@@ -1,0 +1,229 @@
+
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Signup</title>
+      <link rel="stylesheet" href="signup.component.css">
+    </head>
+    <body>
+
+  <form [formGroup]="Empregister" (ngSubmit)="HandleSubmit()" class="container">
+    
+    <div class="logo-container">
+      <img src="assets/Images/spsignup.png" alt="Logo">
+    </div>
+    
+    <mat-stepper [linear]="isLinear" #stepper>
+  
+      <!-- Step 1: Basic Details -->
+      <mat-step [stepControl]="Basicform">
+        <div formGroupName="basic" class="form-container">
+          <ng-template matStepLabel>Basic Details</ng-template>
+  
+          <!-- Your form fields for Basic Details -->
+          <mat-form-field appearance="fill" style="width: 100%">
+            <mat-label>Registration Name</mat-label>
+            <input matInput formControlName="registrationName" placeholder="Registration Name">
+          </mat-form-field>
+  
+          <mat-form-field appearance="fill" style="width: 100%">
+            <mat-label>Trading Name</mat-label>
+            <input matInput formControlName="tradingName" placeholder="Trading Name">
+          </mat-form-field>
+  
+          <mat-form-field appearance="fill" style="width: 100%">
+            <mat-label>Contact Person</mat-label>
+            <input matInput formControlName="contactPerson" placeholder="Contact Person">
+          </mat-form-field>
+  
+          <mat-form-field appearance="fill" style="width: 100%">
+            <mat-label>Cell Number</mat-label>
+            <input matInput formControlName="cellNumber" placeholder="Cell Number">
+          
+            <mat-error class="error-message" *ngIf="Basicform.get('cellNumber')?.invalid && (Basicform.get('cellNumber')?.dirty || Basicform.get('cellNumber')?.touched)">
+              Please enter a valid cellphone number
+            </mat-error>
+          
+          </mat-form-field>
+  
+          <mat-form-field appearance="fill" style="width: 100%">
+            <mat-label>Telephone Number</mat-label>
+            <input matInput formControlName="telNumber" placeholder="Telephone Number">
+          
+            <mat-error class="error-message" *ngIf="Basicform.get('telNumber')?.invalid && (Basicform.get('telNumber')?.dirty || Basicform.get('telNumber')?.touched)">
+              Please enter a valid telephone number
+            </mat-error>
+          
+          </mat-form-field>
+  
+          <mat-form-field appearance="fill" style="width: 100%">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" placeholder="Email">
+          </mat-form-field>
+
+          <mat-error class="error-message" *ngIf="Basicform.get('email')?.invalid && (Basicform.get('email')?.dirty || Basicform.get('email')?.touched)">
+            Please enter a valid email address
+          </mat-error>
+  
+          <mat-form-field appearance="fill" style="width: 100%">
+            <mat-label>Payee Type</mat-label>
+            <input matInput formControlName="payeeType" placeholder="eg. assessor fee, payment to supplier">
+          </mat-form-field>
+  
+          <mat-form-field appearance="fill" style="width: 100%">
+            <mat-label>Type</mat-label>
+            <input matInput formControlName="type" placeholder="eg. assessor, panel beater">
+          </mat-form-field>
+  
+          <mat-form-field appearance="fill" style="width: 100%">
+            <mat-label>Company Registration Number</mat-label>
+            <input matInput formControlName="companyRegistrationNumber" placeholder="Company Registration Number">
+          </mat-form-field>
+
+          <mat-error class="error-message" *ngIf="Basicform.get('companyRegistrationNumber')?.invalid && (Basicform.get('companyRegistrationNumber')?.dirty || Basicform.get('companyRegistrationNumber')?.touched)">
+            Please enter a valid registration number
+          </mat-error>
+  
+          <mat-form-field appearance="fill" style="width: 100%">
+            <mat-label>VAT Vendor</mat-label>
+            <input matInput formControlName="VATVendor" placeholder="VAT Vendor">
+          </mat-form-field>
+
+          <mat-error class="error-message" *ngIf="Basicform.get('VATVendor')?.invalid && (Basicform.get('VATVendor')?.dirty || Basicform.get('VATVendor')?.touched)">
+            Please enter either 'Y' or 'N' for VAT Vendor.
+          </mat-error>
+  
+          <mat-form-field appearance="fill" style="width: 100%">
+            <mat-label>VAT Number</mat-label>
+            <input matInput formControlName="VATNumber" placeholder="VAT Number">
+            <mat-error class="error-message" *ngIf="Basicform.get('VATNumber')?.invalid && (Basicform.get('VATNumber')?.dirty || Basicform.get('VATNumber')?.touched)">
+             VAT Number is required when VAT Vendor is 'Y'. VAT Number should be in the format ZA45 followed by a 6-digit number
+            </mat-error>
+          </mat-form-field>
+  
+        </div>
+        <div class="button-container">
+          <button mat-raised-button color="primary" matStepperNext>Next</button>
+        </div>
+      </mat-step>
+  
+      <!-- Step 2: Address -->
+      <mat-step [stepControl]="Addressform">
+        <ng-template matStepLabel>Address</ng-template>
+        <div formGroupName="address" class="form-container">
+  
+          <!-- Your form fields for Address -->
+          <mat-form-field appearance="fill" style="width: 100%">
+            <mat-label>Building Name</mat-label>
+            <input matInput formControlName="buildingName" placeholder="Building Name">
+          </mat-form-field>
+  
+          <mat-form-field appearance="fill" style="width: 100%">
+            <mat-label>Street Number</mat-label>
+            <input matInput formControlName="streetNumber" placeholder="Street Number">
+          </mat-form-field>
+
+          <mat-error class="error-message" *ngIf="Addressform.get('streetNumber')?.invalid && (Addressform.get('streetNumber')?.dirty || Addressform.get('streetNumber')?.touched)">
+            Please enter a valid street number.
+          </mat-error>
+  
+          <mat-form-field appearance="fill" style="width: 100%">
+            <mat-label>Street Name</mat-label>
+            <input matInput formControlName="streetName" placeholder="Street Name">
+          </mat-form-field>
+  
+          <mat-form-field appearance="fill" style="width: 100%">
+            <mat-label>Suburb</mat-label>
+            <input matInput formControlName="surbub" placeholder="Suburb">
+          </mat-form-field>
+  
+          <mat-form-field appearance="fill" style="width: 100%">
+            <mat-label>City</mat-label>
+            <input matInput formControlName="city" placeholder="City">
+          </mat-form-field>
+  
+          <mat-form-field appearance="fill" style="width: 100%">
+            <mat-label>Province</mat-label>
+            <!-- <input matInput formControlName="province" placeholder="Province"> -->
+            <select matNativeControl [(ngModel)]="selectedProvince" formControlName="province">
+              <option *ngFor="let province of province" [value]="province.id">{{ province.name }}</option>
+            </select>
+          </mat-form-field>
+  
+          <mat-form-field appearance="fill" style="width: 100%">
+            <mat-label>Country</mat-label>
+            <input matInput formControlName="country" placeholder="Country">
+            <!-- <select matNativeControl [(ngModel)]="selectedCountry" formControlName="country">
+              <option value="1">South Africa</option>
+            </select> -->
+          </mat-form-field>
+  
+          <mat-form-field appearance="fill" style="width: 100%">
+            <mat-label>Zip Code</mat-label>
+            <input matInput formControlName="zipCode" placeholder="Zip Code">
+          </mat-form-field>
+
+          <mat-error class="error-message" *ngIf="Addressform.get('zipCode')?.invalid && (Addressform.get('zipCode')?.dirty || Addressform.get('zipCode')?.touched)">
+            Please enter a valid four digit zip code
+          </mat-error>
+  
+        </div>
+        <div class="button-container">
+          <button mat-raised-button color="primary" matStepperPrevious>Back</button>
+          <button mat-raised-button color="primary" matStepperNext>Next</button>
+        </div>
+      </mat-step>
+  
+      <!-- Step 3: Banking Details -->
+      <mat-step [stepControl]="Bankingform">
+        <ng-template matStepLabel>Banking Details</ng-template>
+        <div formGroupName="banking" class="form-container">
+  
+          <!-- Your form fields for Banking Details -->
+          <mat-form-field appearance="fill" style="width: 100%">
+            <mat-label>Bank</mat-label>
+            <input matInput formControlName="Bank" placeholder="Bank" required>
+          </mat-form-field>
+  
+          <mat-form-field appearance="fill" style="width: 100%">
+            <mat-label>Account Number</mat-label>
+            <input matInput formControlName="accountNumber" placeholder="Account Number" required>
+          </mat-form-field>
+
+          <mat-error class="error-message" *ngIf="Bankingform.get('accountNumber')?.invalid && (Bankingform.get('accountNumber')?.dirty || Bankingform.get('accountNumber')?.touched)">
+            Please enter a valid account number
+          </mat-error>
+  
+          <mat-form-field appearance="fill" style="width: 100%">
+            <mat-label>Branch</mat-label>
+            <input matInput formControlName="branch" placeholder="Branch" required>
+          </mat-form-field>
+  
+          <mat-form-field appearance="fill" style="width: 100%">
+            <mat-label>Branch Code</mat-label>
+            <input matInput formControlName="branchCode" placeholder="Branch Code" required>
+          </mat-form-field>
+  
+          <mat-form-field appearance="fill" style="width: 100%">
+            <mat-label>Account Type</mat-label>
+            <input matInput formControlName="accountType" placeholder="Account Type" required>
+          </mat-form-field>
+  
+          <mat-form-field appearance="fill" style="width: 100%">
+            <mat-label>Account Holder</mat-label>
+            <input matInput formControlName="accountHolder" placeholder="Account Holder" required>
+          </mat-form-field>
+  
+        </div>
+        <div class="button-container">
+          <button mat-raised-button color="primary" matStepperPrevious>Back</button>
+          <button mat-raised-button color="accent" type="submit">Submit</button>
+        </div>
+      </mat-step>
+    </mat-stepper>
+  </form>
+</body>
+</html>
+
+

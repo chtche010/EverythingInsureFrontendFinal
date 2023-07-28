@@ -1,0 +1,92 @@
+<!-- <div class="form-wrapper">
+<form [formGroup]="caregister" (ngSubmit)="handleSubmit()" class="container">
+    
+    <div class="logo-container">
+        <img src="assets/Images/casignup.png" alt="Logo">
+    </div>
+
+    <mat-form-field appearance="fill" style="width: 100%">
+      <mat-label>Insurance company</mat-label>
+      <input matInput formControlName="insuranceCompany" required>
+    </mat-form-field>
+
+    <mat-error class="error-message" *ngIf="caregister.get('insuranceCompany')?.invalid && (caregister.get('insuranceCompany')?.dirty || caregister.get('insuranceCompany')?.touched)">
+        Please enter your insurance company
+    </mat-error>
+  
+    <mat-form-field appearance="fill" style="width: 100%">
+      <mat-label>First name</mat-label>
+      <input matInput formControlName="firstName" required>
+    </mat-form-field>
+
+    <mat-error class="error-message" *ngIf="caregister.get('firstName')?.invalid && (caregister.get('firstName')?.dirty || caregister.get('firstName')?.touched)">
+        Please enter your first name
+    </mat-error>
+  
+    <mat-form-field appearance="fill" style="width: 100%">
+      <mat-label>Last name</mat-label>
+      <input matInput formControlName="lastName" required>
+    </mat-form-field>
+
+    <mat-error class="error-message" *ngIf="caregister.get('lastName')?.invalid && (caregister.get('lastName')?.dirty || caregister.get('lastName')?.touched)">
+        Please enter your last name
+    </mat-error>
+  
+    <div class="button-container">
+      <button mat-raised-button color="accent" type="submit" [disabled]="!caregister.valid">Submit</button>
+    </div>
+  </form>
+</div>
+  
+
+ -->
+
+ <!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Claim Agent Signup</title>
+  <link rel="stylesheet" href="claimsagentsignup.component.css">
+</head>
+<body>
+  <div class="form-wrapper">
+    <form [formGroup]="caregister" (ngSubmit)="handleSubmit()" class="container">
+
+      <div class="logo-container">
+        <img src="assets/Images/casignup.png" alt="Logo">
+      </div>
+
+      <mat-form-field appearance="fill" style="width: 100%">
+        <mat-label>Insurance company</mat-label>
+        <input matInput formControlName="insuranceCompany" required>
+      </mat-form-field>
+
+      <mat-error class="error-message" *ngIf="caregister.get('insuranceCompany')?.invalid && (caregister.get('insuranceCompany')?.dirty || caregister.get('insuranceCompany')?.touched)">
+        Please enter your insurance company
+      </mat-error>
+
+      <mat-form-field appearance="fill" style="width: 100%">
+        <mat-label>First name</mat-label>
+        <input matInput formControlName="firstName" required>
+      </mat-form-field>
+
+      <mat-error class="error-message" *ngIf="caregister.get('firstName')?.invalid && (caregister.get('firstName')?.dirty || caregister.get('firstName')?.touched)">
+        Please enter your first name
+      </mat-error>
+
+      <mat-form-field appearance="fill" style="width: 100%">
+        <mat-label>Last name</mat-label>
+        <input matInput formControlName="lastName" required>
+      </mat-form-field>
+
+      <mat-error class="error-message" *ngIf="caregister.get('lastName')?.invalid && (caregister.get('lastName')?.dirty || caregister.get('lastName')?.touched)">
+        Please enter your last name
+      </mat-error>
+
+      <div class="button-container">
+        <button mat-raised-button color="accent" type="submit" [disabled]="!caregister.valid">Submit</button>
+      </div>
+    </form>
+  </div>
+</body>
+</html>

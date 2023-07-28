@@ -1,0 +1,61 @@
+
+/* General error message style */
+.error-message {
+  font-size: 14px; /* Adjust the font size as needed */
+  font-family: "DM Sans", sans-serif;
+}
+
+/* Form wrapper to center the form */
+.form-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Container for the form */
+.container {
+  max-width: 600px; /* Increase the max-width to make the form wider */
+  width: 100%;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a shadow border to the container */
+  border-radius: 8px; /* Add some border radius for a rounded look */
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+/* Make form fields take full width */
+.container mat-form-field {
+  width: 100%;
+}
+
+/* Customize the size of the form fields */
+.container input.mat-input-element {
+  font-size: 14px; /* Adjust the font size */
+  padding: 10px; /* Add some padding around the input fields */
+}
+
+/* Style the submit button */
+.container button[type="submit"] {
+  margin-top: 20px; /* Add some spacing between the form fields and the button */
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+
+.container button {
+  margin-top: 20px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+
+/* Center the logo and add some spacing */
+.logo-container {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Customize the size of the logo */
+.logo-container img {
+  width: 300px; /* Adjust the width of the logo */
+  height: auto; /* Keep the aspect ratio of the logo */
+}

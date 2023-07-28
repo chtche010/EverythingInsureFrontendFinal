@@ -1,0 +1,24 @@
+/* src/fonts/montserrat-classic.css */
+
+@font-face {
+    font-family: 'Montserrat Classic';
+    src: url('./fonts/MontserratClassic-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'Montserrat Classic';
+    src: url('./fonts/MontserratClassic-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+  }
+  
+  /* Add more @font-face rules for other font weights and styles if necessary */
+  
+  /* Example usage:
+  body {
+    font-family: 'Montserrat Classic', sans-serif;
+  }
+  */
+  
