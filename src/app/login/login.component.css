@@ -1,0 +1,58 @@
+@import '~@fortawesome/fontawesome-free/css/all.css';
+
+body {
+  background-image: url('/assets/Images/background4.png');
+  background-size: cover;
+  background-position: center center;
+  background-color: #f0f0f0;
+}
+
+.error-message {
+  font-size: 14px;
+  font-family: "DM Sans", sans-serif;
+}
+
+.form-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.container {
+  max-width: 400px;
+  width: 100%;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+.container mat-form-field {
+  width: 100%;
+}
+
+.container input.mat-input-element {
+  font-size: 14px;
+  padding: 10px;
+}
+
+.container button[type="submit"] {
+  margin-top: 10px;
+}
+
+.logo-container {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.logo-container img {
+  width: 250px;
+  height: auto;
+}
+
+.eyeicon {
+  position: absolute;
+  right: 10px;
+  top: 15px;
+  color: black;
+}

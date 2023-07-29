@@ -57,8 +57,8 @@
       </div>
 
       <mat-form-field appearance="fill" style="width: 100%">
-        <mat-label>Insurance company</mat-label>
-        <input matInput formControlName="insuranceCompany" required>
+        <mat-label for="insuranceCompany">Insurance company</mat-label>
+        <input matInput formControlName="insuranceCompany" required id="insuranceCompany">
       </mat-form-field>
 
       <mat-error class="error-message" *ngIf="caregister.get('insuranceCompany')?.invalid && (caregister.get('insuranceCompany')?.dirty || caregister.get('insuranceCompany')?.touched)">
@@ -66,8 +66,8 @@
       </mat-error>
 
       <mat-form-field appearance="fill" style="width: 100%">
-        <mat-label>First name</mat-label>
-        <input matInput formControlName="firstName" required>
+        <mat-label for="firstName">First name</mat-label>
+        <input matInput formControlName="firstName" required id="firstName">
       </mat-form-field>
 
       <mat-error class="error-message" *ngIf="caregister.get('firstName')?.invalid && (caregister.get('firstName')?.dirty || caregister.get('firstName')?.touched)">
@@ -75,8 +75,8 @@
       </mat-error>
 
       <mat-form-field appearance="fill" style="width: 100%">
-        <mat-label>Last name</mat-label>
-        <input matInput formControlName="lastName" required>
+        <mat-label for="lastName">Last name</mat-label>
+        <input matInput formControlName="lastName" required id="lastName">
       </mat-form-field>
 
       <mat-error class="error-message" *ngIf="caregister.get('lastName')?.invalid && (caregister.get('lastName')?.dirty || caregister.get('lastName')?.touched)">

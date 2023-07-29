@@ -57,3 +57,10 @@ body {
     width: 250px; /* Adjust the width of the logo */
     height: auto; /* Keep the aspect ratio of the logo */
   }
+
+  .eyeicon{
+    position: absolute;
+    right: 10px;
+    top: 15px;
+    color: black;
+  }

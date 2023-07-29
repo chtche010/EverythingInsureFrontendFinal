@@ -22,6 +22,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { ClaimsagentsignupComponent } from './claimsagentsignup/claimsagentsignup.component';
 import { ServiceproviderprofileComponent } from './serviceproviderprofile/serviceproviderprofile.component';
 import { InitialsignupComponent } from './initialsignup/initialsignup.component';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
   { path: 'signup', component: SignupComponent },
@@ -34,6 +35,7 @@ const routes: Routes = [
     ClaimsagentsignupComponent,
     ServiceproviderprofileComponent,
     InitialsignupComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,

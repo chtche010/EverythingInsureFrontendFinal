@@ -1,65 +1,6 @@
-// import { Component, OnInit } from '@angular/core';
-// import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-// import {FormsModule} from '@angular/forms';
-// import {MatInputModule} from '@angular/material/input';
-// import {NgFor} from '@angular/common';
-// import {MatSelectModule} from '@angular/material/select';
-// import {MatFormFieldModule} from '@angular/material/form-field';
-// import { initialsignup } from '../Models/initialsignup.model';
-
-// interface roles {
-//   value: string;
-//   viewValue: string;
-// }
-
-// @Component({
-//   selector: 'app-initialsignup',
-//   templateUrl: './initialsignup.component.html',
-//   styleUrls: ['./initialsignup.component.css'], 
-// })
-
-// export class InitialsignupComponent implements OnInit {
-//   userregister!: FormGroup;
-//   roles: roles[] = [
-//     {value: 'Administrator-0', viewValue: 'Administrator'},
-//     {value: 'ClaimsAgent-1', viewValue: 'Claims agent'},
-//     {value: 'ServiceProvider-2', viewValue: 'Service provider'}
-//   ];
-
-// // Bind the form to a module 
-//   // initialSignupRequest: initialsignup = {
-//   //   Account_UserId: '',
-//   //   username: '',
-//   //   email: '',
-//   //   password: '',
-//   //   accountType: '',
-//   // };
-
-//   constructor(private formBuilder: FormBuilder) { }
-
-//   ngOnInit(): void {
-//     this.userregister = this.formBuilder.group({
-//       email: ['', Validators.required],
-//       password: ['', Validators.required],
-//       username: ['', Validators.required],
-//       accountType: ['', Validators.required],
-//     });
-//   }
-
-//   // initialSignup() {
-//   //   console.log(this.initialSignupRequest);
-//   // }
-
-//   handleSubmit(): void {
-//     if (this.userregister.valid) {
-//       console.log(this.userregister.value);
-//     }
-//   }
-// }
-
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { initialsignup } from '../models/initialsignup.model';
 import { SharedService } from '../shared.service';
@@ -85,16 +26,17 @@ export class InitialsignupComponent implements OnInit {
   };
   
   roles: roles[] = [
-    { value: 'Administrator', viewValue: 'Administrator' },
     { value: 'ClaimsAgent', viewValue: 'Claims agent' },
     { value: 'ServiceProvider', viewValue: 'Service provider' },
   ];
 
   signupSuccess: boolean = false;
 
-  type: string = "password";
-  isText: boolean = false;
-  eyeIcon: string = 'fa-eye-slash';
+  visible: boolean = true;
+  changetype:boolean =true;
+
+  confirmVisible: boolean = true;
+  confirmChangetype: boolean = true;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -105,16 +47,21 @@ export class InitialsignupComponent implements OnInit {
 
   ngOnInit(): void {
     this.userregister = this.formBuilder.group({
-      email: ['', Validators.required],
-      password: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6), Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,}$')]],
+      confirmPassword: ['', Validators.required],
       accountType: ['', Validators.required],
-    });
+    }, { validator: this.passwordMatchValidator });
   }
 
   hideShowPass() {
-    this.isText = !this.isText;
-    this.isText ? (this.eyeIcon = 'fa-eye') : (this.eyeIcon = 'fa-eye-slash');
-    this.isText ? (this.type = 'text') : (this.type = 'password');
+    this.visible = !this.visible;
+    this.changetype = !this.changetype;
+  }
+
+  hideShowConfirmPass() {
+    this.confirmVisible = !this.confirmVisible;
+    this.confirmChangetype = !this.confirmChangetype;
   }
 
   handleSubmit(): void {
@@ -139,5 +86,18 @@ export class InitialsignupComponent implements OnInit {
       console.log('Form is invalid. Please fill in all required fields.');
     }
   }
+
+  passwordMatchValidator(control: AbstractControl): { [key: string]: boolean } | null {
+    const password = control.get('password');
+    const confirmPassword = control.get('confirmPassword');
+  
+    if (password && confirmPassword && password.value !== confirmPassword.value) {
+      return { mustMatch: true };
+    }
+  
+    return null;
+  }
 }
+
+
 

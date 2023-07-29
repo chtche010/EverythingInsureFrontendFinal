@@ -113,11 +113,3 @@ export class SignupComponent implements OnInit {
 
 }
 
-// HandleSubmit(){
-//   if(this.Empregister.valid){
-//     console.log(this.Empregister.value);
-//   }
-// }
-
-// }
-

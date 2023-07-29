@@ -24,14 +24,24 @@
 
       <mat-form-field appearance="fill" style="width: 100%">
         <mat-label for="password">Password</mat-label>
-        <input matInput formControlName="password" required id="password" name="password">
-        <button type="button" (click)="hideShowPass()" class="bg-white text-muted"> 
-          <span class="fa {{eyeIcon}}"></span> 
-        </button>  
+        <input matInput formControlName="password" required id="password" name="password" [type]="changetype?'password':'text'">
+        <span class="eyeicon" (click)="hideShowPass()"><i [ngClass]="visible?'fa fa-eye-slash':'fa fa-eye'"></i>
+        </span>
       </mat-form-field>
 
       <mat-error class="error-message" *ngIf="userregister.get('password')?.invalid && (userregister.get('password')?.dirty || userregister.get('password')?.touched)">
-        Please enter a valid password
+        Passwords should be at least six characters and include at least one uppercase letter, number and special character
+      </mat-error>
+
+      <mat-form-field appearance="fill" style="width: 100%">
+        <mat-label for="confirmPassword">Confirm Password</mat-label>
+        <input matInput formControlName="confirmPassword" required id="confirmPassword" name="confirmPassword" type="password">
+        <span class="eyeicon" (click)="hideShowConfirmPass()"><i [ngClass]="confirmVisible?'fa fa-eye-slash':'fa fa-eye'"></i>
+        </span>
+      </mat-form-field>
+
+      <mat-error class="error-message" *ngIf="userregister.hasError('mustMatch', 'confirmPassword') && (userregister.get('confirmPassword')?.dirty || userregister.get('confirmPassword')?.touched)">
+        Passwords must match 
       </mat-error>
 
       <mat-form-field>

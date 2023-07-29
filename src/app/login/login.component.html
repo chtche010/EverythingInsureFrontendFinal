@@ -1,0 +1,28 @@
+
+<body>
+<div class="form-wrapper">
+    <form [formGroup]="loginForm" (ngSubmit)="handleSubmit()" class="container">
+  
+      <div class="logo-container">
+        <img src="assets/Images/login.png" alt="Logo">
+      </div>
+  
+      <mat-form-field appearance="fill" style="width: 100%">
+        <mat-label for="email">Email</mat-label>
+        <input matInput formControlName="email" required id="email" name="email" type="email">
+      </mat-form-field>
+  
+      <mat-form-field appearance="fill" style="width: 100%">
+        <mat-label for="password">Password</mat-label>
+        <input matInput formControlName="password" required id="password" name="password" [type]="passwordVisible ? 'password' : 'text'">
+        <span class="eyeicon" (click)="hideShowPass()"><i [ngClass]="passwordVisible ? 'fa fa-eye-slash' : 'fa fa-eye'"></i></span>
+      </mat-form-field>
+  
+      <div class="button-container">
+        <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.valid">Login</button>
+      </div>
+  
+    </form>
+  </div>
+</body>
+  
