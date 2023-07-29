@@ -30,22 +30,17 @@ export class LoginComponent implements OnInit {
   handleSubmit(): void {
     if (this.loginForm.valid) {
       // Implement login logic here, e.g., send login request to server
-      console.log(this.loginForm.value)
+      // console.log(this.loginForm.value)
       // Send the obj to database 
-      this.sharedService.login(this.loginForm.value)
-      .subscribe({
-        next:(res)=>{
-          alert(res.message)
+      this.sharedService.login(this.loginForm.value).subscribe(
+        (response: any) => {
+          console.log(response);
         },
-        error: (err)=>{
-          alert(err?.error.message)
+        (error: any) => {
+          console.log(error);
         }
-      })
-
+      );
     } else {
-
-
-
       console.log('Form is invalid. Please enter valid email and password.');
     }
   }
