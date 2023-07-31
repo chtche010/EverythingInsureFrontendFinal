@@ -4,6 +4,7 @@ import { NgToastService } from 'ng-angular-popup';
 import ValidateForm from '../helpers/validationform';
 import { SharedService } from '../shared.service';
 import { Router } from '@angular/router';
+import { UserStoreService } from '../services/user-store.service';
 
 @Component({
   selector: 'app-login',
@@ -12,13 +13,14 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
-  passwordVisible: boolean = false;
+  passwordVisible: boolean = true;
   router: any;
 
   constructor(
     private formBuilder: FormBuilder,
     private sharedService: SharedService,
-    private toast: NgToastService
+    private toast: NgToastService,
+    private userStore: UserStoreService
     ) {}
 
   ngOnInit(): void {
@@ -42,6 +44,12 @@ export class LoginComponent implements OnInit {
           console.log(res.message);
           this.loginForm.reset;
           this.sharedService.storeToken(res.token);
+
+          // const tokenPayload = this.sharedService.decodeToken();
+          // this.userStore.setusernameForStore(tokenpayload.name);
+          // this.userStore.setaccountTypeForStore(tokenpayload.accountType);
+          // this.userStore.setemailForStore(tokenpayload.email);
+          
           this.toast.success({detail:"Success", summary:res.message, duration: 5000});
           this.router.navigate(['serviceproviderprofile'])
         },

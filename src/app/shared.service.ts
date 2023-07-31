@@ -5,6 +5,7 @@ import { initialsignup } from './models/initialsignup.model';
 import { addclaimsagent } from './models/addclaimsagent';
 import { addserviceprovider } from './models/addserviceprovider';
 import { Router } from '@angular/router';
+import { JwtHelperService } from '@auth0/angular-jwt'
 
 @Injectable({
   providedIn: 'root'
@@ -12,10 +13,13 @@ import { Router } from '@angular/router';
 export class SharedService {
 
     baseAPIUrl = "http://localhost:5184/";
+    private userPayload: any;
 
     constructor(
         private http: HttpClient,
-        private router: Router) { }
+        private router: Router) {
+            this.userPayload = this.decodeToken();
+         }
 
     addInitialSignup(initialSignupRequest : initialsignup): Observable<initialsignup> {    
      return this.http.post<initialsignup>(this.baseAPIUrl + 'Auth/Register', initialSignupRequest);
@@ -48,6 +52,28 @@ export class SharedService {
 
     isLoggedIn(): boolean {
         return !!localStorage.getItem('token')
+    }
+
+    decodeToken(){
+        const jwtHelper = new JwtHelperService();
+        const token = this.getToken()!;
+        console.log(jwtHelper.decodeToken(token))
+        return jwtHelper.decodeToken(token)
+    }
+
+    getusernameFromToken(){
+        if(this.userPayload)
+        return this.userPayload.username;
+    }
+
+    getemailFromToken(){
+        if(this.userPayload)
+        return this.userPayload.email;
+    }
+
+    getaccountTypeFromToken(){
+        if(this.userPayload)
+        return this.userPayload.accountType;
     }
 
     // updateStudent(val: any) {
