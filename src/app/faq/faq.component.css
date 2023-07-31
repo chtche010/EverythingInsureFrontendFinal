@@ -1,0 +1,47 @@
+/*--------------------------------------------------------------
+# F.A.Q Page
+--------------------------------------------------------------*/
+.faq-section {
+    align-content: center;
+    display: flex;
+}
+.faq-section .container {
+    font-size: 20px;
+    font-weight: 100;
+    color: #1a1818;
+  }
+
+  /* Accordion */
+  .accordion-item {
+    border: 1px solid #ffffff;
+  }
+
+  .accordion-button:focus {
+    outline: 0;
+    box-shadow: none;
+  }
+  
+  .accordion-button:not(.collapsed) {
+    color: #E76A5F;
+    background-color: #ffffff;
+  }
+  
+  .accordion-flush .accordion-button {
+    padding: 15px 0;
+    background: none;
+    border: 0;
+  }
+  
+  .accordion-flush .accordion-button:not(.collapsed) {
+    box-shadow: none;
+    color: #E76A5F;
+  }
+  
+  .accordion-flush .accordion-body {
+    padding: 0 0 15px 0;
+    color: #444444;
+    font-size: 15px;
+  }
+  
+
+  

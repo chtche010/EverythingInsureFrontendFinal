@@ -1,0 +1,57 @@
+/* Container for the section */
+.why-trust-us {
+    padding: 80px 0;
+}
+
+.why-trust-us img {
+    margin-left: 100px;
+    padding: 20px 20px 20px 20px;
+}
+
+/* Trust item container */
+.trust-item {
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+}
+
+/* Trust item icon */
+.trust-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fffbfb;
+    font-size: 24px;
+    margin-right: 20px;
+}
+
+.trust-content {
+    flex: 1;
+}
+
+/* Trust item content */
+.trust-content h4 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.trust-content p {
+    font-size: 16px;
+    margin-bottom: 0;
+}
+
+/* Background colors for the icons */
+.bg-color-everything-60 {
+    background-color: #ea6f82;
+}
+
+.bg-color-personal-60 {
+    background-color: #2fba99;
+}
+
+.bg-color-professional-60 {
+    background-color: #498dcd;
+}

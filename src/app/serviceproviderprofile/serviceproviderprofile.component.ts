@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SharedService } from '../shared.service';
 
 @Component({
   selector: 'app-serviceproviderprofile',
@@ -7,4 +8,11 @@ import { Component } from '@angular/core';
 })
 export class ServiceproviderprofileComponent {
 
+  constructor(
+    private sharedServices: SharedService
+  ){}
+
+  logout() {
+    this.sharedServices.signOut();
+  }
 }

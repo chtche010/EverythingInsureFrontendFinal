@@ -4,6 +4,7 @@ import { Observable } from "rxjs";
 import { initialsignup } from './models/initialsignup.model';
 import { addclaimsagent } from './models/addclaimsagent';
 import { addserviceprovider } from './models/addserviceprovider';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,9 @@ export class SharedService {
 
     baseAPIUrl = "http://localhost:5184/";
 
-    constructor(private http: HttpClient) { }
+    constructor(
+        private http: HttpClient,
+        private router: Router) { }
 
     addInitialSignup(initialSignupRequest : initialsignup): Observable<initialsignup> {    
      return this.http.post<initialsignup>(this.baseAPIUrl + 'Auth/Register', initialSignupRequest);
@@ -28,6 +31,23 @@ export class SharedService {
 
     login(loginObj: any) {
         return this.http.post<any>(this.baseAPIUrl + 'Auth/Login', loginObj)
+    }
+
+    signOut(){
+        localStorage.clear();
+        this.router.navigate(['login'])
+    }
+
+    storeToken(tokenValue: string){
+        localStorage.setItem('token', tokenValue)
+    }
+
+    getToken() {
+        return localStorage.getItem('token')
+    }
+
+    isLoggedIn(): boolean {
+        return !!localStorage.getItem('token')
     }
 
     // updateStudent(val: any) {

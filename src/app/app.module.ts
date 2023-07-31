@@ -19,10 +19,20 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSelectModule } from '@angular/material/select';
+import { NgToastModule } from 'ng-angular-popup'
+
 import { ClaimsagentsignupComponent } from './claimsagentsignup/claimsagentsignup.component';
 import { ServiceproviderprofileComponent } from './serviceproviderprofile/serviceproviderprofile.component';
 import { InitialsignupComponent } from './initialsignup/initialsignup.component';
 import { LoginComponent } from './login/login.component';
+import { AdminprofileComponent } from './adminprofile/adminprofile.component';
+import { HomeComponent } from './home/home.component';
+import { AboutUsComponent } from './about-us/about-us.component';
+import { WhyTrustUsComponent } from './why-trust-us/why-trust-us.component';
+import { FAQComponent } from './faq/faq.component';
+import { FooterComponent } from './footer/footer.component';
+import { ClaimsagentprofileComponent } from './claimsagentprofile/claimsagentprofile.component';
+import { TokenInterceptor } from './interceptors/token.interceptor';
 
 const routes: Routes = [
   { path: 'signup', component: SignupComponent },
@@ -36,6 +46,13 @@ const routes: Routes = [
     ServiceproviderprofileComponent,
     InitialsignupComponent,
     LoginComponent,
+    AdminprofileComponent,
+    HomeComponent,
+    AboutUsComponent,
+    WhyTrustUsComponent,
+    FAQComponent,
+    FooterComponent,
+    ClaimsagentprofileComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,8 +70,13 @@ const routes: Routes = [
     HttpClientModule,
     MatSnackBarModule,
     MatIconModule,
+    NgToastModule,
   ],
-  providers: [],
+  providers: [{
+    provide:HTTP_INTERCEPTORS,
+    useClass:TokenInterceptor,
+    multi:true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

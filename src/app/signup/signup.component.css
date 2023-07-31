@@ -1,4 +1,11 @@
 
+/* body {
+  background-image: url('/assets/Images/background6.png');
+  background-size: cover;
+  background-position: center center;
+  background-color: #f0f0f0;
+} */
+
 /* General error message style */
 .error-message {
   font-size: 14px; /* Adjust the font size as needed */
@@ -56,6 +63,6 @@
 
 /* Customize the size of the logo */
 .logo-container img {
-  width: 300px; /* Adjust the width of the logo */
+  width: 400px; /* Adjust the width of the logo */
   height: auto; /* Keep the aspect ratio of the logo */
 }
