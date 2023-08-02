@@ -301,7 +301,7 @@
 #hero {
   width: 100%;
   height: 100vh;
-  background: url("/assets/img/header-everything-bg.svg") top center;
+  background: url("/assets/Images/home.png") top center;
   background-size: cover;
   position: relative;
 }

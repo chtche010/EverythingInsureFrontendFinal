@@ -14,13 +14,13 @@ import { UserStoreService } from '../services/user-store.service';
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   passwordVisible: boolean = true;
-  router: any;
 
   constructor(
     private formBuilder: FormBuilder,
     private sharedService: SharedService,
     private toast: NgToastService,
-    private userStore: UserStoreService
+    private userStore: UserStoreService,
+    private router: Router, 
     ) {}
 
   ngOnInit(): void {
@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
       this.sharedService.login(this.loginForm.value).subscribe({
         next: (res) => {
           console.log(res.message);
-          this.loginForm.reset;
+          this.loginForm.reset();
           this.sharedService.storeToken(res.token);
 
           // const tokenPayload = this.sharedService.decodeToken();

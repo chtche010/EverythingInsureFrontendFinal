@@ -54,11 +54,30 @@ export class SharedService {
         return !!localStorage.getItem('token')
     }
 
-    decodeToken(){
+    // decodeToken(){
+    //     const jwtHelper = new JwtHelperService();
+    //     const token = this.getToken()!;
+    //     console.log(jwtHelper.decodeToken(token))
+    //     return jwtHelper.decodeToken(token)
+    // }
+
+    decodeToken() {
         const jwtHelper = new JwtHelperService();
-        const token = this.getToken()!;
-        console.log(jwtHelper.decodeToken(token))
-        return jwtHelper.decodeToken(token)
+        const token = this.getToken();
+    
+        if (token) {
+            try {
+                const decodedToken = jwtHelper.decodeToken(token);
+                console.log('Decoded Token:', decodedToken);
+                return decodedToken;
+            } catch (error) {
+                console.error('Error decoding token:', error);
+                return null; // Handle the error gracefully
+            }
+        } else {
+            console.warn('No token found.');
+            return null; // Handle the case where no token is found
+        }
     }
 
     getusernameFromToken(){
