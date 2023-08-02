@@ -3,6 +3,7 @@ import { CanActivate, Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { Observable } from 'rxjs';
 import { SharedService } from '../shared.service';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -15,39 +16,51 @@ export class AuthGuard implements CanActivate {
 
   }
 
-  canActivate(): boolean {
-    // if (this.sharedService.isLoggedIn()){
-    //   return true
-    // } else {
-    //   this.toast.error({detail: "Error", summary:"Please login first"});
-    //   this.router.navigate(['/login'])
-    //   return false;
-    // }
-
-    if (this.sharedService.isLoggedIn()){
-      // Get the users accountType from the sharedService 
+  canActivate(): Observable<boolean> | Promise<boolean> | boolean {
+    if (this.sharedService.isLoggedIn()) {
+      // Get the user's accountType from the sharedService
       const accountType = this.sharedService.getaccountTypeFromToken();
 
-      // Use the account type to decide where to redirect the user 
+      // Use the account type to decide where to redirect the user
       switch (accountType) {
         case 'Administrator':
           this.router.navigate(['/adminprofile']);
-          break;
-        
+          return true;
+
         case 'ClaimsAgent':
-          this.router.navigate(['/claimsagentprofile']);
-          break; 
+          this.sharedService.isProfileExists(this.sharedService.getemailFromToken()).subscribe(exists => {
+            if (exists) {
+              this.router.navigate(['/claimsagentprofile']);
+            } else {
+              this.router.navigate(['/casignup']);
+            }
+          });
+          return true;
 
         case 'ServiceProvider':
-          this.router.navigate(['/serviceproviderprofile']);
-          break;
+          this.sharedService.isProfileExists(this.sharedService.getemailFromToken()).subscribe(exists => {
+            if (exists) {
+              this.router.navigate(['/serviceproviderprofile']);
+            } else {
+              this.router.navigate(['/serviceprovidersignup']);
+            }
+          });
+          return true;
       }
 
-      return true; // Allow access to the route 
+      // If the user's role is not recognized or not one of the profiles above, redirect them to the login page.
+      this.router.navigate(['/login']);
+      return false;
     } else {
       this.toast.error({ detail: 'Error', summary: 'Please login first' });
       this.router.navigate(['/login']);
-      return false; 
+      return false;
     }
   }
 }
+
+
+
+
+
+

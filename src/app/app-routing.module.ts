@@ -19,19 +19,13 @@ import { UploadClaimComponent } from './claims-agent/upload-claim/upload-claim.c
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
-  { path: 'signup', component: SignupComponent},
-  { path: 'casignup', component: ClaimsagentsignupComponent},
-  { path: 'serviceproviderprofile', component: ServiceproviderprofileComponent},
+  { path: 'signup', component: SignupComponent, canActivate: [AuthGuard]},
+  { path: 'casignup', component: ClaimsagentsignupComponent, canActivate: [AuthGuard]},
+  { path: 'serviceproviderprofile', component: ServiceproviderprofileComponent, canActivate: [AuthGuard]},
   { path: 'initialsignup', component: InitialsignupComponent},
   { path: 'login', component: LoginComponent},
   { path: 'adminprofile', component: AdminprofileComponent},
-  { path: 'about', component: AboutUsComponent},
-  { path: 'claims-agent-dashboard', component: ClaimsAgentDashboardComponent},
-  { path: 'ca-sidebar', component: CaSidebarComponent},
-  { path: 'ca-navbar', component: CaNavbarComponent},
-  { path: 'auction', component: AuctionComponent},
-  { path: 'ca-profile', component: CaProfileComponent},
-  { path: 'upload-claim', component: UploadClaimComponent}
+  { path: 'claimsagentprofile', component: ClaimsagentprofileComponent}
 ];
 
 @NgModule({

@@ -37,6 +37,10 @@ export class SharedService {
         return this.http.post<any>(this.baseAPIUrl + 'Auth/Login', loginObj)
     }
 
+    isProfileExists(email: string): Observable<boolean> {
+        return this.http.get<boolean>(this.baseAPIUrl + 'api/User/ProfileExists?email=' + email);
+    }
+
     signOut(){
         localStorage.clear();
         this.router.navigate(['login'])
