@@ -1,0 +1,122 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "DM Serif Text", sans-serif;
+}
+/* Light Backgrounds */
+.bg-primary-light {
+    background-color: #1616d192;
+    border-color: #cfe2ff;
+  }
+  
+  .bg-secondary-light {
+    background-color: #e2e3e5;
+    border-color: #e2e3e5;
+  }
+  
+  .bg-success-light {
+    background-color: #d1e7dd;
+    border-color: #d1e7dd;
+  }
+  
+  .bg-danger-light {
+    background-color: #f8d7da;
+    border-color: #f8d7da;
+  }
+  
+  .bg-warning-light {
+    background-color: #fff3cd;
+    border-color: #fff3cd;
+  }
+  
+  .bg-info-light {
+    background-color: #cff4fc;
+    border-color: #cff4fc;
+  }
+  
+  .bg-dark-light {
+    background-color: #d3d3d4;
+    border-color: #d3d3d4;
+  }
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #ffffff; /* Add your preferred background color */
+  z-index: 1000; /* Set a higher z-index value */
+}
+
+.main-content {
+  margin-top: 80px;
+  margin-left: -30px;
+}
+
+.card {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.card-title {
+  font-size: 20px;
+  color: rgb(10, 73, 208);
+  margin-bottom: 15px;
+}
+
+.table-responsive {
+  overflow-x: auto;
+}
+
+.mat-cell,
+.mat-header-cell {
+  padding: 12px 16px;
+  font-size: 14px;
+}
+
+.mat-elevation-z8 th{
+  color: #000000;
+  background-color: #f5f5f5;
+  font-weight: bold;
+  text-align: left;
+  border-bottom: 2px solid #ccc;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Add some spacing between cells */
+.mat-elevation-z8 td,
+.mat-elevation-z8 th {
+  padding: 10px;
+}
+/* Add a light background color to even rows for better readability */
+.mat-elevation-z8 tr:nth-child(even) {
+  background-color: #86d0fa25;
+}
+/* Add a hover effect on rows to make it more interactive */
+.mat-elevation-z8 tr:hover {
+  background-color: #eaeaea;
+  cursor: pointer;
+}
+.mat-elevation-z8 td {
+  border-bottom: 1px solid #ccc;
+}
+
+/* Add this to your component's CSS file */
+.mat-sort-header {
+  cursor: pointer;
+  user-select: none;
+}
+
+.mat-sort-header-arrow {
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.mat-sort-header:hover .mat-sort-header-arrow {
+  opacity: 1;
+}

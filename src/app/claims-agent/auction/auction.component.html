@@ -1,0 +1,69 @@
+<nav>
+    <div>
+        <app-ca-navbar></app-ca-navbar>
+    </div>
+</nav>
+<div class="container-fluid">
+    <div class="row">
+        <aside class="col-md-3">
+            <div>
+                <app-ca-sidebar></app-ca-sidebar>
+            </div>
+        </aside>
+        <main class="col-9">
+            <div class="card col-10">
+                <div *ngIf="alert"
+                    class="alert alert-success bg-success text-light border-0 padding-5px border-radius-5px alert-dismissible fade show"
+                    role="alert">
+                    <strong>Success!</strong> The Auction Event was Created.
+                    <button (click)="closeAlert()" type="button" class="btn-close" data-dismiss="alert"
+                        aria-label="Close">
+                    </button>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Create New Auction Event</h5>
+                    <br>
+                    <!--Create auction event form-->
+                    <form #auctionForm="ngForm" (ngSubmit)="submit(auctionForm)" class="row g-3">
+                        <div class="form-group col-8">
+                            <label for="auctionTitle" class="form-label">Auction Title</label>
+                            <input #auctionTitleRef="ngModel" required type="text" class="form-control"
+                                name="auctionTitle" id="auctionTitle" [(ngModel)]="auctionData.auctionTitle" autofocus>
+                            <div *ngIf="formSubmitted && auctionTitleRef.invalid" class="alert alert-danger">Please fill
+                                in the
+                                auction title!</div>
+                        </div>
+                        <div class="form-group col-8">
+                            <label for="auctionDate" class="form-label">Auction Date</label>
+                            <input #auctionDateRef="ngModel" required type="date" class="form-control"
+                                name="auctionDate" id="auctionDate" [(ngModel)]="auctionData.auctionDate"
+                                [min]="minAuctionDate()" (change)="updateEndTime()">
+                            <div *ngIf="formSubmitted && auctionDateRef.invalid" class="alert alert-danger">Please
+                                Select a Date
+                                for the Auction!</div>
+                        </div>
+                        <div class="form-group col-8">
+                            <label for="startTime" class="form-label">Auction Start Time</label>
+                            <input #auctionStartRef="ngModel" required type="time" class="form-control" name="startTime"
+                                id="startTime" [(ngModel)]="auctionData.startTime" (change)="updateEndTime()">
+                            <div *ngIf="formSubmitted && auctionStartRef.invalid" class="alert alert-danger">Please
+                                Select a Start Time for the Auction!</div>
+                        </div>
+                        <div class="form-group col-8">
+                            <label for="endTime" class="form-label">Auction End Time</label>
+                            <input #auctionEndRef="ngModel" required type="time" class="form-control" name="endTime"
+                                id="endTime" [(ngModel)]="auctionData.endTime">
+                            <div *ngIf="formSubmitted && auctionEndRef.invalid" class="alert alert-danger">Please Select
+                                an End Time for the Auction!</div>
+                        </div>
+                        <pre></pre>
+                        <div class="col-12">
+                            <button class="btn btn-primary" type="submit" (click)="formSubmitted = true">Create
+                                Auction</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>

@@ -33,6 +33,16 @@ import { FAQComponent } from './faq/faq.component';
 import { FooterComponent } from './footer/footer.component';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 
+//Ben's imports brought across
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { ClaimsAgentDashboardComponent } from './claims-agent/claims-agent-dashboard/claims-agent-dashboard.component';
+import { CaSidebarComponent } from './claims-agent/ca-sidebar/ca-sidebar.component';
+import { CaNavbarComponent } from './claims-agent/ca-navbar/ca-navbar.component';
+import { AuctionComponent } from './claims-agent/auction/auction.component';
+import { CaProfileComponent } from './claims-agent/ca-profile/ca-profile.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
+
 const routes: Routes = [
   { path: 'signup', component: SignupComponent },
 ];
@@ -51,6 +61,11 @@ const routes: Routes = [
     WhyTrustUsComponent,
     FAQComponent,
     FooterComponent,
+    ClaimsAgentDashboardComponent, 
+    CaNavbarComponent,
+    CaSidebarComponent,
+    AuctionComponent,
+    CaProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -69,6 +84,9 @@ const routes: Routes = [
     MatSnackBarModule,
     MatIconModule,
     NgToastModule,
+    MatDatepickerModule,
+    MatTableModule,
+    MatSortModule,
   ],
   providers: [{
     provide:HTTP_INTERCEPTORS,

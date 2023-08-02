@@ -8,6 +8,14 @@ import { LoginComponent } from './login/login.component';
 import { AdminprofileComponent } from './adminprofile/adminprofile.component';
 import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './guards/auth.guard';
+//Bens added
+import { AboutUsComponent } from './about-us/about-us.component';
+import { ClaimsAgentDashboardComponent } from './claims-agent/claims-agent-dashboard/claims-agent-dashboard.component';
+import { CaSidebarComponent } from './claims-agent/ca-sidebar/ca-sidebar.component';
+import { CaNavbarComponent } from './claims-agent/ca-navbar/ca-navbar.component';
+import { AuctionComponent } from './claims-agent/auction/auction.component';
+import { CaProfileComponent } from './claims-agent/ca-profile/ca-profile.component';
+import { UploadClaimComponent } from './claims-agent/upload-claim/upload-claim.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
@@ -17,6 +25,13 @@ const routes: Routes = [
   { path: 'initialsignup', component: InitialsignupComponent},
   { path: 'login', component: LoginComponent},
   { path: 'adminprofile', component: AdminprofileComponent},
+  { path: 'about', component: AboutUsComponent},
+  { path: 'claims-agent-dashboard', component: ClaimsAgentDashboardComponent},
+  { path: 'ca-sidebar', component: CaSidebarComponent},
+  { path: 'ca-navbar', component: CaNavbarComponent},
+  { path: 'auction', component: AuctionComponent},
+  { path: 'ca-profile', component: CaProfileComponent},
+  { path: 'upload-claim', component: UploadClaimComponent}
 ];
 
 @NgModule({

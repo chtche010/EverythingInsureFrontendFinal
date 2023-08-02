@@ -1,0 +1,43 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "DM Serif Text", sans-serif;
+}
+
+.alert-danger {
+    background-color: #fd2828ca;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.alert {
+    color: rgb(255, 255, 255);
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+.card {
+    border-color: #211561;
+    border-width: 2px;
+    border-radius: 10px;
+}
+
+.card-title {
+    font-weight: bolder;
+    color:#040777 ;
+    font-size: 18px;
+}
+
+.container-fluid {
+    margin-top: 80px;
+    margin-right: 20px;
+    margin-left: -30px;
+}
+
+.form-label {
+    font-family: "DM Sans", sans-serif;
+    font-weight: 600;
+}
