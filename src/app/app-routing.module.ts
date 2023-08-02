@@ -9,7 +9,6 @@ import { AdminprofileComponent } from './adminprofile/adminprofile.component';
 import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './guards/auth.guard';
 //Bens added
-import { AboutUsComponent } from './about-us/about-us.component';
 import { ClaimsAgentDashboardComponent } from './claims-agent/claims-agent-dashboard/claims-agent-dashboard.component';
 import { CaSidebarComponent } from './claims-agent/ca-sidebar/ca-sidebar.component';
 import { CaNavbarComponent } from './claims-agent/ca-navbar/ca-navbar.component';
@@ -26,6 +25,11 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent},
   { path: 'adminprofile', component: AdminprofileComponent},
   { path: 'caprofile', component: CaProfileComponent},
+  { path: 'claims-agent-dashboard', component: ClaimsAgentDashboardComponent},
+  { path: 'ca-sidebar', component: CaSidebarComponent},
+  { path: 'ca-navbar', component: CaNavbarComponent},
+  { path: 'auction', component: AuctionComponent},
+  { path: 'upload-claim', component: UploadClaimComponent}
 ];
 
 @NgModule({
