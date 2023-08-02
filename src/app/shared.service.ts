@@ -38,7 +38,7 @@ export class SharedService {
     }
 
     isProfileExists(email: string): Observable<boolean> {
-        return this.http.get<boolean>(this.baseAPIUrl + 'api/User/ProfileExists?email=' + email);
+        return this.http.get<boolean>(this.baseAPIUrl + 'Auth/Check User Profile' + email);
     }
 
     signOut(){
