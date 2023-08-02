@@ -25,11 +25,6 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent},
   { path: 'adminprofile', component: AdminprofileComponent},
   { path: 'caprofile', component: CaProfileComponent},
-  { path: 'claims-agent-dashboard', component: ClaimsAgentDashboardComponent},
-  { path: 'ca-sidebar', component: CaSidebarComponent},
-  { path: 'ca-navbar', component: CaNavbarComponent},
-  { path: 'auction', component: AuctionComponent},
-  { path: 'upload-claim', component: UploadClaimComponent}
 ];
 
 @NgModule({
