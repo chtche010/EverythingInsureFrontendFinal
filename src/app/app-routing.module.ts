@@ -25,7 +25,7 @@ const routes: Routes = [
   { path: 'initialsignup', component: InitialsignupComponent},
   { path: 'login', component: LoginComponent},
   { path: 'adminprofile', component: AdminprofileComponent},
-  { path: 'caprofile', component: CaProfileComponent},
+  { path: 'caprofile', component: CaProfileComponent}
 ];
 
 @NgModule({
