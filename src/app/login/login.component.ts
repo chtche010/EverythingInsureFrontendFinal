@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
                   this.router.navigate(['/adminprofile']);
                   break;
                 case 'ClaimsAgent':
-                  this.router.navigate(['/claimsagentprofile']);
+                  this.router.navigate(['/claim-agent-dashboard']);
                   break;
                 case 'ServiceProvider':
                   this.router.navigate(['/serviceproviderprofile']);
