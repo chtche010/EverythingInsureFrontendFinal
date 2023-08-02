@@ -30,10 +30,6 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  hideShowPass() {
-    this.passwordVisible = !this.passwordVisible;
-  }
-
   handleSubmit(): void {
     if (this.loginForm.valid) {
       // Implement login logic here, e.g., send login request to server
@@ -45,13 +41,32 @@ export class LoginComponent implements OnInit {
           this.loginForm.reset();
           this.sharedService.storeToken(res.token);
 
-          // const tokenPayload = this.sharedService.decodeToken();
-          // this.userStore.setusernameForStore(tokenpayload.name);
-          // this.userStore.setaccountTypeForStore(tokenpayload.accountType);
-          // this.userStore.setemailForStore(tokenpayload.email);
-          
+          // Check if the user's profile exists and redirect to the appropriate component
+          this.sharedService.isProfileExists(this.loginForm.value.email).subscribe(exists => {
+            if (exists) {
+              const accountType = this.sharedService.getaccountTypeFromToken();
+              switch (accountType) {
+                case 'Administrator':
+                  this.router.navigate(['/adminprofile']);
+                  break;
+                case 'ClaimsAgent':
+                  this.router.navigate(['/claimsagentprofile']);
+                  break;
+                case 'ServiceProvider':
+                  this.router.navigate(['/serviceproviderprofile']);
+                  break;
+                default:
+                  this.router.navigate(['/initialsignup']);
+                  this.toast.error({detail:"Error", summary:"Cannot verify account type!", duration: 5000});
+                  break;
+              }
+            } else {
+              // Profile does not exist, redirect to the appropriate role selection page during signup
+              this.router.navigate(['/initialsignup']); 
+            }
+          });
+
           this.toast.success({detail:"Success", summary:res.message, duration: 5000});
-          this.router.navigate(['serviceproviderprofile'])
         },
         error: (err) => {
           this.toast.error({detail:"Error", summary:"Something went wrong!", duration: 5000});
