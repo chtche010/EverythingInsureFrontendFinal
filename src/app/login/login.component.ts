@@ -30,6 +30,10 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  hideShowPass() {
+    this.passwordVisible = !this.passwordVisible;
+  }
+
   handleSubmit(): void {
     if (this.loginForm.valid) {
       // Implement login logic here, e.g., send login request to server
