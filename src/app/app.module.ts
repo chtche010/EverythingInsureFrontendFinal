@@ -31,7 +31,6 @@ import { AboutUsComponent } from './about-us/about-us.component';
 import { WhyTrustUsComponent } from './why-trust-us/why-trust-us.component';
 import { FAQComponent } from './faq/faq.component';
 import { FooterComponent } from './footer/footer.component';
-import { ClaimsagentprofileComponent } from './claimsagentprofile/claimsagentprofile.component';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 
 const routes: Routes = [
@@ -52,7 +51,6 @@ const routes: Routes = [
     WhyTrustUsComponent,
     FAQComponent,
     FooterComponent,
-    ClaimsagentprofileComponent,
   ],
   imports: [
     BrowserModule,

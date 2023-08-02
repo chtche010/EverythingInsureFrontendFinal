@@ -7,7 +7,6 @@ import { InitialsignupComponent } from './initialsignup/initialsignup.component'
 import { LoginComponent } from './login/login.component';
 import { AdminprofileComponent } from './adminprofile/adminprofile.component';
 import { HomeComponent } from './home/home.component';
-import { ClaimsagentprofileComponent } from './claimsagentprofile/claimsagentprofile.component';
 import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
@@ -18,7 +17,6 @@ const routes: Routes = [
   { path: 'initialsignup', component: InitialsignupComponent},
   { path: 'login', component: LoginComponent},
   { path: 'adminprofile', component: AdminprofileComponent},
-  { path: 'claimsagentprofile', component: ClaimsagentprofileComponent}
 ];
 
 @NgModule({
