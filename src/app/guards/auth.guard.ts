@@ -30,7 +30,7 @@ export class AuthGuard implements CanActivate {
         case 'ClaimsAgent':
           this.sharedService.isProfileExists(this.sharedService.getemailFromToken()).subscribe(exists => {
             if (exists) {
-              this.router.navigate(['/caprofile']);
+              this.router.navigate(['/claim-agent-dashboard']);
             } else {
               this.router.navigate(['/casignup']);
             }
