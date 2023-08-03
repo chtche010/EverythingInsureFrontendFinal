@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { initialsignup } from './models/initialsignup.model';
 import { addclaimsagent } from './models/addclaimsagent';
+import { addclaim } from './models/addclaim';
 import { addserviceproviderdetails } from './models/addserviceproviderdetails';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt'
@@ -32,11 +33,14 @@ export class SharedService {
 
     // Claims agent
 
- 
+    addClaim(addClaimsRequest : addclaim): Observable<addclaim> {    
+        return this.http.post<addclaim>(this.baseAPIUrl + 'api/Claims/Add-Claim', addClaimsRequest);
+    }
 
     addClaimsAgent(addClaimsAgentRequest : addclaimsagent): Observable<addclaimsagent> {    
         return this.http.post<addclaimsagent>(this.baseAPIUrl + 'api/ClaimsAgent/Create Claims Agent Profile', addClaimsAgentRequest);
     }
+
     // Service Provider
     addServiceProviderDetails(addServiceProviderDetailsRequest : addserviceproviderdetails): Observable<addserviceproviderdetails> {    
         return this.http.post<addserviceproviderdetails>(this.baseAPIUrl + 'api/ServiceProvider/Create-ServiceProvider-Profile', addServiceProviderDetailsRequest);

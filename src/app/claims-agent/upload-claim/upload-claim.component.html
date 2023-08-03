@@ -1,1 +1,75 @@
-<p>upload-claim works!</p>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+    <link rel="stylesheet" href="./upload-claim.component.css">
+  </head>
+  <body>
+
+  <div class="form-wrapper">
+    <form [formGroup]="claimupload" (ngSubmit)="handleSubmit()" class="container">
+
+      <mat-form-field appearance="fill" style="width: 100%">
+        <mat-label for="customerName">Customer name</mat-label>
+        <input matInput formControlName="customerName" required id="customerName" name="customerName">
+      </mat-form-field>
+
+      <mat-error class="error-message" *ngIf="claimupload.get('customerName')?.invalid && (claimupload.get('customerName')?.dirty || claimupload.get('customerName')?.touched)">
+        Please enter a valid email address
+      </mat-error>
+
+      <mat-form-field appearance="fill" style="width: 100%">
+        <mat-label for="customerEmail">Customer email</mat-label>
+        <input matInput formControlName="customerEmail" required id="customerEmail" name="customerEmail">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" style="width: 100%">
+        <mat-label for="vehicleMake">Vehicle make</mat-label>
+        <input matInput formControlName="vehicleMake" required id="vehicleMake" name="vehicleMake">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" style="width: 100%">
+        <mat-label for="vehicleModel">Vehicle model</mat-label>
+        <input matInput formControlName="vehicleModel" required id="vehicleModel" name="vehicleModel">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" style="width: 100%">
+        <mat-label for="modelYear">Vehicle year</mat-label>
+        <input matInput formControlName="modelYear" required id="modelYear" name="modelYear">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" style="width: 100%">
+        <mat-label for="MMCode">MM code</mat-label>
+        <input matInput formControlName="MMCode" required id="MMCode" name="MMCode">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" style="width: 100%">
+        <mat-label for="damageDescription">Damage description</mat-label>
+        <input matInput formControlName="damageDescription" required id="damageDescription" name="damageDescription">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" style="width: 100%">
+        <mat-label for="customerSurbub">Customer suburb</mat-label>
+        <input matInput formControlName="customerSurbub" required id="customerSurbub" name="customerSurbub">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" style="width: 100%">
+        <mat-label for="customerCity">Customer city</mat-label>
+        <input matInput formControlName="customerCity" required id="customerCity" name="customerCity">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" style="width: 100%">
+        <mat-label for="customerProvince">Customer province</mat-label>
+        <input matInput formControlName="customerProvince" required id="customerProvince" name="customerProvince">
+      </mat-form-field>
+     
+
+      <div class="button-container">
+        <button mat-raised-button color="accent" type="Submit" [disabled]="!claimupload.valid">Upload claim</button>
+      </div>
+    </form>
+  </div>
+</body>
+</html>
+

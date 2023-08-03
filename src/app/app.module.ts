@@ -43,6 +43,7 @@ import { CaProfileComponent } from './claims-agent/ca-profile/ca-profile.compone
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { UploadClaimComponent } from './claims-agent/upload-claim/upload-claim.component';
 
 const routes: Routes = [
   { path: 'signup', component: SignupComponent },
@@ -66,7 +67,8 @@ const routes: Routes = [
     CaNavbarComponent,
     CaSidebarComponent,
     AuctionComponent,
-    CaProfileComponent
+    CaProfileComponent,
+    UploadClaimComponent
   ],
   imports: [
     BrowserModule,

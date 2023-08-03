@@ -29,7 +29,7 @@ const routes: Routes = [
   { path: 'ca-sidebar', component: CaSidebarComponent},
   { path: 'ca-navbar', component: CaNavbarComponent},
   { path: 'auction', component: AuctionComponent},
-  { path: 'upload-claim', component: UploadClaimComponent}
+  { path: 'uploadclaim', component: UploadClaimComponent}
 ];
 
 @NgModule({
