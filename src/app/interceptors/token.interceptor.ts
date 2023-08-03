@@ -24,16 +24,16 @@ export class TokenInterceptor implements HttpInterceptor {
 
 if(myToken){
   request = request.clone({
-    setHeaders: {Authorization:`Bearer ${myToken}`}
-  })
+    setHeaders: { Authorization:`Bearer ${myToken}`}
+  });
 }
 
     return next.handle(request).pipe(
-      catchError((err:any)=>{
+      catchError((err:any) => {
         if(err instanceof HttpErrorResponse){
           if(err.status === 401){
             this.toast.warning({detail:"Warning", summary:"Token is expired, Login again"});
-            this.router.navigate(['login'])
+            this.router.navigate(['login']) //this.sharedService.signOut();
           }
         }
         return throwError(()=> new Error("Some other error occured"))
