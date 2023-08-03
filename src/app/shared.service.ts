@@ -16,19 +16,16 @@ import { addserviceprovideraddress } from './models/addserviceprovideraddress';
 })
 
 export class SharedService {
-
- 
-
     baseAPIUrl = "http://localhost:5184/";
-
     private userPayload: any;
+    private jwtHelper: JwtHelperService;
 
     constructor(
-
         private http: HttpClient,
-
         private router: Router) {
-            this.userPayload = this.decodeToken();
+            const token = this.getToken();
+            //this.userPayload = this.decodeToken();
+            this.jwtHelper = new JwtHelperService;
          }
 
  
@@ -119,35 +116,22 @@ export class SharedService {
     //     return jwtHelper.decodeToken(token)
     // }
 
-    decodeToken() {
-        const jwtHelper = new JwtHelperService();
-        const token = this.getToken();
-    
-        if (token) {
-
-            try {
-                const decodedToken = jwtHelper.decodeToken(token);
-                console.log('Decoded Token:', decodedToken);
-
-                return decodedToken;
-
-            } catch (error) {
-
-                console.error('Error decoding token:', error);
-
-                return null; // Handle the error gracefully
-
-            }
-
-        } else {
-
-            console.warn('No token found.');
-
-            return null; // Handle the case where no token is found
-
-        }
-
-    }
+    // decodeToken() {  
+    //     const token = localStorage.getItem('token');
+        
+    //     if (token) {    
+    //         try {      
+    //             const decodedToken = this.jwtHelper.decodeToken(token);      
+    //             console.log('Decoded Token:', decodedToken);      
+    //             return decodedToken;    
+    //         } catch (error) {      
+    //             console.error('Error decoding token:', error);      
+    //             return null;    
+    //         }  
+    //     } else {    
+    //         console.warn('No token found.');    
+    //         return null;  
+    //     }}
 
  
 
