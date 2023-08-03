@@ -34,52 +34,34 @@ export class LoginComponent implements OnInit {
     this.passwordVisible = !this.passwordVisible;
   }
 
+
   handleSubmit(): void {
-    if (this.loginForm.valid) {
-      // Implement login logic here, e.g., send login request to server
-      console.log(this.loginForm.value)
-      // Send the obj to database 
-      this.sharedService.login(this.loginForm.value).subscribe({
-        next: (res) => {
-          console.log(res.message);
-          this.loginForm.reset();
-          this.sharedService.storeToken(res.token);
+  if (this.loginForm.valid) {
+    // Implement login logic here, e.g., send login request to server
+    console.log(this.loginForm.value)
+    // Send the obj to database 
+    this.sharedService.login(this.loginForm.value).subscribe({
+      next: (res) => {
+        console.log(res.message);
+        this.loginForm.reset();
+        this.sharedService.storeToken(res.token);
 
-          // Check if the user's profile exists and redirect to the appropriate component
-          this.sharedService.isProfileExists(this.loginForm.value.email).subscribe(exists => {
-            if (exists) {
-              const accountType = this.sharedService.getaccountTypeFromToken();
-              switch (accountType) {
-                case 'Administrator':
-                  this.router.navigate(['/adminprofile']);
-                  break;
-                case 'ClaimsAgent':
-                  this.router.navigate(['/caprofile']);
-                  break;
-                case 'ServiceProvider':
-                  this.router.navigate(['/serviceproviderprofile']);
-                  break;
-                default:
-                  this.router.navigate(['/initialsignup']);
-                  this.toast.error({detail:"Error", summary:"Cannot verify account type!", duration: 5000});
-                  break;
-              }
-            } else {
-              // Profile does not exist, redirect to the appropriate role selection page during signup
-              this.router.navigate(['/initialsignup']); 
-            }
-          });
-
-          this.toast.success({detail:"Success", summary:res.message, duration: 5000});
-        },
-        error: (err) => {
-          this.toast.error({detail:"Error", summary:"Something went wrong!", duration: 5000});
-          console.log(err);
-        },
-      });
-     } else {
-        ValidateForm.validateAllFormFields(this.loginForm);
-      }
-    }
+        // const tokenPayload = this.sharedService.decodeToken();
+        // this.userStore.setusernameForStore(tokenpayload.name);
+        // this.userStore.setaccountTypeForStore(tokenpayload.accountType);
+        // this.userStore.setemailForStore(tokenpayload.email);
+        
+        this.toast.success({detail:"Success", summary:res.message, duration: 5000});
+        this.router.navigate(['/serviceproviderprofile'])
+      },
+      error: (err) => {
+        this.toast.error({detail:"Error", summary:"Something went wrong!", duration: 5000});
+        console.log(err);
+      },
+    });
+  } else {
+    ValidateForm.validateAllFormFields(this.loginForm);
   }
+}
+}
   

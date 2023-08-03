@@ -99,6 +99,11 @@ export class SharedService {
         return this.userPayload.accountType;
     }
 
+    getAccountUserIdFromToken(){
+        if(this.userPayload)
+        return this.userPayload.Account_UserId;
+    }
+
     // updateStudent(val: any) {
     //     return this.http.put(this.APIUrl + '/Student', val);
     // }
