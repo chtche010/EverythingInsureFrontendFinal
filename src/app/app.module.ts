@@ -93,9 +93,7 @@ const routes: Routes = [
     provide:HTTP_INTERCEPTORS,
     useClass:TokenInterceptor,
     multi:true
-  }, 
-  JwtHelperService
-],
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

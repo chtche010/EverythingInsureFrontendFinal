@@ -5,6 +5,7 @@ import ValidateForm from '../helpers/validationform';
 import { SharedService } from '../shared.service';
 import { Router } from '@angular/router';
 import { UserStoreService } from '../services/user-store.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -21,6 +22,7 @@ export class LoginComponent implements OnInit {
     private toast: NgToastService,
     private userStore: UserStoreService,
     private router: Router, 
+    private authService: AuthService
     ) {}
 
   ngOnInit(): void {
@@ -35,63 +37,59 @@ export class LoginComponent implements OnInit {
   }
 
 // Method to handle form submission
-handleSubmit() {
-  if (this.loginForm.invalid) {
-    return;
-  }
 
+async handleSubmit() {
+  // Prepare the login data
   const loginObj = {
-    email: this.loginForm.get('email')!.value,
-    password: this.loginForm.get('password')!.value
+    // Add your login data properties here
+    username: 'your-username',
+    password: 'your-password'
   };
 
-  this.sharedService.login(loginObj).subscribe(
-    (response) => {
-      // On successful login, store the token and redirect to profile page
-      this.sharedService.storeToken(response.token);
-      this.redirectToProfilePage();
-    },
-    (error) => {
-      // Handle login errors (e.g., invalid credentials)
-      console.error('Login Error:', error);
-      // You can display error messages to the user if needed
-    }
-  );
-}
+  try {
+    // Call the login method in the SharedService with the login data
+    const response = await this.sharedService.login(loginObj).toPromise(); // Convert observable to promise
 
-// Helper method to redirect to profile page after successful login
-redirectToProfilePage() {
-  // Implement the logic to redirect to the appropriate profile page
-  // For example, based on the user's role or profile status
-  // You can use the AuthGuard to handle the redirection based on the user's status
-  // For now, let's assume you have a generic profile page for all users
-  const accountType = this.sharedService.getaccountTypeFromToken();
-  if (accountType === 'Administrator') {
-    this.redirectToAdminProfile();
-  } else if (accountType === 'ClaimsAgent') {
-    this.redirectToClaimsAgentProfile();
-  } else if (accountType === 'ServiceProvider') {
-    this.redirectToServiceProviderProfile();
-  } else {
-    // Handle the case where accountType is not recognized
-    // You can decide where to redirect them in this case (e.g., back to the login page)
-    this.router.navigate(['/login']);
+    const token = response.token;
+    // Store the token in local storage
+    localStorage.setItem('token', token);
+    // Set the user payload in the shared service
+    this.sharedService.setUserPayload(token);
+    // Redirect to the appropriate page
+    const accountUserId = this.sharedService.getAccountUserIdFromToken();
+    const accountType = this.sharedService.getaccountTypeFromToken();
+    if (accountUserId) {
+      // User is logged in and has an account ID
+      if (accountType === 'administrator') {
+        this.router.navigate(['/adminprofile']);
+      } else if (accountType === 'serviceprovider') {
+        this.router.navigate(['/serviceproviderprofile']);
+      } else if (accountType === 'ClaimsAgent') {
+        this.router.navigate(['/claimsagentprofile']);
+      } else {
+        // Handle the case where accountType is neither administrator, serviceprovider, nor ClaimsAgent
+        // You can decide where to redirect them in this case (e.g., back to the login page)
+        this.router.navigate(['/login']);
+      }
+    } else {
+      // User is logged in but does not have an account ID
+      if (accountType === 'ClaimsAgent') {
+        this.router.navigate(['/casignup']);
+      } else if (accountType === 'serviceprovider') {
+        this.router.navigate(['/spsignup']);
+      } else {
+        // Handle the case where accountType is neither ClaimsAgent nor serviceprovider
+        // You can decide where to redirect them in this case (e.g., back to the login page)
+        this.router.navigate(['/login']);
+      }
+    }
+  } catch (error) {
+    // Handle error if login fails (e.g., show an error message to the user)
+    console.error('Login error:', error);
+    // You can also redirect to an error page or show an error message to the user
   }
 }
-
-// Helper method to redirect to the claims agent profile page
-redirectToClaimsAgentProfile() {
-  this.router.navigate(['/caprofile']);
 }
 
-// Helper method to redirect to the service provider profile page
-redirectToServiceProviderProfile() {
-  this.router.navigate(['/serviceproviderprofile']);
-}
 
-// Helper method to redirect to the admin profile page
-redirectToAdminProfile() {
-  this.router.navigate(['/adminprofile']);
-}
-}
   

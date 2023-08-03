@@ -24,8 +24,8 @@ export class SharedService {
         private http: HttpClient,
         private router: Router) {
             const token = this.getToken();
-            //this.userPayload = this.decodeToken();
-            this.jwtHelper = new JwtHelperService;
+            this.userPayload = this.decodeToken(token);
+            this.jwtHelper = new JwtHelperService();
          }
 
  
@@ -107,33 +107,25 @@ export class SharedService {
 
     }
 
- 
+    decodeToken(token: string | null) {
+        if (token) {
+            try {
+                const decodedToken = this.jwtHelper.decodeToken(token);
+                console.log('Decoded Token:', decodedToken);
+                return decodedToken;
+            } catch (error) {
+                console.error('Error decoding token:', error);
+                return null; // Handle the error gracefully
+            }
+        } else {
+            console.warn('No token found.');
+            return null; // Handle the case where no token is found
+        }
+    }
 
-    // decodeToken(){
-    //     const jwtHelper = new JwtHelperService();
-    //     const token = this.getToken()!;
-    //     console.log(jwtHelper.decodeToken(token))
-    //     return jwtHelper.decodeToken(token)
-    // }
-
-    // decodeToken() {  
-    //     const token = localStorage.getItem('token');
-        
-    //     if (token) {    
-    //         try {      
-    //             const decodedToken = this.jwtHelper.decodeToken(token);      
-    //             console.log('Decoded Token:', decodedToken);      
-    //             return decodedToken;    
-    //         } catch (error) {      
-    //             console.error('Error decoding token:', error);      
-    //             return null;    
-    //         }  
-    //     } else {    
-    //         console.warn('No token found.');    
-    //         return null;  
-    //     }}
-
- 
+    setUserPayload(token: string) {
+        this.userPayload = this.jwtHelper.decodeToken(token);
+    }
 
     getusernameFromToken(){
 
@@ -166,14 +158,9 @@ export class SharedService {
  
 
     getAccountUserIdFromToken(){
-
         if(this.userPayload)
-
         return this.userPayload.Account_UserId;
-
     }
-
- 
 
     // updateStudent(val: any) {
 
