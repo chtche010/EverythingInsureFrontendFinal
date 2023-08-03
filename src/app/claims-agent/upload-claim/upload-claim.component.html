@@ -6,7 +6,10 @@
     <link rel="stylesheet" href="./upload-claim.component.css">
   </head>
   <body>
-
+  
+    <app-ca-navbar></app-ca-navbar>
+    <app-ca-sidebar></app-ca-sidebar>
+  
   <div class="form-wrapper">
     <form [formGroup]="claimupload" (ngSubmit)="handleSubmit()" class="container">
 
