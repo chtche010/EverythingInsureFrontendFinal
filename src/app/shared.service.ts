@@ -22,7 +22,7 @@ export class SharedService {
         private http: HttpClient,
         private router: Router) {
             const token = this.getToken();
-            this.userPayload = this.decodeToken(token);
+            //this.userPayload = this.decodeToken(token);
             this.jwtHelper = new JwtHelperService();
          }
 
@@ -89,20 +89,26 @@ export class SharedService {
         return !!localStorage.getItem('token')
     }
 
-    decodeToken(token: string | null) {
+    decodeToken() {
+        const token = localStorage.getItem('token');
+      
         if (token) {
-            try {
-                const decodedToken = this.jwtHelper.decodeToken(token);
-                console.log('Decoded Token:', decodedToken);
-                return decodedToken;
-            } catch (error) {
-                console.error('Error decoding token:', error);
-                return null; // Handle the error gracefully
-            }
+          try {
+            const decodedToken = this.jwtHelper.decodeToken(token);
+            console.log('Decoded Token:', decodedToken);
+            return decodedToken;
+          } catch (error) {
+            console.error('Error decoding token:', error);
+            return null;
+          }
         } else {
-            console.warn('No token found.');
-            return null; // Handle the case where no token is found
+          console.warn('No token found.');
+          return null;
         }
+      }
+
+    setUserPayload(token: string) {
+        this.userPayload = this.jwtHelper.decodeToken(token);
     }
 
     getusernameFromToken(){
@@ -121,8 +127,10 @@ export class SharedService {
     }
 
     getAccountUserIdFromToken(){
-        if(this.userPayload)
+        if(this.userPayload) {
         return this.userPayload.Account_UserId;
+        }
+        return null;
     }
 
     // updateStudent(val: any) {

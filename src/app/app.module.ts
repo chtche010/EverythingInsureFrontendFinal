@@ -42,6 +42,7 @@ import { AuctionComponent } from './claims-agent/auction/auction.component';
 import { CaProfileComponent } from './claims-agent/ca-profile/ca-profile.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 const routes: Routes = [
   { path: 'signup', component: SignupComponent },
@@ -91,8 +92,10 @@ const routes: Routes = [
   providers: [{
     provide:HTTP_INTERCEPTORS,
     useClass:TokenInterceptor,
-    multi:true
-  }],
+    multi:true,
+  },
+  JwtHelperService
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
