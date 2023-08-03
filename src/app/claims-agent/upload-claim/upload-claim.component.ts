@@ -42,7 +42,6 @@ export class UploadClaimComponent implements OnInit {
 
   ngOnInit(): void {
     this.claimupload = this.formBuilder.group({
-    claimId: ['', [Validators.required]],
     customerName: ['', [Validators.required]],
     customerEmail: ['', [Validators.required]],
     vehicleMake: ['', [Validators.required]],
@@ -54,7 +53,6 @@ export class UploadClaimComponent implements OnInit {
     customerCity: ['', [Validators.required]],
     customerProvince: ['', [Validators.required]],
     claimsAgent: ['', [Validators.required]],
-    claimsAgentId: ['', [Validators.required]],
     });
   }
 
