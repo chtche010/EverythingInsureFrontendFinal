@@ -1,6 +1,6 @@
-export interface initialsignup {
-    Account_UserId: string,
-    email: string;
-    password: string; 
-    accountType: string;
+export class initialsignup {
+    //Account_UserId = '';
+    email = '';
+    password = ''; 
+    accountType = '';
 }

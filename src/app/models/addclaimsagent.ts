@@ -1,6 +1,6 @@
-export interface addclaimsagent {
-    claimsAgentId: string;
-    insuranceCompany: string;
-    firstName: string; 
-    lastName: string;
+export class addclaimsagent {
+    //claimsAgentId = '';
+    insuranceCompany = '';
+    firstName = ''; 
+    lastName = '';
 }

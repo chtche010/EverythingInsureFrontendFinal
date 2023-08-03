@@ -14,30 +14,35 @@ import { Router } from '@angular/router';
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
 
-  constructor(
-    private sharedServices: SharedService,
-    private toast: NgToastService,
-    private router: Router) {}
+//   constructor(
+//     private sharedServices: SharedService,
+//     private toast: NgToastService,
+//     private router: Router) {}
 
-  intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    const myToken = this.sharedServices.getToken();
+//   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+//     const myToken = this.sharedServices.getToken();
 
-if(myToken){
-  request = request.clone({
-    setHeaders: { Authorization:`Bearer ${myToken}`}
-  });
-}
+// if(myToken){
+//   request = request.clone({
+//     setHeaders: { Authorization:`Bearer ${myToken}`}
+//   });
+// }
 
-    return next.handle(request).pipe(
-      catchError((err:any) => {
-        if(err instanceof HttpErrorResponse){
-          if(err.status === 401){
-            this.toast.warning({detail:"Warning", summary:"Token is expired, Login again"});
-            this.router.navigate(['login']) //this.sharedService.signOut();
-          }
-        }
-        return throwError(()=> new Error("Some other error occured"))
-      })
-    );
+//     return next.handle(request);
+//   }
+
+  intercept(
+    req: HttpRequest<any>, 
+    next: HttpHandler
+  ): Observable<HttpEvent<any>> {
+    const token = localStorage.getItem('authToken');
+
+    if (token) {
+      req = req.clone({
+        setHeaders: { Authorization: `Bearer ${token}` },
+      });
+    }
+
+    return next.handle(req);
   }
 }

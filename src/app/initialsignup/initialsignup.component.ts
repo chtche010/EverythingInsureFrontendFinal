@@ -4,6 +4,7 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { Router } from '@angular/router';
 import { initialsignup } from '../models/initialsignup.model';
 import { SharedService } from '../shared.service';
+import { AuthService } from '../services/auth.service';
 
 interface roles {
   value: string;
@@ -18,12 +19,25 @@ interface roles {
 
 export class InitialsignupComponent implements OnInit {
   userregister!: FormGroup;
-  addInitialSignupRequest: initialsignup = {
-    Account_UserId: '',
-    email: '',
-    password: '',
-    accountType: ''
-  };
+  InitialSignUp = new initialsignup();
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private http: HttpClient,
+    private authService: AuthService,
+    private router: Router
+    ) {}
+
+    register(InitialSignUp: initialsignup) {
+      this.authService.register(InitialSignUp).subscribe();
+    }
+
+  // addInitialSignupRequest: initialsignup = {
+  //   Account_UserId: '',
+  //   email: '',
+  //   password: '',
+  //   accountType: ''
+  // };
   
   roles: roles[] = [
     { value: 'ClaimsAgent', viewValue: 'Claims agent' },
@@ -37,13 +51,6 @@ export class InitialsignupComponent implements OnInit {
 
   confirmVisible: boolean = true;
   confirmChangetype: boolean = true;
-
-  constructor(
-    private formBuilder: FormBuilder,
-    private http: HttpClient,
-    private sharedService: SharedService,
-    private router: Router
-    ) {}
 
   ngOnInit(): void {
     this.userregister = this.formBuilder.group({
@@ -66,26 +73,29 @@ export class InitialsignupComponent implements OnInit {
 
   handleSubmit(): void {
     if (this.userregister.valid) {
+      this.register(this.InitialSignUp)
+    // this.addInitialSignupRequest.Account_UserId = ''; // Set the Account_UserId property
+    // this.addInitialSignupRequest.email = this.userregister.value.email; // Set the email property
+    // this.addInitialSignupRequest.password = this.userregister.value.password; // Set the password property
+    // this.addInitialSignupRequest.accountType = this.userregister.value.accountType;
 
-    this.addInitialSignupRequest.Account_UserId = ''; // Set the Account_UserId property
-    this.addInitialSignupRequest.email = this.userregister.value.email; // Set the email property
-    this.addInitialSignupRequest.password = this.userregister.value.password; // Set the password property
-    this.addInitialSignupRequest.accountType = this.userregister.value.accountType;
+    //   this.sharedService.addInitialSignup(this.addInitialSignupRequest).subscribe(
+    //    (response: any) => {
+    //     console.log(response);
+    //     this.userregister.reset();
+    //     this.signupSuccess = true;
+    //    },
+    //    (error: any) => {
+    //     console.log(error);
+    //   }
+    //  );
+    // } else {
+    //   console.log('Form is invalid. Please fill in all required fields.');
+    // }
 
-      this.sharedService.addInitialSignup(this.addInitialSignupRequest).subscribe(
-       (response: any) => {
-        console.log(response);
-        this.userregister.reset();
-        this.signupSuccess = true;
-       },
-       (error: any) => {
-        console.log(error);
-      }
-     );
-    } else {
-      console.log('Form is invalid. Please fill in all required fields.');
-    }
+    
   }
+}
 
   passwordMatchValidator(control: AbstractControl): { [key: string]: boolean } | null {
     const password = control.get('password');

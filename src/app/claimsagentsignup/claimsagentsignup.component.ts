@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 export class ClaimsagentsignupComponent implements OnInit {
   caregister!: FormGroup;
   addClaimsAgentRequest: addclaimsagent = {
-    claimsAgentId: '',
+    //claimsAgentId: '',
     insuranceCompany: '',
     firstName: '', 
     lastName: '' 
@@ -38,25 +38,25 @@ export class ClaimsagentsignupComponent implements OnInit {
   }
 
   handleSubmit(): void {
-    if (this.caregister.valid) {
+    // if (this.caregister.valid) {
 
-      this.addClaimsAgentRequest.claimsAgentId = '';
-      this.addClaimsAgentRequest.insuranceCompany = this.caregister.value.insuranceCompany;
-      this.addClaimsAgentRequest.firstName = this.caregister.value.firstName;
-      this.addClaimsAgentRequest.lastName = this.caregister.value.lastName;
+    //   this.addClaimsAgentRequest.claimsAgentId = '';
+    //   this.addClaimsAgentRequest.insuranceCompany = this.caregister.value.insuranceCompany;
+    //   this.addClaimsAgentRequest.firstName = this.caregister.value.firstName;
+    //   this.addClaimsAgentRequest.lastName = this.caregister.value.lastName;
 
-        this.sharedServices.addClaimsAgent(this.addClaimsAgentRequest).subscribe(
-          (response: any) => {
-            console.log(response);
-            this.caregister.reset();
-            this.signupSuccess = true;
-          },
-          (error: any) => {
-            console.log(error);
-          }
-        );
-    } else {
-      console.log('Form is invalid. Please fill in all the required fields');
-    }
+    //     this.sharedServices.addClaimsAgent(this.addClaimsAgentRequest).subscribe(
+    //       (response: any) => {
+    //         console.log(response);
+    //         this.caregister.reset();
+    //         this.signupSuccess = true;
+    //       },
+    //       (error: any) => {
+    //         console.log(error);
+    //       }
+    //     );
+    // } else {
+    //   console.log('Form is invalid. Please fill in all the required fields');
+    // }
   }
 }
