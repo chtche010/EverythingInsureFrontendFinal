@@ -7,7 +7,7 @@ import { InitialsignupComponent } from './initialsignup/initialsignup.component'
 import { LoginComponent } from './login/login.component';
 import { AdminprofileComponent } from './adminprofile/adminprofile.component';
 import { HomeComponent } from './home/home.component';
-import { AuthGuard } from './guards/auth.guard';
+//import { AuthGuard } from './guards/auth.guard';
 //Bens added
 import { ClaimsAgentDashboardComponent } from './claims-agent/claims-agent-dashboard/claims-agent-dashboard.component';
 import { CaSidebarComponent } from './claims-agent/ca-sidebar/ca-sidebar.component';
@@ -18,8 +18,8 @@ import { UploadClaimComponent } from './claims-agent/upload-claim/upload-claim.c
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
-  { path: 'signup', component: SignupComponent, canActivate: [AuthGuard]},
-  { path: 'casignup', component: ClaimsagentsignupComponent, canActivate: [AuthGuard]},
+  { path: 'signup', component: SignupComponent},
+  { path: 'casignup', component: ClaimsagentsignupComponent},
   { path: 'serviceproviderprofile', component: ServiceproviderprofileComponent },
   { path: 'initialsignup', component: InitialsignupComponent},
   { path: 'login', component: LoginComponent},

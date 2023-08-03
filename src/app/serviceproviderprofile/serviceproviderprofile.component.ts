@@ -14,21 +14,21 @@ export class ServiceproviderprofileComponent implements OnInit {
   ){}
 
   ngOnInit(): void {
-    this.loadUserProfile();
+    //this.loadUserProfile();
     //this.loadAddress();
     //this.loadBankDetails();
   }
 
-  loadUserProfile(){
-    this.sharedServices.getServiceProviderProfile().subscribe(
-      (data) => {
-        this.userProfile = data; // Store the user profile data in userProfile
-      },
-      (error) => {
-        console.error('Error fetching user profile:', error);
-      }
-    );
-  }
+  // loadUserProfile(){
+  //   this.sharedServices.getServiceProviderProfile().subscribe(
+  //     (data) => {
+  //       this.userProfile = data; // Store the user profile data in userProfile
+  //     },
+  //     (error) => {
+  //       console.error('Error fetching user profile:', error);
+  //     }
+  //   );
+  // }
 
   // loadAddress() {
   //   this.sharedServices.getServiceProviderAddress('AddressId').subscribe(
@@ -52,7 +52,7 @@ export class ServiceproviderprofileComponent implements OnInit {
   //   );
   // }
 
-  logout() {
-    this.sharedServices.signOut();
-  }
+  // logout() {
+  //   this.sharedServices.signOut();
+  // }
 }
