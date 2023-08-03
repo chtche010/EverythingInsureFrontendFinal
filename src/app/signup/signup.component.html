@@ -23,23 +23,23 @@
   
           <!-- Your form fields for Basic Details -->
           <mat-form-field appearance="fill" style="width: 100%">
-            <mat-label>Registration Name</mat-label>
-            <input matInput formControlName="registrationName" placeholder="Registration Name">
+            <mat-label for="registrationName">Registration Name</mat-label>
+            <input matInput formControlName="registrationName" id="registrationName" placeholder="Registration Name">
           </mat-form-field>
   
           <mat-form-field appearance="fill" style="width: 100%">
-            <mat-label>Trading Name</mat-label>
-            <input matInput formControlName="tradingName" placeholder="Trading Name">
+            <mat-label for="tradingName">Trading Name</mat-label>
+            <input matInput formControlName="tradingName" id="tradingName" placeholder="Trading Name">
           </mat-form-field>
   
           <mat-form-field appearance="fill" style="width: 100%">
-            <mat-label>Contact Person</mat-label>
-            <input matInput formControlName="contactPerson" placeholder="Contact Person">
+            <mat-label for="contactPerson">Contact Person</mat-label>
+            <input matInput formControlName="contactPerson" placeholder="Contact Person" id="contactPerson">
           </mat-form-field>
   
           <mat-form-field appearance="fill" style="width: 100%">
-            <mat-label>Cell Number</mat-label>
-            <input matInput formControlName="cellNumber" placeholder="Cell Number">
+            <mat-label for="cellNumber">Cell Number</mat-label>
+            <input matInput formControlName="cellNumber" placeholder="Cell Number" id="cellNumber">
           
             <mat-error class="error-message" *ngIf="Basicform.get('cellNumber')?.invalid && (Basicform.get('cellNumber')?.dirty || Basicform.get('cellNumber')?.touched)">
               Please enter a valid cellphone number
@@ -48,8 +48,8 @@
           </mat-form-field>
   
           <mat-form-field appearance="fill" style="width: 100%">
-            <mat-label>Telephone Number</mat-label>
-            <input matInput formControlName="telNumber" placeholder="Telephone Number">
+            <mat-label for="telNumber">Telephone Number</mat-label>
+            <input matInput formControlName="telNumber" placeholder="Telephone Number" id="telNumber">
           
             <mat-error class="error-message" *ngIf="Basicform.get('telNumber')?.invalid && (Basicform.get('telNumber')?.dirty || Basicform.get('telNumber')?.touched)">
               Please enter a valid telephone number
@@ -58,8 +58,8 @@
           </mat-form-field>
   
           <mat-form-field appearance="fill" style="width: 100%">
-            <mat-label>Email</mat-label>
-            <input matInput formControlName="email" placeholder="Email">
+            <mat-label for="email">Email</mat-label>
+            <input matInput formControlName="email" placeholder="Email" id="email">
           </mat-form-field>
 
           <mat-error class="error-message" *ngIf="Basicform.get('email')?.invalid && (Basicform.get('email')?.dirty || Basicform.get('email')?.touched)">
@@ -67,18 +67,18 @@
           </mat-error>
   
           <mat-form-field appearance="fill" style="width: 100%">
-            <mat-label>Payee Type</mat-label>
-            <input matInput formControlName="payeeType" placeholder="eg. assessor fee, payment to supplier">
+            <mat-label for="payeeType">Payee Type</mat-label>
+            <input matInput formControlName="payeeType" placeholder="eg. assessor fee, payment to supplier" id="payeeType">
           </mat-form-field>
   
           <mat-form-field appearance="fill" style="width: 100%">
-            <mat-label>Type</mat-label>
-            <input matInput formControlName="type" placeholder="eg. assessor, panel beater">
+            <mat-label for="Type">Type</mat-label>
+            <input matInput formControlName="type" placeholder="eg. assessor, panel beater" id="Type">
           </mat-form-field>
   
           <mat-form-field appearance="fill" style="width: 100%">
-            <mat-label>Company Registration Number</mat-label>
-            <input matInput formControlName="companyRegistrationNumber" placeholder="Company Registration Number">
+            <mat-label for="companyRegistrationNumber">Company Registration Number</mat-label>
+            <input matInput formControlName="companyRegistrationNumber" placeholder="Company Registration Number" id="companyRegistrationNumber">
           </mat-form-field>
 
           <mat-error class="error-message" *ngIf="Basicform.get('companyRegistrationNumber')?.invalid && (Basicform.get('companyRegistrationNumber')?.dirty || Basicform.get('companyRegistrationNumber')?.touched)">
@@ -86,8 +86,8 @@
           </mat-error>
   
           <mat-form-field appearance="fill" style="width: 100%">
-            <mat-label>VAT Vendor</mat-label>
-            <input matInput formControlName="VATVendor" placeholder="VAT Vendor">
+            <mat-label for="VATVendor">VAT Vendor</mat-label>
+            <input matInput formControlName="VATVendor" placeholder="VAT Vendor" id="VATVendor">
           </mat-form-field>
 
           <mat-error class="error-message" *ngIf="Basicform.get('VATVendor')?.invalid && (Basicform.get('VATVendor')?.dirty || Basicform.get('VATVendor')?.touched)">
@@ -95,8 +95,8 @@
           </mat-error>
   
           <mat-form-field appearance="fill" style="width: 100%">
-            <mat-label>VAT Number</mat-label>
-            <input matInput formControlName="VATNumber" placeholder="VAT Number">
+            <mat-label for="VATNumber">VAT Number</mat-label>
+            <input matInput formControlName="VATNumber" placeholder="VAT Number" id="VATNumber">
             <mat-error class="error-message" *ngIf="Basicform.get('VATNumber')?.invalid && (Basicform.get('VATNumber')?.dirty || Basicform.get('VATNumber')?.touched)">
              VAT Number is required when VAT Vendor is 'Y'. VAT Number should be in the format ZA45 followed by a 6-digit number
             </mat-error>
@@ -115,13 +115,13 @@
   
           <!-- Your form fields for Address -->
           <mat-form-field appearance="fill" style="width: 100%">
-            <mat-label>Building Name</mat-label>
-            <input matInput formControlName="buildingName" placeholder="Building Name">
+            <mat-label for="buildingName">Building Name</mat-label>
+            <input matInput formControlName="buildingName" placeholder="Building Name" id="buildingName">
           </mat-form-field>
   
           <mat-form-field appearance="fill" style="width: 100%">
-            <mat-label>Street Number</mat-label>
-            <input matInput formControlName="streetNumber" placeholder="Street Number">
+            <mat-label for="streetNumber">Street Number</mat-label>
+            <input matInput formControlName="streetNumber" placeholder="Street Number" id="streetNumber">
           </mat-form-field>
 
           <mat-error class="error-message" *ngIf="Addressform.get('streetNumber')?.invalid && (Addressform.get('streetNumber')?.dirty || Addressform.get('streetNumber')?.touched)">
@@ -129,39 +129,39 @@
           </mat-error>
   
           <mat-form-field appearance="fill" style="width: 100%">
-            <mat-label>Street Name</mat-label>
-            <input matInput formControlName="streetName" placeholder="Street Name">
+            <mat-label for="streetName">Street Name</mat-label>
+            <input matInput formControlName="streetName" placeholder="Street Name" id="streetName">
           </mat-form-field>
   
           <mat-form-field appearance="fill" style="width: 100%">
-            <mat-label>Suburb</mat-label>
-            <input matInput formControlName="surbub" placeholder="Suburb">
+            <mat-label for="surbub">Suburb</mat-label>
+            <input matInput formControlName="surbub" placeholder="Suburb" id="surbub">
           </mat-form-field>
   
           <mat-form-field appearance="fill" style="width: 100%">
-            <mat-label>City</mat-label>
-            <input matInput formControlName="city" placeholder="City">
+            <mat-label for="city">City</mat-label>
+            <input matInput formControlName="city" placeholder="City" id="city">
           </mat-form-field>
   
           <mat-form-field appearance="fill" style="width: 100%">
-            <mat-label>Province</mat-label>
+            <mat-label for="province">Province</mat-label>
             <!-- <input matInput formControlName="province" placeholder="Province"> -->
-            <select matNativeControl [(ngModel)]="selectedProvince" formControlName="province">
+            <select matNativeControl [(ngModel)]="selectedProvince" formControlName="province" id="province">
               <option *ngFor="let province of province" [value]="province.id">{{ province.name }}</option>
             </select>
           </mat-form-field>
   
           <mat-form-field appearance="fill" style="width: 100%">
-            <mat-label>Country</mat-label>
-            <input matInput formControlName="country" placeholder="Country">
+            <mat-label for="Country">Country</mat-label>
+            <input matInput formControlName="country" placeholder="Country" id="Country">
             <!-- <select matNativeControl [(ngModel)]="selectedCountry" formControlName="country">
               <option value="1">South Africa</option>
             </select> -->
           </mat-form-field>
   
           <mat-form-field appearance="fill" style="width: 100%">
-            <mat-label>Zip Code</mat-label>
-            <input matInput formControlName="zipCode" placeholder="Zip Code">
+            <mat-label for="zipCode">Zip Code</mat-label>
+            <input matInput formControlName="zipCode" placeholder="Zip Code" id="zipCode">
           </mat-form-field>
 
           <mat-error class="error-message" *ngIf="Addressform.get('zipCode')?.invalid && (Addressform.get('zipCode')?.dirty || Addressform.get('zipCode')?.touched)">
@@ -182,13 +182,13 @@
   
           <!-- Your form fields for Banking Details -->
           <mat-form-field appearance="fill" style="width: 100%">
-            <mat-label>Bank</mat-label>
-            <input matInput formControlName="Bank" placeholder="Bank" required>
+            <mat-label for="Bank">Bank</mat-label>
+            <input matInput formControlName="Bank" placeholder="Bank" required id="Bank">
           </mat-form-field>
   
           <mat-form-field appearance="fill" style="width: 100%">
-            <mat-label>Account Number</mat-label>
-            <input matInput formControlName="accountNumber" placeholder="Account Number" required>
+            <mat-label for="accountNumber">Account Number</mat-label>
+            <input matInput formControlName="accountNumber" placeholder="Account Number" required id="accountNumber">
           </mat-form-field>
 
           <mat-error class="error-message" *ngIf="Bankingform.get('accountNumber')?.invalid && (Bankingform.get('accountNumber')?.dirty || Bankingform.get('accountNumber')?.touched)">
@@ -196,23 +196,23 @@
           </mat-error>
   
           <mat-form-field appearance="fill" style="width: 100%">
-            <mat-label>Branch</mat-label>
-            <input matInput formControlName="branch" placeholder="Branch" required>
+            <mat-label for="branch">Branch</mat-label>
+            <input matInput formControlName="branch" placeholder="Branch" required id="branch">
           </mat-form-field>
   
           <mat-form-field appearance="fill" style="width: 100%">
-            <mat-label>Branch Code</mat-label>
-            <input matInput formControlName="branchCode" placeholder="Branch Code" required>
+            <mat-label for="branchCode">Branch Code</mat-label>
+            <input matInput formControlName="branchCode" placeholder="Branch Code" required id="branchCode">
           </mat-form-field>
   
           <mat-form-field appearance="fill" style="width: 100%">
-            <mat-label>Account Type</mat-label>
-            <input matInput formControlName="accountType" placeholder="Account Type" required>
+            <mat-label for="accountType">Account Type</mat-label>
+            <input matInput formControlName="accountType" placeholder="Account Type" required id="accountType">
           </mat-form-field>
   
           <mat-form-field appearance="fill" style="width: 100%">
-            <mat-label>Account Holder</mat-label>
-            <input matInput formControlName="accountHolder" placeholder="Account Holder" required>
+            <mat-label for="accountHolder">Account Holder</mat-label>
+            <input matInput formControlName="accountHolder" placeholder="Account Holder" required id="accountHolder">
           </mat-form-field>
   
         </div>

@@ -34,34 +34,64 @@ export class LoginComponent implements OnInit {
     this.passwordVisible = !this.passwordVisible;
   }
 
-
-  handleSubmit(): void {
-  if (this.loginForm.valid) {
-    // Implement login logic here, e.g., send login request to server
-    console.log(this.loginForm.value)
-    // Send the obj to database 
-    this.sharedService.login(this.loginForm.value).subscribe({
-      next: (res) => {
-        console.log(res.message);
-        this.loginForm.reset();
-        this.sharedService.storeToken(res.token);
-
-        // const tokenPayload = this.sharedService.decodeToken();
-        // this.userStore.setusernameForStore(tokenpayload.name);
-        // this.userStore.setaccountTypeForStore(tokenpayload.accountType);
-        // this.userStore.setemailForStore(tokenpayload.email);
-        
-        this.toast.success({detail:"Success", summary:res.message, duration: 5000});
-        this.router.navigate(['/serviceproviderprofile'])
-      },
-      error: (err) => {
-        this.toast.error({detail:"Error", summary:"Something went wrong!", duration: 5000});
-        console.log(err);
-      },
-    });
-  } else {
-    ValidateForm.validateAllFormFields(this.loginForm);
+// Method to handle form submission
+handleSubmit() {
+  if (this.loginForm.invalid) {
+    return;
   }
+
+  const loginObj = {
+    email: this.loginForm.get('email')!.value,
+    password: this.loginForm.get('password')!.value
+  };
+
+  this.sharedService.login(loginObj).subscribe(
+    (response) => {
+      // On successful login, store the token and redirect to profile page
+      this.sharedService.storeToken(response.token);
+      this.redirectToProfilePage();
+    },
+    (error) => {
+      // Handle login errors (e.g., invalid credentials)
+      console.error('Login Error:', error);
+      // You can display error messages to the user if needed
+    }
+  );
+}
+
+// Helper method to redirect to profile page after successful login
+redirectToProfilePage() {
+  // Implement the logic to redirect to the appropriate profile page
+  // For example, based on the user's role or profile status
+  // You can use the AuthGuard to handle the redirection based on the user's status
+  // For now, let's assume you have a generic profile page for all users
+  const accountType = this.sharedService.getaccountTypeFromToken();
+  if (accountType === 'Administrator') {
+    this.redirectToAdminProfile();
+  } else if (accountType === 'ClaimsAgent') {
+    this.redirectToClaimsAgentProfile();
+  } else if (accountType === 'ServiceProvider') {
+    this.redirectToServiceProviderProfile();
+  } else {
+    // Handle the case where accountType is not recognized
+    // You can decide where to redirect them in this case (e.g., back to the login page)
+    this.router.navigate(['/login']);
+  }
+}
+
+// Helper method to redirect to the claims agent profile page
+redirectToClaimsAgentProfile() {
+  this.router.navigate(['/caprofile']);
+}
+
+// Helper method to redirect to the service provider profile page
+redirectToServiceProviderProfile() {
+  this.router.navigate(['/serviceproviderprofile']);
+}
+
+// Helper method to redirect to the admin profile page
+redirectToAdminProfile() {
+  this.router.navigate(['/adminprofile']);
 }
 }
   

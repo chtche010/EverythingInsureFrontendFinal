@@ -20,7 +20,7 @@ const routes: Routes = [
   { path: '', component: HomeComponent},
   { path: 'signup', component: SignupComponent, canActivate: [AuthGuard]},
   { path: 'casignup', component: ClaimsagentsignupComponent, canActivate: [AuthGuard]},
-  { path: 'serviceproviderprofile', component: ServiceproviderprofileComponent, canActivate: [AuthGuard]},
+  { path: 'serviceproviderprofile', component: ServiceproviderprofileComponent },
   { path: 'initialsignup', component: InitialsignupComponent},
   { path: 'login', component: LoginComponent},
   { path: 'adminprofile', component: AdminprofileComponent},

@@ -3,9 +3,11 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { initialsignup } from './models/initialsignup.model';
 import { addclaimsagent } from './models/addclaimsagent';
-import { addserviceprovider } from './models/addserviceprovider';
+import { addserviceproviderdetails } from './models/addserviceproviderdetails';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt'
+import { addserviceproviderbank } from './models/addserviceproviderbank';
+import { addserviceprovideraddress } from './models/addserviceprovideraddress';
 
 @Injectable({
   providedIn: 'root'
@@ -21,24 +23,50 @@ export class SharedService {
             this.userPayload = this.decodeToken();
          }
 
-    addInitialSignup(initialSignupRequest : initialsignup): Observable<initialsignup> {    
-     return this.http.post<initialsignup>(this.baseAPIUrl + 'Auth/Register', initialSignupRequest);
-    } 
+    // Claims agent 
 
     addClaimsAgent(addClaimsAgentRequest : addclaimsagent): Observable<addclaimsagent> {    
         return this.http.post<addclaimsagent>(this.baseAPIUrl + 'api/ClaimsAgent/Create Claims Agent Profile', addClaimsAgentRequest);
     }
 
-    addServiceProvider(addServiceProviderRequest : addserviceprovider): Observable<addserviceprovider> {    
-        return this.http.post<addserviceprovider>(this.baseAPIUrl + 'api/ServiceProvider/ Create ServiceProvider Profile', addServiceProviderRequest);
+    // Service Provider
+
+    addServiceProviderDetails(addServiceProviderDetailsRequest : addserviceproviderdetails): Observable<addserviceproviderdetails> {    
+        return this.http.post<addserviceproviderdetails>(this.baseAPIUrl + 'api/ServiceProvider/Create-ServiceProvider-Profile', addServiceProviderDetailsRequest);
     }
+
+    addServiceProviderAddress(addServiceProviderAddressRequest : addserviceproviderbank): Observable<addserviceprovideraddress> {
+        return this.http.post<addserviceprovideraddress>(this.baseAPIUrl + 'api/ServiceProvider/Add-Address', addServiceProviderAddressRequest);
+    }
+
+    addServiceProviderBank(addServiceProviderBankRequest: addserviceproviderbank): Observable<addserviceproviderbank> {
+        return this.http.post<addserviceproviderbank>(this.baseAPIUrl + 'api/ServiceProvider/Add-Bank-Details', addServiceProviderBankRequest);
+    }
+
+    getServiceProviderProfile(): Observable<any> {
+        return this.http.get<any>(`${this.baseAPIUrl}/api/Get-Profile`);
+      }
+
+    getServiceProviderAddress(AddressId: string): Observable<any> {
+        return this.http.get<any>(`${this.baseAPIUrl}/api/Get-Address-by-Id`);
+      }
+
+    getServiceProviderBank(BankDetailsId: string): Observable<any> {
+        return this.http.get<any>(`${this.baseAPIUrl}/api/Get-Bank-Details-by-Id`);
+      }
+
+    // All 
+
+    addInitialSignup(initialSignupRequest : initialsignup): Observable<initialsignup> {    
+        return this.http.post<initialsignup>(this.baseAPIUrl + 'Auth/Register', initialSignupRequest);
+       } 
 
     login(loginObj: any) {
         return this.http.post<any>(this.baseAPIUrl + 'Auth/Login', loginObj)
     }
 
-    isProfileExists(email: string): Observable<boolean> {
-        return this.http.get<boolean>(this.baseAPIUrl + 'Auth/CheckUserProfile' + email);
+    isProfileExists(Account_UserId: string): Observable<boolean> {
+        return this.http.get<boolean>(this.baseAPIUrl + 'Auth/CheckUserProfile' + Account_UserId);
     }
 
     signOut(){

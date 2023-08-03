@@ -1,4 +1,4 @@
-export interface addserviceprovider {
+export interface addserviceproviderdetails {
     serviceProviderId: string;
     registrationName: string;
     tradingName: string;
