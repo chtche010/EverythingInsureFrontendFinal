@@ -16,11 +16,14 @@ export class SharedService {
 
     baseAPIUrl = "http://localhost:5184/";
     private userPayload: any;
+    private jwtHelper: JwtHelperService;
 
     constructor(
         private http: HttpClient,
         private router: Router) {
-            this.userPayload = this.decodeToken();
+            const token = this.getToken();
+            this.userPayload = this.decodeToken(token);
+            this.jwtHelper = new JwtHelperService();
          }
 
     // Claims agent 
@@ -86,20 +89,10 @@ export class SharedService {
         return !!localStorage.getItem('token')
     }
 
-    // decodeToken(){
-    //     const jwtHelper = new JwtHelperService();
-    //     const token = this.getToken()!;
-    //     console.log(jwtHelper.decodeToken(token))
-    //     return jwtHelper.decodeToken(token)
-    // }
-
-    decodeToken() {
-        const jwtHelper = new JwtHelperService();
-        const token = this.getToken();
-    
+    decodeToken(token: string | null) {
         if (token) {
             try {
-                const decodedToken = jwtHelper.decodeToken(token);
+                const decodedToken = this.jwtHelper.decodeToken(token);
                 console.log('Decoded Token:', decodedToken);
                 return decodedToken;
             } catch (error) {
