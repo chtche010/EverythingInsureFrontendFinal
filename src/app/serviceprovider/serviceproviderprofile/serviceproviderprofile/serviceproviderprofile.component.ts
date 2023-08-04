@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { SharedService } from '../shared.service';
 
 @Component({
   selector: 'app-serviceproviderprofile',
@@ -10,7 +9,7 @@ export class ServiceproviderprofileComponent implements OnInit {
   userProfile: any; //To store the user profile data 
 
   constructor(
-    private sharedServices: SharedService
+    
   ){}
 
   ngOnInit(): void {
@@ -56,3 +55,4 @@ export class ServiceproviderprofileComponent implements OnInit {
   //   this.sharedServices.signOut();
   // }
 }
+

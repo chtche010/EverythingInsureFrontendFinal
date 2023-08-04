@@ -23,6 +23,7 @@ main {
     font-weight: 700;
     color: #2c384e;
     margin: 10px 0 0 0;
+    text-align: center;
   }
   
   .profile .profile-card h3 {

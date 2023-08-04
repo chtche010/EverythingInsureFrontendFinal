@@ -14,7 +14,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatInputModule } from '@angular/material/input';
-import { MatIconModule } from '@angular/material/icon';
+import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -22,7 +22,6 @@ import { MatSelectModule } from '@angular/material/select';
 import { NgToastModule } from 'ng-angular-popup'
 
 import { ClaimsagentsignupComponent } from './claimsagentsignup/claimsagentsignup.component';
-import { ServiceproviderprofileComponent } from './serviceproviderprofile/serviceproviderprofile.component';
 import { InitialsignupComponent } from './initialsignup/initialsignup.component';
 import { LoginComponent } from './login/login.component';
 import { AdminprofileComponent } from './adminprofile/adminprofile.component';
@@ -44,7 +43,6 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { UploadClaimComponent } from './claims-agent/upload-claim/upload-claim.component';
-import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
 
 const routes: Routes = [
   { path: 'signup', component: SignupComponent },
@@ -55,7 +53,6 @@ const routes: Routes = [
     AppComponent,
     SignupComponent,
     ClaimsagentsignupComponent,
-    ServiceproviderprofileComponent,
     InitialsignupComponent,
     LoginComponent,
     AdminprofileComponent,
@@ -69,7 +66,14 @@ const routes: Routes = [
     CaSidebarComponent,
     AuctionComponent,
     CaProfileComponent,
-    UploadClaimComponent
+    UploadClaimComponent,
+    ManageclaimsComponent,
+    ManageauctionComponent,
+    SpNavbarComponent,
+    SpSidebarComponent,
+    SpActivityComponent,
+    ServiceproviderprofileComponent,
+    AuctionDashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -95,15 +99,9 @@ const routes: Routes = [
   providers: [{
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptor,
-    multi: true,
-  },
-  {
-    provide: JWT_OPTIONS,
-    useValue: JWT_OPTIONS
-  },
-  JwtHelperService
-],
- 
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }
