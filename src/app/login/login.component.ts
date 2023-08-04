@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { UserStoreService } from '../services/user-store.service';
 import { AuthService } from '../services/auth.service';
 import { initialsignup } from '../models/initialsignup.model';
+import { JwtHelperService } from '@auth0/angular-jwt'
 
 @Component({
   selector: 'app-login',
@@ -24,12 +25,25 @@ export class LoginComponent implements OnInit {
     private toast: NgToastService,
     private userStore: UserStoreService,
     private router: Router, 
-    private authService: AuthService
+    private authService: AuthService, 
+    private jwtHelper : JwtHelperService
     ) {}
 
   login(InitialSignUp: initialsignup) {
     this.authService.login(InitialSignUp).subscribe((token: string) => {
       localStorage.setItem('authToken', token);
+
+      const decodedToken = this.jwtHelper.decodeToken(token);
+
+      if (decodedToken.role === 'Administrator'){
+        this.router.navigate(['/adminprofile']);
+      } else if (decodedToken.role === 'ServiceProvider'){
+        this.router.navigate(['/serviceproviderprofile'])
+      } else if (decodedToken.role === 'ClaimsAgent'){
+        this.router.navigate(['/caprofile']);
+      } else {
+        this.router.navigate(['/signup'])
+      }
     });
   }
 
@@ -45,8 +59,12 @@ export class LoginComponent implements OnInit {
   }
 
   handleSubmit(){
+    this.InitialSignUp.email = this.loginForm.value.email;
+    this.InitialSignUp.password = this.loginForm.value.password;
+
     this.login(this.InitialSignUp);
   }
+
 
 // async handleSubmit() {
 //   // Prepare the login data

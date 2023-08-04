@@ -44,6 +44,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { UploadClaimComponent } from './claims-agent/upload-claim/upload-claim.component';
+import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
 
 const routes: Routes = [
   { path: 'signup', component: SignupComponent },
@@ -94,8 +95,15 @@ const routes: Routes = [
   providers: [{
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptor,
-    multi: true
-  }],
+    multi: true,
+  },
+  {
+    provide: JWT_OPTIONS,
+    useValue: JWT_OPTIONS
+  },
+  JwtHelperService
+],
+ 
   bootstrap: [AppComponent]
 })
 export class AppModule { }
