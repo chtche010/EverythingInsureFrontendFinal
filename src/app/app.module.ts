@@ -49,6 +49,7 @@ import { SpNavbarComponent } from './serviceprovider/serviceproviderprofile/sp-n
 import { SpSidebarComponent } from './serviceprovider/serviceproviderprofile/sp-sidebar/sp-sidebar.component';
 import { SpActivityComponent } from './serviceprovider/serviceproviderprofile/sp-activity/sp-activity.component';
 import { ServiceproviderprofileComponent } from './serviceprovider/serviceproviderprofile/serviceproviderprofile/serviceproviderprofile.component';
+import { AuctionDashboardComponent } from './serviceprovider/serviceproviderprofile/auction-dashboard/auction-dashboard.component';
 
 const routes: Routes = [
   { path: 'signup', component: SignupComponent },
@@ -78,7 +79,8 @@ const routes: Routes = [
     SpNavbarComponent,
     SpSidebarComponent,
     SpActivityComponent,
-    ServiceproviderprofileComponent
+    ServiceproviderprofileComponent,
+    AuctionDashboardComponent
   ],
   imports: [
     BrowserModule,

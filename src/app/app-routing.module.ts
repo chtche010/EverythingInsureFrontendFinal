@@ -8,7 +8,6 @@ import { AdminprofileComponent } from './adminprofile/adminprofile.component';
 import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './guards/auth.guard';
 
-//Bens added
 import { ClaimsAgentDashboardComponent } from './claims-agent/claims-agent-dashboard/claims-agent-dashboard.component';
 import { CaSidebarComponent } from './claims-agent/ca-sidebar/ca-sidebar.component';
 import { CaNavbarComponent } from './claims-agent/ca-navbar/ca-navbar.component';
@@ -19,6 +18,7 @@ import { ManageauctionComponent } from './claims-agent/manageauction/manageaucti
 import { ManageclaimsComponent } from './claims-agent/manageclaims/manageclaims.component';
 import { SpActivityComponent } from './serviceprovider/serviceproviderprofile/sp-activity/sp-activity.component';
 import { ServiceproviderprofileComponent } from './serviceprovider/serviceproviderprofile/serviceproviderprofile/serviceproviderprofile.component';
+import { AuctionDashboardComponent } from './serviceprovider/serviceproviderprofile/auction-dashboard/auction-dashboard.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
@@ -37,7 +37,7 @@ const routes: Routes = [
   { path: 'manageauctions', component: ManageauctionComponent},
   { path: 'sp-activity', component: SpActivityComponent},
   { path: 'serviceproviderprofile', component: ServiceproviderprofileComponent},
-  
+  { path: 'auction-dashboard', component: AuctionDashboardComponent},
 ];
 
 @NgModule({
