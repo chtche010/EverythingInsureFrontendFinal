@@ -22,8 +22,8 @@
           <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
             <img src="/assets/Images/panelbeaterlogo.png" alt="Profile" class="rounded-circle">
-            <h2 style="font-size: large">R&R Panel Beaters</h2>
-            <h3>Panel Beater</h3>
+            <h2 style="font-size: large">{{ userProfile?.registeredName }}</h2>
+            <h3>{{ userProfile?.type }}</h3>
             <div class="social-links mt-2">
               <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
               <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
@@ -142,77 +142,77 @@
                   <div class="row mb-3">
                     <label for="registeredName" class="col-md-4 col-lg-3 col-form-label">Registered Name</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="registeredName" type="text" class="form-control" id="registeredName" value="R&R Panel Beaters">
+                      <input name="registeredName" type="text" class="form-control" id="registeredName" [value]="userProfile.registrationName">
                     </div>
                   </div>
 
                   <div class="row mb-3">
                     <label for="tradingName" class="col-md-4 col-lg-3 col-form-label">Trading Name</label>
                     <div class="col-md-8 col-lg-9">
-                      <textarea name="tradingName" class="form-control" id="tradingName" style="height: 100px">R&R Panel Beaters.</textarea>
+                      <input name="tradingName" class="form-control" id="tradingName" [value]="userProfile.tradingName">
                     </div>
                   </div>
 
                   <div class="row mb-3">
                     <label for="contactPerson" class="col-md-4 col-lg-3 col-form-label">Contact Person</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="contactPerson" type="text" class="form-control" id="contactPerson" value="Gail Smith">
+                      <input name="contactPerson" type="text" class="form-control" id="contactPerson" [value]="userProfile.contactPerson">
                     </div>
                   </div>
 
                   <div class="row mb-3">
                     <label for="telephoneNumber" class="col-md-4 col-lg-3 col-form-label">Telephone number</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="telephoneNumber" type="number" class="form-control" id="telephoneNumber" value="0437321983">
+                      <input name="telephoneNumber" type="number" class="form-control" id="telephoneNumber" [value]="userProfile.telephoneNumber">
                     </div>
                   </div>
 
                   <div class="row mb-3">
                     <label for="cellphoneNumber" class="col-md-4 col-lg-3 col-form-label">Cellphone Number</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="cellphoneNumber" type="number" class="form-control" id="cellphoneNumber" value="0786553726">
+                      <input name="cellphoneNumber" type="number" class="form-control" id="cellphoneNumber" [value]="userProfile.cellphoneNumber">
                     </div>
                   </div>
 
                   <div class="row mb-3">
                     <label for="email" class="col-md-4 col-lg-3 col-form-label">Email</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="email" type="text" class="form-control" id="email" value="info@randr.co.za">
+                      <input name="email" type="text" class="form-control" id="email" [value]="userProfile.email">
                     </div>
                   </div>
 
                   <div class="row mb-3">
                     <label for="payeeType" class="col-md-4 col-lg-3 col-form-label">Payee Type</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="payeeType" type="text" class="form-control" id="payeeType" value="Assessor fee">
+                      <input name="payeeType" type="text" class="form-control" id="payeeType"[value]="userProfile.payeeType">
                     </div>
                   </div>
 
                   <div class="row mb-3">
                     <label for="type" class="col-md-4 col-lg-3 col-form-label">Type</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="type" type="text" class="form-control" id="type" value="Panel beater">
+                      <input name="type" type="text" class="form-control" id="type" [value]="userProfile.type">
                     </div>
                   </div>
 
                   <div class="row mb-3">
                     <label for="coRegistrationNo" class="col-md-4 col-lg-3 col-form-label">Co Registration No</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="coRegistrationNo" type="text" class="form-control" id="coRegistrationNo" value="A075280">
+                      <input name="coRegistrationNo" type="text" class="form-control" id="coRegistrationNo" [value]="userProfile.coRegistrationNo">
                     </div>
                   </div>
 
                   <div class="row mb-3">
                     <label for="VATVendor" class="col-md-4 col-lg-3 col-form-label">VAT Vendor</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="VATVendor" type="text" class="form-control" id="VATVendor" value="Yes">
+                      <input name="VATVendor" type="text" class="form-control" id="VATVendor" [value]="userProfile.VATVendor">
                     </div>
                   </div>
 
                   <div class="row mb-3">
                     <label for="VATNo:" class="col-md-4 col-lg-3 col-form-label">VAT No:</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="VATNo" type="text" class="form-control" id="VATNo" value="648297495702">
+                      <input name="VATNo" type="text" class="form-control" id="VATNo" [value]="userProfile.VATNo">
                     </div>
                   </div>
 

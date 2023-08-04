@@ -1,70 +1,158 @@
-<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-<nav>
-    <div>
-        <app-ca-navbar></app-ca-navbar>
-    </div>
-</nav>
-<div class="container-fluid">
-    <div class="row">
-        <aside class="col-md-3">
-            <div>
-                <app-ca-sidebar></app-ca-sidebar>
+<div class="container stepper-container">
+<app-ca-navbar></app-ca-navbar>
+<app-ca-sidebar></app-ca-sidebar>
+
+<mat-horizontal-stepper>
+    <!-- Step 1: Create claim -->
+   <mat-step>
+    <ng-template matStepLabel>Claim details</ng-template>
+    <form [formGroup]="claimDetailsForm">
+
+      <mat-form-field appearance="fill" style="width: 50%">
+        <mat-label for="customerName">Customer name</mat-label>
+        <input matInput formControlName="customerName" required id="customerName" name="customerName">
+      </mat-form-field>
+
+      <mat-error class="error-message" *ngIf="claimDetailsForm.get('customerName')?.invalid && (claimDetailsForm.get('customerName')?.dirty || claimDetailsForm.get('customerName')?.touched)">
+        Please enter a valid email address
+      </mat-error>
+
+      <mat-form-field appearance="fill" style="width: 50%">
+        <mat-label for="customerEmail">Customer email</mat-label>
+        <input matInput formControlName="customerEmail" required id="customerEmail" name="customerEmail">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" style="width: 50%">
+        <mat-label for="vehicleMake">Vehicle make</mat-label>
+        <input matInput formControlName="vehicleMake" required id="vehicleMake" name="vehicleMake">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" style="width: 50%">
+        <mat-label for="vehicleModel">Vehicle model</mat-label>
+        <input matInput formControlName="vehicleModel" required id="vehicleModel" name="vehicleModel">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" style="width: 50%">
+        <mat-label for="modelYear">Vehicle year</mat-label>
+        <input matInput formControlName="modelYear" required id="modelYear" name="modelYear">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" style="width: 50%">
+        <mat-label for="MMCode">MM code</mat-label>
+        <input matInput formControlName="MMCode" required id="MMCode" name="MMCode">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" style="width: 50%">
+        <mat-label for="damageDescription">Damage description</mat-label>
+        <input matInput formControlName="damageDescription" required id="damageDescription" name="damageDescription">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" style="width: 50%">
+        <mat-label for="customerSurbub">Customer suburb</mat-label>
+        <input matInput formControlName="customerSurbub" required id="customerSurbub" name="customerSurbub">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" style="width: 50%">
+        <mat-label for="customerCity">Customer city</mat-label>
+        <input matInput formControlName="customerCity" required id="customerCity" name="customerCity">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" style="width: 50%">
+        <mat-label for="customerProvince">Customer province</mat-label>
+        <input matInput formControlName="customerProvince" required id="customerProvince" name="customerProvince">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" style="width: 50%">
+        <mat-label for="claimsAgent">Claims agent</mat-label>
+        <input matInput formControlName="claimsAgent" required id="claimsAgent" name="claimsAgent">
+      </mat-form-field>
+
+      <div class="button-container">
+        <button mat-raised-button color="primary" matStepperNext>Next</button>
+      </div>
+    </form>
+   </mat-step>
+  
+    <!-- Step 2: Auction details -->
+    
+    <mat-step>
+      <ng-template matStepLabel>Auction Details</ng-template>
+      <form [formGroup]="auctionForm">
+  
+        <mat-form-field>
+          <input matInput [matDatepicker]="auctionDatepicker" placeholder="Auction Date" formControlName="auctionDate">
+          <mat-datepicker-toggle matSuffix [for]="auctionDatepicker"></mat-datepicker-toggle>
+          <mat-datepicker #auctionDatepicker></mat-datepicker>
+        </mat-form-field>
+  
+        <mat-form-field>
+          <input matInput placeholder="Start Time" formControlName="startTime">
+          <ngx-material-timepicker formControlName="startTime"></ngx-material-timepicker>
+        </mat-form-field>
+  
+        <mat-form-field>
+          <input matInput placeholder="End Time" formControlName="endTime">
+          <ngx-material-timepicker formControlName="endTime"></ngx-material-timepicker>
+        </mat-form-field>
+  
+        <div class="button-container">
+          <button mat-raised-button color="primary" matStepperPrevious>Back</button>
+          <button mat-raised-button color="primary" matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+
+        <!-- Step 3: Guide price -->
+  
+        <mat-step>
+          <ng-template matStepLabel>Guide price</ng-template>
+          <form [formGroup]="guidePriceForm">
+
+            <mat-form-field>
+              <input matInput placeholder="Labour cost" formControlName="labourCost">
+            </mat-form-field>
+      
+            <mat-form-field>
+              <input matInput placeholder="Estimated duration" formControlName="estimatedDuration">
+            </mat-form-field>
+            
+            <div class="button-container">
+              <button mat-raised-button color="primary" matStepperPrevious>Back</button>
+              <button mat-raised-button color="primary" matStepperNext>Next</button>
             </div>
-        </aside>
-        <main class="col-9">
-            <div class="card col-10">
-                <div *ngIf="alert"
-                    class="alert alert-success bg-success text-light border-0 padding-5px border-radius-5px alert-dismissible fade show"
-                    role="alert">
-                    <strong>Success!</strong> The Auction Event was Created.
-                    <button (click)="closeAlert()" type="button" class="btn-close" data-dismiss="alert"
-                        aria-label="Close">
-                    </button>
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">Create New Auction Event</h5>
-                    <br>
-                    <!--Create auction event form-->
-                    <form #auctionForm="ngForm" (ngSubmit)="submit(auctionForm)" class="row g-3">
-                        <div class="form-group col-8">
-                            <label for="auctionTitle" class="form-label">Auction Title</label>
-                            <input #auctionTitleRef="ngModel" required type="text" class="form-control"
-                                name="auctionTitle" id="auctionTitle" [(ngModel)]="auctionData.auctionTitle" autofocus>
-                            <div *ngIf="formSubmitted && auctionTitleRef.invalid" class="alert alert-danger">Please fill
-                                in the
-                                auction title!</div>
-                        </div>
-                        <div class="form-group col-8">
-                            <label for="auctionDate" class="form-label">Auction Date</label>
-                            <input #auctionDateRef="ngModel" required type="date" class="form-control"
-                                name="auctionDate" id="auctionDate" [(ngModel)]="auctionData.auctionDate"
-                                [min]="minAuctionDate()" (change)="updateEndTime()">
-                            <div *ngIf="formSubmitted && auctionDateRef.invalid" class="alert alert-danger">Please
-                                Select a Date
-                                for the Auction!</div>
-                        </div>
-                        <div class="form-group col-8">
-                            <label for="startTime" class="form-label">Auction Start Time</label>
-                            <input #auctionStartRef="ngModel" required type="time" class="form-control" name="startTime"
-                                id="startTime" [(ngModel)]="auctionData.startTime" (change)="updateEndTime()">
-                            <div *ngIf="formSubmitted && auctionStartRef.invalid" class="alert alert-danger">Please
-                                Select a Start Time for the Auction!</div>
-                        </div>
-                        <div class="form-group col-8">
-                            <label for="endTime" class="form-label">Auction End Time</label>
-                            <input #auctionEndRef="ngModel" required type="time" class="form-control" name="endTime"
-                                id="endTime" [(ngModel)]="auctionData.endTime">
-                            <div *ngIf="formSubmitted && auctionEndRef.invalid" class="alert alert-danger">Please Select
-                                an End Time for the Auction!</div>
-                        </div>
-                        <pre></pre>
-                        <div class="col-12">
-                            <button class="btn btn-primary" type="submit" (click)="formSubmitted = true">Create
-                                Auction</button>
-                        </div>
-                    </form>
-                </div>
+          </form>
+        </mat-step>
+
+        <!-- Step 3: Materials  -->
+        <mat-step>
+          <ng-template matStepLabel>Material cost</ng-template>
+          <form [formGroup]="materialCostForm">
+
+            <mat-form-field>
+              <input matInput placeholder="Material Name" formControlName="materialName">
+            </mat-form-field>
+      
+            <mat-form-field>
+              <input matInput placeholder="Material Description" formControlName="materialDescription">
+            </mat-form-field>
+      
+            <mat-form-field>
+              <input matInput type="number" placeholder="Cost" formControlName="cost">
+            </mat-form-field>
+      
+            <mat-form-field>
+              <input matInput type="number" placeholder="Quantity" formControlName="quantity">
+            </mat-form-field>  
+            
+            <div class="button-container">
+              <button mat-raised-button color="primary" matStepperPrevious>Back</button>
+              <button mat-raised-button color="primary" matStepperNext>Add material</button>
+              <button mat-raised-button color="primary" matStepperNext>Submit</button>
             </div>
-        </main>
-    </div>
-</div>
+          </form>
+        </mat-step>
+
+        <!-- Confirmation -->
+  
+  </mat-horizontal-stepper>
+  </div>

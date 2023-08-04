@@ -31,8 +31,8 @@
                             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
                                 <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-                                <h2>Kevin Anderson</h2>
-                                <h3>Web Designer</h3>
+                                <h2>{{ userProfile?.firstName }} {{ userProfile?.lastName }}</h2>
+                                <h3>{{ userProfile?.insuranceCompany }}</h3>
                                 <div class="social-links mt-2">
                                     <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
                                     <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
@@ -82,17 +82,22 @@
                                         
                                         <div class="row">
                                             <div class="col-lg-3 col-md-4 label ">First name</div>
-                                            <div class="col-lg-9 col-md-8">Kevin Anderson</div>
+                                            <div class="col-lg-9 col-md-8">{{ userProfile?.firstName }}</div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-3 col-md-4 label ">Last name</div>
+                                            <div class="col-lg-9 col-md-8">{{ userProfile?.lasttName }}</div>
                                         </div>
 
                                         <div class="row">
                                             <div class="col-lg-3 col-md-4 label">Email</div>
-                                            <div class="col-lg-9 col-md-8">k.anderson@example.com</div>
+                                            <div class="col-lg-9 col-md-8">{{ userProfile?.email }}</div>
                                         </div>
 
                                         <div class="row">
                                             <div class="col-lg-3 col-md-4 label">Insurance company</div>
-                                            <div class="col-lg-9 col-md-8">Lueilwitz, Wisoky and Leuschke</div>
+                                            <div class="col-lg-9 col-md-8">{{ userProfile?.insuranceCompany }}</div>
                                         </div>
 
                                     </div>
@@ -100,7 +105,8 @@
                                     <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
 
                                         <!-- Profile Edit Form -->
-                                        <form>
+                                        <!-- <form #profileForm="ngForm" (ngSubmit)="updateProfile()"-->
+                                        <form #profileForm="ngForm"> 
                                             <div class="row mb-3">
                                                 <label for="profileImage"
                                                     class="col-md-4 col-lg-3 col-form-label">Profile Image</label>

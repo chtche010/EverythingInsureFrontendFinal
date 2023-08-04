@@ -12,6 +12,9 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
+
+  // all users 
+
   public register(InitialSignUp: initialsignup): Observable<any> {
     return this.http.post<any>(this.baseUrl + 'Auth/Register', InitialSignUp);
   }
@@ -22,8 +25,18 @@ export class AuthService {
     })
   }
 
-  public getcaprofile(): Observable<string> {
-    return this.http.get<string>(this.baseUrl + 'api/ClaimsAgent/Get-Profile');
+  // claims agents 
+
+  public getcaprofile(): Observable<any> {
+    return this.http.get<any>(this.baseUrl + 'api/ClaimsAgent/Get-Profile');
   }
 
+  // service providers 
+  public getspdetails(): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}api/ServiceProvider/Get-Profile`);
+  }
+
+  public updatespdetails(profileData: any): Observable<any> {
+    return this.http.put<any>(`${this.baseUrl}api/ServiceProvider/Update-Profile`, profileData);
+  }
 }

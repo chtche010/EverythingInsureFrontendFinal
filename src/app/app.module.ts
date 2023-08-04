@@ -20,7 +20,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSelectModule } from '@angular/material/select';
 import { NgToastModule } from 'ng-angular-popup'
-
+import { MatNativeDateModule } from '@angular/material/core';
 import { ClaimsagentsignupComponent } from './claimsagentsignup/claimsagentsignup.component';
 import { InitialsignupComponent } from './initialsignup/initialsignup.component';
 import { LoginComponent } from './login/login.component';
@@ -31,6 +31,7 @@ import { WhyTrustUsComponent } from './why-trust-us/why-trust-us.component';
 import { FAQComponent } from './faq/faq.component';
 import { FooterComponent } from './footer/footer.component';
 import { TokenInterceptor } from './interceptors/token.interceptor';
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 
 //Ben's imports brought across
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -41,8 +42,15 @@ import { AuctionComponent } from './claims-agent/auction/auction.component';
 import { CaProfileComponent } from './claims-agent/ca-profile/ca-profile.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
-import { JwtHelperService } from '@auth0/angular-jwt';
+import { MatCardModule } from '@angular/material/card';
+import { JwtHelperService, JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { UploadClaimComponent } from './claims-agent/upload-claim/upload-claim.component';
+import { ManageclaimsComponent } from './claims-agent/manageclaims/manageclaims.component';
+import { ManageauctionComponent } from './claims-agent/manageauction/manageauction.component';
+import { SpNavbarComponent } from './serviceprovider/serviceproviderprofile/sp-navbar/sp-navbar.component';
+import { SpSidebarComponent } from './serviceprovider/serviceproviderprofile/sp-sidebar/sp-sidebar.component';
+import { SpActivityComponent } from './serviceprovider/serviceproviderprofile/sp-activity/sp-activity.component';
+import { ServiceproviderprofileComponent } from './serviceprovider/serviceproviderprofile/serviceproviderprofile/serviceproviderprofile.component';
 
 const routes: Routes = [
   { path: 'signup', component: SignupComponent },
@@ -72,8 +80,7 @@ const routes: Routes = [
     SpNavbarComponent,
     SpSidebarComponent,
     SpActivityComponent,
-    ServiceproviderprofileComponent,
-    AuctionDashboardComponent
+    ServiceproviderprofileComponent
   ],
   imports: [
     BrowserModule,
@@ -95,13 +102,18 @@ const routes: Routes = [
     MatDatepickerModule,
     MatTableModule,
     MatSortModule,
+    MatCardModule,
+    NgxMaterialTimepickerModule,
+    MatNativeDateModule,
+    
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptor,
-    multi: true
-  }],
-  bootstrap: [AppComponent]
+    multi: true }, 
+    JwtHelperService
+  ],
+  bootstrap: [AppComponent],
 })
 
 export class AppModule { }

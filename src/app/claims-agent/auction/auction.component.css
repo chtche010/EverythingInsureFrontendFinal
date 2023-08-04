@@ -1,47 +1,38 @@
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: "Montserrat", sans-serif;;
+.container {
+  display: flex;
+  flex-direction: column;
 }
 
-.alert-danger {
-    background-color: #fd2828ca;
-    padding: 10px;
-    border-radius: 4px;
+mat-horizontal-stepper {
+  margin-top: 70px; /* Add space between navbar and stepper */
+  margin-left: 230px; /* Add space for the sidebar on the left */
 }
 
-.alert {
-    color: rgb(255, 255, 255);
-    margin-bottom: 5px;
-    text-align: left;
+.stepper-container mat-form-field {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 50px; 
+  margin-bottom: -30px; 
+  gap: 50px;
+  width: 50%;
 }
 
-.card {
-    border-color: #211561;
-    border-width: 2px;
-    border-radius: 10px;
+.stepper-container .button-row {
+  display: flex;
+  justify-content: flex-end;
 }
 
-.card-title {
-    font-weight: bolder;
-    color:#040777 ;
-    font-size: 18px;
+.stepper-container .button-row button {
+  margin-left: 10px; /* Add space between buttons */
 }
 
-.container-fluid {
-    margin-top: 80px;
-    margin-right: 20px;
-    margin-left: -30px;
+.button-container {
+  display: flex;
+  /* justify-content: flex-end; */
+  margin-top: 20px; /* Optional: Add some space above the buttons */
 }
 
-.form-label {
-    font-family: "Montserrat", sans-serif;
-    font-weight: 600;
-}
-
-.btn btn-primary {
-    font-family: "Montserrat", sans-serif;
+.button-container button {
+  margin-right: 10px; /* Add space between the buttons */
 }

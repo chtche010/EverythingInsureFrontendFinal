@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -6,14 +6,23 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './ca-profile.component.html',
   styleUrls: ['./ca-profile.component.css']
 })
-export class CaProfileComponent {
+export class CaProfileComponent implements OnInit {
+  userProfile: any; 
 
   constructor(private authService: AuthService) {}
 
-  getcaprofile(){
-    this.authService.getcaprofile().subscribe((name: string) => {
-      console.log(name);
-    })
+  ngOnInit(): void {
+    this.getcaprofile();
   }
 
+  getcaprofile(): void {
+    this.authService.getcaprofile().subscribe(
+      (data) => {
+        this.userProfile = data;
+      }, 
+      (error) => {
+        console.log('Error returning user profile', error);
+      }
+    );
+  }
 }

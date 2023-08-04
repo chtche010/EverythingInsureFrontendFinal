@@ -7,13 +7,13 @@ import { Router } from '@angular/router';
 import { UserStoreService } from '../services/user-store.service';
 import { AuthService } from '../services/auth.service';
 import { initialsignup } from '../models/initialsignup.model';
-import { JwtHelperService } from '@auth0/angular-jwt'
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
+
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   passwordVisible: boolean = true;
@@ -25,25 +25,14 @@ export class LoginComponent implements OnInit {
     private toast: NgToastService,
     private userStore: UserStoreService,
     private router: Router, 
-    private authService: AuthService, 
-    private jwtHelper : JwtHelperService
+    private authService: AuthService
     ) {}
+
+ 
 
   login(InitialSignUp: initialsignup) {
     this.authService.login(InitialSignUp).subscribe((token: string) => {
       localStorage.setItem('authToken', token);
-
-      const decodedToken = this.jwtHelper.decodeToken(token);
-
-      if (decodedToken.role === 'Administrator'){
-        this.router.navigate(['/adminprofile']);
-      } else if (decodedToken.role === 'ServiceProvider'){
-        this.router.navigate(['/serviceproviderprofile'])
-      } else if (decodedToken.role === 'ClaimsAgent'){
-        this.router.navigate(['/caprofile']);
-      } else {
-        this.router.navigate(['/signup'])
-      }
     });
   }
 
@@ -59,9 +48,6 @@ export class LoginComponent implements OnInit {
   }
 
   handleSubmit(){
-    this.InitialSignUp.email = this.loginForm.value.email;
-    this.InitialSignUp.password = this.loginForm.value.password;
-
     this.login(this.InitialSignUp);
   }
 
@@ -73,11 +59,9 @@ export class LoginComponent implements OnInit {
 //     username: 'your-username',
 //     password: 'your-password'
 //   };
-
 //   try {
 //     // Call the login method in the SharedService with the login data
 //     const response = await this.sharedService.login(loginObj).toPromise(); // Convert observable to promise
-
 //     const token = response.token;
 //     // Store the token in local storage
 //     localStorage.setItem('token', token);
@@ -100,7 +84,7 @@ export class LoginComponent implements OnInit {
 //         this.router.navigate(['/login']);
 //       }
 //     } else {
-//       // User is logged in but does not have an account ID
+//      // User is logged in but does not have an account ID
 //       if (accountType === 'ClaimsAgent') {
 //         this.router.navigate(['/casignup']);
 //       } else if (accountType === 'serviceprovider') {
@@ -118,8 +102,8 @@ export class LoginComponent implements OnInit {
 //   }
 // }
 
+ 
+
+ 
 
 }
-
-
-  

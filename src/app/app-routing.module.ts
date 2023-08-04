@@ -18,7 +18,6 @@ import { ManageauctionComponent } from './claims-agent/manageauction/manageaucti
 import { ManageclaimsComponent } from './claims-agent/manageclaims/manageclaims.component';
 import { SpActivityComponent } from './serviceprovider/serviceproviderprofile/sp-activity/sp-activity.component';
 import { ServiceproviderprofileComponent } from './serviceprovider/serviceproviderprofile/serviceproviderprofile/serviceproviderprofile.component';
-import { AuctionDashboardComponent } from './serviceprovider/serviceproviderprofile/auction-dashboard/auction-dashboard.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
@@ -37,7 +36,7 @@ const routes: Routes = [
   { path: 'manageauctions', component: ManageauctionComponent},
   { path: 'sp-activity', component: SpActivityComponent},
   { path: 'serviceproviderprofile', component: ServiceproviderprofileComponent},
-  { path: 'auction-dashboard', component: AuctionDashboardComponent},
+  
 ];
 
 @NgModule({

@@ -1,7 +1,7 @@
 /*--------------------------------------------------------------
-# Sidebar
---------------------------------------------------------------*/
-.sidebar {
+  # Sidebar
+  --------------------------------------------------------------*/
+  .sidebar {
     position: fixed;
     top: 60px;
     left: 0;
@@ -73,13 +73,17 @@
   
   .sidebar-nav .nav-item {
     margin-bottom: 5px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 15px;
+    color: #012970;
+    text-decoration: none;
   }
   
   .sidebar-nav .nav-heading {
     font-size: 11px;
     text-transform: uppercase;
     color: #899bbd;
-    font-weight: 600;
+    font-weight: 200;
     margin: 10px 0 5px 15px;
   }
   
@@ -88,7 +92,7 @@
     align-items: center;
     font-size: 15px;
     font-family: "Montserrat", sans-serif;
-    color: #4154f1;
+    color: #212446;
     transition: 0.3;
     background: #f6f9ff;
     padding: 10px 15px;
@@ -98,7 +102,7 @@
   .sidebar-nav .nav-link i {
     font-size: 16px;
     margin-right: 10px;
-    color: #4154f1;
+    color: #212446;
   }
   
   .sidebar-nav .nav-link.collapsed {
@@ -138,7 +142,7 @@
     display: flex;
     align-items: center;
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 100;
     color: #012970;
     transition: 0.3;
     padding: 10px 0 10px 40px;
@@ -152,10 +156,11 @@
     border-radius: 50%;
   }
   
-  .sidebar-nav .nav-item .nav-link.active {
-    color: #212446; /* Change the text color to blue when hovered or active */
-    background-color: #009cfd53;
+  .sidebar-nav .nav-content a:hover,
+  .sidebar-nav .nav-content a.active {
+    color: #212446;
   }
-  .sidebar-nav .nav-item .nav-link.active i {
-    color: #212446; /* Change the background color of the icon when the link is active */
+  
+  .sidebar-nav .nav-content a.active i {
+    background-color: #212446;
   }
