@@ -1,0 +1,10 @@
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-sp-sidebar',
+  templateUrl: './sp-sidebar.component.html',
+  styleUrls: ['./sp-sidebar.component.css']
+})
+export class SpSidebarComponent {
+
+}

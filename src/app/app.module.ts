@@ -14,7 +14,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatInputModule } from '@angular/material/input';
-import { MatIconModule } from '@angular/material/icon';
+import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -22,7 +22,6 @@ import { MatSelectModule } from '@angular/material/select';
 import { NgToastModule } from 'ng-angular-popup'
 
 import { ClaimsagentsignupComponent } from './claimsagentsignup/claimsagentsignup.component';
-import { ServiceproviderprofileComponent } from './serviceproviderprofile/serviceproviderprofile.component';
 import { InitialsignupComponent } from './initialsignup/initialsignup.component';
 import { LoginComponent } from './login/login.component';
 import { AdminprofileComponent } from './adminprofile/adminprofile.component';
@@ -44,6 +43,12 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { UploadClaimComponent } from './claims-agent/upload-claim/upload-claim.component';
+import { ManageclaimsComponent } from './claims-agent/manageclaims/manageclaims.component';
+import { ManageauctionComponent } from './claims-agent/manageauction/manageauction.component';
+import { SpNavbarComponent } from './serviceprovider/serviceproviderprofile/sp-navbar/sp-navbar.component';
+import { SpSidebarComponent } from './serviceprovider/serviceproviderprofile/sp-sidebar/sp-sidebar.component';
+import { SpActivityComponent } from './serviceprovider/serviceproviderprofile/sp-activity/sp-activity.component';
+import { ServiceproviderprofileComponent } from './serviceprovider/serviceproviderprofile/serviceproviderprofile/serviceproviderprofile.component';
 
 const routes: Routes = [
   { path: 'signup', component: SignupComponent },
@@ -54,7 +59,6 @@ const routes: Routes = [
     AppComponent,
     SignupComponent,
     ClaimsagentsignupComponent,
-    ServiceproviderprofileComponent,
     InitialsignupComponent,
     LoginComponent,
     AdminprofileComponent,
@@ -68,7 +72,13 @@ const routes: Routes = [
     CaSidebarComponent,
     AuctionComponent,
     CaProfileComponent,
-    UploadClaimComponent
+    UploadClaimComponent,
+    ManageclaimsComponent,
+    ManageauctionComponent,
+    SpNavbarComponent,
+    SpSidebarComponent,
+    SpActivityComponent,
+    ServiceproviderprofileComponent
   ],
   imports: [
     BrowserModule,
@@ -94,8 +104,10 @@ const routes: Routes = [
   providers: [{
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptor,
-    multi: true
-  }],
-  bootstrap: [AppComponent]
+    multi: true }, 
+    JwtHelperService
+  ],
+  bootstrap: [AppComponent],
 })
+
 export class AppModule { }
