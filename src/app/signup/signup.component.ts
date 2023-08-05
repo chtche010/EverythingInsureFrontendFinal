@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -32,7 +33,7 @@ export class SignupComponent implements OnInit {
   selectedCountry: number | null = null;
   selectedProvince: number | null = null;
 
-  constructor(private builder: FormBuilder, private snackBar: MatSnackBar) { }
+  constructor(private builder: FormBuilder, private snackBar: MatSnackBar, private router: Router) { }
   isLinear = true;
 
   // ngOnInit(): void {
@@ -106,6 +107,7 @@ export class SignupComponent implements OnInit {
     if (this.Empregister.valid) {
       console.log(this.Empregister.value);
       this.snackBar.open('Sign up successful!', 'Close', { duration: 3000 });
+      this.router.navigate(['/login']);
     } else {
       this.snackBar.open('Failed to sign up', 'Close', { duration: 3000 });
     }

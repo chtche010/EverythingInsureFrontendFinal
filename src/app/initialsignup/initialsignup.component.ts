@@ -85,6 +85,7 @@ export class InitialsignupComponent implements OnInit {
         response => {
           console.log(response);
           let route: string;
+          localStorage.setItem("accountUserId",response.data)
           if (accountType === 'ClaimsAgent') {
             route = '/casignup';
           } else if (accountType === 'ServiceProvider') {

@@ -28,8 +28,8 @@ export class AuthService {
     return this.http.post<any>(this.baseUrl + 'Auth/Register', InitialSignUp);
   }
 
-  public login(InitialSignUp: initialsignup): Observable<{ token: string }> {
-    return this.http.post<{ token: string }>(this.baseUrl + 'Auth/Login', InitialSignUp);
+  public login(InitialSignUp: initialsignup): Observable<{ data: string }> {
+    return this.http.post<{ data: string }>(this.baseUrl + 'Auth/Login', InitialSignUp);
   }
 
   logout(): void {
@@ -40,18 +40,30 @@ export class AuthService {
 
   // claims agents 
 
+  getToken(){
+    var tokenstring=localStorage.getItem("authToken")
+    if (tokenstring!=null){var token=JSON.parse(tokenstring)
+    return token.data} 
+  }
+
   addClaimsAgent(newCA: addclaimsagent): Observable<ServiceResponse<any>> {
+    const httpOptions = {
+      headers: new HttpHeaders().set(
+        "Authorization",
+        "Bearer " + this.getToken()
+      ),
+    };
     return this.http.post<ServiceResponse<any>>(this.baseUrl + 'api/ClaimsAgent/Create Claims Agent Profile', { newCA });
   }
 
   getcaprofile(): Observable<any> {
-    return this.http.get<any>(this.baseUrl + 'api/ClaimsAgent/Get-Profile');
+    return this.http.get<any>(this.baseUrl + 'api/ClaimsAgent/Get Profile');
   }
 
   // Adding an auction 
 
   submitClaimData(data: any): Observable<any> {
-    return this.http.post<any>(this.baseUrl + 'api/Claims/AddClaim', data, this.httpOptions);
+    return this.http.post<any>(this.baseUrl + 'api/Claims/Add Claim', data, this.httpOptions);
   }
 
   createAuction(auctionData: any) {

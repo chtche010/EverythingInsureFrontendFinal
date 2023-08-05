@@ -71,16 +71,16 @@ export class LoginComponent implements OnInit {
       // Handle successful login
       console.log(response);
       // Redirect to the appropriate page based on the user's role or perform any other actions
-      const decodedToken = this.jwtHelper.decodeToken(response.token);
+      const decodedToken = this.jwtHelper.decodeToken(response.data);
       console.log(decodedToken);
-      if (decodedToken.accountType === 'Administrator') {
+      if (decodedToken.role === 'Administrator') {
         this.router.navigate(['/adminprofile']);
-      } else if (decodedToken.accountType === 'ServiceProvider') {
+      } else if (decodedToken.role === 'ServiceProvider') {
         this.router.navigate(['/serviceproviderprofile']);
-      } else if (decodedToken.accountType === 'ClaimsAgent') {
+      } else if (decodedToken.role === 'ClaimsAgent') {
         this.router.navigate(['/caprofile']);
       } else {
-        this.router.navigate(['/signup']);
+        this.router.navigate(['/login']);
       }
     },
     error => {
