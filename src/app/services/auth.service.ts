@@ -88,5 +88,47 @@ export class AuthService {
     return this.http.put<any>(`${this.baseUrl}api/ServiceProvider/Update-Profile`, profileData);
   }
 
+  // Method to submit the form data
+  submitForm(formData: any) {
+
+    // posting basic details
+    this.http.post(this.baseUrl + "api/ServiceProvider/Create ServiceProvider Profile", formData.basic)
+      .subscribe(
+        (response) => {
+          console.log("Basic details submitted successfully!");
+         
+        },
+        (error) => {
+          console.error("Error submitting basic details:", error);
+     
+        }
+      );
+
+    // posting address details
+    this.http.post(this.baseUrl + "api/ServiceProvider/Add Address", formData.address)
+      .subscribe(
+        (response) => {
+          console.log("Address details submitted successfully!");
+          
+        },
+        (error) => {
+          console.error("Error submitting address details:", error);
+          
+        }
+      );
+
+    // posting banking details
+    this.http.post(this.baseUrl + "api/ServiceProvider/Add Bank Details", formData.banking)
+      .subscribe(
+        (response) => {
+          console.log("Banking details submitted successfully!");
+      
+        },
+        (error) => {
+          console.error("Error submitting banking details:", error);
+        
+        }
+      );
+  }
 }
 

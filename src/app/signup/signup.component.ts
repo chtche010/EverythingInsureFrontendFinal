@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-signup',
@@ -33,7 +34,7 @@ export class SignupComponent implements OnInit {
   selectedCountry: number | null = null;
   selectedProvince: number | null = null;
 
-  constructor(private builder: FormBuilder, private snackBar: MatSnackBar, private router: Router) { }
+  constructor(private builder: FormBuilder, private snackBar: MatSnackBar) { }
   isLinear = true;
 
   // ngOnInit(): void {
@@ -103,15 +104,25 @@ export class SignupComponent implements OnInit {
     });
   }
 
+  // HandleSubmit() {
+  //   if (this.Empregister.valid) {
+  //     console.log(this.Empregister.value);
+  //     this.snackBar.open('Sign up successful!', 'Close', { duration: 3000 });
+  //   } else {
+  //     this.snackBar.open('Failed to sign up', 'Close', { duration: 3000 });
+  //   }
+  // }
+
   HandleSubmit() {
     if (this.Empregister.valid) {
       console.log(this.Empregister.value);
       this.snackBar.open('Sign up successful!', 'Close', { duration: 3000 });
-      this.router.navigate(['/login']);
     } else {
-      this.snackBar.open('Failed to sign up', 'Close', { duration: 3000 });
+      // Form is not valid, handle validation errors if needed
     }
   }
 
 }
+
+
 
