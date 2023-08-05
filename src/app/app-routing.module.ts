@@ -19,6 +19,14 @@ import { ManageclaimsComponent } from './claims-agent/manageclaims/manageclaims.
 import { SpActivityComponent } from './serviceprovider/serviceproviderprofile/sp-activity/sp-activity.component';
 import { ServiceproviderprofileComponent } from './serviceprovider/serviceproviderprofile/serviceproviderprofile/serviceproviderprofile.component';
 
+// Admin 
+import { AdminNavBarComponent } from './admin/admin-nav-bar/admin-nav-bar/admin-nav-bar.component';
+import { AdminSideBarComponent } from './admin/admin-side-bar/admin-side-bar/admin-side-bar.component';
+import { AdminmanageauctionComponent } from './admin/manageauction/adminmanageauction/adminmanageauction.component';
+import { ManagebidComponent } from './admin/managebid/managebid/managebid.component';
+import { ManagecaComponent } from './admin/manageca/manageca/manageca.component';
+import { ManagespComponent } from './admin/managesp/managesp/managesp.component';
+
 const routes: Routes = [
   { path: '', component: HomeComponent},
   { path: 'signup', component: SignupComponent},
@@ -30,13 +38,20 @@ const routes: Routes = [
   { path: 'claims-agent-dashboard', component: ClaimsAgentDashboardComponent},
   { path: 'ca-sidebar', component: CaSidebarComponent},
   { path: 'ca-navbar', component: CaNavbarComponent},
-  { path: 'auction', component: AuctionComponent},
+  { path: 'addauction', component: AuctionComponent},
   { path: 'uploadclaim', component: UploadClaimComponent},
   { path: 'manageclaims', component: ManageclaimsComponent},
   { path: 'manageauctions', component: ManageauctionComponent},
   { path: 'sp-activity', component: SpActivityComponent},
   { path: 'serviceproviderprofile', component: ServiceproviderprofileComponent},
   
+  //admin 
+  { path: 'admin-nav-bar', component: AdminNavBarComponent},
+  { path: 'admin-side-bar', component: AdminSideBarComponent},
+  { path: 'adminmanageauction', component: AdminmanageauctionComponent},
+  { path: 'managebids', component: ManagebidComponent},
+  { path: 'manageca', component: ManagecaComponent},
+  { path: 'managesp', component: ManagespComponent}
 ];
 
 @NgModule({

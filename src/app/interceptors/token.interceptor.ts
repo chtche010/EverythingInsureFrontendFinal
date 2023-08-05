@@ -3,46 +3,28 @@ import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
+  HttpResponse,
   HttpInterceptor,
   HttpErrorResponse
 } from '@angular/common/http';
 import { catchError, Observable, throwError } from 'rxjs';
-import { SharedService } from '../shared.service';
+import { AuthService } from '../services/auth.service';
 import { NgToastService } from 'ng-angular-popup';
 import { Router } from '@angular/router';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
+  constructor(private authService: AuthService) {}
 
-//   constructor(
-//     private sharedServices: SharedService,
-//     private toast: NgToastService,
-//     private router: Router) {}
-
-//   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-//     const myToken = this.sharedServices.getToken();
-
-// if(myToken){
-//   request = request.clone({
-//     setHeaders: { Authorization:`Bearer ${myToken}`}
-//   });
-// }
-
-//     return next.handle(request);
-//   }
-
-  intercept(
-    req: HttpRequest<any>, 
-    next: HttpHandler
-  ): Observable<HttpEvent<any>> {
-    const token = localStorage.getItem('authToken');
-
-    if (token) {
-      req = req.clone({
-        setHeaders: { Authorization: `Bearer ${token}` },
-      });
-    }
-
-    return next.handle(req);
+  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    return next.handle(request).pipe(
+      catchError((error: HttpErrorResponse) => {
+        if (error.status === 401) {
+          // Redirect to login page or perform other actions
+          this.authService.logout();
+        }
+        return throwError(error);
+      })
+    );
   }
 }
