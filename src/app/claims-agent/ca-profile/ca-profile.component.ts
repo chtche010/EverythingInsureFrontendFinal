@@ -17,11 +17,12 @@ export class CaProfileComponent implements OnInit {
 
   getcaprofile(): void {
     this.authService.getcaprofile().subscribe(
-      (data) => {
-        this.userProfile = data;
+      (response) => {
+        this.userProfile = response;
+        console.log('Claim Agent Profile', this.userProfile);
       }, 
       (error) => {
-        console.log('Error returning user profile', error);
+        console.log('Error returning claim agent profile', error);
       }
     );
   }

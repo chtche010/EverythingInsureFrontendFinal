@@ -72,6 +72,7 @@ export class LoginComponent implements OnInit {
       console.log(response);
       // Redirect to the appropriate page based on the user's role or perform any other actions
       const decodedToken = this.jwtHelper.decodeToken(response.token);
+      console.log(decodedToken);
       if (decodedToken.accountType === 'Administrator') {
         this.router.navigate(['/adminprofile']);
       } else if (decodedToken.accountType === 'ServiceProvider') {
