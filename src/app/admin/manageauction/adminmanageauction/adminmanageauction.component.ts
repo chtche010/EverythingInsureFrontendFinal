@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { AdminNavBarComponent } from '../../admin-nav-bar/admin-nav-bar/admin-nav-bar.component';
+import { AdminSideBarComponent } from '../../admin-side-bar/admin-side-bar/admin-side-bar.component';
 
 export interface PeriodicElement {
   auctionTitle: string;

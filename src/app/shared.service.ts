@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { initialsignup } from './models/initialsignup.model';
-import { addclaimsagent } from './models/addclaimsagent';
-import { addclaim } from './models/addclaim';
-import { addserviceproviderdetails } from './models/addserviceproviderdetails';
+import { addclaimsagent } from './models/claimagent/addclaimsagent';
+import { addclaim } from './models/claimagent/addclaim';
+import { addserviceproviderdetails } from './models/serviceprovider/addserviceproviderdetails';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt'
-import { addserviceproviderbank } from './models/addserviceproviderbank';
-import { addserviceprovideraddress } from './models/addserviceprovideraddress';
+import { addserviceproviderbank } from './models/serviceprovider/addserviceproviderbank';
+import { addserviceprovideraddress } from './models/serviceprovider/addserviceprovideraddress';
 
 @Injectable({
   providedIn: 'root'

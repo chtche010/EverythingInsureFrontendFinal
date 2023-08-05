@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { SharedService } from '../shared.service';
-import { addclaimsagent } from '../models/addclaimsagent';
+import { addclaimsagent } from '../models/claimagent/addclaimsagent';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-claimsagentsignup',
@@ -25,7 +26,7 @@ export class ClaimsagentsignupComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private http: HttpClient,
-    private sharedServices: SharedService,
+    private authService: AuthService,
     private router: Router
     ) { }
 
@@ -37,26 +38,24 @@ export class ClaimsagentsignupComponent implements OnInit {
     });
   }
 
-  handleSubmit(): void {
-    // if (this.caregister.valid) {
+  handleSubmit() {
+    if (this.caregister.valid) {
 
-    //   this.addClaimsAgentRequest.claimsAgentId = '';
-    //   this.addClaimsAgentRequest.insuranceCompany = this.caregister.value.insuranceCompany;
-    //   this.addClaimsAgentRequest.firstName = this.caregister.value.firstName;
-    //   this.addClaimsAgentRequest.lastName = this.caregister.value.lastName;
+    const newCA: addclaimsagent = { 
+      firstName: this.caregister.value.firstName,
+      lastName: this.caregister.value.lastName,
+      insuranceCompany: this.caregister.value.insuranceCompany,
+    };
 
-    //     this.sharedServices.addClaimsAgent(this.addClaimsAgentRequest).subscribe(
-    //       (response: any) => {
-    //         console.log(response);
-    //         this.caregister.reset();
-    //         this.signupSuccess = true;
-    //       },
-    //       (error: any) => {
-    //         console.log(error);
-    //       }
-    //     );
-    // } else {
-    //   console.log('Form is invalid. Please fill in all the required fields');
-    // }
+    this.authService.addClaimsAgent(newCA).subscribe(
+      response => {
+        console.log(response); 
+      },
+      error => {
+        console.error(error);
+      }
+    );
   }
+}
+
 }

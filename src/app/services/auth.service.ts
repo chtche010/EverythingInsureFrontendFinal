@@ -2,6 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { initialsignup } from '../models/initialsignup.model';
+import { HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { addclaimsagent, ServiceResponse } from '../models/claimagent/addclaimsagent';
 
 @Injectable({
   providedIn: 'root'
@@ -9,9 +12,15 @@ import { initialsignup } from '../models/initialsignup.model';
 
 export class AuthService {
   private baseUrl: string = "http://localhost:5184/";
+  private httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + localStorage.getItem('token')
+    }),
+    observe: 'body' as const
+  };
 
-  constructor(private http: HttpClient) { }
-
+  constructor(private http: HttpClient, private router: Router) { }
 
   // all users 
 
@@ -19,19 +28,34 @@ export class AuthService {
     return this.http.post<any>(this.baseUrl + 'Auth/Register', InitialSignUp);
   }
 
-  public login(InitialSignUp: initialsignup): Observable<string> {
-    return this.http.post(this.baseUrl + 'Auth/Login', InitialSignUp, {
-      responseType: 'text',
-    })
+  public login(InitialSignUp: initialsignup): Observable<{ token: string }> {
+    return this.http.post<{ token: string }>(this.baseUrl + 'Auth/Login', InitialSignUp);
+  }
+
+  logout(): void {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    this.router.navigate(['/login']);
   }
 
   // claims agents 
+
+  addClaimsAgent(newCA: addclaimsagent): Observable<ServiceResponse<any>> {
+    return this.http.post<ServiceResponse<any>>(this.baseUrl + 'api/ClaimsAgent/Create Claims Agent Profile', newCA);
+  }
 
   public getcaprofile(): Observable<any> {
     return this.http.get<any>(this.baseUrl + 'api/ClaimsAgent/Get-Profile');
   }
 
+  // Adding an auction 
+
+  submitClaimData(data: any): Observable<any> {
+    return this.http.post<any>(this.baseUrl + 'api/Claims/Add%20Claim', data, this.httpOptions);
+  }
+
   // service providers 
+
   public getspdetails(): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}api/ServiceProvider/Get-Profile`);
   }
@@ -39,4 +63,6 @@ export class AuthService {
   public updatespdetails(profileData: any): Observable<any> {
     return this.http.put<any>(`${this.baseUrl}api/ServiceProvider/Update-Profile`, profileData);
   }
+
 }
+

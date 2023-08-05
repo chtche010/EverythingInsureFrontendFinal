@@ -3,7 +3,7 @@
   flex-direction: column;
 }
 
-mat-horizontal-stepper {
+mat-stepper {
   margin-top: 70px; /* Add space between navbar and stepper */
   margin-left: 230px; /* Add space for the sidebar on the left */
 }

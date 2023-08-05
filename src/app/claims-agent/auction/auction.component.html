@@ -2,9 +2,9 @@
 <app-ca-navbar></app-ca-navbar>
 <app-ca-sidebar></app-ca-sidebar>
 
-<mat-horizontal-stepper>
+<mat-stepper [linear]="isLinear" #stepper>
     <!-- Step 1: Create claim -->
-   <mat-step>
+   <mat-step [stepControl]="claimDetailsForm">
     <ng-template matStepLabel>Claim details</ng-template>
     <form [formGroup]="claimDetailsForm">
 
@@ -68,31 +68,31 @@
       </mat-form-field>
 
       <div class="button-container">
-        <button mat-raised-button color="primary" matStepperNext>Next</button>
+        <button mat-raised-button type="button" mat-button (click)="submitClaimDetails()" [disabled]="!claimDetailsForm.valid">Next</button>
       </div>
     </form>
    </mat-step>
   
     <!-- Step 2: Auction details -->
     
-    <mat-step>
+    <mat-step [stepControl]="auctionForm">
       <ng-template matStepLabel>Auction Details</ng-template>
       <form [formGroup]="auctionForm">
   
         <mat-form-field>
-          <input matInput [matDatepicker]="auctionDatepicker" placeholder="Auction Date" formControlName="auctionDate">
+          <input matInput formControlName="auctionDate" [matDatepicker]="auctionDatepicker" placeholder="Auction Date">
           <mat-datepicker-toggle matSuffix [for]="auctionDatepicker"></mat-datepicker-toggle>
           <mat-datepicker #auctionDatepicker></mat-datepicker>
         </mat-form-field>
   
         <mat-form-field>
-          <input matInput placeholder="Start Time" formControlName="startTime">
-          <ngx-material-timepicker formControlName="startTime"></ngx-material-timepicker>
+          <input matInput formControlName="startTime" type="time" placeholder="Start Time">
+          <ngx-material-timepicker #picker></ngx-material-timepicker>
         </mat-form-field>
   
         <mat-form-field>
-          <input matInput placeholder="End Time" formControlName="endTime">
-          <ngx-material-timepicker formControlName="endTime"></ngx-material-timepicker>
+          <input matInput formControlName="endTime" type="time" matInput placeholder="End Time">
+          <ngx-material-timepicker #picker></ngx-material-timepicker>
         </mat-form-field>
   
         <div class="button-container">
@@ -104,16 +104,16 @@
 
         <!-- Step 3: Guide price -->
   
-        <mat-step>
+        <mat-step [stepControl]="guidePriceForm">
           <ng-template matStepLabel>Guide price</ng-template>
           <form [formGroup]="guidePriceForm">
 
             <mat-form-field>
-              <input matInput placeholder="Labour cost" formControlName="labourCost">
+              <input matInput formControlName="labourCost" placeholder="Labour cost">
             </mat-form-field>
       
             <mat-form-field>
-              <input matInput placeholder="Estimated duration" formControlName="estimatedDuration">
+              <input matInput formControlName="estimatedDuration" placeholder="Estimated duration">
             </mat-form-field>
             
             <div class="button-container">
@@ -124,7 +124,7 @@
         </mat-step>
 
         <!-- Step 3: Materials  -->
-        <mat-step>
+        <mat-step [stepControl]="materialCostForm">
           <ng-template matStepLabel>Material cost</ng-template>
           <form [formGroup]="materialCostForm">
 
@@ -154,5 +154,5 @@
 
         <!-- Confirmation -->
   
-  </mat-horizontal-stepper>
+  </mat-stepper>
   </div>

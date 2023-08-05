@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { UserStoreService } from '../services/user-store.service';
 import { AuthService } from '../services/auth.service';
 import { initialsignup } from '../models/initialsignup.model';
+import { JwtHelperService } from '@auth0/angular-jwt'
 
 @Component({
   selector: 'app-login',
@@ -17,93 +18,76 @@ import { initialsignup } from '../models/initialsignup.model';
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   passwordVisible: boolean = true;
-  InitialSignUp = new initialsignup();
+  //InitialSignUp = new initialsignup();
 
   constructor(
     private formBuilder: FormBuilder,
-    private sharedService: SharedService,
     private toast: NgToastService,
-    private userStore: UserStoreService,
-    private router: Router, 
-    private authService: AuthService
+    private router: Router,
+    private authService: AuthService,
+    private jwtHelper : JwtHelperService
     ) {}
 
- 
+    ngOnInit(): void {
+      this.loginForm = this.formBuilder.group({
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', Validators.required],
+      });
+    }
 
-  login(InitialSignUp: initialsignup) {
-    this.authService.login(InitialSignUp).subscribe((token: string) => {
-      localStorage.setItem('authToken', token);
-    });
-  }
+    hideShowPass() {
+      this.passwordVisible = !this.passwordVisible;
+    }
 
-  ngOnInit(): void {
-    this.loginForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required],
-    });
-  }
+    handleSubmit() {
+      if (this.loginForm.valid) {
+        const email = this.loginForm.value.email;
+        const password = this.loginForm.value.password;
+    
+        const loginObject = {
+          email,
+          password,
+          accountType: '' // Add the accountType property here
+        };
 
-  hideShowPass() {
-    this.passwordVisible = !this.passwordVisible;
-  }
+  // login(InitialSignUp: initialsignup) {
+  //   this.authService.login(InitialSignUp).subscribe((token: string) => {
+  //     localStorage.setItem('authToken', token);
+  //     const decodedToken = this.jwtHelper.decodeToken(token);
+  //     if (decodedToken.role === 'Administrator'){
+  //       this.router.navigate(['/adminprofile']);
+  //     } else if (decodedToken.role === 'ServiceProvider'){
+  //       this.router.navigate(['/serviceproviderprofile'])
+  //     } else if (decodedToken.role === 'ClaimsAgent'){
+  //       this.router.navigate(['/caprofile']);
+  //     } else {
+  //       this.router.navigate(['/signup'])
+  //     }
+  //   });
+  // }
 
-  handleSubmit(){
-    this.login(this.InitialSignUp);
-  }
-
-
-// async handleSubmit() {
-//   // Prepare the login data
-//   const loginObj = {
-//     // Add your login data properties here
-//     username: 'your-username',
-//     password: 'your-password'
-//   };
-//   try {
-//     // Call the login method in the SharedService with the login data
-//     const response = await this.sharedService.login(loginObj).toPromise(); // Convert observable to promise
-//     const token = response.token;
-//     // Store the token in local storage
-//     localStorage.setItem('token', token);
-//     // Set the user payload in the shared service
-//     this.sharedService.setUserPayload(token);
-//     // Redirect to the appropriate page
-//     const accountUserId = this.sharedService.getAccountUserIdFromToken();
-//     const accountType = this.sharedService.getaccountTypeFromToken();
-//     if (accountUserId) {
-//       // User is logged in and has an account ID
-//       if (accountType === 'administrator') {
-//         this.router.navigate(['/adminprofile']);
-//       } else if (accountType === 'serviceprovider') {
-//         this.router.navigate(['/serviceproviderprofile']);
-//       } else if (accountType === 'ClaimsAgent') {
-//         this.router.navigate(['/claimsagentprofile']);
-//       } else {
-//         // Handle the case where accountType is neither administrator, serviceprovider, nor ClaimsAgent
-//         // You can decide where to redirect them in this case (e.g., back to the login page)
-//         this.router.navigate(['/login']);
-//       }
-//     } else {
-//      // User is logged in but does not have an account ID
-//       if (accountType === 'ClaimsAgent') {
-//         this.router.navigate(['/casignup']);
-//       } else if (accountType === 'serviceprovider') {
-//         this.router.navigate(['/spsignup']);
-//       } else {
-//         // Handle the case where accountType is neither ClaimsAgent nor serviceprovider
-//         // You can decide where to redirect them in this case (e.g., back to the login page)
-//         this.router.navigate(['/login']);
-//       }
-//     }
-//   } catch (error) {
-//     // Handle error if login fails (e.g., show an error message to the user)
-//     console.error('Login error:', error);
-//     // You can also redirect to an error page or show an error message to the user
-//   }
-// }
-
- 
-
- 
-
+  this.authService.login(loginObject).subscribe(
+    response => {
+      // Handle successful login
+      console.log(response);
+      // Redirect to the appropriate page based on the user's role or perform any other actions
+      const decodedToken = this.jwtHelper.decodeToken(response.token);
+      if (decodedToken.accountType === 'Administrator') {
+        this.router.navigate(['/adminprofile']);
+      } else if (decodedToken.accountType === 'ServiceProvider') {
+        this.router.navigate(['/serviceproviderprofile']);
+      } else if (decodedToken.accountType === 'ClaimsAgent') {
+        this.router.navigate(['/caprofile']);
+      } else {
+        this.router.navigate(['/signup']);
+      }
+    },
+    error => {
+      // Handle login error
+      console.error(error);
+      // Display an error message to the user or perform any other actions
+    }
+  );
 }
+    }
+  }

@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { initialsignup } from '../models/initialsignup.model';
-import { SharedService } from '../shared.service';
 import { AuthService } from '../services/auth.service';
 
 interface roles {
@@ -19,11 +18,15 @@ interface roles {
 
 export class InitialsignupComponent implements OnInit {
   userregister!: FormGroup;
-  InitialSignUp = new initialsignup();
+  InitialSignUp: initialsignup = new initialsignup();
+
+  roles: roles[] = [
+    { value: 'ClaimsAgent', viewValue: 'Claims agent' },
+    { value: 'ServiceProvider', viewValue: 'Service provider' },
+  ];
 
   constructor(
     private formBuilder: FormBuilder,
-    private http: HttpClient,
     private authService: AuthService,
     private router: Router
     ) {}
@@ -32,34 +35,28 @@ export class InitialsignupComponent implements OnInit {
       this.authService.register(InitialSignUp).subscribe();
     }
 
+    ngOnInit(): void {
+      this.userregister = this.formBuilder.group({
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', [Validators.required, Validators.minLength(6), Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,}$')]],
+        confirmPassword: ['', Validators.required],
+        accountType: ['', Validators.required],
+      }, { validator: this.passwordMatchValidator });
+    }
+
   // addInitialSignupRequest: initialsignup = {
   //   Account_UserId: '',
   //   email: '',
   //   password: '',
   //   accountType: ''
   // };
-  
-  roles: roles[] = [
-    { value: 'ClaimsAgent', viewValue: 'Claims agent' },
-    { value: 'ServiceProvider', viewValue: 'Service provider' },
-  ];
 
-  signupSuccess: boolean = false;
 
   visible: boolean = true;
   changetype:boolean =true;
 
   confirmVisible: boolean = true;
   confirmChangetype: boolean = true;
-
-  ngOnInit(): void {
-    this.userregister = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6), Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,}$')]],
-      confirmPassword: ['', Validators.required],
-      accountType: ['', Validators.required],
-    }, { validator: this.passwordMatchValidator });
-  }
 
   hideShowPass() {
     this.visible = !this.visible;
@@ -73,8 +70,39 @@ export class InitialsignupComponent implements OnInit {
 
   handleSubmit(): void {
     if (this.userregister.valid) {
-      this.register(this.InitialSignUp)
-    // this.addInitialSignupRequest.Account_UserId = ''; // Set the Account_UserId property
+
+      const email = this.userregister.value.email;
+      const password = this.userregister.value.password;
+      const accountType = this.userregister.value.accountType;
+
+      const newInitialSignUp: initialsignup = {
+        email: email,
+        password: password,
+        accountType: accountType,
+      }
+
+      this.authService.register(newInitialSignUp).subscribe(
+        response => {
+          console.log(response);
+          let route: string;
+          if (accountType === 'ClaimsAgent') {
+            route = '/casignup';
+          } else if (accountType === 'ServiceProvider') {
+            route = '/signup';
+          } else {
+            console.error('Invalid account type');
+            return;
+          }
+          this.router.navigate([route]);
+        },
+        error => {
+          console.error(error);
+        }
+      );
+    }
+  }
+
+// this.addInitialSignupRequest.Account_UserId = ''; // Set the Account_UserId property
     // this.addInitialSignupRequest.email = this.userregister.value.email; // Set the email property
     // this.addInitialSignupRequest.password = this.userregister.value.password; // Set the password property
     // this.addInitialSignupRequest.accountType = this.userregister.value.accountType;
@@ -92,10 +120,6 @@ export class InitialsignupComponent implements OnInit {
     // } else {
     //   console.log('Form is invalid. Please fill in all required fields.');
     // }
-
-    
-  }
-}
 
   passwordMatchValidator(control: AbstractControl): { [key: string]: boolean } | null {
     const password = control.get('password');

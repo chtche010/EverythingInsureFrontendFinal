@@ -3,7 +3,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SharedService } from 'src/app/shared.service';
-import { addclaim } from 'src/app/models/addclaim';
+import { addclaim } from 'src/app/models/claimagent/addclaim';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 

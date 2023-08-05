@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-auction',
@@ -7,13 +9,16 @@ import { FormGroup, FormBuilder, Validators, AbstractControl, ValidationErrors }
   styleUrls: ['./auction.component.css']
 })
 export class AuctionComponent implements OnInit {
-  claimDetailsForm: FormGroup;
-  auctionForm: FormGroup = new FormGroup({});
-  guidePriceForm: FormGroup;
-  materialCostForm: FormGroup;
+  stepper: any;
+  claimDetailsForm!: FormGroup;
+  auctionForm!: FormGroup;
+  guidePriceForm!: FormGroup;
+  materialCostForm!: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private snackBar: MatSnackBar, private authService: AuthService) {}
+  isLinear = true; 
 
+  ngOnInit(): void {
     this.claimDetailsForm = this.formBuilder.group({
       customerName: ['', Validators.required],
       customerEmail: ['', Validators.required],
@@ -27,7 +32,7 @@ export class AuctionComponent implements OnInit {
       customerProvince: ['', Validators.required],
       claimsAgent: ['', Validators.required]
     });
-   
+
     this.auctionForm = this.formBuilder.group({
       auctionDate: ['', Validators.required],
       startTime: ['', Validators.required],
@@ -44,9 +49,30 @@ export class AuctionComponent implements OnInit {
       materialDescription: ['', Validators.required],
       cost: ['', Validators.required],
       quantity: ['', Validators.required],
-    })
-
+    });
   }
 
-  ngOnInit(): void {}
+  submitClaimDetails() {
+    if (this.claimDetailsForm.valid) {
+      const formData = this.claimDetailsForm.value;
+      this.authService.submitClaimData(formData).subscribe(
+        response => {
+          this.stepper.next();
+        },
+        error => {
+          this.snackBar.open('An error has occurred while submitting.', 'Close', {
+            duration: 3000,
+          });
+        }
+      );
+    } else {
+      this.snackBar.open('Please complete the form correctly before proceeding.', 'Close', {
+        duration: 3000,
+      });
+    }
+  }
+
+
+
+
 }

@@ -51,6 +51,12 @@ import { SpNavbarComponent } from './serviceprovider/serviceproviderprofile/sp-n
 import { SpSidebarComponent } from './serviceprovider/serviceproviderprofile/sp-sidebar/sp-sidebar.component';
 import { SpActivityComponent } from './serviceprovider/serviceproviderprofile/sp-activity/sp-activity.component';
 import { ServiceproviderprofileComponent } from './serviceprovider/serviceproviderprofile/serviceproviderprofile/serviceproviderprofile.component';
+import { AdminNavBarComponent } from './admin/admin-nav-bar/admin-nav-bar/admin-nav-bar.component';
+import { AdminSideBarComponent } from './admin/admin-side-bar/admin-side-bar/admin-side-bar.component';
+import { AdminmanageauctionComponent } from './admin/manageauction/adminmanageauction/adminmanageauction.component';
+import { ManagebidComponent } from './admin/managebid/managebid/managebid.component';
+import { ManagecaComponent } from './admin/manageca/manageca/manageca.component';
+import { ManagespComponent } from './admin/managesp/managesp/managesp.component';
 
 const routes: Routes = [
   { path: 'signup', component: SignupComponent },
@@ -80,7 +86,13 @@ const routes: Routes = [
     SpNavbarComponent,
     SpSidebarComponent,
     SpActivityComponent,
-    ServiceproviderprofileComponent
+    ServiceproviderprofileComponent,
+    AdminNavBarComponent,
+    AdminSideBarComponent,
+    AdminmanageauctionComponent,
+    ManagebidComponent,
+    ManagecaComponent,
+    ManagespComponent
   ],
   imports: [
     BrowserModule,
@@ -111,7 +123,11 @@ const routes: Routes = [
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptor,
     multi: true }, 
-    JwtHelperService
+  {
+    provide: JWT_OPTIONS,
+    useValue: JWT_OPTIONS
+  },
+  JwtHelperService
   ],
   bootstrap: [AppComponent],
 })
