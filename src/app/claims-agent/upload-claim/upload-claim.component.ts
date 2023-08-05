@@ -16,7 +16,7 @@ import { Router } from '@angular/router';
 export class UploadClaimComponent implements OnInit {
   claimupload!: FormGroup;
   addClaimRequest: addclaim = {
-    claimId: '',
+   // claimId: '',
     customerName: '',
     customerEmail: '', 
     vehicleMake: '',
@@ -27,8 +27,8 @@ export class UploadClaimComponent implements OnInit {
     customerSurbub: '',
     customerCity: '',
     customerProvince: '',
-    claimsAgent: '',
-    claimsAgentId: '',
+   // claimsAgent: '',
+   // claimsAgentId: '',
   };
 
   submitSuccess: boolean = false;
@@ -52,7 +52,7 @@ export class UploadClaimComponent implements OnInit {
     customerSurbub: ['', [Validators.required]],
     customerCity: ['', [Validators.required]],
     customerProvince: ['', [Validators.required]],
-    claimsAgent: ['', [Validators.required]],
+   // claimsAgent: ['', [Validators.required]],
     });
   }
 
