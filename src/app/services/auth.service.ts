@@ -41,17 +41,29 @@ export class AuthService {
   // claims agents 
 
   addClaimsAgent(newCA: addclaimsagent): Observable<ServiceResponse<any>> {
-    return this.http.post<ServiceResponse<any>>(this.baseUrl + 'api/ClaimsAgent/Create Claims Agent Profile', newCA);
+    return this.http.post<ServiceResponse<any>>(this.baseUrl + 'api/ClaimsAgent/Create Claims Agent Profile', { newCA });
   }
 
-  public getcaprofile(): Observable<any> {
+  getcaprofile(): Observable<any> {
     return this.http.get<any>(this.baseUrl + 'api/ClaimsAgent/Get-Profile');
   }
 
   // Adding an auction 
 
   submitClaimData(data: any): Observable<any> {
-    return this.http.post<any>(this.baseUrl + 'api/Claims/Add%20Claim', data, this.httpOptions);
+    return this.http.post<any>(this.baseUrl + 'api/Claims/AddClaim', data, this.httpOptions);
+  }
+
+  createAuction(auctionData: any) {
+    return this.http.post(`${this.baseUrl}api/Auction/CreateAuction`, auctionData);
+  }
+
+  createGuidePrice(guidePriceData: any) {
+    return this.http.post(`${this.baseUrl}api/GuidePrice/CreateGuidePrice`, guidePriceData);
+  }
+
+  createGuidePriceMaterial(materialData: any) {
+    return this.http.post(`${this.baseUrl}api/GuidePrice/CreateGuidePriceMaterial`, materialData);
   }
 
   // service providers 

@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -9,14 +9,19 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./auction.component.css']
 })
 export class AuctionComponent implements OnInit {
-  stepper: any;
+  @ViewChild('stepper') stepper: any;
   claimDetailsForm!: FormGroup;
   auctionForm!: FormGroup;
   guidePriceForm!: FormGroup;
   materialCostForm!: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private snackBar: MatSnackBar, private authService: AuthService) {}
-  isLinear = true; 
+  constructor(
+    private formBuilder: FormBuilder,
+    private snackBar: MatSnackBar,
+    private authService: AuthService
+  ) {}
+
+  isLinear = true;
 
   ngOnInit(): void {
     this.claimDetailsForm = this.formBuilder.group({
@@ -72,7 +77,58 @@ export class AuctionComponent implements OnInit {
     }
   }
 
+  submitAuctionDetails(): void {
+    if (this.auctionForm.valid) {
+      const auctionDetailsData = this.auctionForm.value;
+      this.authService.createAuction(auctionDetailsData).subscribe(
+        (response) => {
+          this.stepper.next();
+        },
+        (error) => {
+          this.snackBar.open('An error has occurred while submitting.', 'Close', {
+            duration: 3000,
+          });
+        }
+      );
+    } else {
+      this.snackBar.open('Please complete the form correctly before proceeding.', 'Close', {
+        duration: 3000,
+      });
+    }
+  }
 
+  submitGuidePrice(): void {
+    if (this.guidePriceForm.valid) {
+      const guidePriceData = this.guidePriceForm.value;
+      this.authService.createGuidePrice(guidePriceData).subscribe(
+        (response) => {
+          this.stepper.next();
+        },
+        (error) => {
+          this.snackBar.open('An error has occurred while submitting.', 'Close', {
+            duration: 3000,
+          });
+        }
+      );
+    } else {
+      this.snackBar.open('Please complete the form correctly before proceeding.', 'Close', {
+        duration: 3000,
+      });
+    }
+  }
 
-
+  submitMaterialCost(): void {
+    // Submit material cost form data to API endpoint
+    const materialCostData = this.materialCostForm.value;
+    this.authService.createGuidePriceMaterial(materialCostData).subscribe(
+      (response) => {
+        this.stepper.next();
+      },
+      (error) => {
+        this.snackBar.open('An error has occurred while submitting.', 'Close', {
+          duration: 3000,
+        });
+      }
+    );
+  }
 }
