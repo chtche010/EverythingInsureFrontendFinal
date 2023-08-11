@@ -57,6 +57,12 @@ import { AdminmanageauctionComponent } from './admin/manageauction/adminmanageau
 import { ManagebidComponent } from './admin/managebid/managebid/managebid.component';
 import { ManagecaComponent } from './admin/manageca/manageca/manageca.component';
 import { ManagespComponent } from './admin/managesp/managesp/managesp.component';
+import { DatePipe } from '@angular/common';
+import { AuctionDialogComponent } from './serviceprovider/serviceproviderprofile/auction-dialog/auction-dialog.component';
+import { AuctionDashboardComponent } from './serviceprovider/serviceproviderprofile/auction-dashboard/auction-dashboard.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { FormArray } from '@angular/forms';
+import { BidFormComponent } from './bid-form/bid-form.component';
 
 const routes: Routes = [
   { path: 'signup', component: SignupComponent },
@@ -92,7 +98,10 @@ const routes: Routes = [
     AdminmanageauctionComponent,
     ManagebidComponent,
     ManagecaComponent,
-    ManagespComponent
+    ManagespComponent,
+    AuctionDialogComponent,
+    AuctionDashboardComponent,
+    BidFormComponent
   ],
   imports: [
     BrowserModule,
@@ -117,7 +126,7 @@ const routes: Routes = [
     MatCardModule,
     NgxMaterialTimepickerModule,
     MatNativeDateModule,
-    
+    MatDialogModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
@@ -127,7 +136,8 @@ const routes: Routes = [
     provide: JWT_OPTIONS,
     useValue: JWT_OPTIONS
   },
-  JwtHelperService
+  JwtHelperService,
+  DatePipe
   ],
   bootstrap: [AppComponent],
 })

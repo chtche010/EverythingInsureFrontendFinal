@@ -1,3 +1,4 @@
+import { Token } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -7,7 +8,7 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./serviceproviderprofile.component.css']
 })
 export class ServiceproviderprofileComponent implements OnInit {
-  userProfile: any = {}; //To store the user profile data 
+  userProfile: any;
 
   constructor(
     private authService: AuthService
@@ -21,8 +22,8 @@ export class ServiceproviderprofileComponent implements OnInit {
 
   loadUserProfile(){
     this.authService.getspdetails().subscribe(
-      (data) => {
-        this.userProfile = data; // Store the user profile data in userProfile
+      (response) => {
+        this.userProfile = response.data; // Store the user profile data in userProfile
       },
       (error) => {
         console.error('Error fetching user profile:', error);

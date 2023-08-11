@@ -18,7 +18,8 @@ import { ManageauctionComponent } from './claims-agent/manageauction/manageaucti
 import { ManageclaimsComponent } from './claims-agent/manageclaims/manageclaims.component';
 import { SpActivityComponent } from './serviceprovider/serviceproviderprofile/sp-activity/sp-activity.component';
 import { ServiceproviderprofileComponent } from './serviceprovider/serviceproviderprofile/serviceproviderprofile/serviceproviderprofile.component';
-
+import { AuctionDashboardComponent } from './serviceprovider/serviceproviderprofile/auction-dashboard/auction-dashboard.component';
+import { BidFormComponent } from './bid-form/bid-form.component';
 // Admin 
 import { AdminNavBarComponent } from './admin/admin-nav-bar/admin-nav-bar/admin-nav-bar.component';
 import { AdminSideBarComponent } from './admin/admin-side-bar/admin-side-bar/admin-side-bar.component';
@@ -44,14 +45,16 @@ const routes: Routes = [
   { path: 'manageauctions', component: ManageauctionComponent},
   { path: 'sp-activity', component: SpActivityComponent},
   { path: 'serviceproviderprofile', component: ServiceproviderprofileComponent},
-  
+  { path: 'auction-dashboard', component: AuctionDashboardComponent},
+
   //admin 
   { path: 'admin-nav-bar', component: AdminNavBarComponent},
   { path: 'admin-side-bar', component: AdminSideBarComponent},
   { path: 'adminmanageauction', component: AdminmanageauctionComponent},
   { path: 'managebids', component: ManagebidComponent},
   { path: 'manageca', component: ManagecaComponent},
-  { path: 'managesp', component: ManagespComponent}
+  { path: 'managesp', component: ManagespComponent},
+  { path: 'bid-form', component: BidFormComponent}
 ];
 
 @NgModule({

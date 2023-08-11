@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -34,7 +35,13 @@ export class SignupComponent implements OnInit {
   selectedCountry: number | null = null;
   selectedProvince: number | null = null;
 
-  constructor(private builder: FormBuilder, private snackBar: MatSnackBar) { }
+  constructor(
+    private builder: FormBuilder, 
+    private snackBar: MatSnackBar, 
+    private authService: AuthService,
+    private router: Router, 
+    private httpClient: HttpClient
+    ) { }
   isLinear = true;
 
   // ngOnInit(): void {
@@ -104,25 +111,47 @@ export class SignupComponent implements OnInit {
     });
   }
 
-  // HandleSubmit() {
-  //   if (this.Empregister.valid) {
-  //     console.log(this.Empregister.value);
-  //     this.snackBar.open('Sign up successful!', 'Close', { duration: 3000 });
-  //   } else {
-  //     this.snackBar.open('Failed to sign up', 'Close', { duration: 3000 });
-  //   }
-  // }
-
-  HandleSubmit() {
-    if (this.Empregister.valid) {
-      console.log(this.Empregister.value);
-      this.snackBar.open('Sign up successful!', 'Close', { duration: 3000 });
+  submitBasicDetails() {
+    if (this.Basicform.valid) {
+      this.authService.submitBasicDetails(this.Basicform.value).subscribe(() => {
+        console.log("Basic details submitted successfully!");
+        // Proceed to the next step
+      }, (error) => {
+        console.log("Error submitting basic details:", error);
+      });
     } else {
-      // Form is not valid, handle validation errors if needed
+      // Handle form validation errors if needed
     }
   }
 
+  submitAddressDetails() {
+    if (this.Addressform.valid) {
+      this.authService.submitAddressDetails(this.Addressform.value).subscribe(() => {
+        console.log("Address details submitted successfully!");
+        // Proceed to the next step
+      }, (error) => {
+        console.log("Error submitting address details:", error);
+      });
+    } else {
+      // Handle form validation errors if needed
+    }
+  }
+
+  handleSubmit() {
+    if (this.Bankingform.valid) {
+      this.authService.submitBankingDetails(this.Bankingform.value).subscribe(() => {
+        console.log("Banking details submitted successfully!");
+        this.snackBar.open('Registration successful. Please login.', 'Close', { duration: 3000 });
+        this.router.navigate(['/login']);
+      }, (error) => {
+        console.log("Error submitting banking details:", error);
+      });
+    } else {
+      // Handle form validation errors if needed
+    }
+  }
 }
+
 
 
 

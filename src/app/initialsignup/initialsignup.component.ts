@@ -85,7 +85,7 @@ export class InitialsignupComponent implements OnInit {
         response => {
           console.log(response);
           let route: string;
-          localStorage.setItem("accountUserId",response.data)
+          localStorage.setItem("authToken",JSON.stringify(response))
           if (accountType === 'ClaimsAgent') {
             route = '/casignup';
           } else if (accountType === 'ServiceProvider') {
@@ -102,25 +102,6 @@ export class InitialsignupComponent implements OnInit {
       );
     }
   }
-
-// this.addInitialSignupRequest.Account_UserId = ''; // Set the Account_UserId property
-    // this.addInitialSignupRequest.email = this.userregister.value.email; // Set the email property
-    // this.addInitialSignupRequest.password = this.userregister.value.password; // Set the password property
-    // this.addInitialSignupRequest.accountType = this.userregister.value.accountType;
-
-    //   this.sharedService.addInitialSignup(this.addInitialSignupRequest).subscribe(
-    //    (response: any) => {
-    //     console.log(response);
-    //     this.userregister.reset();
-    //     this.signupSuccess = true;
-    //    },
-    //    (error: any) => {
-    //     console.log(error);
-    //   }
-    //  );
-    // } else {
-    //   console.log('Form is invalid. Please fill in all required fields.');
-    // }
 
   passwordMatchValidator(control: AbstractControl): { [key: string]: boolean } | null {
     const password = control.get('password');

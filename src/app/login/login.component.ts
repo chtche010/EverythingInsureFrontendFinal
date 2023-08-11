@@ -7,7 +7,8 @@ import { Router } from '@angular/router';
 import { UserStoreService } from '../services/user-store.service';
 import { AuthService } from '../services/auth.service';
 import { initialsignup } from '../models/initialsignup.model';
-import { JwtHelperService } from '@auth0/angular-jwt'
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -25,7 +26,8 @@ export class LoginComponent implements OnInit {
     private toast: NgToastService,
     private router: Router,
     private authService: AuthService,
-    private jwtHelper : JwtHelperService
+    private jwtHelper : JwtHelperService,
+    private snackbar : MatSnackBar,
     ) {}
 
     ngOnInit(): void {
@@ -50,26 +52,12 @@ export class LoginComponent implements OnInit {
           accountType: '' // Add the accountType property here
         };
 
-  // login(InitialSignUp: initialsignup) {
-  //   this.authService.login(InitialSignUp).subscribe((token: string) => {
-  //     localStorage.setItem('authToken', token);
-  //     const decodedToken = this.jwtHelper.decodeToken(token);
-  //     if (decodedToken.role === 'Administrator'){
-  //       this.router.navigate(['/adminprofile']);
-  //     } else if (decodedToken.role === 'ServiceProvider'){
-  //       this.router.navigate(['/serviceproviderprofile'])
-  //     } else if (decodedToken.role === 'ClaimsAgent'){
-  //       this.router.navigate(['/caprofile']);
-  //     } else {
-  //       this.router.navigate(['/signup'])
-  //     }
-  //   });
-  // }
 
   this.authService.login(loginObject).subscribe(
     response => {
       // Handle successful login
       console.log(response);
+      localStorage.setItem("authToken",JSON.stringify(response))
       // Redirect to the appropriate page based on the user's role or perform any other actions
       const decodedToken = this.jwtHelper.decodeToken(response.data);
       console.log(decodedToken);

@@ -1,0 +1,109 @@
+<h2 mat-dialog-title>{{ data.auctionTitle }}</h2>
+
+ 
+
+<div mat-dialog-content>
+
+  <p>Date: <strong>{{ data.auctionDate | date }}</strong></p>
+
+  <p>Start Time: <strong>{{ data.startTime }}</strong></p>
+
+  <p>End Time: <strong>{{ data.endTime }}</strong></p>
+
+ 
+
+  <mat-card class="dialog-card">
+
+    <mat-card-title>
+
+      <h3 class="dialog-card-title">Claims Details</h3>
+
+    </mat-card-title>
+
+    <mat-card-content>
+
+      <div class="claim-details-container">
+
+        <div class="claim-details-label">Vehicle Make:</div>
+
+        <div class="claim-details-value">{{ data.vehicleMake }}</div>
+
+      </div>
+
+      <div class="claim-details-container">
+
+        <div class="claim-details-label">Vehicle Model:</div>
+
+        <div class="claim-details-value">{{ data.vehicleModel }}</div>
+
+      </div>
+
+      <div class="claim-details-container">
+
+        <div class="claim-details-label">Model Year:</div>
+
+        <div class="claim-details-value">{{ data.modelYear }}</div>
+
+      </div>
+
+      <div class="claim-details-container">
+
+        <div class="claim-details-label">MM Code:</div>
+
+        <div class="claim-details-value">{{ data.MMcode }}</div>
+
+      </div>
+
+      <div class="claim-details-container">
+
+        <div class="claim-details-label">Location:</div>
+
+        <div class="claim-details-value">{{ data.addressId }}</div>
+
+      </div>
+
+      <div class="claim-details-container">
+
+        <div class="claim-details-label">Damage Description: </div>
+
+        <div class="claim-details-value damage-description">{{ data.damageDescription }}</div>
+
+      </div>
+
+      <br>
+
+      <div class="claim-details-label">Pictures of damage: </div><br>
+
+      <div *ngIf="data.images.length > 0" class="image-grid">
+
+        <div *ngFor="let image of data.images" class="image-container">
+
+          <img [src]="image" alt="Image">
+
+        </div>
+
+      </div>
+
+ 
+
+    </mat-card-content>
+
+  </mat-card>
+
+</div>
+
+<mat-dialog-actions>
+
+  <div class="button-container">
+
+    <button mat-button mat-dialog-close>Close</button>
+
+  </div>
+
+  <div class="button-container">
+
+    <button mat-raised-button (click)="openBidForm()">Create Bid</button>
+
+  </div>
+
+</mat-dialog-actions>

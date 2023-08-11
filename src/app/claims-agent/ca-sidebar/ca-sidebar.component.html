@@ -5,9 +5,9 @@
 
     <ul class="sidebar-nav" id="sidebar-nav">
       <li class="nav-item">
-        <a class="nav-link collapsed" routerLink="/claims-agent-dashboard" routerLinkActive="active">
+        <a class="nav-link collapsed" routerLink="/claims-agent-dashboard" routerLink="auction-dashboard">
           <i class="bi bi-grid"></i>
-          <span>Dashboard</span>
+          <span>Auction</span>
         </a>
       <!-- End Dashboard Nav -->
     
@@ -47,13 +47,13 @@
           <span>Manage auctions</span>
         </a>
       </li> 
-
       <li class="nav-item">
-        <a class="nav-link collapsed" href=""> <!-- (click)="logout()">-->
+        <a class="nav-link collapsed" href="" (click)="logout()">
           <i class="bi bi-box-arrow-right"></i>
           <span>Logout</span>
         </a>
-      </li><!-- End Logout Page Nav -->
+      </li>
+      <!-- End Logout Page Nav -->
 
       <!-- End Blank Page Nav -->
 

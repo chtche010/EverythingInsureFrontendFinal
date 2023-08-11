@@ -18,7 +18,8 @@ export class CaProfileComponent implements OnInit {
   getcaprofile(): void {
     this.authService.getcaprofile().subscribe(
       (response) => {
-        this.userProfile = response;
+        console.log(response)
+        this.userProfile = response.data;
         console.log('Claim Agent Profile', this.userProfile);
       }, 
       (error) => {

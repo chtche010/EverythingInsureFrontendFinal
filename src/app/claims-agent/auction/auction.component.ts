@@ -2,6 +2,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from 'src/app/services/auth.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { DatePipe } from '@angular/common';
+import { Dialog } from '@angular/cdk/dialog';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-auction',
@@ -10,6 +14,11 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class AuctionComponent implements OnInit {
   @ViewChild('stepper') stepper: any;
+
+  addedMaterials: any[] = [];
+  isAddingMaterial = false;
+  showMaterialsCard = false;
+
   claimDetailsForm!: FormGroup;
   auctionForm!: FormGroup;
   guidePriceForm!: FormGroup;
@@ -18,10 +27,16 @@ export class AuctionComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private snackBar: MatSnackBar,
-    private authService: AuthService
+    private authService: AuthService,
+    private jwtHelper : JwtHelperService,
+    private datePipe: DatePipe,
+    private router: Router,
   ) {}
 
   isLinear = true;
+  claimId!: number; 
+  auctionId!: number;
+  guidePriceId!: number;
 
   ngOnInit(): void {
     this.claimDetailsForm = this.formBuilder.group({
@@ -35,10 +50,10 @@ export class AuctionComponent implements OnInit {
       customerSurbub: ['', Validators.required],
       customerCity: ['', Validators.required],
       customerProvince: ['', Validators.required],
-      claimsAgent: ['', Validators.required]
     });
 
     this.auctionForm = this.formBuilder.group({
+      claimId: ['', Validators.required],
       auctionDate: ['', Validators.required],
       startTime: ['', Validators.required],
       endTime: ['', Validators.required],
@@ -55,80 +70,127 @@ export class AuctionComponent implements OnInit {
       cost: ['', Validators.required],
       quantity: ['', Validators.required],
     });
+
   }
 
   submitClaimDetails() {
     if (this.claimDetailsForm.valid) {
-      const formData = this.claimDetailsForm.value;
-      this.authService.submitClaimData(formData).subscribe(
-        response => {
-          this.stepper.next();
-        },
-        error => {
-          this.snackBar.open('An error has occurred while submitting.', 'Close', {
-            duration: 3000,
-          });
-        }
-      );
-    } else {
-      this.snackBar.open('Please complete the form correctly before proceeding.', 'Close', {
-        duration: 3000,
+      this.authService.submitClaimData(this.claimDetailsForm.value).subscribe((response) => {
+        console.log("Claim details submitted successfully!");
+
+        const claimId = response.data;
+        this.authService.setClaimId(claimId);
+        this.auctionForm.patchValue({ claimId: claimId });
+
+        this.claimId = claimId;
+
+        this.submitAuctionDetails(this.claimId);
+        // Proceed to the next step
+      }, (error) => {
+        console.log("Error submitting basic details:", error);
       });
+    } else {
+      // Handle form validation errors if needed
     }
   }
 
-  submitAuctionDetails(): void {
+  submitAuctionDetails(claimId: number) {
     if (this.auctionForm.valid) {
-      const auctionDetailsData = this.auctionForm.value;
-      this.authService.createAuction(auctionDetailsData).subscribe(
-        (response) => {
-          this.stepper.next();
-        },
-        (error) => {
-          this.snackBar.open('An error has occurred while submitting.', 'Close', {
-            duration: 3000,
-          });
-        }
-      );
-    } else {
-      this.snackBar.open('Please complete the form correctly before proceeding.', 'Close', {
-        duration: 3000,
+
+      // Parse input values as valid Date objects
+    const auctionDate = new Date(this.auctionForm.value.auctionDate);
+    const startTime = new Date(`1970-01-01T${this.auctionForm.value.startTime}`);
+    const endTime = new Date(`1970-01-01T${this.auctionForm.value.endTime}`);
+  
+    // Convert to ISO strings
+    const formattedAuctionDate = auctionDate.toISOString();
+    const formattedStartTime = startTime.toISOString();
+    const formattedEndTime = endTime.toISOString();
+
+    const auctionDetails = {
+      claimId: claimId,
+      auctionDate: formattedAuctionDate,
+      startTime: formattedStartTime,
+      endTime: formattedEndTime,
+    };
+
+      this.authService.createAuction(auctionDetails).subscribe((response) => {
+        console.log("Auction details submitted successfully!");
+        
+        const auctionId = response.data;
+        this.authService.setAuctionId(auctionId);
+        this.auctionForm.patchValue({ auctionId: auctionId });
+
+        this.auctionId = auctionId;
+
+        this.submitGuidePrice(this.auctionId);
+
+        // Proceed to the next step
+      }, (error) => {
+        console.log("Error submitting auction details:", error);
+        console.log("auctionDetails:", auctionDetails);
       });
+    } else {
+      // Handle form validation errors if needed
     }
   }
 
-  submitGuidePrice(): void {
+  submitGuidePrice(auctionId: number) {
     if (this.guidePriceForm.valid) {
-      const guidePriceData = this.guidePriceForm.value;
-      this.authService.createGuidePrice(guidePriceData).subscribe(
-        (response) => {
-          this.stepper.next();
-        },
-        (error) => {
-          this.snackBar.open('An error has occurred while submitting.', 'Close', {
-            duration: 3000,
-          });
-        }
-      );
-    } else {
-      this.snackBar.open('Please complete the form correctly before proceeding.', 'Close', {
-        duration: 3000,
+
+      const guidePrice = {
+        auctionId: auctionId,
+        labourCost: this.guidePriceForm.value.labourCost,
+        estimatedDuration: this.guidePriceForm.value.estimatedDuration,
+      };
+
+      this.authService.createGuidePrice(guidePrice).subscribe((response) => {
+        console.log("Guide price details submitted successfully!");
+
+        const guidePriceId = response.data;
+        this.authService.setGuidePriceId(guidePriceId);
+        this.auctionForm.patchValue({ guidePriceId: guidePriceId });
+
+        this.guidePriceId = guidePriceId;
+        this.addMaterial(this.guidePriceId);
+        // Proceed to the next step
+      }, (error) => {
+        console.log("Error submitting guide price details:", error);
       });
+    } else {
+      // Handle form validation errors if needed
     }
   }
 
-  submitMaterialCost(): void {
-    // Submit material cost form data to API endpoint
-    const materialCostData = this.materialCostForm.value;
-    this.authService.createGuidePriceMaterial(materialCostData).subscribe(
-      (response) => {
-        this.stepper.next();
-      },
-      (error) => {
-        this.snackBar.open('An error has occurred while submitting.', 'Close', {
-          duration: 3000,
-        });
-      }
-    );
+  addMaterial(guidePriceId: number) {
+    if (this.materialCostForm.valid) {
+      console.log("guidePriceId:", guidePriceId);
+
+      const material = {
+        guidePriceId: guidePriceId,
+        materialName: this.materialCostForm.value.materialName,
+        materialDescription: this.materialCostForm.value.materialDescription,
+        cost: this.materialCostForm.value.cost,
+        quantity: this.materialCostForm.value.quantity
+      };
+
+      this.authService.createGuidePriceMaterial(material).subscribe(() => {
+        console.log("Material added successfully!");
+
+      this.addedMaterials.push(material);
+      this.materialCostForm.reset();
+      this.showMaterialsCard = true;
+      
+    }, (error) => {
+      console.log("Error adding material:", error);
+    });
+  } else {
+    // Handle form validation errors if needed
   }
+}
+
+handleSubmit() {
+  this.snackBar.open('Auction added successfully!', 'Close', { duration: 5000 });
+  this.router.navigate(['/caprofile']);
+}
 }

@@ -1,16 +1,47 @@
 <app-sp-navbar></app-sp-navbar>
+
 <app-sp-sidebar></app-sp-sidebar>
+
+ 
 
 <main id="main" class="main">
 
-    <div class="pagetitle">
-        <h1>Profile</h1>
-        <nav>
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-            <li class="breadcrumb-item">Users</li>
-            <li class="breadcrumb-item active">Profile</li>
-          </ol>
-        </nav>
-      </div><!-- End Page Title -->
+ 
+
+  <div class="pagetitle">
+
+    <h1>Auction Events</h1>
+
+  </div><!-- End Page Title -->
+
+   <!--Display Auction Events-->
+
+   <div class="auction-events-container">
+
+    <mat-card *ngFor="let auctionEvent of auctionEvents" (click)="openDialog(auctionEvent)">
+
+      <mat-card-header>
+
+        <mat-card-title>
+
+          {{ auctionEvent.auctionTitle }}
+
+        </mat-card-title>
+
+        <mat-card-subtitle>
+
+          Date: {{ auctionEvent.auctionDate | date }}  <br>
+
+          Start Time: {{ auctionEvent.startTime }} |
+
+          End Time: {{ auctionEvent.endTime }}
+
+        </mat-card-subtitle>
+
+      </mat-card-header>
+
+    </mat-card>
+
+  </div>
+
 </main>
