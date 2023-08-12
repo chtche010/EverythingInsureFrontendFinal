@@ -6,17 +6,16 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { Observable } from 'rxjs';
 
- //import { ApiService } from 'src/app/services/api.service';
+//import { ApiService } from 'src/app/services/api.service';
 
-//mock api
-
-import { ApiServiceMock } from './api.service.mock';
+//mock api is below, replace with real!
+import { ApiServiceMock } from './api.service.mock';//<-----replace with real
 
 import { AuctionDialogComponent } from '../auction-dialog/auction-dialog.component';
 
- 
 
- 
+
+
 
 @Component({
 
@@ -28,21 +27,20 @@ import { AuctionDialogComponent } from '../auction-dialog/auction-dialog.compone
 
 })
 
- 
+
 
 export class AuctionDashboardComponent implements OnInit {
 
-  auctionEvents: any[] = []; // Update this type based on your DTO structure
-
-  selectedAuction: any; // Update this type based on your DTO structure
-
+  auctionEvents: any[] = []; // <-----------Update this type based on your DTO structure
+  favoriteEvents: any[] = []; //array to store favorite events
+  selectedAuction: any; // <------------Update this type based on your DTO structure
   formSubmitted = false;
 
- 
 
-  constructor(private apiService: ApiServiceMock, private formBuilder: FormBuilder, public dialog: MatDialog) { }
 
- 
+  constructor(private apiService: ApiServiceMock, private formBuilder: FormBuilder, public dialog: MatDialog) { } //<--------replace mockapi here
+
+
 
   openDialog(auctionEvent: any): void {
 
@@ -56,7 +54,7 @@ export class AuctionDashboardComponent implements OnInit {
 
     });
 
- 
+
 
     dialogRef.afterClosed().subscribe(
 
@@ -68,9 +66,9 @@ export class AuctionDashboardComponent implements OnInit {
 
   }
 
- 
 
- 
+
+
 
   ngOnInit(): void {
 
@@ -78,11 +76,11 @@ export class AuctionDashboardComponent implements OnInit {
 
   }
 
- 
+
 
   fetchAuctionEvents() {
 
-    this.apiService.getAuctionEvents().subscribe(
+    this.apiService.getAuctionEvents().subscribe( //<------replace API here
 
       (response: any) => { // Explicitly type the response as an array of any
 
@@ -99,9 +97,30 @@ export class AuctionDashboardComponent implements OnInit {
     );
 
   }
+  favoriteEvent(event: any, auctionEvent: any) {
+    event.stopPropagation();//this line prevents the event from bubbling up
+    if (this.isEventFavorite(auctionEvent)) {
+      this.removeFromFavorites(auctionEvent);
+    } else {
+      this.addToFavorites(auctionEvent);
+    }
+  }
 
- 
+  isEventFavorite(auctionEvent: any): boolean {
+    return this.favoriteEvents.includes(auctionEvent);
+  }
+
+  addToFavorites(auctionEvent: any) {
+    this.favoriteEvents.push(auctionEvent);
+  }
+
+  removeFromFavorites(auctionEvent: any) {
+    const index = this.favoriteEvents.indexOf(auctionEvent);
+    if (index > -1) {
+      this.favoriteEvents.splice(index, 1);
+    }
+  }
+
 
 }
 
- 

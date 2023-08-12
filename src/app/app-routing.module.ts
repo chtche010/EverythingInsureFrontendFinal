@@ -19,7 +19,7 @@ import { ManageclaimsComponent } from './claims-agent/manageclaims/manageclaims.
 import { SpActivityComponent } from './serviceprovider/serviceproviderprofile/sp-activity/sp-activity.component';
 import { ServiceproviderprofileComponent } from './serviceprovider/serviceproviderprofile/serviceproviderprofile/serviceproviderprofile.component';
 import { AuctionDashboardComponent } from './serviceprovider/serviceproviderprofile/auction-dashboard/auction-dashboard.component';
-import { BidFormComponent } from './bid-form/bid-form.component';
+import { BidFormComponent } from './serviceprovider/serviceproviderprofile/bid-form/bid-form.component';
 // Admin 
 import { AdminNavBarComponent } from './admin/admin-nav-bar/admin-nav-bar/admin-nav-bar.component';
 import { AdminSideBarComponent } from './admin/admin-side-bar/admin-side-bar/admin-side-bar.component';

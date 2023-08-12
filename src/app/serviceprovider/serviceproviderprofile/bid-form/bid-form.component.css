@@ -1,0 +1,46 @@
+.background-container {
+  background-image: url("src/assets/Images/background3.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  min-height: 100vh;
+}
+
+.back-link {
+
+  display: flex;
+
+  align-items: center;
+
+  text-decoration: underline;
+
+  color: #ec0a0a;
+
+  margin-top: 20px;
+
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+
+
+.back-link mat-icon {
+
+  margin-right: 2px;
+}
+
+
+.estimated-duration-field {
+
+  width: 300px;
+  /* Adjust the width as needed */
+
+}
+
+
+
+.add-material-icon {
+
+  margin-right: 8px;
+
+}

@@ -62,7 +62,7 @@ import { AuctionDialogComponent } from './serviceprovider/serviceproviderprofile
 import { AuctionDashboardComponent } from './serviceprovider/serviceproviderprofile/auction-dashboard/auction-dashboard.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { FormArray } from '@angular/forms';
-import { BidFormComponent } from './bid-form/bid-form.component';
+import { BidFormComponent } from './serviceprovider/serviceproviderprofile/bid-form/bid-form.component';
 
 const routes: Routes = [
   { path: 'signup', component: SignupComponent },

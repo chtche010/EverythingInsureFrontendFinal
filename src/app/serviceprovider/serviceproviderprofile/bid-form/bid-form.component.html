@@ -1,3 +1,4 @@
+<div class="background-container">
 <div class="container">
 
     <a routerLink="/auction-dashboard" class="back-link"> <mat-icon>keyboard_arrow_left</mat-icon> Back to Auction Dashboard</a>
@@ -134,13 +135,13 @@
 
     <mat-step [completed]="bidForm.valid">
 
-        <h3 style="text-decoration:underline; font-weight: 400;">Step 1: Labour & Duration</h3>
+        <h3 style="text-decoration:underline; font-weight: 400;">Step 3: Submit Final Bid Price</h3>
 
         <div>
 
-          <p>Total Material Cost: R {{ calculateTotalMaterialCost() }}</p>
+          <p style="font-size: larger; font-weight: 500;">Total Material Cost: R {{ calculateTotalMaterialCost() }}</p>
 
-          <p>Final Bid Price: R {{ calculateFinalBidPrice() }}</p>
+          <p style="font-size: larger; font-weight: 500;">Final Bid Price: R {{ calculateFinalBidPrice() }}</p>
 
         </div>
 
@@ -154,4 +155,5 @@
 
 </mat-card>
 
+</div>
 </div>
