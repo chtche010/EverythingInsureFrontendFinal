@@ -28,6 +28,9 @@ import { ManagebidComponent } from './admin/managebid/managebid/managebid.compon
 import { ManagecaComponent } from './admin/manageca/manageca/manageca.component';
 import { ManagespComponent } from './admin/managesp/managesp/managesp.component';
 
+import { EverythingauctionComponent } from './everythingauction/everythingauction.component';
+import { ClaimReviewComponent } from './claims-agent/claim-review/claim-review/claim-review.component';
+
 const routes: Routes = [
   { path: '', component: HomeComponent},
   { path: 'signup', component: SignupComponent},
@@ -46,6 +49,8 @@ const routes: Routes = [
   { path: 'sp-activity', component: SpActivityComponent},
   { path: 'serviceproviderprofile', component: ServiceproviderprofileComponent},
   { path: 'auction-dashboard', component: AuctionDashboardComponent},
+  { path: 'everythingauction', component: EverythingauctionComponent},
+  { path: 'claim-review', component: ClaimReviewComponent},
 
   //admin 
   { path: 'admin-nav-bar', component: AdminNavBarComponent},

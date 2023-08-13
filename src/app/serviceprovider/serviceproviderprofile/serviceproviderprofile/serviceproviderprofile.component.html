@@ -22,7 +22,7 @@
           <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
             <img src="/assets/Images/panelbeaterlogo.png" alt="Profile" class="rounded-circle">
-            <h2 style="font-size: large">{{ userProfile?.registeredName }}</h2>
+            <h2 style="font-size: large">{{ userProfile?.registrationName }}</h2>
             <h3>{{ userProfile?.type }}</h3>
             <div class="social-links mt-2">
               <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
@@ -62,9 +62,6 @@
             <div class="tab-content pt-2">
 
               <div class="tab-pane fade show active profile-overview" id="profile-overview">
-                <h5 class="card-title">About</h5>
-                <p class="small fst-italic">Sunt est soluta temporibus accusantium neque nam maiores cumque temporibus. Tempora libero non est unde veniam est qui dolor. Ut sunt iure rerum quae quisquam autem eveniet perspiciatis odit. Fuga sequi sed ea saepe at unde.</p>
-
                 <h5 class="card-title">Profile Details</h5>
 
                 <div class="row">
@@ -114,12 +111,12 @@
 
                 <div class="row">
                   <div class="col-lg-3 col-md-4 label">VAT Vendor</div>
-                  <div class="col-lg-9 col-md-8">{{ userProfile?.VATVendor }}</div>
+                  <div class="col-lg-9 col-md-8">{{ userProfile?.vatVendor }}</div>
                 </div>
 
                 <div class="row">
                   <div class="col-lg-3 col-md-4 label">VAT Number</div>
-                  <div class="col-lg-9 col-md-8">{{ userProfile?.VATNumber }}</div>
+                  <div class="col-lg-9 col-md-8">{{ userProfile?.vatNumber }}</div>
                 </div>
 
               </div>
@@ -127,7 +124,7 @@
               <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
 
                 <!-- Profile Edit Form -->
-                <form>
+                <form (ngSubmit)="updateProfile()">
                   <div class="row mb-3">
                     <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
                     <div class="col-md-8 col-lg-9">
@@ -142,77 +139,82 @@
                   <div class="row mb-3">
                     <label for="registeredName" class="col-md-4 col-lg-3 col-form-label">Registered Name</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="registeredName" type="text" class="form-control" id="registeredName" [value]="userProfile.registrationName">
+                      <input name="registeredName" type="text" class="form-control" id="registeredName" [value]="userProfile.registrationName" [(ngModel)]="userProfile.registrationName">
+                      
+                      <!-- <div *ngIf="profileForm.get('registrationName')?.invalid && (profileForm.get('registrationName')?.dirty || profileForm.get('registrationName')?.touched)" class="text-danger">
+                        <div *ngIf="profileForm.get('registrationName')?.hasError('required')">Registered Name is required.</div>
+                      </div> -->
+            
                     </div>
                   </div>
 
                   <div class="row mb-3">
                     <label for="tradingName" class="col-md-4 col-lg-3 col-form-label">Trading Name</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="tradingName" class="form-control" id="tradingName" [value]="userProfile.tradingName">
+                      <input name="tradingName" class="form-control" id="tradingName" [value]="userProfile.tradingName" [(ngModel)]="userProfile.tradingName">
                     </div>
                   </div>
 
                   <div class="row mb-3">
                     <label for="contactPerson" class="col-md-4 col-lg-3 col-form-label">Contact Person</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="contactPerson" type="text" class="form-control" id="contactPerson" [value]="userProfile.contactPerson">
+                      <input name="contactPerson" type="text" class="form-control" id="contactPerson" [value]="userProfile.contactPerson" [(ngModel)]="userProfile.contactPerson">
                     </div>
                   </div>
 
                   <div class="row mb-3">
                     <label for="telephoneNumber" class="col-md-4 col-lg-3 col-form-label">Telephone number</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="telephoneNumber" type="number" class="form-control" id="telephoneNumber" [value]="userProfile.telephoneNumber">
+                      <input name="telephoneNumber" type="number" class="form-control" id="telephoneNumber" [value]="userProfile.telNumber" [(ngModel)]="userProfile.telNumber">
                     </div>
                   </div>
 
                   <div class="row mb-3">
                     <label for="cellphoneNumber" class="col-md-4 col-lg-3 col-form-label">Cellphone Number</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="cellphoneNumber" type="number" class="form-control" id="cellphoneNumber" [value]="userProfile.cellphoneNumber">
+                      <input name="cellphoneNumber" type="number" class="form-control" id="cellphoneNumber" [value]="userProfile.cellNumber" [(ngModel)]="userProfile.cellNumber">
                     </div>
                   </div>
 
                   <div class="row mb-3">
                     <label for="email" class="col-md-4 col-lg-3 col-form-label">Email</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="email" type="text" class="form-control" id="email" [value]="userProfile.email">
+                      <input name="email" type="text" class="form-control" id="email" [value]="userProfile.email" [(ngModel)]="userProfile.email">
                     </div>
                   </div>
 
                   <div class="row mb-3">
                     <label for="payeeType" class="col-md-4 col-lg-3 col-form-label">Payee Type</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="payeeType" type="text" class="form-control" id="payeeType"[value]="userProfile.payeeType">
+                      <input name="payeeType" type="text" class="form-control" id="payeeType" [value]="userProfile.payeeType" [(ngModel)]="userProfile.payeeType">
                     </div>
                   </div>
 
                   <div class="row mb-3">
                     <label for="type" class="col-md-4 col-lg-3 col-form-label">Type</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="type" type="text" class="form-control" id="type" [value]="userProfile.type">
+                      <input name="type" type="text" class="form-control" id="type" [value]="userProfile.type" [(ngModel)]="userProfile.type">
                     </div>
                   </div>
 
                   <div class="row mb-3">
                     <label for="coRegistrationNo" class="col-md-4 col-lg-3 col-form-label">Co Registration No</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="coRegistrationNo" type="text" class="form-control" id="coRegistrationNo" [value]="userProfile.coRegistrationNo">
+                      <input name="coRegistrationNo" type="text" class="form-control" id="coRegistrationNo" [value]="userProfile.companyRegistrationNumber" [(ngModel)]="userProfile.companyRegistrationNumber">
                     </div>
                   </div>
 
                   <div class="row mb-3">
                     <label for="VATVendor" class="col-md-4 col-lg-3 col-form-label">VAT Vendor</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="VATVendor" type="text" class="form-control" id="VATVendor" [value]="userProfile.VATVendor">
+                      <input name="VATVendor" type="text" class="form-control" id="VATVendor" [value]="userProfile.vatVendor" [(ngModel)]="userProfile.vatVendor">
                     </div>
                   </div>
 
                   <div class="row mb-3">
                     <label for="VATNo:" class="col-md-4 col-lg-3 col-form-label">VAT No:</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="VATNo" type="text" class="form-control" id="VATNo" [value]="userProfile.VATNo">
+                      <input name="VATNo" type="text" class="form-control" id="VATNo" [value]="userProfile.vatNumber" [(ngModel)]="userProfile.vatNumber">
                     </div>
                   </div>
 
@@ -220,34 +222,6 @@
                     <label for="physicalAddress:" class="col-md-4 col-lg-3 col-form-label">Physical Address:</label>
                     <div class="col-md-8 col-lg-9">
                       <input name="physicalAddress" type="text" class="form-control" id="physicalAddress" value="1 Thicket Street, Newlands, 7700">
-                    </div>
-                  </div>
-
-                  <div class="row mb-3">
-                    <label for="Twitter" class="col-md-4 col-lg-3 col-form-label">Twitter Profile</label>
-                    <div class="col-md-8 col-lg-9">
-                      <input name="twitter" type="text" class="form-control" id="Twitter" value="https://twitter.com/#">
-                    </div>
-                  </div>
-
-                  <div class="row mb-3">
-                    <label for="Facebook" class="col-md-4 col-lg-3 col-form-label">Facebook Profile</label>
-                    <div class="col-md-8 col-lg-9">
-                      <input name="facebook" type="text" class="form-control" id="Facebook" value="https://facebook.com/#">
-                    </div>
-                  </div>
-
-                  <div class="row mb-3">
-                    <label for="Instagram" class="col-md-4 col-lg-3 col-form-label">Instagram Profile</label>
-                    <div class="col-md-8 col-lg-9">
-                      <input name="instagram" type="text" class="form-control" id="Instagram" value="https://instagram.com/#">
-                    </div>
-                  </div>
-
-                  <div class="row mb-3">
-                    <label for="Linkedin" class="col-md-4 col-lg-3 col-form-label">Linkedin Profile</label>
-                    <div class="col-md-8 col-lg-9">
-                      <input name="linkedin" type="text" class="form-control" id="Linkedin" value="https://linkedin.com/#">
                     </div>
                   </div>
 

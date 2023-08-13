@@ -1,0 +1,42 @@
+<div class="profile-container">
+    <span class="glyphicon glyphicon-user profile-icon" aria-hidden="true"></span>
+    <div class="hover-message">Back to Profile</div>
+</div>
+  
+  <div class="dashboard-container">
+    <div class="row">
+      <div class="section">
+        <h3>Active Auctions</h3>
+        <div class="cards-container">
+          <div class="card" *ngFor="let auction of activeAuctions">
+            <div class="card-content">
+              <h4>Auction Title</h4>
+              <p>Date: </p>
+              <p>Start Time: </p>
+              <p>End Time: </p>
+            </div>
+          </div>
+        </div>
+        <div class="arrow" (click)="navigateActiveAuctions()">→</div>
+      </div>
+    </div>
+  
+    <div class="row">
+      <div class="section">
+        <h3>Upcoming Claims</h3>
+        <div class="cards-container">
+          <div class="card" *ngFor="let claim of upcomingClaims">
+            <div class="card-content">
+              <!-- Details for upcoming claims here -->
+              <h4>Auction Title</h4>
+              <p>Date: </p>
+              <p>Start Time: </p>
+              <p>End Time: </p>
+            </div>
+          </div>
+        </div>
+        <div class="arrow" (click)="navigateUpcomingClaims()">↓</div>
+      </div>
+    </div>
+  </div>
+  

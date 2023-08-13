@@ -54,9 +54,7 @@ export class ClaimsagentsignupComponent implements OnInit {
       this.authService.addClaimsAgent(newCA).subscribe(
         response => {
           console.log(response);
-          
           // Show success message
-          //this.snackBar.open('Claims agent added successfully!', 'Close', { duration: 3000 });
   
           // Navigate to the login page after successful signup
           this.router.navigate(['/login']); // Replace 'login' with the actual route path

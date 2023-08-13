@@ -1,0 +1,100 @@
+<app-ca-navbar></app-ca-navbar>
+<app-ca-sidebar></app-ca-sidebar>
+
+<div class="review-container">
+    <h2>Review Claim Details</h2>
+
+    <div class="review-item">
+      <strong>Customer Name:</strong> {{ claimdetails?.customerName }}
+    </div>
+
+    <div class="review-item">
+      <strong>Customer Email:</strong> {{ claimdetails?.customerEmail }}
+    </div>
+
+    <div class="review-item">
+      <strong>Vehicle Make:</strong> {{ claimdetails?.vehicleMake }}
+    </div>
+
+    <div class="review-item">
+      <strong>Vehicle Model:</strong> {{ claimdetails?.vehicleModel }}
+    </div>
+
+    <div class="review-item">
+      <strong>Model Year:</strong> {{ claimdetails?.modelYear }}
+    </div>
+
+    <div class="review-item">
+      <strong>MM Code:</strong> {{ claimdetails?.mmCode }}
+    </div>
+
+    <div class="review-item">
+      <strong>Damage Description:</strong> {{ claimdetails?.damageDescription }}
+    </div>
+
+    <div class="review-item">
+      <strong>Customer Suburb:</strong> {{ claimdetails?.customerSurbub }}
+    </div>
+
+    <div class="review-item">
+      <strong>Customer City:</strong> {{ claimdetails?.customerCity }}
+    </div>
+
+    <div class="review-item">
+      <strong>Customer Province:</strong> {{ claimdetails?.customerProvince }}
+    </div>
+
+    <div class="review-item">
+      <strong>Auction Title:</strong> {{ claimdetails?.auction.auctionTitle }}
+    </div>
+
+    <div class="review-item">
+      <strong>Auction Date:</strong> {{ claimdetails?.auction.auctionDate }}
+    </div>
+
+    <div class="review-item">
+      <strong>Start Time:</strong> {{ claimdetails?.auction.startTime }}
+    </div>
+
+    <div class="review-item">
+      <strong>End Time:</strong> {{ claimdetails?.auction.endTime }}
+    </div>
+
+    <div class="review-item">
+      <strong>Auction Status:</strong> {{ claimdetails?.auction.auctionStatus }}
+    </div>
+
+    <div class="review-item">
+      <strong>Total Material Cost:</strong> {{ claimdetails?.auction.guideprice.totalMaterialCost }}
+    </div>
+    
+    <div class="review-item">
+      <strong>Labour Cost:</strong> {{ claimdetails?.auction.guideprice.labourCost }}
+    </div>
+
+    <div class="review-item">
+      <strong>Estimated Duration:</strong> {{ claimdetails?.auction.guideprice.estimatedDuration }}
+    </div>
+
+    <div class="review-item">
+      <strong>Total Cost:</strong> {{ claimdetails?.auction.guideprice.totalCost }}
+    </div>
+
+    <div class="review-item">
+      <strong>Material Name:</strong> {{ claimdetails?.auction.guideprice.guidePriceMaterials.materialName }}
+    </div>
+
+    <div class="review-item">
+      <strong>Material Description:</strong> {{ claimdetails?.auction.guideprice.guidePriceMaterials.materialDescription }}
+    </div>
+
+    <div class="review-item">
+      <strong>Cost:</strong> {{ claimdetails?.auction.guideprice.guidePriceMaterials.cost }}
+    </div>
+
+    <div class="review-item">
+      <strong>Quantity:</strong> {{ claimdetails?.auction.guideprice.guidePriceMaterials.quantity }}
+    </div>
+
+  </div>
+  

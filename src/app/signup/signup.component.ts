@@ -60,8 +60,6 @@ export class SignupComponent implements OnInit {
         type: ['', Validators.required],
         companyRegistrationNumber: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
         VATVendor: ['', [Validators.required, Validators.pattern('^[YN]$')]],
-        //VATNumber: ['', [Validators.required, Validators.pattern(/^ZA 45 \d{6}$/)]]
-        //VATNumber: ['', this.conditionalVATNumberValidator()]
         VATNumber: ['', Validators.pattern(/^ZA45\d{6}$/)]
 
       }),
@@ -115,6 +113,7 @@ export class SignupComponent implements OnInit {
     if (this.Basicform.valid) {
       this.authService.submitBasicDetails(this.Basicform.value).subscribe(() => {
         console.log("Basic details submitted successfully!");
+        //this.snackBar.open('Basic details submitted successfully!', 'Close', { duration: 3000 });
         // Proceed to the next step
       }, (error) => {
         console.log("Error submitting basic details:", error);
@@ -128,6 +127,7 @@ export class SignupComponent implements OnInit {
     if (this.Addressform.valid) {
       this.authService.submitAddressDetails(this.Addressform.value).subscribe(() => {
         console.log("Address details submitted successfully!");
+        //this.snackBar.open('Address details submitted successfully!', 'Close', { duration: 3000 });
         // Proceed to the next step
       }, (error) => {
         console.log("Error submitting address details:", error);
@@ -141,7 +141,9 @@ export class SignupComponent implements OnInit {
     if (this.Bankingform.valid) {
       this.authService.submitBankingDetails(this.Bankingform.value).subscribe(() => {
         console.log("Banking details submitted successfully!");
-        this.snackBar.open('Registration successful. Please login.', 'Close', { duration: 3000 });
+        this.snackBar.open('Banking details submitted successfully!', 'Close', { duration: 3000 });
+        // Proceed to the next step
+        //this.snackBar.open('Registration successful. Please login.', 'Close', { duration: 3000 });
         this.router.navigate(['/login']);
       }, (error) => {
         console.log("Error submitting banking details:", error);

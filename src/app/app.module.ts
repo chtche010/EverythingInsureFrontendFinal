@@ -64,6 +64,10 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { FormArray } from '@angular/forms';
 import { BidFormComponent } from './bid-form/bid-form.component';
 
+// New auction site 
+import { EverythingauctionComponent } from './everythingauction/everythingauction.component';
+import { ClaimReviewComponent } from './claims-agent/claim-review/claim-review/claim-review.component';
+
 const routes: Routes = [
   { path: 'signup', component: SignupComponent },
 ];
@@ -101,7 +105,9 @@ const routes: Routes = [
     ManagespComponent,
     AuctionDialogComponent,
     AuctionDashboardComponent,
-    BidFormComponent
+    BidFormComponent,
+    EverythingauctionComponent,
+    ClaimReviewComponent,
   ],
   imports: [
     BrowserModule,

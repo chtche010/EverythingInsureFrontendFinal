@@ -77,7 +77,7 @@ export class AuctionComponent implements OnInit {
     if (this.claimDetailsForm.valid) {
       this.authService.submitClaimData(this.claimDetailsForm.value).subscribe((response) => {
         console.log("Claim details submitted successfully!");
-
+        
         const claimId = response.data;
         this.authService.setClaimId(claimId);
         this.auctionForm.patchValue({ claimId: claimId });
@@ -85,6 +85,7 @@ export class AuctionComponent implements OnInit {
         this.claimId = claimId;
 
         this.submitAuctionDetails(this.claimId);
+        this.snackBar.open('Claim details added successfully!', 'Close', { duration: 5000 });
         // Proceed to the next step
       }, (error) => {
         console.log("Error submitting basic details:", error);
@@ -124,7 +125,7 @@ export class AuctionComponent implements OnInit {
         this.auctionId = auctionId;
 
         this.submitGuidePrice(this.auctionId);
-
+        this.snackBar.open('Auction details added successfully!', 'Close', { duration: 5000 });
         // Proceed to the next step
       }, (error) => {
         console.log("Error submitting auction details:", error);
@@ -153,6 +154,7 @@ export class AuctionComponent implements OnInit {
 
         this.guidePriceId = guidePriceId;
         this.addMaterial(this.guidePriceId);
+        this.snackBar.open('Guide price details added successfully!', 'Close', { duration: 5000 });
         // Proceed to the next step
       }, (error) => {
         console.log("Error submitting guide price details:", error);
@@ -191,6 +193,10 @@ export class AuctionComponent implements OnInit {
 
 handleSubmit() {
   this.snackBar.open('Auction added successfully!', 'Close', { duration: 5000 });
-  this.router.navigate(['/caprofile']);
+  this.router.navigate(['/claim-review']);
+}
+
+navigateToReview() {
+  this.router.navigate(['claim-review']);
 }
 }

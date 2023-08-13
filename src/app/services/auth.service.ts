@@ -12,6 +12,9 @@ import { addclaim } from '../models/claimagent/addclaim';
 import { addauctiondetail } from '../models/auction/addauctiondetail';
 import { addguideprice } from '../models/auction/addguideprice';
 import { addmaterialcost } from '../models/auction/addmaterialcost';
+import { PeriodicElement } from '../models/claimagent/manageClaims';
+import { manageAuctions } from '../models/claimagent/manageAuctions';
+import { ClaimReview } from '../models/claimagent/claimReview';
 
 @Injectable({
   providedIn: 'root'
@@ -72,6 +75,22 @@ export class AuthService {
 
   getcaprofile(): Observable<any> {
     return this.http.get<any>(this.baseUrl + 'api/ClaimsAgent/Get Profile', this.httpOptions);
+  }
+
+  public updatecadetails(profileData: any): Observable<any> {
+    return this.http.put<any>(this.baseUrl + "api/ClaimsAgent/Update Profile", profileData, this.httpOptions);
+  }
+
+  public cagetclaims(): Observable<PeriodicElement[]> {
+    return this.http.get<PeriodicElement[]>(this.baseUrl + 'api/Claims/GetAllClaims', this.httpOptions);
+  }
+
+  cagetauctions(): Observable<manageAuctions[]> {
+    return this.http.get<manageAuctions[]>(this.baseUrl + 'api/Auction/GetAllAuctions', this.httpOptions);
+  }
+
+  getclaimbyid(claimId: string): Observable<any> {
+    return this.http.get<any>(this.baseUrl + 'api/Claims/Get Claim by Id', this.httpOptions);
   }
 
   // Adding an auction 

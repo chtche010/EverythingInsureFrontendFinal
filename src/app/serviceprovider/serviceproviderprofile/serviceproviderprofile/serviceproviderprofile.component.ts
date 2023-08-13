@@ -1,6 +1,8 @@
 import { Token } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-serviceproviderprofile',
@@ -11,7 +13,7 @@ export class ServiceproviderprofileComponent implements OnInit {
   userProfile: any;
 
   constructor(
-    private authService: AuthService
+    private authService: AuthService, private formBuilder: FormBuilder, private snackBar: MatSnackBar
   ){}
 
   ngOnInit(): void {
@@ -23,7 +25,7 @@ export class ServiceproviderprofileComponent implements OnInit {
   loadUserProfile(){
     this.authService.getspdetails().subscribe(
       (response) => {
-        this.userProfile = response.data; // Store the user profile data in userProfile
+        this.userProfile = {...response.data}; // Store the user profile data in userProfile
       },
       (error) => {
         console.error('Error fetching user profile:', error);
@@ -58,14 +60,16 @@ export class ServiceproviderprofileComponent implements OnInit {
   // }
 
   updateProfile() {
-    this.authService.updatespdetails(this.userProfile).subscribe(
-      (data) => {
-        //Show success message 
-      },
-      (error) => {
-        console.error('Error updating profile:', error);
-      }
-    );
+      this.authService.updatespdetails(this.userProfile).subscribe(
+        (data) => {
+          console.log('Profile updated successfully:', data);
+          this.loadUserProfile();
+          this.snackBar.open('Your profile has been updated successfully', 'Close', {duration: 3000});
+        },
+        (error) => {
+          console.error('Error updating profile:', error);
+        }
+      );
   }
 }
 

@@ -1,39 +1,19 @@
 .back-link {
-
     display: flex;
-
     align-items: center;
-
-    text-decoration: underline;
-
-    color: #ec0a0a;
-
+    color:black;
     margin-top: 20px;
-
     margin-bottom: 5px;
-
   }
-
- 
 
   .back-link mat-icon {
-
     margin-right: 2px;
-
   }
-
- 
 
   .estimated-duration-field {
-
     width: 300px; /* Adjust the width as needed */
-
   }
 
- 
-
   .add-material-icon {
-
     margin-right: 8px;
-
   }

@@ -1,47 +1,27 @@
-<app-sp-navbar></app-sp-navbar>
-
-<app-sp-sidebar></app-sp-sidebar>
-
- 
 
 <main id="main" class="main">
-
- 
-
   <div class="pagetitle">
-
     <h1>Auction Events</h1>
-
   </div><!-- End Page Title -->
 
+  <div class="profile-icon">
+    <i class="bi bi-person-fill"></i>
+  </div>
+
    <!--Display Auction Events-->
-
    <div class="auction-events-container">
-
     <mat-card *ngFor="let auctionEvent of auctionEvents" (click)="openDialog(auctionEvent)">
 
       <mat-card-header>
-
         <mat-card-title>
-
           {{ auctionEvent.auctionTitle }}
-
         </mat-card-title>
-
         <mat-card-subtitle>
-
           Date: {{ auctionEvent.auctionDate | date }}  <br>
-
           Start Time: {{ auctionEvent.startTime }} |
-
           End Time: {{ auctionEvent.endTime }}
-
         </mat-card-subtitle>
-
       </mat-card-header>
-
     </mat-card>
-
   </div>
-
 </main>

@@ -100,8 +100,7 @@
                                     <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
 
                                         <!-- Profile Edit Form -->
-                                        <!-- <form #profileForm="ngForm" (ngSubmit)="updateProfile()"-->
-                                        <form #profileForm="ngForm"> 
+                                        <form (ngSubmit)="updateProfile()">
                                             <div class="row mb-3">
                                                 <label for="profileImage"
                                                     class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
@@ -121,8 +120,7 @@
                                             <div class="row mb-3">
                                                 <label for="firstName" class="col-md-4 col-lg-3 col-form-label">First name</label>
                                                 <div class="col-md-8 col-lg-9">
-                                                    <input name="firstName" type="text" class="form-control"
-                                                        id="firstName" value="Kevin Anderson">
+                                                    <input name="firstName" type="text" class="form-control" id="firstName" [value]="userProfile.firstName" [(ngModel)]="userProfile.firstName">
                                                 </div>
                                             </div>
 
@@ -130,16 +128,7 @@
                                                 <label for="lastName"
                                                     class="col-md-4 col-lg-3 col-form-label">Last name</label>
                                                 <div class="col-md-8 col-lg-9">
-                                                    <input name="lastName" type="text" class="form-control" id="lastName"
-                                                        value="Lueilwitz, Wisoky and Leuschke">
-                                                </div>
-                                            </div>
-
-                                            <div class="row mb-3">
-                                                <label for="email" class="col-md-4 col-lg-3 col-form-label">Email</label>
-                                                <div class="col-md-8 col-lg-9">
-                                                    <input name="email" type="text" class="form-control" id="email"
-                                                        value="Web Designer">
+                                                    <input name="lastName" type="text" class="form-control" id="lastName" [value]="userProfile.lastName" [(ngModel)]="userProfile.lastName">
                                                 </div>
                                             </div>
 
@@ -147,8 +136,7 @@
                                                 <label for="insuranceCompany"
                                                     class="col-md-4 col-lg-3 col-form-label">Insurance company</label>
                                                 <div class="col-md-8 col-lg-9">
-                                                    <input name="insuranceCompany" type="text" class="form-control" id="insuranceCompany"
-                                                        value="USA">
+                                                    <input name="insuranceCompany" type="text" class="form-control" id="insuranceCompany" [value]="userProfile.insuranceCompany" [(ngModel)]="userProfile.insuranceCompany">
                                                 </div>
                                             </div>
 

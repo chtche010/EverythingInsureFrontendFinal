@@ -144,7 +144,7 @@
             <div class="button-container">
               <button mat-raised-button color="primary" matStepperPrevious>Back</button>
               <button mat-raised-button color="primary" (click)="addMaterial(guidePriceId)">Add material</button>
-              <button mat-raised-button color="primary" (click)="handleSubmit()">Submit</button>
+              <!-- <button mat-raised-button color="primary" (click)="getdetails(claimId)">View details</button> -->
             </div>
           </div>
           </form>
@@ -163,6 +163,43 @@
                       </mat-card-content>
                     </mat-card>
                   </div>
+        </mat-step>
+
+        <mat-step>
+          <ng-template matStepLabel>Display data</ng-template>
+          <div class="data-container">
+            <h2>Claim Details</h2>
+            <p><strong>Customer Name:</strong> {{ claimDetailsForm.value.customerName }}</p>
+            <p><strong>Customer Email:</strong> {{ claimDetailsForm.value.customerEmail }}</p>
+            <p><strong>Vehicle Make:</strong> {{ claimDetailsForm.value.vehicleMake }}</p>
+            <p><strong>Vehicle Model:</strong> {{ claimDetailsForm.value.vehicleModel }}</p>
+            <p><strong>Model Year:</strong> {{ claimDetailsForm.value.modelYear }}</p>
+            <p><strong>MM Code:</strong> {{ claimDetailsForm.value.mmCode }}</p>
+            <p><strong>Damage Description:</strong> {{ claimDetailsForm.value.damageDescription }}</p>
+            <p><strong>Customer Suburb:</strong> {{ claimDetailsForm.value.customerSurbub }}</p>
+            <p><strong>Customer City:</strong> {{ claimDetailsForm.value.customerCity }}</p>
+            <p><strong>Customer Province:</strong> {{ claimDetailsForm.value.customerProvince }}</p>
+        
+            <h2>Auction Details</h2>
+            <p><strong>Auction Date:</strong> {{ auctionForm.value.auctionDate }}</p>
+            <p><strong>Start Time:</strong> {{ auctionForm.value.startTime }}</p>
+            <p><strong>End Time:</strong> {{ auctionForm.value.endTime }}</p>
+        
+            <h2>Guide Price</h2>
+            <p><strong>Labour Cost:</strong> {{ guidePriceForm.value.labourCost }}</p>
+            <p><strong>Estimated Duration:</strong> {{ guidePriceForm.value.estimatedDuration }}</p>
+        
+            <h2>Material Cost</h2>
+            <div *ngFor="let material of addedMaterials">
+              <p><strong>Material Name:</strong> {{ material.materialName }}</p>
+              <p><strong>Description:</strong> {{ material.materialDescription }}</p>
+              <p><strong>Cost:</strong> {{ material.cost }}</p>
+              <p><strong>Quantity:</strong> {{ material.quantity }}</p>
+            </div>
+          </div>
+          <div class="button-container">
+            <button mat-raised-button color="primary" matStepperPrevious>Back</button>
+          </div>
         </mat-step>
 
         <!-- Confirmation -->

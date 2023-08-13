@@ -1,0 +1,28 @@
+
+ /* .profile-container {
+   
+  }
+  
+  .dashboard-container {
+    
+  }
+  
+  .section {
+   
+  } */
+  
+  .cards-container {
+    height: 300px;
+    overflow-y: scroll;
+  }
+  
+  .card {
+    background-color: #f0f0f0;
+    margin-bottom: 10px;
+    padding: 10px;
+  }
+  
+  /* .arrow {
+
+  } */
+  
