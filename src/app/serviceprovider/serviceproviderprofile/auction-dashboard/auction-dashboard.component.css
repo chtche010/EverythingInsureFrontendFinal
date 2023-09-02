@@ -15,75 +15,45 @@ body {
 
 body {
   margin: 0;
-
   font-family: "Montserrat", sans-serif;
 }
-
-
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap');
 
 :root {
-
   scroll-behavior: smooth;
-
 }
-
-
 
 body {
-
   font-family: "Montserrat", sans-serif;
-
   background: #f6f9ff;
-
   color: #444444;
-
 }
-
-
 
 a {
-
   color: #444444;
-
   text-decoration: none;
-
 }
-
-
 
 a:hover {
-
   color: #717ff5;
-
   text-decoration: none;
-
 }
 
-
-
 h1,
-
 h2,
-
 h3,
-
 h4,
-
 h5,
-
 h6 {
-
   font-family: "Montserrat", sans-serif;
-
   color: #444444;
   font-weight: 800;
 }
 
 
 .background-container {
-  background-image: url("src/assets/Images/background1.png");
+  background-image: url("src/assets/Images/background4.png");
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -103,76 +73,43 @@ h6 {
   transition: all 0.3s;
 }
 
-
-
 @media (max-width: 1199px) {
-
   #main {
-
     padding: 20px;
-
     margin-left: 0;
-
   }
-
 }
 
-
 .auction-events-container {
-
   width: 100%;
-
   margin-top: 30px;
-
   display: grid;
-
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-
   grid-gap: 20px;
-
 }
 
 .auction-events-container mat-card {
-
   width: 100%;
-
   margin: 0px;
-
   cursor: pointer;
-
 }
-
-
 
 .auction-events-container mat-card-header {
-
   display: flex;
-
   flex-direction: column;
-
 }
-
-
 
 .auction-events-container mat-card-title {
-
-  font-size: 18px;
+  font-size: 16px;
   margin-left: 8px;
-
-
 }
 
-
-
 .auction-events-container mat-card-subtitle {
-
-  font-size: 14px;
-
+  font-size: 12px;
   margin-top: 10px;
   margin-left: 8px;
   margin-bottom: 5px;
   color: #666;
-
 }
 
 .auction-card {
@@ -226,7 +163,8 @@ h6 {
   margin-right: 20px;
   margin-left: 20px;
   height: 1px;
-  background-color: #d6d5d5cf; /* Change the color of the divider line if needed */
+  background-color: #d6d5d5cf;
+  /* Change the color of the divider line if needed */
 }
 
 .title-section {

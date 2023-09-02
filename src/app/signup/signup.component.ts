@@ -115,6 +115,7 @@ export class SignupComponent implements OnInit {
     if (this.Basicform.valid) {
       this.authService.submitBasicDetails(this.Basicform.value).subscribe(() => {
         console.log("Basic details submitted successfully!");
+        this.snackBar.open('Basic details added successfully.', 'Close', { duration: 3000 });
         // Proceed to the next step
       }, (error) => {
         console.log("Error submitting basic details:", error);
@@ -128,6 +129,7 @@ export class SignupComponent implements OnInit {
     if (this.Addressform.valid) {
       this.authService.submitAddressDetails(this.Addressform.value).subscribe(() => {
         console.log("Address details submitted successfully!");
+        this.snackBar.open('Address details added successfully.', 'Close', { duration: 3000 });
         // Proceed to the next step
       }, (error) => {
         console.log("Error submitting address details:", error);

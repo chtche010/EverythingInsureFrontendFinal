@@ -7,11 +7,29 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./sp-navbar.component.css']
 })
 export class SpNavbarComponent {
-
+  userProfile: any;
   constructor(private authService: AuthService) { }
   
   logout() {
     this.authService.logout();
+  }
+
+  ngOnInit(): void {
+    this.loadUserProfile();
+    //this.loadAddress(this.serviceProviderId);
+    //this.loadBankDetails();
+  }
+
+  loadUserProfile(){
+    this.authService.getspdetails().subscribe(
+      (response) => {
+        this.userProfile = {...response.data}; // Store the user profile data in userProfile
+        console.log(response);
+      },
+      (error) => {
+        console.error('Error fetching user profile:', error);
+      }
+    );
   }
 
 }

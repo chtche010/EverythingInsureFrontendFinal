@@ -1,102 +1,79 @@
 import { MatDialog } from '@angular/material/dialog';
-
 import { Component, OnInit } from '@angular/core';
-
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
 import { Observable } from 'rxjs';
-
-//import { ApiService } from 'src/app/services/api.service';
-
-//mock api is below, replace with real!
-import { ApiServiceMock } from './api.service.mock';//<-----replace with real
-
 import { AuctionDialogComponent } from '../auction-dialog/auction-dialog.component';
-
-
-
-
+import { AuthService } from 'src/app/services/auth.service';
+import { GetAllAuctions } from 'src/app/models/auction-dashboard/getallauctions';
 
 @Component({
-
   selector: 'app-auction-dashboard',
-
   templateUrl: './auction-dashboard.component.html',
-
   styleUrls: ['./auction-dashboard.component.css']
-
 })
 
-
-
 export class AuctionDashboardComponent implements OnInit {
-
-  auctionEvents: any[] = []; // <-----------Update this type based on your DTO structure
+  auctionEvents: GetAllAuctions[] = [];
   favoriteEvents: any[] = []; //array to store favorite events
   selectedAuction: any; // <------------Update this type based on your DTO structure
   formSubmitted = false;
 
-
-
-  constructor(private apiService: ApiServiceMock, private formBuilder: FormBuilder, public dialog: MatDialog) { } //<--------replace mockapi here
-
-
+  constructor(
+    private formBuilder: FormBuilder, 
+    public dialog: MatDialog,
+    private authService: AuthService) { } 
 
   openDialog(auctionEvent: any): void {
-
+    console.log('AuctionId:', auctionEvent.auctionId);
+    
     const dialogRef = this.dialog.open(AuctionDialogComponent, {
-
       width: '80%',
-
       enterAnimationDuration: '500ms',
-
-      data: auctionEvent
-
+      data: { auctionEvent, auctionId: auctionEvent.auctionId }
     });
 
-
-
     dialogRef.afterClosed().subscribe(
-
       result => console.log('The dialog was closed', result)
-
       // You can do something with the result here if needed
-
     );
-
   }
-
-
-
-
 
   ngOnInit(): void {
-
-    this.fetchAuctionEvents();
-
+    this.getAuctionEvents();
   }
-
-
-
-  fetchAuctionEvents() {
-
-    this.apiService.getAuctionEvents().subscribe( //<------replace API here
-
-      (response: any) => { // Explicitly type the response as an array of any
-
-        this.auctionEvents = response;
-
+  
+  getAuctionEvents(): void {
+    this.authService.getUpcomingAuctions().subscribe(
+      (response: any) => {
+        console.log('Upcoming auctions', response.data);
+        this.auctionEvents = response.data;
       },
-
-      (error: any) => {
-
-        console.error('Error fetching auction events:', error);
-
+      error => {
+        console.log('Error fetching upcoming auctions:', error);
       }
-
     );
-
+  
+    this.authService.getOpenAuctions().subscribe(
+      openAuctions => {
+        console.log('Open Auctions:', openAuctions);
+        this.auctionEvents = this.auctionEvents.concat(openAuctions);
+      },
+      error => {
+        console.log('Error fetching open auctions:', error);
+      }
+    );
+  
+    this.authService.getClosedAuctions().subscribe(
+      closedAuctions => {
+        console.log('Closed Auctions:', closedAuctions);
+        this.auctionEvents = this.auctionEvents.concat(closedAuctions);
+      },
+      error => {
+        console.log('Error fetching closed auctions:', error);
+      }
+    );
   }
+
   favoriteEvent(event: any, auctionEvent: any) {
     event.stopPropagation();//this line prevents the event from bubbling up
     if (this.isEventFavorite(auctionEvent)) {

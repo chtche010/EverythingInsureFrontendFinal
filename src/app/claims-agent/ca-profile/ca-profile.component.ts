@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-ca-profile',
@@ -9,7 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class CaProfileComponent implements OnInit {
   userProfile: any; 
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
     this.getcaprofile();
@@ -24,6 +25,19 @@ export class CaProfileComponent implements OnInit {
       }, 
       (error) => {
         console.log('Error returning claim agent profile', error);
+      }
+    );
+  }
+
+  updateProfile() {
+    this.authService.updatecadetails(this.userProfile).subscribe(
+      (data) => {
+        console.log('Profile updated successfully:', data);
+        this.getcaprofile();
+        this.snackBar.open('Your profile has been updated successfully', 'Close', {duration: 3000});
+      },
+      (error) => {
+        console.error('Error updating profile:', error);
       }
     );
   }

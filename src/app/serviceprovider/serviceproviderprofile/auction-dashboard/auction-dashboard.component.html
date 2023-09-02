@@ -40,8 +40,9 @@
         <div class="divider-line"></div> 
         <mat-card-subtitle>
           <i class="bi bi-calendar4"></i> {{ auctionEvent.auctionDate | date }} <br>
-          Start Time: {{ auctionEvent.startTime }} |
-          End Time: {{ auctionEvent.endTime }}
+          Start Time: {{ auctionEvent.startTime | date:'shortTime' }} |
+          End Time: {{ auctionEvent.endTime | date:'shortTime'}} <br>
+          Status: {{ auctionEvent.auctionStatus}}
         </mat-card-subtitle>
       </mat-card>
     </div>

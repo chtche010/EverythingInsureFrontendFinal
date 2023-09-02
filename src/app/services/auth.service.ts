@@ -12,6 +12,11 @@ import { addclaim } from '../models/claimagent/addclaim';
 import { addauctiondetail } from '../models/auction/addauctiondetail';
 import { addguideprice } from '../models/auction/addguideprice';
 import { addmaterialcost } from '../models/auction/addmaterialcost';
+import { PeriodicElement } from '../models/claimagent/manageClaims';
+import { manageAuctions } from '../models/claimagent/manageAuctions';
+import { ClaimReview } from '../models/claimagent/claimReview';
+import { GetAllAuctions } from '../models/auction-dashboard/getallauctions';
+import { getSingleAuction } from '../models/serviceprovider/getSingleAuction';
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +36,10 @@ export class AuthService {
   private guidePriceId!: number;
   private guidePriceIdSubject = new BehaviorSubject<number>(0);
   guidePriceId$ = this.guidePriceIdSubject.asObservable();
+
+  private serviceProviderId!: number;
+  private serviceProviderIdSubject = new BehaviorSubject<number>(0);
+  serviceProviderId$ = this.serviceProviderIdSubject.asObservable();
 
   private httpOptions = {
       headers: new HttpHeaders().set(
@@ -72,6 +81,22 @@ export class AuthService {
 
   getcaprofile(): Observable<any> {
     return this.http.get<any>(this.baseUrl + 'api/ClaimsAgent/Get Profile', this.httpOptions);
+  }
+
+  public updatecadetails(profileData: any): Observable<any> {
+    return this.http.put<any>(this.baseUrl + "api/ClaimsAgent/Update Profile", profileData, this.httpOptions);
+  }
+
+  public cagetclaims(): Observable<PeriodicElement[]> {
+    return this.http.get<PeriodicElement[]>(this.baseUrl + 'api/Claims/GetAllClaims', this.httpOptions);
+  }
+
+  cagetauctions(): Observable<manageAuctions[]> {
+    return this.http.get<manageAuctions[]>(this.baseUrl + 'api/Auction/GetAllAuctions', this.httpOptions);
+  }
+
+  getclaimbyid(claimId: string): Observable<any> {
+    return this.http.get<any>(this.baseUrl + 'api/Claims/Get Claim by Id', this.httpOptions);
   }
 
   // Adding an auction 
@@ -128,8 +153,25 @@ export class AuthService {
     return this.http.get<any>(this.baseUrl + "api/ServiceProvider/GetProfile", this.httpOptions);
   }
 
+  public getspaddress(serviceProviderId: number): Observable<any> {
+    return this.http.get<any>(this.baseUrl + "api/ServiceProvider/Get Address by Id", this.httpOptions);
+  }
+
   public updatespdetails(profileData: any): Observable<any> {
     return this.http.put<any>(this.baseUrl + "api/ServiceProvider/UpdateProfile", profileData, this.httpOptions);
+  }
+
+  setserviceProviderId(serviceProviderId: number): void {
+    this.claimId = serviceProviderId;
+  }
+
+  getserviceProviderId(): number {
+    return this.serviceProviderId;
+  }
+
+  getAddressById(addressId: number): Observable<any> {
+    const url = `${this.baseUrl}api/ServiceProvider/GetSingleAuctionDetail?id=${addressId}`;
+    return this.http.get<any>(url, this.httpOptions);
   }
 
   // Submitting the sign up form 
@@ -143,7 +185,26 @@ export class AuthService {
   }
 
   submitBankingDetails(bankingDetails: addserviceproviderbank): Observable<ServiceResponse<any>> {
-    return this.http.post<ServiceResponse<any>>(this.baseUrl + "api/ServiceProvider/Add Bank Details", bankingDetails, this.httpOptions)
+    return this.http.post<ServiceResponse<any>>(this.baseUrl + "api/ServiceProvider/Add Bank Details", bankingDetails, this.httpOptions);
+  }
+
+  // Getting auctions 
+
+  public getUpcomingAuctions(): Observable<GetAllAuctions[]> {
+    return this.http.get<GetAllAuctions[]>(this.baseUrl + 'api/ServiceProvider/GetUpcomingAuctions', this.httpOptions);
+  }
+
+  public getOpenAuctions(): Observable<GetAllAuctions[]> {
+    return this.http.get<GetAllAuctions[]>(this.baseUrl + 'api/ServiceProvider/GetOpenAuctions', this.httpOptions);
+  }
+
+  public getClosedAuctions(): Observable<GetAllAuctions[]> {
+    return this.http.get<GetAllAuctions[]>(this.baseUrl + 'api/ServiceProvider/GetClosedAuctions', this.httpOptions);
+  }
+
+  getSingleAuction(auctionId: number): Observable<getSingleAuction> {
+    const url = `${this.baseUrl}api/ServiceProvider/GetSingleAuctionDetail?id=${auctionId}`;
+    return this.http.get<getSingleAuction>(url, this.httpOptions);
   }
 }
 

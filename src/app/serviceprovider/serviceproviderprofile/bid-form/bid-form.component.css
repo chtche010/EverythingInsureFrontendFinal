@@ -6,41 +6,30 @@
   min-height: 100vh;
 }
 
+.container {
+  margin-top: 100px;
+  margin-left: 330px;
+}
+
 .back-link {
-
   display: flex;
-
   align-items: center;
-
   text-decoration: underline;
-
   color: #ec0a0a;
-
   margin-top: 20px;
-
   margin-bottom: 5px;
   font-weight: 500;
 }
 
-
-
 .back-link mat-icon {
-
   margin-right: 2px;
 }
 
-
 .estimated-duration-field {
-
   width: 300px;
   /* Adjust the width as needed */
-
 }
 
-
-
 .add-material-icon {
-
   margin-right: 8px;
-
 }

@@ -4,6 +4,7 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { Router } from '@angular/router';
 import { initialsignup } from '../models/initialsignup.model';
 import { AuthService } from '../services/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 interface roles {
   value: string;
@@ -24,11 +25,13 @@ export class InitialsignupComponent implements OnInit {
     { value: 'ClaimsAgent', viewValue: 'Claims agent' },
     { value: 'ServiceProvider', viewValue: 'Service provider' },
   ];
+  snackBar: any;
 
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private matSnackBar: MatSnackBar,
     ) {}
 
     register(InitialSignUp: initialsignup) {
@@ -53,7 +56,7 @@ export class InitialsignupComponent implements OnInit {
 
 
   visible: boolean = true;
-  changetype:boolean =true;
+  changetype: boolean = true;
 
   confirmVisible: boolean = true;
   confirmChangetype: boolean = true;
