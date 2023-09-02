@@ -27,6 +27,8 @@ import { AdminmanageauctionComponent } from './admin/manageauction/adminmanageau
 import { ManagebidComponent } from './admin/managebid/managebid/managebid.component';
 import { ManagecaComponent } from './admin/manageca/manageca/manageca.component';
 import { ManagespComponent } from './admin/managesp/managesp/managesp.component';
+//forgot password
+import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
@@ -54,7 +56,8 @@ const routes: Routes = [
   { path: 'managebids', component: ManagebidComponent},
   { path: 'manageca', component: ManagecaComponent},
   { path: 'managesp', component: ManagespComponent},
-  { path: 'bid-form', component: BidFormComponent}
+  { path: 'bid-form', component: BidFormComponent},
+  { path: 'forgotpassword', component: ForgotpasswordComponent}
 ];
 
 @NgModule({
