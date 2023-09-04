@@ -10,7 +10,10 @@ import { ResetPasswordService } from '../services/reset-password.service';
 })
 export class ForgotpasswordComponent implements OnInit {
 forgotPasswordForm!: FormGroup;
-constructor(private dialogRef: MatDialogRef<ForgotpasswordComponent>, private resetService: ResetPasswordService){}
+constructor(
+  private dialogRef: MatDialogRef<ForgotpasswordComponent>, 
+  private resetService: ResetPasswordService
+  ){}
 
 ngOnInit(): void {
   this.forgotPasswordForm = new FormGroup({
@@ -25,10 +28,11 @@ sendResetLink(): void {
   .subscribe({
     next:(res)=>{
       this.dialogRef.close();
+      console.log("success");
 
     }, 
     error:(err)=>{
-      console.log(err)
+      console.log(err);
   
     }
   })
