@@ -11,7 +11,7 @@ export class ResetPasswordService {
 
   sendResetPaswordLink(email: string)
   {
-    return this.http.post<any>(this.baseUrl + 'Auth/sendResetEmai', {})
+    return this.http.post<any>('http://localhost:5184/Auth/sendResetEmail', {})
 
   }
 
