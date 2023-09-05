@@ -29,6 +29,8 @@ import { ManagecaComponent } from './admin/manageca/manageca/manageca.component'
 import { ManagespComponent } from './admin/managesp/managesp/managesp.component';
 //forgot password
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
+import { ResetPassword } from './models/resetPassword.model';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
@@ -48,6 +50,7 @@ const routes: Routes = [
   { path: 'sp-activity', component: SpActivityComponent},
   { path: 'serviceproviderprofile', component: ServiceproviderprofileComponent},
   { path: 'auction-dashboard', component: AuctionDashboardComponent},
+  { path: 'reset', component: ResetPasswordComponent},
 
   //admin 
   { path: 'admin-nav-bar', component: AdminNavBarComponent},
