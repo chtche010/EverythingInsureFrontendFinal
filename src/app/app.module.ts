@@ -64,6 +64,10 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { FormArray } from '@angular/forms';
 import { BidFormComponent } from './serviceprovider/serviceproviderprofile/bid-form/bid-form.component';
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
+import { OtpInputComponent } from './otp-input/otp-input.component';
+import { ChangepasswordComponent } from './changepassword/changepassword.component';
+import { SpReportDashComponent } from './reporting/sp-report-dash/sp-report-dash.component';
+import { CaReportDashComponent } from './reporting/ca-report-dash/ca-report-dash.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 const routes: Routes = [
@@ -104,8 +108,7 @@ const routes: Routes = [
     AuctionDialogComponent,
     AuctionDashboardComponent,
     BidFormComponent,
-    ForgotpasswordComponent,
-    ResetPasswordComponent
+    ForgotpasswordComponent
   ],
   imports: [
     BrowserModule,
