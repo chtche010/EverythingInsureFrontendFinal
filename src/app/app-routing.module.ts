@@ -30,6 +30,8 @@ import { ManagespComponent } from './admin/managesp/managesp/managesp.component'
 //forgot password
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 import { ChangepasswordComponent } from './changepassword/changepassword.component';
+import { SpReportDashComponent } from './reporting/sp-report-dash/sp-report-dash.component';
+import { CaReportDashComponent } from './reporting/ca-report-dash/ca-report-dash.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
@@ -60,6 +62,8 @@ const routes: Routes = [
   { path: 'bid-form', component: BidFormComponent},
   { path: 'forgotpassword', component: ForgotpasswordComponent},
   { path: 'changepassword', component: ChangepasswordComponent},
+  { path: 'sp-report-dash', component: SpReportDashComponent},
+  { path: 'ca-report-dash',component: CaReportDashComponent},
 ];
 
 @NgModule({

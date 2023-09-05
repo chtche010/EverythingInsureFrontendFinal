@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-changepassword',
   templateUrl: './changepassword.component.html',
-  styleUrls: ['./changepassword.component.css']
+  styleUrls: ['./changepassword.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class ChangepasswordComponent implements OnInit {
   changePasswordForm!: FormGroup;

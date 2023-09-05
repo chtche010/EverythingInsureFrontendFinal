@@ -66,6 +66,8 @@ import { BidFormComponent } from './serviceprovider/serviceproviderprofile/bid-f
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 import { OtpInputComponent } from './otp-input/otp-input.component';
 import { ChangepasswordComponent } from './changepassword/changepassword.component';
+import { SpReportDashComponent } from './reporting/sp-report-dash/sp-report-dash.component';
+import { CaReportDashComponent } from './reporting/ca-report-dash/ca-report-dash.component';
 
 const routes: Routes = [
   { path: 'signup', component: SignupComponent },
@@ -107,7 +109,9 @@ const routes: Routes = [
     BidFormComponent,
     ForgotpasswordComponent,
     OtpInputComponent,
-    ChangepasswordComponent
+    ChangepasswordComponent,
+    SpReportDashComponent,
+    CaReportDashComponent
   ],
   imports: [
     BrowserModule,
