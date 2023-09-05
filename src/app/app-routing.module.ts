@@ -29,6 +29,7 @@ import { ManagecaComponent } from './admin/manageca/manageca/manageca.component'
 import { ManagespComponent } from './admin/managesp/managesp/managesp.component';
 //forgot password
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
+import { ChangepasswordComponent } from './changepassword/changepassword.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
@@ -57,7 +58,8 @@ const routes: Routes = [
   { path: 'manageca', component: ManagecaComponent},
   { path: 'managesp', component: ManagespComponent},
   { path: 'bid-form', component: BidFormComponent},
-  { path: 'forgotpassword', component: ForgotpasswordComponent}
+  { path: 'forgotpassword', component: ForgotpasswordComponent},
+  { path: 'changepassword', component: ChangepasswordComponent},
 ];
 
 @NgModule({

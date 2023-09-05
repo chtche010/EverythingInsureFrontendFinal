@@ -64,6 +64,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { FormArray } from '@angular/forms';
 import { BidFormComponent } from './serviceprovider/serviceproviderprofile/bid-form/bid-form.component';
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
+import { OtpInputComponent } from './otp-input/otp-input.component';
+import { ChangepasswordComponent } from './changepassword/changepassword.component';
 
 const routes: Routes = [
   { path: 'signup', component: SignupComponent },
@@ -103,7 +105,9 @@ const routes: Routes = [
     AuctionDialogComponent,
     AuctionDashboardComponent,
     BidFormComponent,
-    ForgotpasswordComponent
+    ForgotpasswordComponent,
+    OtpInputComponent,
+    ChangepasswordComponent
   ],
   imports: [
     BrowserModule,
