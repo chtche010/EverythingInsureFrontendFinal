@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ResetPassword } from '../models/resetPassword.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ConfirmPasswordValidator } from '../helpers/confirmPassword.validator';
+import { ActivatedRoute, Router } from '@angular/router';
+import ValidateForm from '../helpers/validationform';
+import { ResetPasswordService } from '../services/reset-password.service';
 
 @Component({
   selector: 'app-reset-password',
@@ -10,17 +14,53 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class ResetPasswordComponent implements OnInit {
   resetPasswordForm!: FormGroup;
   emailToken!: string;
+  emailToReset!: string;
   resetPasswordObj = new ResetPassword();
   passwordVisible: boolean = true;
   authService: any;
 
-  constructor(private fb: FormBuilder){ }
+  constructor(private fb: FormBuilder, 
+    private router: Router,
+    private activateRoute : ActivatedRoute, 
+    private resetService: ResetPasswordService){ }
 
   ngOnInit(): void {
     this.resetPasswordForm = this.fb.group({
       password: [null, Validators.required],
       confirmPassword: [null, Validators.required]
+    }, {
+      validator: ConfirmPasswordValidator("password", "confirmPassword")
+    });
+
+    this.activateRoute.queryParams.subscribe(val=>{
+      this.emailToReset= val['email'];
+      let uriToken = val['code'];
+
+
+      this.emailToken = uriToken.replace(/ /g, '+')
+      console.log(this.emailToken);
+      console.log(this.emailToReset);
     })
+  }
+
+  reset (){
+    if(this.resetPasswordForm.valid){
+      this.resetPasswordObj.email = this.emailToReset
+      this.resetPasswordObj.newPassword = this.resetPasswordForm.value.password;
+      this.resetPasswordObj.confirmPassword = this.resetPasswordForm.value.confirmPassword;
+      this.resetPasswordObj.emailToken = this.emailToken;
+
+      this.resetService.resetPassword(this.resetPasswordObj)
+      .subscribe({
+        next: (res)=>{
+        },
+        error: (err)=>{
+
+        }
+      })
+    } else {
+      ValidateForm.validateAllFormFields(this.resetPasswordForm);
+    }
   }
 
   
@@ -39,33 +79,11 @@ export class ResetPasswordComponent implements OnInit {
         accountType: '' // Add the accountType property here
       };
 
-
-      // this.authService.login(loginObject).subscribe(
-      //   response => {
-      //     // Handle successful login
-      //     console.log(response);
-      //     localStorage.setItem("authToken", JSON.stringify(response))
-      //     // Redirect to the appropriate page based on the user's role or perform any other actions
-      //     const decodedToken = this.jwtHelper.decodeToken(response.data);
-      //     console.log(decodedToken);
-      //     if (decodedToken.role === 'Administrator') {
-      //       this.router.navigate(['/adminprofile']);
-      //     } else if (decodedToken.role === 'ServiceProvider') {
-      //       this.router.navigate(['/serviceproviderprofile']);
-      //     } else if (decodedToken.role === 'ClaimsAgent') {
-      //       this.router.navigate(['/caprofile']);
-      //     } else {
-      //       this.router.navigate(['/login']);
-      //     }
-      //   },
-      //   error => {
-      //     // Handle login error
-      //     console.error(error);
-      //     // Display an error message to the user or perform any other actions
-      //   }
       
     }
   }
+
+
 }
 
 
