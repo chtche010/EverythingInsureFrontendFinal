@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
+import { ResetPasswordService } from '../services/reset-password.service';
 //put API service here
 @Component({
   selector: 'app-forgotpassword',
@@ -8,6 +10,10 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class ForgotpasswordComponent implements OnInit {
 forgotPasswordForm!: FormGroup;
+constructor(
+  private dialogRef: MatDialogRef<ForgotpasswordComponent>, 
+  private resetService: ResetPasswordService
+  ){}
 
 ngOnInit(): void {
   this.forgotPasswordForm = new FormGroup({
@@ -17,7 +23,19 @@ ngOnInit(): void {
 
 sendResetLink(): void {
   const email = this.forgotPasswordForm.get('email')?.value ?? '';
-   // Implement the logic to send the reset link to the user's email.
-     // This typically involves calling a service method that sends a HTTP request to your server.
+  console.log(email);
+  this.resetService.sendResetPaswordLink(email)
+  .subscribe({
+    next:(res)=>{
+      this.dialogRef.close();
+      console.log("success");
+
+    }, 
+    error:(err)=>{
+      console.log(err);
+  
+    }
+  })
+ 
 }
 }
