@@ -25,7 +25,8 @@
       <mat-form-field appearance="fill" style="width: 100%">
         <mat-label for="password">Password</mat-label>
         <input matInput formControlName="password" required id="password" name="password" [type]="changetype?'password':'text'">
-        <span class="eyeicon" (click)="hideShowPass()"><i [ngClass]="visible?'fa fa-eye-slash':'fa fa-eye'"></i>
+        <span class="eyeicon" (click)="hideShowPass()">
+          <i [ngClass]="visible ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
         </span>
       </mat-form-field>
 
@@ -35,8 +36,9 @@
 
       <mat-form-field appearance="fill" style="width: 100%">
         <mat-label for="confirmPassword">Confirm Password</mat-label>
-        <input matInput formControlName="confirmPassword" required id="confirmPassword" name="confirmPassword" type="password">
-        <span class="eyeicon" (click)="hideShowConfirmPass()"><i [ngClass]="confirmVisible?'fa fa-eye-slash':'fa fa-eye'"></i>
+        <input matInput formControlName="confirmPassword" required id="confirmPassword" name="confirmPassword" [type]="confirmChangetype?'password':'text'">
+        <span class="eyeicon" (click)="hideShowConfirmPass()">
+          <i [ngClass]="confirmVisible ? 'fa fa-eye-slash' : 'fa fa-eye'"></i>
         </span>
       </mat-form-field>
 

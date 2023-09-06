@@ -54,9 +54,9 @@ export class AuctionDashboardComponent implements OnInit {
     );
   
     this.authService.getOpenAuctions().subscribe(
-      openAuctions => {
-        console.log('Open Auctions:', openAuctions);
-        this.auctionEvents = this.auctionEvents.concat(openAuctions);
+      (response: any) => {
+        console.log('Open Auctions:', response.data);
+        this.auctionEvents = response.data;
       },
       error => {
         console.log('Error fetching open auctions:', error);
@@ -64,9 +64,9 @@ export class AuctionDashboardComponent implements OnInit {
     );
   
     this.authService.getClosedAuctions().subscribe(
-      closedAuctions => {
-        console.log('Closed Auctions:', closedAuctions);
-        this.auctionEvents = this.auctionEvents.concat(closedAuctions);
+      (response: any) => {
+        console.log('Closed Auctions:', response.data);
+        this.auctionEvents = response.data;
       },
       error => {
         console.log('Error fetching closed auctions:', error);
