@@ -1,0 +1,16 @@
+<body>
+    <div class="form-wrapper">
+      <form [formGroup]="otpFrom" class="container">
+  
+        <div class="logo-container">
+          <a routerLink="/"> <img src="assets/Images/login.png" alt="Logo"></a>
+        </div>
+  
+        <mat-form-field appearance="fill" style="width: 100%">
+          <mat-label for="email">OTP</mat-label>
+          <input matInput formControlName="email" required id="email" name="email" type="email">
+        </mat-form-field>
+        <br>
+      </form>
+    </div>
+  </body>

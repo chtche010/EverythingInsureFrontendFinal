@@ -12,8 +12,11 @@ export class ResetPasswordService {
 
   sendResetPaswordLink(email: string)
   {
+    const data = { email: email };
     
-   return this.http.post<any>(`${this.baseUrl}/sendResetEmail/${email}`, {})
+   return this.http.post<any>(`${this.baseUrl}/sendResetEmail/${email}`, {"email": email})
+   //problem with how im passing email
+   //how do i get my URL last part
   }
 
   resetPassword(resetPasswordobj: ResetPassword)

@@ -30,7 +30,7 @@ sendResetLink(): void {
 
 
 
-  this.resetService.sendResetPaswordLink(encodedEmail)
+  this.resetService.sendResetPaswordLink(email)
   .subscribe({
     next:(res)=>{
       this.dialogRef.close();

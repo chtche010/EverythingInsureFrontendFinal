@@ -65,6 +65,7 @@ import { FormArray } from '@angular/forms';
 import { BidFormComponent } from './serviceprovider/serviceproviderprofile/bid-form/bid-form.component';
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { OptComponent } from './opt/opt.component';
 
 const routes: Routes = [
   { path: 'signup', component: SignupComponent },
@@ -105,7 +106,8 @@ const routes: Routes = [
     AuctionDashboardComponent,
     BidFormComponent,
     ForgotpasswordComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    OptComponent
   ],
   imports: [
     BrowserModule,
