@@ -11,9 +11,9 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
@@ -108,7 +108,8 @@ const routes: Routes = [
     AuctionDialogComponent,
     AuctionDashboardComponent,
     BidFormComponent,
-    ForgotpasswordComponent
+    ForgotpasswordComponent,
+    ChangepasswordComponent,
   ],
   imports: [
     BrowserModule,
@@ -117,7 +118,6 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     MatStepperModule,
     ReactiveFormsModule,
-    MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
     MatButtonModule,
@@ -133,7 +133,8 @@ const routes: Routes = [
     MatCardModule,
     NgxMaterialTimepickerModule,
     MatNativeDateModule,
-    MatDialogModule
+    MatDialogModule,
+    MatFormFieldModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
