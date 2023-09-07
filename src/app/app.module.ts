@@ -9,7 +9,7 @@ import { HttpClientModule, HttpContext, HTTP_INTERCEPTORS } from '@angular/commo
 import { SignupComponent } from './signup/signup.component';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormArrayName, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatStepperModule } from '@angular/material/stepper';
@@ -108,7 +108,12 @@ const routes: Routes = [
     AuctionDialogComponent,
     AuctionDashboardComponent,
     BidFormComponent,
-    ForgotpasswordComponent
+    ForgotpasswordComponent,
+    ChangepasswordComponent,
+    SpReportDashComponent,
+    CaReportDashComponent,
+    ResetPasswordComponent,
+    OtpInputComponent,
   ],
   imports: [
     BrowserModule,
@@ -133,7 +138,9 @@ const routes: Routes = [
     MatCardModule,
     NgxMaterialTimepickerModule,
     MatNativeDateModule,
-    MatDialogModule
+    MatDialogModule,
+    MatIconModule,
+    
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
