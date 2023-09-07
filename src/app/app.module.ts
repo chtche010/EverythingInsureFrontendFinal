@@ -36,8 +36,8 @@ import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 //Ben's imports brought across
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ClaimsAgentDashboardComponent } from './claims-agent/claims-agent-dashboard/claims-agent-dashboard.component';
-import { CaSidebarComponent } from './claims-agent/ca-sidebar/ca-sidebar.component';
 import { CaNavbarComponent } from './claims-agent/ca-navbar/ca-navbar.component';
+import { CaSidebarComponent } from './claims-agent/ca-sidebar/ca-sidebar.component';
 import { AuctionComponent } from './claims-agent/auction/auction.component';
 import { CaProfileComponent } from './claims-agent/ca-profile/ca-profile.component';
 import { MatTableModule } from '@angular/material/table';
@@ -88,16 +88,16 @@ const routes: Routes = [
     FAQComponent,
     FooterComponent,
     ClaimsAgentDashboardComponent, 
-    CaNavbarComponent,
-    CaSidebarComponent,
     AuctionComponent,
     CaProfileComponent,
+    CaNavbarComponent,
+    CaSidebarComponent,
     UploadClaimComponent,
     ManageclaimsComponent,
     ManageauctionComponent,
+    SpActivityComponent,
     SpNavbarComponent,
     SpSidebarComponent,
-    SpActivityComponent,
     ServiceproviderprofileComponent,
     AdminNavBarComponent,
     AdminSideBarComponent,
@@ -110,6 +110,9 @@ const routes: Routes = [
     BidFormComponent,
     ForgotpasswordComponent,
     ChangepasswordComponent,
+    ResetPasswordComponent,
+    SpReportDashComponent,
+    CaReportDashComponent,
   ],
   imports: [
     BrowserModule,
