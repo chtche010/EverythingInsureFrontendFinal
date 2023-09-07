@@ -68,6 +68,7 @@ import { OtpInputComponent } from './otp-input/otp-input.component';
 import { ChangepasswordComponent } from './changepassword/changepassword.component';
 import { SpReportDashComponent } from './reporting/sp-report-dash/sp-report-dash.component';
 import { CaReportDashComponent } from './reporting/ca-report-dash/ca-report-dash.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 const routes: Routes = [
   { path: 'signup', component: SignupComponent },
@@ -107,11 +108,7 @@ const routes: Routes = [
     AuctionDialogComponent,
     AuctionDashboardComponent,
     BidFormComponent,
-    ForgotpasswordComponent,
-    OtpInputComponent,
-    ChangepasswordComponent,
-    SpReportDashComponent,
-    CaReportDashComponent
+    ForgotpasswordComponent
   ],
   imports: [
     BrowserModule,

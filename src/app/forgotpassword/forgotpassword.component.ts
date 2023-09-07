@@ -24,16 +24,20 @@ ngOnInit(): void {
 sendResetLink(): void {
   const email = this.forgotPasswordForm.get('email')?.value ?? '';
   console.log(email);
-  this.resetService.sendResetPaswordLink(email)
+
+  const encodedEmail = encodeURIComponent(email);
+  const url = 'http://localhost:5184/Auth/sendResetEmail/${encodedEmail}'
+
+
+
+  this.resetService.sendResetPaswordLink(encodedEmail)
   .subscribe({
     next:(res)=>{
       this.dialogRef.close();
       console.log("success");
-
     }, 
     error:(err)=>{
       console.log(err);
-  
     }
   })
  

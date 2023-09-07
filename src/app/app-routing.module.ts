@@ -32,6 +32,8 @@ import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.compone
 import { ChangepasswordComponent } from './changepassword/changepassword.component';
 import { SpReportDashComponent } from './reporting/sp-report-dash/sp-report-dash.component';
 import { CaReportDashComponent } from './reporting/ca-report-dash/ca-report-dash.component';
+import { ResetPassword } from './models/resetPassword.model';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
@@ -51,6 +53,7 @@ const routes: Routes = [
   { path: 'sp-activity', component: SpActivityComponent},
   { path: 'serviceproviderprofile', component: ServiceproviderprofileComponent},
   { path: 'auction-dashboard', component: AuctionDashboardComponent},
+  { path: 'reset', component: ResetPasswordComponent},
 
   //admin 
   { path: 'admin-nav-bar', component: AdminNavBarComponent},
