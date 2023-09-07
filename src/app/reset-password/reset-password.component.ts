@@ -53,6 +53,8 @@ export class ResetPasswordComponent implements OnInit {
       this.resetService.resetPassword(this.resetPasswordObj)
       .subscribe({
         next: (res)=>{
+          //console.log(this.resetPasswordObj)
+          this.router.navigate(['/login']);
         },
         error: (err)=>{
 

@@ -21,7 +21,16 @@ export class ResetPasswordService {
 
   resetPassword(resetPasswordobj: ResetPassword)
   {
-    return this.http.post<any>(this.baseUrl + '/resetPassword', resetPasswordobj)
 
+    return this.http.post<any>(this.baseUrl + '/resetPassword', {
+    "email":resetPasswordobj.email, 
+    "emailToken":resetPasswordobj.emailToken, 
+    "newPassword":resetPasswordobj.newPassword, 
+    "confirmPassword":resetPasswordobj.confirmPassword })
+
+   // email = '';
+   // emailToken = '';
+    //newPassword = '';
+    //confirmPassword= '';
   }
 }
