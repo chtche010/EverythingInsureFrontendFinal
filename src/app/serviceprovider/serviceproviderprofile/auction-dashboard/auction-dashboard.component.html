@@ -28,16 +28,16 @@
           </div>
         </mat-card-header>
         <div class="title-section">
-        <mat-card-title>
-          {{ auctionEvent.auctionTitle }}
-        </mat-card-title>
-        <mat-card-actions>
-          <button mat-icon-button class="favorite-button" (click)="favoriteEvent($event, auctionEvent)">
-            <mat-icon>{{ isEventFavorite(auctionEvent) ? 'favorite' : 'favorite_border' }}</mat-icon>
-          </button>
-        </mat-card-actions>
+          <mat-card-title>
+            {{ auctionEvent.auctionTitle }}
+          </mat-card-title>
+          <mat-card-actions>
+            <button mat-icon-button class="favorite-button" (click)="favoriteEvent($event, auctionEvent)">
+              <mat-icon>{{ isEventFavorite(auctionEvent) ? 'favorite' : 'favorite_border' }}</mat-icon>
+            </button>
+          </mat-card-actions>
         </div>
-        <div class="divider-line"></div> 
+        <div class="divider-line"></div>
         <mat-card-subtitle>
           <i class="bi bi-calendar4"></i> {{ auctionEvent.auctionDate | date }} <br>
           Start Time: {{ auctionEvent.startTime | date:'shortTime' }} |
@@ -46,6 +46,5 @@
         </mat-card-subtitle>
       </mat-card>
     </div>
-
   </main>
 </div>
