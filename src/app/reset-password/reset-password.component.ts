@@ -50,10 +50,14 @@ export class ResetPasswordComponent implements OnInit {
       this.resetPasswordObj.confirmPassword = this.resetPasswordForm.value.confirmPassword;
       this.resetPasswordObj.emailToken = this.emailToken;
 
+      console.log(this.resetPasswordObj)
+      //this works
+
+
       this.resetService.resetPassword(this.resetPasswordObj)
       .subscribe({
         next: (res)=>{
-          //console.log(this.resetPasswordObj)
+          console.log(this.resetPasswordObj)
           this.router.navigate(['/login']);
         },
         error: (err)=>{
@@ -84,6 +88,8 @@ export class ResetPasswordComponent implements OnInit {
       
     }
   }
+
+  
 
 
 }

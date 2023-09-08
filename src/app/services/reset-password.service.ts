@@ -14,7 +14,7 @@ export class ResetPasswordService {
   {
     const data = { email: email };
     
-   return this.http.post<any>(`${this.baseUrl}/sendResetEmail/${email}`, {"email": email})
+   return this.http.post<any>(`${this.baseUrl}/sendResetEmail/${email}`, {"email": email});
    //problem with how im passing email
    //how do i get my URL last part
   }
@@ -22,15 +22,12 @@ export class ResetPasswordService {
   resetPassword(resetPasswordobj: ResetPassword)
   {
 
-    return this.http.post<any>(this.baseUrl + '/resetPassword', {
+    console.log(resetPasswordobj);
+
+    return this.http.post<any>(this.baseUrl + `/resetPassword`, {
     "email":resetPasswordobj.email, 
     "emailToken":resetPasswordobj.emailToken, 
     "newPassword":resetPasswordobj.newPassword, 
-    "confirmPassword":resetPasswordobj.confirmPassword })
-
-   // email = '';
-   // emailToken = '';
-    //newPassword = '';
-    //confirmPassword= '';
+    "confirmPassword":resetPasswordobj.confirmPassword });
   }
 }
