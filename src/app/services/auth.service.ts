@@ -206,5 +206,18 @@ export class AuthService {
     const url = `${this.baseUrl}api/ServiceProvider/GetSingleAuctionDetail?id=${auctionId}`;
     return this.http.get<getSingleAuction>(url, this.httpOptions);
   }
+
+  //otp verification
+
+  sendOTPEmail(email: string){
+    return this.http.post<any>(this.baseUrl + 'Auth/sendOTP', {"email": email})
+
+  }
+
+  verifyOTP(otp: string){
+    return this.http.post<any>(this.baseUrl + 'Auth/verifyOTP', {"otp": otp})
+
+
+  }
 }
 

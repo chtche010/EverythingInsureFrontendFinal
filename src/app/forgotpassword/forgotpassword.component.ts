@@ -37,7 +37,6 @@ sendResetLink(): void {
     next:(res)=>{
       this.dialogRef.close();
 
-// Create a notification with the message "Email send successfully"
       console.log("success");
     }, 
     error:(err)=>{

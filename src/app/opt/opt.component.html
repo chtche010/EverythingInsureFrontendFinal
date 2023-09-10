@@ -1,16 +1,19 @@
 <body>
-    <div class="form-wrapper">
-      <form [formGroup]="otpFrom" class="container">
-  
-        <div class="logo-container">
-          <a routerLink="/"> <img src="assets/Images/login.png" alt="Logo"></a>
-        </div>
-  
-        <mat-form-field appearance="fill" style="width: 100%">
-          <mat-label for="email">OTP</mat-label>
-          <input matInput formControlName="email" required id="email" name="email" type="email">
-        </mat-form-field>
-        <br>
-      </form>
-    </div>
-  </body>
+  <div class="form-wrapper">
+    <form [formGroup]="otpFrom" class="container">
+
+      <div class="logo-container">
+        <a routerLink="/"> <img src="assets/Images/login.png" alt="Logo"></a>
+      </div>
+
+      <mat-form-field appearance="fill" style="width: 100%">
+        <mat-label for="email">OTP</mat-label>
+        <input matInput formControlName="otp" required id="otp" name="otp" type="otp">
+      </mat-form-field>   
+      <div class="button-container">
+        <button mat-raised-button color="primary" type="submit" [disabled]="!otpFrom.valid" (click)="verifyOTP()">Verify OTP</button>
+      </div>
+      <br>
+    </form>
+  </div>
+</body>

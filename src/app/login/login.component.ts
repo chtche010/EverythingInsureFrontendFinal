@@ -80,7 +80,17 @@ export class LoginComponent implements OnInit {
           } else if (decodedToken.role === 'ServiceProvider') {
             this.router.navigate(['/serviceproviderprofile']);
           } else if (decodedToken.role === 'ClaimsAgent') {
-            this.router.navigate(['/caprofile']);
+            this.authService.sendOTPEmail(email)
+            .subscribe({
+              next: (res) => {
+                this.router.navigate(['/opt']);
+
+              },
+              error:(err)=>{
+                console.log(err);
+              }
+            })
+           
           } else {
             this.router.navigate(['/login']);
           }
