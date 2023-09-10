@@ -34,6 +34,7 @@ import { SpReportDashComponent } from './reporting/sp-report-dash/sp-report-dash
 import { CaReportDashComponent } from './reporting/ca-report-dash/ca-report-dash.component';
 import { ResetPassword } from './models/resetPassword.model';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { AdminReportComponent } from './reporting/admin-report/admin-report.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
@@ -67,6 +68,7 @@ const routes: Routes = [
   { path: 'changepassword', component: ChangepasswordComponent},
   { path: 'sp-report-dash', component: SpReportDashComponent},
   { path: 'ca-report-dash',component: CaReportDashComponent},
+  { path: 'admin-report', component: AdminReportComponent},
 ];
 
 @NgModule({

@@ -69,6 +69,7 @@ import { ChangepasswordComponent } from './changepassword/changepassword.compone
 import { SpReportDashComponent } from './reporting/sp-report-dash/sp-report-dash.component';
 import { CaReportDashComponent } from './reporting/ca-report-dash/ca-report-dash.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { AdminReportComponent } from './reporting/admin-report/admin-report.component';
 
 const routes: Routes = [
   { path: 'signup', component: SignupComponent },
@@ -114,6 +115,7 @@ const routes: Routes = [
     CaReportDashComponent,
     ResetPasswordComponent,
     OtpInputComponent,
+    AdminReportComponent,
   ],
   imports: [
     BrowserModule,
