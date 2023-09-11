@@ -11,9 +11,9 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { FormArrayName, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
@@ -33,11 +33,10 @@ import { FooterComponent } from './footer/footer.component';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 
-//Ben's imports brought across
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ClaimsAgentDashboardComponent } from './claims-agent/claims-agent-dashboard/claims-agent-dashboard.component';
-import { CaSidebarComponent } from './claims-agent/ca-sidebar/ca-sidebar.component';
 import { CaNavbarComponent } from './claims-agent/ca-navbar/ca-navbar.component';
+import { CaSidebarComponent } from './claims-agent/ca-sidebar/ca-sidebar.component';
 import { AuctionComponent } from './claims-agent/auction/auction.component';
 import { CaProfileComponent } from './claims-agent/ca-profile/ca-profile.component';
 import { MatTableModule } from '@angular/material/table';
@@ -69,6 +68,12 @@ import { ChangepasswordComponent } from './changepassword/changepassword.compone
 import { SpReportDashComponent } from './reporting/sp-report-dash/sp-report-dash.component';
 import { CaReportDashComponent } from './reporting/ca-report-dash/ca-report-dash.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { UpdateclaimComponent } from './claims-agent/updateclaim/updateclaim/updateclaim.component';
+import { UpdateauctionComponent } from './claims-agent/updateauction/updateauction/updateauction.component';
+import { CustomTimepickerComponent } from './custom-timepicker/custom-timepicker.component';
+import { UpdateBidComponent } from './serviceprovider/update-bid/update-bid/update-bid.component';
+import { DeleteDialogComponent } from './claims-agent/delete-claim-dialog/delete-dialog/delete-dialog.component';
+import { DeleteAuctionDialogComponent } from './claims-agent/delete-auction/delete-auction-dialog/delete-auction-dialog.component';
 import { AdminReportComponent } from './reporting/admin-report/admin-report.component';
 
 const routes: Routes = [
@@ -89,16 +94,16 @@ const routes: Routes = [
     FAQComponent,
     FooterComponent,
     ClaimsAgentDashboardComponent, 
-    CaNavbarComponent,
-    CaSidebarComponent,
     AuctionComponent,
     CaProfileComponent,
+    CaNavbarComponent,
+    CaSidebarComponent,
     UploadClaimComponent,
     ManageclaimsComponent,
     ManageauctionComponent,
+    SpActivityComponent,
     SpNavbarComponent,
     SpSidebarComponent,
-    SpActivityComponent,
     ServiceproviderprofileComponent,
     AdminNavBarComponent,
     AdminSideBarComponent,
@@ -111,11 +116,17 @@ const routes: Routes = [
     BidFormComponent,
     ForgotpasswordComponent,
     ChangepasswordComponent,
+    ResetPasswordComponent,
     SpReportDashComponent,
     CaReportDashComponent,
-    ResetPasswordComponent,
+    UpdateclaimComponent,
+    UpdateauctionComponent,
+    CustomTimepickerComponent,
+    UpdateBidComponent,
+    DeleteDialogComponent,
+    DeleteAuctionDialogComponent,
     OtpInputComponent,
-    AdminReportComponent,
+    AdminReportComponent
   ],
   imports: [
     BrowserModule,
@@ -124,7 +135,6 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     MatStepperModule,
     ReactiveFormsModule,
-    MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
     MatButtonModule,
@@ -141,6 +151,7 @@ const routes: Routes = [
     NgxMaterialTimepickerModule,
     MatNativeDateModule,
     MatDialogModule,
+    MatFormFieldModule,,
     MatIconModule,
     
   ],

@@ -1,0 +1,56 @@
+<div class="dialog-container">
+    <h2 class="dialog-title">Claim Details</h2>
+    <form class="dialog-form">
+      <div class="form-columns">
+        <!-- First Column -->
+        <div class="form-group">
+          <label for="customerName">Customer Name</label>
+          <input type="text" id="customerName" [value]="claimData.customerName" [(ngModel)]="claimData.customerName" name="customerName" required>
+        </div>
+        <div class="form-group">
+          <label for="customerEmail">Customer Email</label>
+          <input type="email" id="customerEmail" [value]="claimData.customerEmail" [(ngModel)]="claimData.customerEmail" name="customerEmail" required>
+        </div>
+        <div class="form-group">
+          <label for="vehicleMake">Vehicle Make</label>
+          <input type="text" id="vehicleMake" [value]="claimData.vehicleMake" [(ngModel)]="claimData.vehicleMake" name="vehicleMake" required>
+        </div>
+        <div class="form-group">
+          <label for="vehicleModel">Vehicle Model</label>
+          <input type="text" id="vehicleModel" [value]="claimData.vehicleModel" [(ngModel)]="claimData.vehicleModel" name="vehicleModel" required>
+        </div>
+        <div class="form-group">
+          <label for="modelYear">Model Year</label>
+          <input type="text" id="modelYear" [value]="claimData.modelYear" [(ngModel)]="claimData.modelYear" name="modelYear" required>
+        </div>
+      </div>
+      <div class="form-columns">
+        <!-- Second Column -->
+        <div class="form-group">
+          <label for="MMCode">MM Code</label>
+          <input type="text" id="MMCode" [value]="claimData.mmCode" [(ngModel)]="claimData.mmCode" name="MMCode" required>
+        </div>
+        <div class="form-group">
+          <label for="customerSurbub">Customer Suburb</label>
+          <input type="text" id="customerSurbub" [value]="claimData.customerSurbub" [(ngModel)]="claimData.customerSurbub" name="customerSurbub" required>
+        </div>
+        <div class="form-group">
+          <label for="customerCity">Customer City</label>
+          <input type="text" id="customerCity" [value]="claimData.customerCity" [(ngModel)]="claimData.customerCity" name="customerCity" required>
+        </div>
+        <div class="form-group">
+          <label for="customerProvince">Customer Province</label>
+          <input type="text" id="customerProvince" [value]="claimData.customerProvince" [(ngModel)]="claimData.customerProvince" name="customerProvince" required>
+        </div>
+        <div class="form-group">
+          <label for="damageDescription">Damage Description</label>
+          <textarea id="damageDescription" [value]="claimData.damageDescription" [(ngModel)]="claimData.damageDescription" name="damageDescription" required></textarea>
+        </div>
+      </div>
+    </form>
+    <div class="dialog-actions">
+      <button mat-button (click)="closeDialog()">Cancel</button>
+      <button mat-button color="primary" (click)="updateClaim()">Save</button>
+    </div>
+  </div>
+  

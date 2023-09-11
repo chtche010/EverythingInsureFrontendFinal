@@ -17,6 +17,10 @@ import { manageAuctions } from '../models/claimagent/manageAuctions';
 import { ClaimReview } from '../models/claimagent/claimReview';
 import { GetAllAuctions } from '../models/auction-dashboard/getallauctions';
 import { getSingleAuction } from '../models/serviceprovider/getSingleAuction';
+import { updateClaim } from '../models/claimagent/updateClaim';
+import { createBid } from '../models/serviceprovider/createBid';
+import { createBidMaterial } from '../models/serviceprovider/createBidMaterial';
+import { getBids } from '../models/serviceprovider/getBids';
 
 @Injectable({
   providedIn: 'root'
@@ -41,10 +45,14 @@ export class AuthService {
   private serviceProviderIdSubject = new BehaviorSubject<number>(0);
   serviceProviderId$ = this.serviceProviderIdSubject.asObservable();
 
+  private bidId!: number;
+  private bidIdSubject = new BehaviorSubject<number>(0);
+  bidId$ = this.bidIdSubject.asObservable();
+
   private httpOptions = {
       headers: new HttpHeaders().set(
         "Authorization",
-        "bearer " + this.getToken()
+        "bearer " + this.getToken(),
       ),
   };
 
@@ -97,6 +105,24 @@ export class AuthService {
 
   getclaimbyid(claimId: string): Observable<any> {
     return this.http.get<any>(this.baseUrl + 'api/Claims/Get Claim by Id', this.httpOptions);
+  }
+
+  updateclaim(updatedClaimData: any): Observable<any> {
+    return this.http.put<any>(this.baseUrl + 'api/Claims/Update Claim', updatedClaimData, this.httpOptions);
+  }
+
+  updateauction(updatedAuctionData: any): Observable<any> {
+    return this.http.put<any>(this.baseUrl + 'api/Auction/Update auction', updatedAuctionData, this.httpOptions);
+  }
+
+  deleteClaim(claimId: number): Observable<any> {
+    const url = `${this.baseUrl}api/Claims/Delete Claim?id=${claimId}`;
+    return this.http.delete(url, this.httpOptions);
+  }
+
+  deleteAuction(auctionId: number): Observable<any> {
+    const url = `${this.baseUrl}api/Auction/${auctionId}`;
+    return this.http.delete(url, this.httpOptions);
   }
 
   // Adding an auction 
@@ -176,6 +202,30 @@ export class AuthService {
 
   public updateaddress(addressData: any): Observable<any> {
     return this.http.put<any>(this.baseUrl + "api/ServiceProvider/Update Address", addressData, this.httpOptions);
+  }
+
+  submitBid(bidData: createBid): Observable<any> {
+    return this.http.post<any>(this.baseUrl + 'api/Bid/CreateBid', bidData, this.httpOptions);
+  }
+
+  submitBidMaterial(materialData: createBidMaterial): Observable<any> {
+    return this.http.post<any>(this.baseUrl + 'api/Bid/CreateBidMaterial', materialData, this.httpOptions);
+  }
+
+  setBidId(bidId: number): void {
+    this.bidId = bidId;
+  }
+
+  getBidId(): number {
+    return this.bidId;
+  }
+
+  public getbiddetails(): Observable<getBids[]> {
+    return this.http.get<getBids[]>(this.baseUrl + "api/Bid/GetAllBids", this.httpOptions);
+  }
+
+  updatebid(updatedBidData: any): Observable<any> {
+    return this.http.put<any>(this.baseUrl + "api/Bid/UpdateBid", updatedBidData, this.httpOptions);
   }
 
   // Submitting the sign up form 

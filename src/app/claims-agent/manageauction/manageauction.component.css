@@ -93,3 +93,16 @@ table {
     font-family: 'Montserrat', sans-serif;
     text-decoration: none;
   }
+
+  .action-buttons {
+    display: flex;
+    gap: 10px; /* Adjust the gap as needed */
+  }
+
+  .search-bar {
+    width: 70%; /* Adjust the width as needed */
+  }
+
+  mat-form-field {
+    width: 70%; /* Make the search bar full width */
+  }

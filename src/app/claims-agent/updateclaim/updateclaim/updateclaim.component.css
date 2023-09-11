@@ -1,0 +1,59 @@
+/* updateclaim.component.css */
+
+.dialog-title {
+  font-size: 24px; 
+  margin-bottom: 16px; 
+  color: #333;
+}
+
+.dialog-container {
+  padding: 16px;
+}
+
+.dialog-title {
+  font-size: 24px;
+  margin-bottom: 16px;
+}
+
+.dialog-form {
+  display: flex;
+  justify-content: space-between; /* Distribute space between columns */
+}
+
+.form-columns {
+  flex: 1; /* Allow columns to grow and shrink equally */
+  display: flex;
+  flex-direction: column;
+  gap: 16px; /* Adjust the gap as needed */
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  height: 50%;
+}
+
+.label {
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+.input-field,
+.textarea-field {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+  width: 10%;
+}
+
+.dialog-actions {
+  margin-top: 16px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+button {
+  margin-left: 8px;
+}
