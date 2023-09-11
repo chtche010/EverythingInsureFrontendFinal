@@ -11,6 +11,16 @@
     <app-ca-navbar></app-ca-navbar>
     <app-ca-sidebar></app-ca-sidebar>
 
+    <div class="content">
+      <h1 class="page-title">Manage Claims</h1>
+
+    <div class="search-bar-container">
+      <mat-form-field>
+        <input matInput (input)="applyFilter($event)" placeholder="Search">
+      </mat-form-field>
+    </div>
+
+
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
     <!--- Note that these columns can be defined in any order.
@@ -74,10 +84,10 @@
       <th mat-header-cell *matHeaderCellDef> Actions </th>
       <td mat-cell *matCellDef="let element">
         <div class="action-buttons">
-          <button mat-icon-button (click)="editClaim()">
+          <button mat-icon-button (click)="openDialog(element)">
             <mat-icon aria-label="Edit">edit</mat-icon>
           </button>
-          <button mat-icon-button (click)="deleteClaim()">
+          <button mat-icon-button (click)="openDeleteDialog(element.claimId)">
             <mat-icon aria-label="Delete">delete</mat-icon>
           </button>
         </div>
@@ -88,6 +98,6 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
 </table>
-
+</div>
 </body>
 </html>

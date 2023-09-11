@@ -1,4 +1,5 @@
 export interface PeriodicElement {
+    claimId(arg0: string, claimId: any): unknown;
     customerName: string;
     customerEmail: string;
     vehicleMake: string;

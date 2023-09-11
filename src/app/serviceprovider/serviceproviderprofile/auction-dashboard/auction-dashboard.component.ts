@@ -34,7 +34,6 @@ export class AuctionDashboardComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(
       result => console.log('The dialog was closed', result)
-      // You can do something with the result here if needed
     );
   }
 

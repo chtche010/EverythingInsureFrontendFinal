@@ -33,7 +33,6 @@ import { FooterComponent } from './footer/footer.component';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 
-//Ben's imports brought across
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ClaimsAgentDashboardComponent } from './claims-agent/claims-agent-dashboard/claims-agent-dashboard.component';
 import { CaNavbarComponent } from './claims-agent/ca-navbar/ca-navbar.component';
@@ -69,6 +68,12 @@ import { ChangepasswordComponent } from './changepassword/changepassword.compone
 import { SpReportDashComponent } from './reporting/sp-report-dash/sp-report-dash.component';
 import { CaReportDashComponent } from './reporting/ca-report-dash/ca-report-dash.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { UpdateclaimComponent } from './claims-agent/updateclaim/updateclaim/updateclaim.component';
+import { UpdateauctionComponent } from './claims-agent/updateauction/updateauction/updateauction.component';
+import { CustomTimepickerComponent } from './custom-timepicker/custom-timepicker.component';
+import { UpdateBidComponent } from './serviceprovider/update-bid/update-bid/update-bid.component';
+import { DeleteDialogComponent } from './claims-agent/delete-claim-dialog/delete-dialog/delete-dialog.component';
+import { DeleteAuctionDialogComponent } from './claims-agent/delete-auction/delete-auction-dialog/delete-auction-dialog.component';
 
 const routes: Routes = [
   { path: 'signup', component: SignupComponent },
@@ -113,6 +118,12 @@ const routes: Routes = [
     ResetPasswordComponent,
     SpReportDashComponent,
     CaReportDashComponent,
+    UpdateclaimComponent,
+    UpdateauctionComponent,
+    CustomTimepickerComponent,
+    UpdateBidComponent,
+    DeleteDialogComponent,
+    DeleteAuctionDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -137,7 +148,7 @@ const routes: Routes = [
     NgxMaterialTimepickerModule,
     MatNativeDateModule,
     MatDialogModule,
-    MatFormFieldModule
+    MatFormFieldModule,
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

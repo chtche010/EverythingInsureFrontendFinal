@@ -83,19 +83,6 @@ export class ServiceproviderprofileComponent implements OnInit {
       );
   }
 
-//   updateAddress() {
-//     this.authService.updateaddress(this.addressId).subscribe(
-//       (data) => {
-//         console.log('Address updated successfully:', data);
-//         this.loadAddress(data.addressId);
-//         this.snackBar.open('Your profile has been updated successfully', 'Close', {duration: 3000});
-//       },
-//       (error) => {
-//         console.error('Error updating profile:', error);
-//       }
-//     );
-// }
-
 updateAddress() {
   // Make sure you include the addressId in the payload
   const addressDataWithId = {

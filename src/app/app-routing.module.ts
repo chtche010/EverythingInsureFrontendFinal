@@ -34,6 +34,9 @@ import { SpReportDashComponent } from './reporting/sp-report-dash/sp-report-dash
 import { CaReportDashComponent } from './reporting/ca-report-dash/ca-report-dash.component';
 import { ResetPassword } from './models/resetPassword.model';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { updateClaim } from './models/claimagent/updateClaim';
+import { UpdateclaimComponent } from './claims-agent/updateclaim/updateclaim/updateclaim.component';
+import { UpdateauctionComponent } from './claims-agent/updateauction/updateauction/updateauction.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
@@ -54,6 +57,8 @@ const routes: Routes = [
   { path: 'serviceproviderprofile', component: ServiceproviderprofileComponent},
   { path: 'auction-dashboard', component: AuctionDashboardComponent},
   { path: 'reset', component: ResetPasswordComponent},
+  { path: 'updateclaim', component: UpdateclaimComponent},
+  { path: 'updateauction', component: UpdateclaimComponent},
 
   //admin 
   { path: 'admin-nav-bar', component: AdminNavBarComponent},

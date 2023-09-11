@@ -1,18 +1,13 @@
 <app-sp-navbar></app-sp-navbar>
-
 <app-sp-sidebar></app-sp-sidebar>
 
 
 <div class="background-container">
   <main id="main" class="main">
-
     <div class="pagetitle">
-
       <h1>Auction Events</h1>
+    </div>
 
-    </div><!-- End Page Title -->
-
-    <!--Display Auction Events-->
     <div class="auction-events-container">
       <mat-card *ngFor="let auctionEvent of auctionEvents" (click)="openDialog(auctionEvent)" class="auction-card">
         <mat-card-header>
@@ -46,6 +41,39 @@
         </mat-card-subtitle>
       </mat-card>
     </div>
-
   </main>
 </div>
+
+<!-- <div class="background-container">
+  <main id="main" class="main">
+    <div class="pagetitle">
+      <h1>Auction Events</h1>
+    </div>
+
+    <div class="auction-section">
+      <h2>Upcoming Auctions</h2>
+      <div class="auction-events-container">
+        <mat-card *ngFor="let auctionEvent of upcomingAuctions" (click)="openDialog(auctionEvent)" class="auction-card">
+        </mat-card>
+      </div>
+    </div>
+
+    <div class="auction-section">
+      <h2>Open Auctions</h2>
+      <div class="auction-events-container">
+        <mat-card *ngFor="let auctionEvent of openAuctions" (click)="openDialog(auctionEvent)" class="auction-card">
+        </mat-card>
+      </div>
+    </div>
+
+    <div class="auction-section">
+      <h2>Closed Auctions</h2>
+      <div class="auction-events-container">
+        <mat-card *ngFor="let auctionEvent of closedAuctions" (click)="openDialog(auctionEvent)" class="auction-card">
+          
+        </mat-card>
+      </div>
+    </div>
+
+  </main>
+</div> -->

@@ -8,39 +8,41 @@
 
         <mat-card>
             <mat-card-header>
-                <mat-card-title>Bid Form</mat-card-title>
+                <mat-card-title>Place a bid for: </mat-card-title>
+                <h2 class="auction-title">{{ auctionDetails.auctionTitle }}</h2>
             </mat-card-header>
 
             <mat-card-content>
                 <mat-horizontal-stepper #stepper [formGroup]="bidForm">
-                    <mat-step [stepControl]="bidForm.get('labourCost')!" [completed]="bidForm.get('labourCost')?.valid">
+                    <mat-step [stepControl]="bidForm.get('bidTotalLabourCost')!" [completed]="bidForm.get('bidTotalLabourCost')?.valid">
                         <h3 style="text-decoration:underline; font-weight: 400;">Step 1: Labour & Duration</h3>
 
                         <mat-form-field style="width:350px;">
-                            <input matInput placeholder="Labour Cost" formControlName="labourCost" required
-                                type="number" step="0.01">
+                            <input matInput placeholder="Job description" formControlName="jobDescription" required for="jobDescription" id="jobDescription">
+                            <mat-error *ngIf="bidForm?.get('jobDescription')?.hasError('required')">Estimated Job description!</mat-error>
+                            <mat-error *ngIf="bidForm?.get('jobDescription')?.hasError('pattern')">Invalid job description.</mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field style="width:350px;">
+                            <input matInput placeholder="Labour Cost" formControlName="bidTotalLabourCost" required step="0.01" for="bidTotalLabourCost" id="bidTotalLabourCost">
                             <span matTextPrefix>R&nbsp;</span>
-                            <mat-error *ngIf="bidForm?.get('labourCost')?.hasError('required')">Labour Cost is
-                                required!</mat-error>
-                            <mat-error *ngIf="bidForm?.get('labourCost')?.hasError('pattern')">Invalid labour cost
-                                format, requires a positve with only 2 decimal places please.</mat-error>
+                            <mat-error *ngIf="bidForm?.get('bidTotalLabourCost')?.hasError('required')">Labour Cost is required!</mat-error>
+                            <mat-error *ngIf="bidForm?.get('bidTotalLabourCost')?.hasError('pattern')">Invalid labour cost format, requires a positve with only 2 decimal places please.</mat-error>
                         </mat-form-field>
 
                         <br>
 
                         <mat-form-field style="width:350px;">
-                            <input matInput placeholder="Estimated Duration (in Business Days)"
-                                formControlName="estimatedDuration" required type="number">
-                            <mat-error *ngIf="bidForm?.get('estimatedDuration')?.hasError('required')">Estimated
-                                Duration is required!</mat-error>
-                            <mat-error *ngIf="bidForm?.get('estimatedDuration')?.hasError('pattern')">Invalid estimated
-                                duration format, please keep as positive whole numbers.</mat-error>
+                            <input matInput placeholder="Estimated Duration (in Business Days)" formControlName="bidEstimatedDuration" required for="bidEstimatedDuration" id="bidEstimatedDuration">
+                            <mat-error *ngIf="bidForm?.get('bidEstimatedDuration')?.hasError('required')">Estimated Duration is required!</mat-error>
+                            <mat-error *ngIf="bidForm?.get('bidEstimatedDuration')?.hasError('pattern')">Invalid estimated duration format, please keep as positive whole numbers.</mat-error>
                         </mat-form-field>
 
                         <div>
                             <button mat-raised-button matStepperNext
-                                [disabled]="!(bidForm.get('estimatedDuration')?.valid && bidForm.get('estimatedDuration')?.dirty) || !bidForm.get('labourCost')?.valid">Submit
-                                & Next</button>
+                                (click)="submitBid()"
+                                [disabled]="!(bidForm.get('bidEstimatedDuration')?.valid && bidForm.get('bidEstimatedDuration')?.dirty) || !bidForm.get('bidTotalLabourCost')?.valid">Submit& Next
+                            </button>
                         </div>
                     </mat-step>
 
@@ -51,36 +53,29 @@
                             <div *ngFor="let material of getMaterialsControls(); let i = index" [formGroupName]="i">
 
                                 <mat-form-field>
-                                    <input matInput placeholder="Material Name" formControlName="materialName" required>
-                                    <mat-error
-                                        *ngIf="material.get('materialName')?.invalid && material.get('materialName')?.touched">
+                                    <input matInput placeholder="Material Name" formControlName="bidMaterialName" required for="bidMaterialName" id="bidMaterialName">
+                                    <mat-error *ngIf="material.get('bidMaterialName')?.invalid && material.get('bidMaterialName')?.touched">
                                         Material Name is required!
                                     </mat-error>
                                 </mat-form-field>
-
+                                
                                 <mat-form-field>
-                                    <input matInput placeholder="Material Description"
-                                        formControlName="materialDescription" required>
-                                    <mat-error
-                                        *ngIf="material.get('materialDescription')?.invalid && material.get('materialDescription')?.touched">
+                                    <input matInput placeholder="Material Description" formControlName="bidMaterialDescription" required for="bidMaterialDescription" id="bidMaterialDescription">
+                                    <mat-error *ngIf="material.get('bidMaterialDescription')?.invalid && material.get('bidMaterialDescription')?.touched">
                                         Material Description is required!
                                     </mat-error>
                                 </mat-form-field>
-
+                                
                                 <mat-form-field>
-                                    <input matInput placeholder="Material Cost" formControlName="materialCost"
-                                        required><span matTextPrefix>R&nbsp;</span>
-                                    <mat-error
-                                        *ngIf="material.get('materialCost')?.invalid && material.get('materialCost')?.touched">
-                                        Material Cost is required and must be a positive number with only two decimal
-                                        places!
+                                    <input matInput placeholder="Material Cost" formControlName="bidMaterialCost" required for="bidMaterialCost" id="bidMaterialCost"><span matTextPrefix>R&nbsp;</span>
+                                    <mat-error *ngIf="material.get('bidMaterialCost')?.invalid && material.get('bidMaterialCost')?.touched">
+                                        Material Cost is required and must be a positive number with only two decimal places!
                                     </mat-error>
                                 </mat-form-field>
-
+                                
                                 <mat-form-field>
-                                    <input matInput placeholder="Quantity" formControlName="quantity" required>
-                                    <mat-error
-                                        *ngIf="material.get('quantity')?.invalid && material.get('quantity')?.touched">
+                                    <input matInput placeholder="Quantity" formControlName="bidQuantity" required for="bidQuantity" id="bidQuantity">
+                                    <mat-error *ngIf="material.get('bidQuantity')?.invalid && material.get('bidQuantity')?.touched">
                                         Quantity is required and must be a positive whole number!
                                     </mat-error>
                                 </mat-form-field>
