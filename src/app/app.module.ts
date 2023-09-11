@@ -151,9 +151,8 @@ const routes: Routes = [
     NgxMaterialTimepickerModule,
     MatNativeDateModule,
     MatDialogModule,
-    MatFormFieldModule,,
-    MatIconModule,
-    
+    MatFormFieldModule,
+    MatIconModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
