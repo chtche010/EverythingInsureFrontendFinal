@@ -23,7 +23,7 @@ export class CaNavbarComponent {
   getcaprofile(): void {
     this.authService.getcaprofile().subscribe(
       (response) => {
-        console.log(response)
+        console.log(response);
         this.userProfile = response.data;
         console.log('Claim Agent Profile', this.userProfile);
       }, 

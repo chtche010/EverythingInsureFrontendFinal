@@ -71,10 +71,11 @@ export class LoginComponent implements OnInit {
         response => {
           // Handle successful login
           console.log(response);
-          localStorage.setItem("authToken", JSON.stringify(response))
+          localStorage.setItem("authToken", JSON.stringify(response));
           // Redirect to the appropriate page based on the user's role or perform any other actions
           const decodedToken = this.jwtHelper.decodeToken(response.data);
           console.log(decodedToken);
+
           if (decodedToken.role === 'Administrator') {
             this.router.navigate(['/adminprofile']);
           } else if (decodedToken.role === 'ServiceProvider') {
@@ -88,7 +89,9 @@ export class LoginComponent implements OnInit {
         error => {
           // Handle login error
           console.error(error);
-          // Display an error message to the user or perform any other actions
+          const errorMessage = "Invalid login credentials";
+          // Display an error message to the user
+          this.toast.error({ detail: 'Error', summary: errorMessage, duration: 5000 });
         }
       );
     }
