@@ -27,6 +27,14 @@ import { AdminmanageauctionComponent } from './admin/manageauction/adminmanageau
 import { ManagebidComponent } from './admin/managebid/managebid/managebid.component';
 import { ManagecaComponent } from './admin/manageca/manageca/manageca.component';
 import { ManagespComponent } from './admin/managesp/managesp/managesp.component';
+//forgot password
+import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
+import { ChangepasswordComponent } from './changepassword/changepassword.component';
+import { SpReportDashComponent } from './reporting/sp-report-dash/sp-report-dash.component';
+import { CaReportDashComponent } from './reporting/ca-report-dash/ca-report-dash.component';
+import { ResetPassword } from './models/resetPassword.model';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { AdminReportComponent } from './reporting/admin-report/admin-report.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
@@ -46,6 +54,7 @@ const routes: Routes = [
   { path: 'sp-activity', component: SpActivityComponent},
   { path: 'serviceproviderprofile', component: ServiceproviderprofileComponent},
   { path: 'auction-dashboard', component: AuctionDashboardComponent},
+  { path: 'reset', component: ResetPasswordComponent},
 
   //admin 
   { path: 'admin-nav-bar', component: AdminNavBarComponent},
@@ -54,7 +63,12 @@ const routes: Routes = [
   { path: 'managebids', component: ManagebidComponent},
   { path: 'manageca', component: ManagecaComponent},
   { path: 'managesp', component: ManagespComponent},
-  { path: 'bid-form', component: BidFormComponent}
+  { path: 'bid-form', component: BidFormComponent},
+  { path: 'forgotpassword', component: ForgotpasswordComponent},
+  { path: 'changepassword', component: ChangepasswordComponent},
+  { path: 'sp-report-dash', component: SpReportDashComponent},
+  { path: 'ca-report-dash',component: CaReportDashComponent},
+  { path: 'admin-report', component: AdminReportComponent},
 ];
 
 @NgModule({

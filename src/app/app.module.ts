@@ -9,7 +9,7 @@ import { HttpClientModule, HttpContext, HTTP_INTERCEPTORS } from '@angular/commo
 import { SignupComponent } from './signup/signup.component';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormArrayName, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatStepperModule } from '@angular/material/stepper';
@@ -63,6 +63,13 @@ import { AuctionDashboardComponent } from './serviceprovider/serviceproviderprof
 import { MatDialogModule } from '@angular/material/dialog';
 import { FormArray } from '@angular/forms';
 import { BidFormComponent } from './serviceprovider/serviceproviderprofile/bid-form/bid-form.component';
+import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
+import { OtpInputComponent } from './otp-input/otp-input.component';
+import { ChangepasswordComponent } from './changepassword/changepassword.component';
+import { SpReportDashComponent } from './reporting/sp-report-dash/sp-report-dash.component';
+import { CaReportDashComponent } from './reporting/ca-report-dash/ca-report-dash.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { AdminReportComponent } from './reporting/admin-report/admin-report.component';
 
 const routes: Routes = [
   { path: 'signup', component: SignupComponent },
@@ -101,7 +108,14 @@ const routes: Routes = [
     ManagespComponent,
     AuctionDialogComponent,
     AuctionDashboardComponent,
-    BidFormComponent
+    BidFormComponent,
+    ForgotpasswordComponent,
+    ChangepasswordComponent,
+    SpReportDashComponent,
+    CaReportDashComponent,
+    ResetPasswordComponent,
+    OtpInputComponent,
+    AdminReportComponent,
   ],
   imports: [
     BrowserModule,
@@ -126,7 +140,9 @@ const routes: Routes = [
     MatCardModule,
     NgxMaterialTimepickerModule,
     MatNativeDateModule,
-    MatDialogModule
+    MatDialogModule,
+    MatIconModule,
+    
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

@@ -1,0 +1,79 @@
+@import '~@fortawesome/fontawesome-free/css/all.css';
+
+/* @import '~@angular/material/prebuilt-themes/indigo-pink.css'; */
+
+
+
+/* @import 'src/theme.scss'; */
+
+
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: "Montserrat", sans-serif;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap');
+
+:root {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+  background: #f6f9ff;
+  color: #444444;
+  overflow-x: hidden;
+}
+
+a {
+  color: #444444;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #717ff5;
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Montserrat", sans-serif;
+  color: #444444;
+  font-weight: 800;
+}
+
+.background-container {
+  background-image: url("src/assets/Images/background3.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  min-height: 100vh;
+}
+
+/*--------------------------------------------------------------
+
+  # Main
+
+  --------------------------------------------------------------*/
+
+#main {
+  margin-top: 60px;
+  margin-left: 310px;
+  padding: 20px 30px;
+  transition: all 0.3s;
+  flex-grow: 1;
+}
+
+@media (max-width: 1199px) {
+  #main {
+    padding: 20px;
+    margin-left: 0;
+  }
+}

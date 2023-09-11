@@ -1,7 +1,13 @@
-<div class="container stepper-container">
+<!--<div class="container stepper-container">-->
 <app-ca-navbar></app-ca-navbar>
 <app-ca-sidebar></app-ca-sidebar>
 
+<div class="background-container">
+  <main id="main" class="main">
+    <div class="pagetitle">
+      <h1>Add Auction</h1>
+    </div><!-- End Page Title -->
+    <div class="container stepper-container">
 <mat-stepper [linear]="isLinear" #stepper>
     <!-- Step 1: Create claim -->
    <mat-step [stepControl]="claimDetailsForm">
@@ -168,4 +174,6 @@
         <!-- Confirmation -->
       </div>
   </mat-stepper>
+  </div>
+  </main>
   </div>
