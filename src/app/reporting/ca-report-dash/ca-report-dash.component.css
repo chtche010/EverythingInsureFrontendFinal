@@ -1,12 +1,5 @@
 @import '~@fortawesome/fontawesome-free/css/all.css';
-
-/* @import '~@angular/material/prebuilt-themes/indigo-pink.css'; */
-
-
-
-/* @import 'src/theme.scss'; */
-
-
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap');
 
 html,
 body {
@@ -18,7 +11,7 @@ body {
   font-family: "Montserrat", sans-serif;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap');
+
 
 :root {
   scroll-behavior: smooth;
