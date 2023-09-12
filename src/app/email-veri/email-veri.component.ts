@@ -52,7 +52,7 @@ export class EmailVeriComponent {
         console.log(this.verifyEmailObj)
         this.snackbar.open('Success! Email Reset', 'Close', { duration: 4000 });
 
-        this.router.navigate(['/login']);
+        this.router.navigate(['/home']);
       },
       error: (err)=>{
         this.snackbar.open('Error! Something went wrong', 'Close', { duration: 4000 });

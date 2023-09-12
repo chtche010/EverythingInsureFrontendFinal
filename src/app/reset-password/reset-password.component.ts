@@ -69,9 +69,6 @@ export class ResetPasswordComponent implements OnInit {
         },
         error: (err)=>{
           this.snackbar.open('Error! Something went wrong', 'Close', { duration: 4000 });
-
-          
-
         }
       })
     } else {

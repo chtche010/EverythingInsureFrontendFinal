@@ -230,17 +230,18 @@ export class AuthService {
 
   emailVeri (email: string){
     return this.http.post<any>(this.baseUrl + 'Auth/emailVeri', {"email": email})
-
   }
 
  verifyEmail(emailVeriToken: verifyEmail)
   {
 
     console.log(emailVeriToken);
+    const jsonObject  = JSON.stringify(emailVeriToken);
+    console.log(jsonObject);
 
-    return this.http.post<any>(this.baseUrl + `/resetPassword`, {
-    "email":emailVeriToken.email, 
-    "emailVeriToken":emailVeriToken.emailVeriToken });
+    return this.http.post<any>(this.baseUrl + `Auth/verifyEmail`, {"email":emailVeriToken.email, 
+    "emailToken":emailVeriToken.emailVeriToken}
+    );}
   }
-}
+
 
