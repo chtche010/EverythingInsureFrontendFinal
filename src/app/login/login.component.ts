@@ -19,6 +19,7 @@ import { ForgotpasswordComponent } from '../forgotpassword/forgotpassword.compon
 })
 
 export class LoginComponent implements OnInit {
+  email = "";
   loginForm!: FormGroup;
   passwordVisible: boolean = true;
   //InitialSignUp = new initialsignup();
@@ -31,6 +32,7 @@ export class LoginComponent implements OnInit {
     private jwtHelper: JwtHelperService,
     private snackbar: MatSnackBar,
     private dialog: MatDialog,
+   // private snackbar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -38,6 +40,8 @@ export class LoginComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
     });
+    this.email = this.authService.parseEmail(this.email);
+
   }
 
   hideShowPass() {
@@ -57,8 +61,10 @@ export class LoginComponent implements OnInit {
   
   handleSubmit() {
     if (this.loginForm.valid) {
-      const email = this.loginForm.value.email;
+      const email = this.authService.parseEmail(this.loginForm.value.email);
       const password = this.loginForm.value.password;
+
+      console.log(email);
 
       const loginObject = {
         email,
@@ -76,17 +82,23 @@ export class LoginComponent implements OnInit {
           const decodedToken = this.jwtHelper.decodeToken(response.data);
           console.log(decodedToken);
           if (decodedToken.role === 'Administrator') {
+            this.snackbar.open('Email verfication sent!', 'Close', { duration: 4000 });
             this.router.navigate(['/adminprofile']);
           } else if (decodedToken.role === 'ServiceProvider') {
+            this.snackbar.open('Email verfication sent!', 'Close', { duration: 4000 });
             this.router.navigate(['/serviceproviderprofile']);
           } else if (decodedToken.role === 'ClaimsAgent') {
             this.authService.sendOTPEmail(email)
             .subscribe({
               next: (res) => {
+                this.snackbar.open('Success! OTP email sent, it will expire in 15 minutes!', 'Close', { duration: 4000 });
+
                 this.router.navigate(['/opt']);
 
               },
               error:(err)=>{
+                this.snackbar.open('Error! Something went wrong', 'Close', { duration: 4000 });
+
                 console.log(err);
               }
             })

@@ -66,6 +66,7 @@ import { BidFormComponent } from './serviceprovider/serviceproviderprofile/bid-f
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { OptComponent } from './opt/opt.component';
+import { EmailVeriComponent } from './email-veri/email-veri.component';
 
 const routes: Routes = [
   { path: 'signup', component: SignupComponent },
@@ -107,7 +108,8 @@ const routes: Routes = [
     BidFormComponent,
     ForgotpasswordComponent,
     ResetPasswordComponent,
-    OptComponent
+    OptComponent,
+    EmailVeriComponent
   ],
   imports: [
     BrowserModule,

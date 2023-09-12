@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ResetPasswordService } from '../services/reset-password.service';
+import { NgToastService } from 'ng-angular-popup';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 //put API service here
 @Component({
   selector: 'app-forgotpassword',
@@ -13,7 +16,8 @@ forgotPasswordForm!: FormGroup;
 
 constructor(
   private dialogRef: MatDialogRef<ForgotpasswordComponent>, 
-  private resetService: ResetPasswordService
+  private resetService: ResetPasswordService,
+  private snackbar: MatSnackBar
   
   ){}
 
@@ -35,11 +39,14 @@ sendResetLink(): void {
   this.resetService.sendResetPaswordLink(email)
   .subscribe({
     next:(res)=>{
+      this.snackbar.open('Success! Reset email password reset!', 'Close', { duration: 4000 });
       this.dialogRef.close();
 
       console.log("success");
     }, 
     error:(err)=>{
+      this.snackbar.open('Error! Something went wrong!', 'Close', { duration: 4000 });
+
       console.log(err);
     }
   })

@@ -14,6 +14,9 @@
         <button mat-raised-button color="primary" type="submit" [disabled]="!otpFrom.valid" (click)="verifyOTP()">Verify OTP</button>
       </div>
       <br>
+      <div class="register-link" style="margin-bottom: -20px;">
+        <p> <a routerLink="/opt" style="font-weight:normal;" (click)="resendOTP()">Resend OTP</a></p>
+      </div>
     </form>
   </div>
 </body>

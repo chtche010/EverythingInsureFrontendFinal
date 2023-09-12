@@ -17,6 +17,7 @@ import { manageAuctions } from '../models/claimagent/manageAuctions';
 import { ClaimReview } from '../models/claimagent/claimReview';
 import { GetAllAuctions } from '../models/auction-dashboard/getallauctions';
 import { getSingleAuction } from '../models/serviceprovider/getSingleAuction';
+import { verifyEmail } from '../models/verifyEmail.model';
 
 @Injectable({
   providedIn: 'root'
@@ -218,6 +219,28 @@ export class AuthService {
     return this.http.post<any>(this.baseUrl + 'Auth/verifyOTP', {"otp": otp})
 
 
+  }
+
+   parseEmail(emailAddress: string): string {
+    const regex = /^[a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    return regex.test(emailAddress) ? emailAddress : '';
+  }
+
+  //email verfication
+
+  emailVeri (email: string){
+    return this.http.post<any>(this.baseUrl + 'Auth/emailVeri', {"email": email})
+
+  }
+
+ verifyEmail(emailVeriToken: verifyEmail)
+  {
+
+    console.log(emailVeriToken);
+
+    return this.http.post<any>(this.baseUrl + `/resetPassword`, {
+    "email":emailVeriToken.email, 
+    "emailVeriToken":emailVeriToken.emailVeriToken });
   }
 }
 

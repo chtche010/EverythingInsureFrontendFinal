@@ -21,6 +21,7 @@ import { SpActivityComponent } from './serviceprovider/serviceproviderprofile/sp
 import { ServiceproviderprofileComponent } from './serviceprovider/serviceproviderprofile/serviceproviderprofile/serviceproviderprofile.component';
 import { AuctionDashboardComponent } from './serviceprovider/serviceproviderprofile/auction-dashboard/auction-dashboard.component';
 import { BidFormComponent } from './serviceprovider/serviceproviderprofile/bid-form/bid-form.component';
+import { EmailVeriComponent } from './email-veri/email-veri.component';
 // Admin 
 import { AdminNavBarComponent } from './admin/admin-nav-bar/admin-nav-bar/admin-nav-bar.component';
 import { AdminSideBarComponent } from './admin/admin-side-bar/admin-side-bar/admin-side-bar.component';
@@ -53,6 +54,7 @@ const routes: Routes = [
   { path: 'serviceproviderprofile', component: ServiceproviderprofileComponent},
   { path: 'auction-dashboard', component: AuctionDashboardComponent},
   { path: 'reset', component: ResetPasswordComponent},
+  { path: 'emailVeri', component: EmailVeriComponent},
 
   //admin 
   { path: 'admin-nav-bar', component: AdminNavBarComponent},

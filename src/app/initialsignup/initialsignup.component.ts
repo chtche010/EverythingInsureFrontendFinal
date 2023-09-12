@@ -25,13 +25,15 @@ export class InitialsignupComponent implements OnInit {
     { value: 'ClaimsAgent', viewValue: 'Claims agent' },
     { value: 'ServiceProvider', viewValue: 'Service provider' },
   ];
-  snackBar: any;
+  //snackBar: any;
 
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    private matSnackBar: MatSnackBar,
+   // private matSnackBar: MatSnackBar,
+    private snackbar: MatSnackBar,
+
     ) {}
 
     register(InitialSignUp: initialsignup) {
@@ -91,8 +93,30 @@ export class InitialsignupComponent implements OnInit {
           localStorage.setItem("authToken",JSON.stringify(response))
           if (accountType === 'ClaimsAgent') {
             route = '/casignup';
+            this.authService.emailVeri(email)
+            .subscribe({
+              next: (res) => {
+                this.snackbar.open('Success! Verification email sent', 'Close', { duration: 4000 });
+               // this.router.navigate(['/opt']);
+              },
+              error:(err)=>{
+                this.snackbar.open('Error! Something went wrong', 'Close', { duration: 4000 });
+                console.log(err);
+              }
+            })
           } else if (accountType === 'ServiceProvider') {
             route = '/signup';
+            this.authService.emailVeri(email)
+            .subscribe({
+              next: (res) => {
+                this.snackbar.open('Success! Verification email sent', 'Close', { duration: 4000 });
+               // this.router.navigate(['/opt']);
+              },
+              error:(err)=>{
+                this.snackbar.open('Error! Something went wrong', 'Close', { duration: 4000 });
+                console.log(err);
+              }
+            })
           } else {
             console.error('Invalid account type');
             return;
@@ -104,6 +128,7 @@ export class InitialsignupComponent implements OnInit {
         }
       );
     }
+
   }
 
   passwordMatchValidator(control: AbstractControl): { [key: string]: boolean } | null {
