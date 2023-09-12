@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-ca-profile',
@@ -9,11 +11,23 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class CaProfileComponent implements OnInit {
   userProfile: any; 
+  chanegPasswordForm!: FormGroup;
 
-  constructor(private authService: AuthService, private snackBar: MatSnackBar) {}
+
+  constructor(private authService: AuthService,
+     private snackBar: MatSnackBar,
+     private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.getcaprofile();
+    this.chanegPasswordForm = this.fb.group([
+      //currentPassword: ['', Validators.required],   
+      //newPassword: ['', Validators.required],   
+      //confirmPassword: ['', Validators.required],
+      
+      
+
+    ])
   }
 
   getcaprofile(): void {

@@ -50,14 +50,12 @@ export class EmailVeriComponent {
     .subscribe({
       next: (res)=>{
         console.log(this.verifyEmailObj)
-        this.snackbar.open('Success! Email Reset', 'Close', { duration: 4000 });
+        this.snackbar.open('Success! Email Verified', 'Close', { duration: 4000 });
 
         this.router.navigate(['/home']);
       },
       error: (err)=>{
-        this.snackbar.open('Error! Something went wrong', 'Close', { duration: 4000 });
-
-        
+        this.snackbar.open('Error! Something went wrong', 'Close', { duration: 4000 }); 
 
       }
     })

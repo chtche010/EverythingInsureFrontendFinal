@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { switchMap } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-serviceproviderprofile',
@@ -13,17 +14,48 @@ import { switchMap } from 'rxjs/operators';
 export class ServiceproviderprofileComponent implements OnInit {
   userProfile: any;
   address: any;
+  email = "";
+  chanegPasswordForm!: FormGroup;
+
 
   constructor(
-    private authService: AuthService, private formBuilder: FormBuilder, private snackBar: MatSnackBar
+    private authService: AuthService,
+     private formBuilder: FormBuilder,
+      private snackBar: MatSnackBar,
+      private router: Router,
+      private snackbar: MatSnackBar,
+
+
   ){}
 
   serviceProviderId!: number;
 
   ngOnInit(): void {
     this.loadUserProfile();
+    this.checkVeri(this.email);
+
     //this.loadAddress(this.serviceProviderId);
     //this.loadBankDetails();
+
+    
+  }
+
+  checkVeri(email: string){
+
+    this.authService.checkVeri(email)
+    .subscribe({
+      next: (res)=>{
+        console.log(email)
+        this.snackbar.open('Success! Email Verified', 'Close', { duration: 4000 });
+
+        this.router.navigate(['/home']);
+      },
+      error: (err)=>{
+        this.snackbar.open('Error! Something went wrong', 'Close', { duration: 4000 }); 
+
+      }
+    })
+
   }
 
   loadUserProfile(){

@@ -265,32 +265,24 @@
 
               <div class="tab-pane fade pt-3" id="profile-change-password">
                 <!-- Change Password Form -->
-                <form>
+                <form  [formGroup]="chanegPasswordForm">
 
-                  <div class="row mb-3">
-                    <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Current Password</label>
-                    <div class="col-md-8 col-lg-9">
-                      <input name="password" type="password" class="form-control" id="currentPassword">
-                    </div>
-                  </div>
-
-                  <div class="row mb-3">
-                    <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">New Password</label>
-                    <div class="col-md-8 col-lg-9">
-                      <input name="newpassword" type="password" class="form-control" id="newPassword">
-                    </div>
-                  </div>
-
-                  <div class="row mb-3">
-                    <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Re-enter New Password</label>
-                    <div class="col-md-8 col-lg-9">
-                      <input name="renewpassword" type="password" class="form-control" id="renewPassword">
-                    </div>
-                  </div>
-
-                  <div class="text-center">
-                    <button type="submit" class="btn btn-primary">Change Password</button>
-                  </div>
+                  <mat-form-field appearance="fill" style="width: 100%">
+                    <mat-label for="email">New Password</mat-label>
+                    <input matInput matPassword formControlName="password" required id="password" name="password" type="password">
+                  </mat-form-field>
+          
+                  <mat-error class="error-message" *ngIf="chanegPasswordForm.get('password')?.invalid && (chanegPasswordForm.get('password')?.dirty || chanegPasswordForm.get('password')?.touched)">
+                    Passwords should be at least six characters and include at least one uppercase letter, number and special character
+                  </mat-error>
+                 
+                  <mat-form-field appearance="fill" style="width: 100%">
+                    <mat-label for="password">Confirm Password</mat-label>
+                    <input matInput matPassword formControlName="confirmPassword" required id="password" name="password" type="password">
+                 
+                  </mat-form-field>
+                  <small *ngIf="chanegPasswordForm.hasError('ConfirmPasswordValidator', 'confirmPassword')">Password does not match</small>
+          
                 </form><!-- End Change Password Form -->
 
               </div>

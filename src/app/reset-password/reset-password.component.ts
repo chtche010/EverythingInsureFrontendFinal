@@ -15,7 +15,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class ResetPasswordComponent implements OnInit {
   resetPasswordForm!: FormGroup;
-  emailToken!: string;
+  emailToken2!: string;
   emailToReset!: string;
   resetPasswordObj = new ResetPassword();
   passwordVisible: boolean = true;
@@ -42,8 +42,8 @@ export class ResetPasswordComponent implements OnInit {
       let uriToken = val['code'];
 
 
-      this.emailToken = uriToken.replace(/ /g, '')
-      console.log(this.emailToken);
+      this.emailToken2 = uriToken.replace(/ /g, '')
+      console.log(this.emailToken2);
       console.log(this.emailToReset);
     })
   }
@@ -53,9 +53,13 @@ export class ResetPasswordComponent implements OnInit {
       this.resetPasswordObj.email = this.emailToReset
       this.resetPasswordObj.newPassword = this.resetPasswordForm.value.password;
       this.resetPasswordObj.confirmPassword = this.resetPasswordForm.value.confirmPassword;
-      this.resetPasswordObj.emailToken = this.emailToken;
+      this.resetPasswordObj.emailToken = this.emailToken2;
+
+
+
 
       console.log(this.resetPasswordObj)
+      //console.log('Reset Password Object:', this.resetPasswordObj);
       //this works
 
 

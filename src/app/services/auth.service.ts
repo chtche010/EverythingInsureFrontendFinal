@@ -242,6 +242,12 @@ export class AuthService {
     return this.http.post<any>(this.baseUrl + `Auth/verifyEmail`, {"email":emailVeriToken.email, 
     "emailToken":emailVeriToken.emailVeriToken}
     );}
+
+    checkVeri(email : string){
+      return this.http.post<any>(this.baseUrl + 'Auth/checkVeri', {"email": email})
+
+
+    }
   }
 
 
