@@ -75,6 +75,7 @@ import { UpdateBidComponent } from './serviceprovider/update-bid/update-bid/upda
 import { DeleteDialogComponent } from './claims-agent/delete-claim-dialog/delete-dialog/delete-dialog.component';
 import { DeleteAuctionDialogComponent } from './claims-agent/delete-auction/delete-auction-dialog/delete-auction-dialog.component';
 import { AdminReportComponent } from './reporting/admin-report/admin-report.component';
+import { NgChartsModule } from 'ng2-charts';
 
 const routes: Routes = [
   { path: 'signup', component: SignupComponent },
@@ -152,7 +153,8 @@ const routes: Routes = [
     MatNativeDateModule,
     MatDialogModule,
     MatFormFieldModule,
-    MatIconModule
+    MatIconModule,
+    NgChartsModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

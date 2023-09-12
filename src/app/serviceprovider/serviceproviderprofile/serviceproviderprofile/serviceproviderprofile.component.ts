@@ -45,8 +45,8 @@ export class ServiceproviderprofileComponent implements OnInit {
 
   loadAddress(addressId: number) {
     this.authService.getAddressById(addressId).subscribe(
-      (reponse) => {
-        this.address = reponse.data;
+      (response) => {
+        this.address = response.data;
         console.log('Address data:', this.address);
       },
       (error) => {
