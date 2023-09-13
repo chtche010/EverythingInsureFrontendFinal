@@ -16,7 +16,7 @@ export class CaBarComponent {
       }
     }
   };
-  public barChartLabels: string[] = ['Auction Event 1', 'Auction Event 2', 'Auction Event 3', 'Auction Event 4', 'Auction Event 5'];
+  public barChartLabels: string[] = ['2021 | Hilux', '2018 | Toyota', '2016 | BMW', '2020 | Mercedes', '2015 | Honda'];
   public barChartType: ChartType = 'bar';
   public barChartLegend = true;
   public barChartPlugins = [];
