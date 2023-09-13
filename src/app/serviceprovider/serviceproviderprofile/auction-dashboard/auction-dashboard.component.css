@@ -176,3 +176,18 @@ h6 {
 .favorite-button .mat-icon {
   color: rgb(255, 1, 1);
 }
+
+/* Separate sections with thin black lines */
+.auction-section {
+  border-top: 1px solid #000;
+  padding-top: 20px;
+  margin-top: 20px;
+}
+
+/* Style section headings */
+.auction-section h2 {
+  font-size: 24px;
+  color: #000;
+  font-weight: bold;
+  margin-bottom: 10px;
+}

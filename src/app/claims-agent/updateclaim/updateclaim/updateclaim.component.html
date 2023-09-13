@@ -1,0 +1,76 @@
+<div class="dialog-container">
+  <h2 class="dialog-title">Claim Details</h2>
+  <div class="center-form-fields">
+  <form class="dialog-form">
+    <div class="form-columns">
+      <!-- First Column -->
+      <div class="form-group">
+        <mat-form-field appearance="fill">
+          <mat-label for="customerName">Customer Name</mat-label>
+          <input matInput type="text" id="customerName" [value]="claimData.customerName" [(ngModel)]="claimData.customerName" name="customerName" required>
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field appearance="fill">
+          <mat-label for="customerEmail">Customer Email</mat-label>
+          <input matInput type="email" id="customerEmail" [value]="claimData.customerEmail" [(ngModel)]="claimData.customerEmail" name="customerEmail" required>
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field appearance="fill">
+          <mat-label for="vehicleMake">Vehicle Make</mat-label>
+          <input matInput type="text" id="vehicleMake" [value]="claimData.vehicleMake" [(ngModel)]="claimData.vehicleMake" name="vehicleMake" required>
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field appearance="fill">
+          <mat-label for="vehicleModel">Vehicle Model</mat-label>
+          <input matInput type="text" id="vehicleModel" [value]="claimData.vehicleModel" [(ngModel)]="claimData.vehicleModel" name="vehicleModel" required>
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field appearance="fill">
+          <mat-label for="modelYear">Model Year</mat-label>
+          <input matInput type="text" id="modelYear" [value]="claimData.modelYear" [(ngModel)]="claimData.modelYear" name="modelYear" required>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="form-columns">
+      <!-- Second Column -->
+      <div class="form-group">
+        <mat-form-field appearance="fill">
+          <mat-label for="MMCode">MM Code</mat-label>
+          <input matInput type="text" id="MMCode" [value]="claimData.mmCode" [(ngModel)]="claimData.mmCode" name="MMCode" required>
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field appearance="fill">
+          <mat-label for="customerSurbub">Customer Suburb</mat-label>
+          <input matInput type="text" id="customerSurbub" [value]="claimData.customerSurbub" [(ngModel)]="claimData.customerSurbub" name="customerSurbub" required>
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field appearance="fill">
+          <mat-label for="customerCity">Customer City</mat-label>
+          <input matInput type="text" id="customerCity" [value]="claimData.customerCity" [(ngModel)]="claimData.customerCity" name="customerCity" required>
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field appearance="fill">
+          <mat-label for="customerProvince">Customer Province</mat-label>
+          <input matInput type="text" id="customerProvince" [value]="claimData.customerProvince" [(ngModel)]="claimData.customerProvince" name="customerProvince" required>
+        </mat-form-field>
+      </div>
+      <div class="form-group">
+        <mat-form-field appearance="fill">
+          <mat-label for="damageDescription">Damage Description</mat-label>
+          <textarea matInput id="damageDescription" [value]="claimData.damageDescription" [(ngModel)]="claimData.damageDescription" name="damageDescription" required></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+  <div class="dialog-actions">
+    <button mat-raised-button color="primary" (click)="updateClaim()">Save</button>
+    <button mat-raised-button (click)="closeDialog()">Cancel</button>
+  </div>
+</div>

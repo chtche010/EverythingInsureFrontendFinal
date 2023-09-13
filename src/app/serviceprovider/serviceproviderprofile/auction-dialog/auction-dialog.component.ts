@@ -48,7 +48,10 @@ export class AuctionDialogComponent implements OnInit {
     //close the dialog
     this.dialogRef.close();
     //navigate to bid form
-    this.router.navigate(['/bid-form']);
+    this.router.navigate(['/bid-form'], {
+      queryParams: { auctionId: this.data.auctionId }
+    });
+    console.log('AuctionId', this.data.auctionId)
   }
 
   closeDialog() {

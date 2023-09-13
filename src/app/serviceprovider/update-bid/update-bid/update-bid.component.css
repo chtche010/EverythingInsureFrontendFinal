@@ -1,0 +1,41 @@
+.mat-dialog-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px; 
+    text-align: center;
+  }
+
+  .mat-dialog-title {
+    text-align: center;
+  }
+  
+  mat-form-field {
+    width: 100%;
+    max-width: 400px; 
+  }
+
+  .mat-dialog-actions {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .mat-dialog-actions button {
+    margin-left: 8px; 
+  }
+
+  .button-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .mat-dialog-title {
+    text-align: center;
+  }
+  
+  
+  
+  
+  
+  

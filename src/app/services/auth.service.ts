@@ -18,6 +18,11 @@ import { ClaimReview } from '../models/claimagent/claimReview';
 import { GetAllAuctions } from '../models/auction-dashboard/getallauctions';
 import { getSingleAuction } from '../models/serviceprovider/getSingleAuction';
 import { verifyEmail } from '../models/verifyEmail.model';
+import { updateClaim } from '../models/claimagent/updateClaim';
+import { createBid } from '../models/serviceprovider/createBid';
+import { createBidMaterial } from '../models/serviceprovider/createBidMaterial';
+import { getBids } from '../models/serviceprovider/getBids';
+import { getspAddress } from '../models/serviceprovider/getspAddress';
 
 @Injectable({
   providedIn: 'root'
@@ -42,10 +47,18 @@ export class AuthService {
   private serviceProviderIdSubject = new BehaviorSubject<number>(0);
   serviceProviderId$ = this.serviceProviderIdSubject.asObservable();
 
+  private bidId!: number;
+  private bidIdSubject = new BehaviorSubject<number>(0);
+  bidId$ = this.bidIdSubject.asObservable();
+
+  private addressId!: number;
+  private addressIdSubject = new BehaviorSubject<number>(0);
+  addressId$ = this.addressIdSubject.asObservable();
+
   private httpOptions = {
       headers: new HttpHeaders().set(
         "Authorization",
-        "bearer " + this.getToken()
+        "bearer " + this.getToken(),
       ),
   };
 
@@ -98,6 +111,24 @@ export class AuthService {
 
   getclaimbyid(claimId: string): Observable<any> {
     return this.http.get<any>(this.baseUrl + 'api/Claims/Get Claim by Id', this.httpOptions);
+  }
+
+  updateclaim(updatedClaimData: any): Observable<any> {
+    return this.http.put<any>(this.baseUrl + 'api/Claims/Update Claim', updatedClaimData, this.httpOptions);
+  }
+
+  updateauction(updatedAuctionData: any): Observable<any> {
+    return this.http.put<any>(this.baseUrl + 'api/Auction/Update auction', updatedAuctionData, this.httpOptions);
+  }
+
+  deleteClaim(claimId: number): Observable<any> {
+    const url = `${this.baseUrl}api/Claims/Delete Claim?id=${claimId}`;
+    return this.http.delete(url, this.httpOptions);
+  }
+
+  deleteAuction(auctionId: number): Observable<any> {
+    const url = `${this.baseUrl}api/Auction/${auctionId}`;
+    return this.http.delete(url, this.httpOptions);
   }
 
   // Adding an auction 
@@ -170,13 +201,59 @@ export class AuthService {
     return this.serviceProviderId;
   }
 
-  getAddressById(addressId: number): Observable<any> {
+  setaddressId(addressId: number): void {
+    this.addressId = addressId;
+  }
+
+  getaddressId(): number {
+    return this.addressId;
+  }
+
+  getAddressById(addressId: number): Observable<getspAddress> {
     const url = `${this.baseUrl}api/ServiceProvider/Get Address By Id?id=${addressId}`;
-    return this.http.get<any>(url, this.httpOptions);
+    return this.http.get<getspAddress>(url, this.httpOptions);
   } 
+
+  public getalladdress(): Observable<any[]> {
+    return this.http.get<any[]>(this.baseUrl + "api/ServiceProvider/Get All Addresses", this.httpOptions);
+  }
 
   public updateaddress(addressData: any): Observable<any> {
     return this.http.put<any>(this.baseUrl + "api/ServiceProvider/Update Address", addressData, this.httpOptions);
+  }
+
+  submitBid(bidData: createBid): Observable<any> {
+    return this.http.post<any>(this.baseUrl + 'api/Bid/CreateBid', bidData, this.httpOptions);
+  }
+
+  submitBidMaterial(materialData: createBidMaterial): Observable<any> {
+    return this.http.post<any>(this.baseUrl + 'api/Bid/CreateBidMaterial', materialData, this.httpOptions);
+  }
+
+  setBidId(bidId: number): void {
+    this.bidId = bidId;
+  }
+
+  getBidId(): number {
+    return this.bidId;
+  }
+
+  public getbiddetails(): Observable<getBids[]> {
+    return this.http.get<getBids[]>(this.baseUrl + "api/Bid/GetAllBids", this.httpOptions);
+  }
+
+  updatebid(updatedBidData: any): Observable<any> {
+    return this.http.put<any>(this.baseUrl + "api/Bid/UpdateBid", updatedBidData, this.httpOptions);
+  }
+
+  getSingleBid(bidId: number): Observable<any> {
+    const url = `${this.baseUrl}api/Bid/GetSingleBid?id=${bidId}`;
+    return this.http.get<any>(url, this.httpOptions);
+  }
+
+  getAllMaterials(bidId: number): Observable<any> {
+    const url = `${this.baseUrl}api/Bid/GetAllMaterials?BidId=${bidId}`; // Include the bidId in the URL
+    return this.http.get<any>(url, this.httpOptions);
   }
 
   // Submitting the sign up form 
@@ -253,5 +330,6 @@ export class AuthService {
 
     }
   }
+
 
 

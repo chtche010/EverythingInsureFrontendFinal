@@ -35,7 +35,8 @@ export class ServiceproviderprofileComponent implements OnInit {
     this.loadUserProfile();
     this.checkVeri(this.email);
 
-    this.loadAddress(this.serviceProviderId);
+    //this.addressId = this.userProfile.addressId;
+    this.loadAddress(this.address);
     //this.loadBankDetails();
 
     
@@ -77,9 +78,10 @@ export class ServiceproviderprofileComponent implements OnInit {
 
   loadAddress(addressId: number) {
     this.authService.getAddressById(addressId).subscribe(
-      (reponse) => {
-        this.address = reponse.data;
+      (response: any) => {
+        console.log('Address Id:', addressId);
         console.log('Address data:', this.address);
+        this.address = response.data;
       },
       (error) => {
         console.log('Error fetching address', error);
@@ -114,19 +116,6 @@ export class ServiceproviderprofileComponent implements OnInit {
         }
       );
   }
-
-//   updateAddress() {
-//     this.authService.updateaddress(this.addressId).subscribe(
-//       (data) => {
-//         console.log('Address updated successfully:', data);
-//         this.loadAddress(data.addressId);
-//         this.snackBar.open('Your profile has been updated successfully', 'Close', {duration: 3000});
-//       },
-//       (error) => {
-//         console.error('Error updating profile:', error);
-//       }
-//     );
-// }
 
 updateAddress() {
   // Make sure you include the addressId in the payload
