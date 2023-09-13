@@ -1,7 +1,6 @@
 import { MatDialog } from '@angular/material/dialog';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
 import { AuctionDialogComponent } from '../auction-dialog/auction-dialog.component';
 import { AuthService } from 'src/app/services/auth.service';
 import { GetAllAuctions } from 'src/app/models/auction-dashboard/getallauctions';

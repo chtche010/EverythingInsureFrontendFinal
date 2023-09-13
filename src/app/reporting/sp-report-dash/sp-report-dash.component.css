@@ -1,24 +1,15 @@
 @import '~@fortawesome/fontawesome-free/css/all.css';
-
-/* @import '~@angular/material/prebuilt-themes/indigo-pink.css'; */
-
-
-
-/* @import 'src/theme.scss'; */
-
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap');
 
 
 html,
 body {
   height: 100%;
-}
-
-body {
   margin: 0;
   font-family: "Montserrat", sans-serif;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap');
+
 
 :root {
   scroll-behavior: smooth;
@@ -28,6 +19,7 @@ body {
   font-family: "Montserrat", sans-serif;
   background: #f6f9ff;
   color: #444444;
+  overflow-x: hidden;
 }
 
 a {
@@ -51,7 +43,6 @@ h6 {
   font-weight: 800;
 }
 
-
 .background-container {
   background-image: url("src/assets/Images/background3.png");
   background-repeat: no-repeat;
@@ -71,6 +62,7 @@ h6 {
   margin-left: 310px;
   padding: 20px 30px;
   transition: all 0.3s;
+  flex-grow: 1;
 }
 
 @media (max-width: 1199px) {
@@ -78,4 +70,96 @@ h6 {
     padding: 20px;
     margin-left: 0;
   }
+}
+
+/*-------------------------------------------------------------- 
+grids section
+--------------------------------------------------------------*/
+
+mat-grid-list.top-tile,
+mat-grid-list.below-tile {
+  display: flex;
+  flex-wrap:nowrap; /* Allows items to wrap to the next line when there's not enough space */
+  justify-content: space-between; /* Distributes items evenly along the main axis */
+  align-items: center; /* Centers items vertically */
+  margin-right: 50px;
+}
+
+mat-grid-tile {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(43, 12, 218, 0.116);
+  margin: 20px;
+  padding: 10px;
+}
+
+mat-grid-tile:hover {
+  box-shadow: 0px 4px 10px rgba(7, 86, 244, 0.3);
+}
+
+.header-style {
+  background-color: transparent !important;
+  color: rgb(95, 93, 93) !important;
+  padding: 5px;
+  font-size: 16px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+@media (max-width: 600px) {
+  .header-style {
+    font-size: 3vw; /* Adjust the value as needed */
+    /* Add other responsive styles here */
+  }
+}
+.mat-grid-tile-header i {
+  margin-right: 5px; /* Adjust the margin as needed for spacing */
+}
+
+/* Style the icons with colors */
+.mat-grid-tile-header i {
+  color: #473da2; /* Adjust the color as needed */
+}
+.header-style1 {
+  background-color: transparent !important;
+  color: #0c0c93 !important;
+  padding: 5px;
+  font-size: 20px;
+  font-weight:bolder;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.number1 {
+  display: inline-block;
+  font-size: 1.5em; /* Adjust the size as needed */
+  font-weight: 600;
+  border-radius: 10%;
+  background-color: #4195f461; /* Adjust the color as needed */
+  color: #0c0c93;
+  padding: 5px 10px; /* Adjust the padding as needed */
+  margin-top: 20px;
+}
+
+.number2 {
+  display: inline-block;
+  font-size: 1.5em; /* Adjust the size as needed */
+  font-weight: 600;
+  border-radius: 10%;
+  background-color: #69e99361; /* Adjust the color as needed */
+  color: #0a7a2e;
+  padding: 5px 10px; /* Adjust the padding as needed */
+  margin-top: 20px;
+}
+
+.number3 {
+  display: inline-block;
+  font-size: 1.5em; /* Adjust the size as needed */
+  font-weight: 600;
+  border-radius: 10%;
+  background-color: #f1d25461; /* Adjust the color as needed */
+  color: #934d0c;
+  padding: 5px 10px; /* Adjust the padding as needed */
+  margin-top: 20px;
 }

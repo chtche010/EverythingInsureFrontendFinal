@@ -40,6 +40,7 @@ import { updateClaim } from './models/claimagent/updateClaim';
 import { UpdateclaimComponent } from './claims-agent/updateclaim/updateclaim/updateclaim.component';
 import { UpdateauctionComponent } from './claims-agent/updateauction/updateauction/updateauction.component';
 import { MaterialListComponent } from './serviceprovider/serviceproviderprofile/material-list/material-list/material-list.component';
+import { AdminReportComponent } from './reporting/admin-report/admin-report.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
@@ -78,6 +79,7 @@ const routes: Routes = [
   { path: 'changepassword', component: ChangepasswordComponent},
   { path: 'sp-report-dash', component: SpReportDashComponent},
   { path: 'ca-report-dash',component: CaReportDashComponent},
+  { path: 'admin-report', component: AdminReportComponent},
 ];
 
 @NgModule({

@@ -9,7 +9,7 @@ import { HttpClientModule, HttpContext, HTTP_INTERCEPTORS } from '@angular/commo
 import { SignupComponent } from './signup/signup.component';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormArrayName, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatInputModule } from '@angular/material/input';
@@ -77,6 +77,11 @@ import { DeleteAuctionDialogComponent } from './claims-agent/delete-auction/dele
 import { MaterialListComponent } from './serviceprovider/serviceproviderprofile/material-list/material-list/material-list.component';
 import { OptComponent } from './opt/opt.component';
 import { EmailVeriComponent } from './email-veri/email-veri.component';
+import { AdminReportComponent } from './reporting/admin-report/admin-report.component';
+import { NgChartsModule, NgChartsConfiguration } from 'ng2-charts';
+import { MatGridListModule} from '@angular/material/grid-list';
+import { BidSelectComponent } from './reporting/bid-select/bid-select.component';
+import { CaBarComponent } from './reporting/ca-bar/ca-bar.component';
 
 const routes: Routes = [
   { path: 'signup', component: SignupComponent },
@@ -130,6 +135,10 @@ const routes: Routes = [
     MaterialListComponent,
     OptComponent,
     EmailVeriComponent
+    OtpInputComponent,
+    AdminReportComponent,
+    BidSelectComponent,
+    CaBarComponent
   ],
   imports: [
     BrowserModule,
@@ -155,6 +164,9 @@ const routes: Routes = [
     MatNativeDateModule,
     MatDialogModule,
     MatFormFieldModule,
+    MatIconModule,
+    NgChartsModule,
+    MatGridListModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
@@ -163,6 +175,9 @@ const routes: Routes = [
   {
     provide: JWT_OPTIONS,
     useValue: JWT_OPTIONS
+  },
+  {
+    provide: NgChartsConfiguration, useValue: { generateColors: false}
   },
   JwtHelperService,
   DatePipe
