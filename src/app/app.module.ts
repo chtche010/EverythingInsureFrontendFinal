@@ -75,7 +75,10 @@ import { UpdateBidComponent } from './serviceprovider/update-bid/update-bid/upda
 import { DeleteDialogComponent } from './claims-agent/delete-claim-dialog/delete-dialog/delete-dialog.component';
 import { DeleteAuctionDialogComponent } from './claims-agent/delete-auction/delete-auction-dialog/delete-auction-dialog.component';
 import { AdminReportComponent } from './reporting/admin-report/admin-report.component';
-import { NgChartsModule } from 'ng2-charts';
+import { NgChartsModule, NgChartsConfiguration } from 'ng2-charts';
+import { MatGridListModule} from '@angular/material/grid-list';
+import { BidSelectComponent } from './reporting/bid-select/bid-select.component';
+import { CaBarComponent } from './reporting/ca-bar/ca-bar.component';
 
 const routes: Routes = [
   { path: 'signup', component: SignupComponent },
@@ -127,7 +130,9 @@ const routes: Routes = [
     DeleteDialogComponent,
     DeleteAuctionDialogComponent,
     OtpInputComponent,
-    AdminReportComponent
+    AdminReportComponent,
+    BidSelectComponent,
+    CaBarComponent
   ],
   imports: [
     BrowserModule,
@@ -154,7 +159,8 @@ const routes: Routes = [
     MatDialogModule,
     MatFormFieldModule,
     MatIconModule,
-    NgChartsModule
+    NgChartsModule,
+    MatGridListModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
@@ -163,6 +169,9 @@ const routes: Routes = [
   {
     provide: JWT_OPTIONS,
     useValue: JWT_OPTIONS
+  },
+  {
+    provide: NgChartsConfiguration, useValue: { generateColors: false}
   },
   JwtHelperService,
   DatePipe

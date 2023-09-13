@@ -484,48 +484,6 @@ body { margin: 0; font-family: "Montserrat", sans-serif; }
     margin-left: 95px;
   }
   
-  /* Recent Sales */
-  .dashboard .recent-sales {
-    font-size: 14px;
-  }
-  
-  .dashboard .recent-sales .table thead {
-    background: #f6f6fe;
-  }
-  
-  .dashboard .recent-sales .table thead th {
-    border: 0;
-  }
-  
-  .dashboard .recent-sales .dataTable-top {
-    padding: 0 0 10px 0;
-  }
-  
-  .dashboard .recent-sales .dataTable-bottom {
-    padding: 10px 0 0 0;
-  }
-  
-  /* Top Selling */
-  .dashboard .top-selling {
-    font-size: 14px;
-  }
-  
-  .dashboard .top-selling .table thead {
-    background: #f6f6fe;
-  }
-  
-  .dashboard .top-selling .table thead th {
-    border: 0;
-  }
-  
-  .dashboard .top-selling .table tbody td {
-    vertical-align: middle;
-  }
-  
-  .dashboard .top-selling img {
-    border-radius: 5px;
-    max-width: 60px;
-  }
   
   /*--------------------------------------------------------------
   # Icons list page
