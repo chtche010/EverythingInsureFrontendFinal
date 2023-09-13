@@ -74,6 +74,7 @@ import { CustomTimepickerComponent } from './custom-timepicker/custom-timepicker
 import { UpdateBidComponent } from './serviceprovider/update-bid/update-bid/update-bid.component';
 import { DeleteDialogComponent } from './claims-agent/delete-claim-dialog/delete-dialog/delete-dialog.component';
 import { DeleteAuctionDialogComponent } from './claims-agent/delete-auction/delete-auction-dialog/delete-auction-dialog.component';
+import { MaterialListComponent } from './serviceprovider/serviceproviderprofile/material-list/material-list/material-list.component';
 
 const routes: Routes = [
   { path: 'signup', component: SignupComponent },
@@ -124,6 +125,7 @@ const routes: Routes = [
     UpdateBidComponent,
     DeleteDialogComponent,
     DeleteAuctionDialogComponent,
+    MaterialListComponent,
   ],
   imports: [
     BrowserModule,

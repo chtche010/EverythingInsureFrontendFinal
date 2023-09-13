@@ -2,12 +2,14 @@
 
 .dialog-title {
   font-size: 24px; 
-  margin-bottom: 16px; 
+  margin-bottom: 20px; 
   color: #333;
+  text-align: center;
 }
 
 .dialog-container {
   padding: 16px;
+  text-align: center;
 }
 
 .dialog-title {
@@ -17,7 +19,7 @@
 
 .dialog-form {
   display: flex;
-  justify-content: space-between; /* Distribute space between columns */
+  justify-content: center; /* Distribute space between columns */
 }
 
 .form-columns {
@@ -30,6 +32,7 @@
 .form-group {
   display: flex;
   flex-direction: column;
+  margin: 0 auto;
   width: 80%;
   height: 50%;
 }
@@ -51,7 +54,8 @@
 .dialog-actions {
   margin-top: 16px;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
+  text-align: center;
 }
 
 button {

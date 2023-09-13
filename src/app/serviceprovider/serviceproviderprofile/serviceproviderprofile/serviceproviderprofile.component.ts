@@ -23,7 +23,8 @@ export class ServiceproviderprofileComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadUserProfile();
-    this.loadAddress(this.serviceProviderId);
+    //this.addressId = this.userProfile.addressId;
+    this.loadAddress(this.address);
     //this.loadBankDetails();
   }
 
@@ -45,9 +46,10 @@ export class ServiceproviderprofileComponent implements OnInit {
 
   loadAddress(addressId: number) {
     this.authService.getAddressById(addressId).subscribe(
-      (reponse) => {
-        this.address = reponse.data;
+      (response: any) => {
+        console.log('Address Id:', addressId);
         console.log('Address data:', this.address);
+        this.address = response.data;
       },
       (error) => {
         console.log('Error fetching address', error);

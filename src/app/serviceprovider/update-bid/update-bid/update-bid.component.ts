@@ -1,67 +1,49 @@
 import { Component, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms'; // Import Angular forms module
-import { updateBid } from 'src/app/models/serviceprovider/updateBid';
-import { getBids } from 'src/app/models/serviceprovider/getBids';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { AuthService } from 'src/app/services/auth.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-update-bid',
   templateUrl: './update-bid.component.html',
-  styleUrls: ['./update-bid.component.css']
+  styleUrls: ['./update-bid.component.css'],
 })
 export class UpdateBidComponent {
-  bidData: updateBid = new updateBid();
-  bidId: number;
-  updateForm: FormGroup; // Define a FormGroup for form controls
+  bidData: any;
+  updateBidForm!: FormGroup;
 
   constructor(
-    private authService: AuthService,
     public dialogRef: MatDialogRef<UpdateBidComponent>,
-    private snackBar: MatSnackBar,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private fb: FormBuilder // Inject FormBuilder
+    private authService: AuthService,
+    private formBuilder: FormBuilder,
   ) {
-    console.log('bidId:', data.bidId);
-    
-    this.updateForm = this.fb.group({ // Initialize the form group with form controls
-      jobDescription: [data.jobDescription, Validators.required], // Bind the form control to data.jobDescription
-      bidTotalLabourCost: [data.bidTotalLabourCost, Validators.required],
-      bidEstimatedDuration: [data.bidEstimatedDuration, Validators.required],
+    this.bidData = { ...data };
+
+    this.updateBidForm = this.formBuilder.group({
+      jobDescription: [this.bidData.jobDescription, Validators.required],
+      bidTotalLabourCost: [this.bidData.bidTotalLabourCost, Validators.required],
+      bidEstimatedDuration: [this.bidData.bidEstimatedDuration, Validators.required],
     });
-
-    if (data && data.bidId) {
-      this.bidId = data.bidId;
-    } else {
-      this.bidId = 0;
-      console.error('Data is missing or incomplete');
-    }
   }
 
-  updateBid() {
-    if (this.updateForm.valid) { // Check if the form is valid
-      const updatedBidData: updateBid = {
-        ...this.bidData,
-        bidId: this.bidId,
-      };
+  updateBid(): void {
+    // Include the bidId in the request body
+    const updatedBidData = {
+      bidId: this.bidData.bidId,
+      jobDescription: this.updateBidForm.get('jobDescription')?.value,
+      bidTotalLabourCost: this.updateBidForm.get('bidTotalLabourCost')?.value,
+      bidEstimatedDuration: this.updateBidForm.get('bidEstimatedDuration')?.value,
+    };
 
-      console.log('Updated bid data:', updatedBidData);
-      console.log('bidId:', updatedBidData.bidId);
-
-      this.authService.updatebid(updatedBidData).subscribe(
-        (response) => {
-          this.dialogRef.close(response);
-          this.snackBar.open('Update successful', 'Close', { duration: 3000 });
-        },
-        (error) => {
-          console.error('Error updating bid:', error)
-        }
-      );
-    }
+    this.authService.updatebid(updatedBidData).subscribe((response) => {
+      if (response.success) {
+        this.dialogRef.close(response.data); // Pass data back to the parent component if needed
+      }
+    });
   }
 
-  onCancelClick(): void {
+  closeDialog(): void {
     this.dialogRef.close();
   }
 }

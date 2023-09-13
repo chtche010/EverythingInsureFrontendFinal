@@ -21,6 +21,7 @@ import { updateClaim } from '../models/claimagent/updateClaim';
 import { createBid } from '../models/serviceprovider/createBid';
 import { createBidMaterial } from '../models/serviceprovider/createBidMaterial';
 import { getBids } from '../models/serviceprovider/getBids';
+import { getspAddress } from '../models/serviceprovider/getspAddress';
 
 @Injectable({
   providedIn: 'root'
@@ -48,6 +49,10 @@ export class AuthService {
   private bidId!: number;
   private bidIdSubject = new BehaviorSubject<number>(0);
   bidId$ = this.bidIdSubject.asObservable();
+
+  private addressId!: number;
+  private addressIdSubject = new BehaviorSubject<number>(0);
+  addressId$ = this.addressIdSubject.asObservable();
 
   private httpOptions = {
       headers: new HttpHeaders().set(
@@ -195,10 +200,22 @@ export class AuthService {
     return this.serviceProviderId;
   }
 
-  getAddressById(addressId: number): Observable<any> {
+  setaddressId(addressId: number): void {
+    this.addressId = addressId;
+  }
+
+  getaddressId(): number {
+    return this.addressId;
+  }
+
+  getAddressById(addressId: number): Observable<getspAddress> {
     const url = `${this.baseUrl}api/ServiceProvider/Get Address By Id?id=${addressId}`;
-    return this.http.get<any>(url, this.httpOptions);
+    return this.http.get<getspAddress>(url, this.httpOptions);
   } 
+
+  public getalladdress(): Observable<any[]> {
+    return this.http.get<any[]>(this.baseUrl + "api/ServiceProvider/Get All Addresses", this.httpOptions);
+  }
 
   public updateaddress(addressData: any): Observable<any> {
     return this.http.put<any>(this.baseUrl + "api/ServiceProvider/Update Address", addressData, this.httpOptions);
@@ -226,6 +243,16 @@ export class AuthService {
 
   updatebid(updatedBidData: any): Observable<any> {
     return this.http.put<any>(this.baseUrl + "api/Bid/UpdateBid", updatedBidData, this.httpOptions);
+  }
+
+  getSingleBid(bidId: number): Observable<any> {
+    const url = `${this.baseUrl}api/Bid/GetSingleBid?id=${bidId}`;
+    return this.http.get<any>(url, this.httpOptions);
+  }
+
+  getAllMaterials(bidId: number): Observable<any> {
+    const url = `${this.baseUrl}api/Bid/GetAllMaterials?BidId=${bidId}`; // Include the bidId in the URL
+    return this.http.get<any>(url, this.httpOptions);
   }
 
   // Submitting the sign up form 

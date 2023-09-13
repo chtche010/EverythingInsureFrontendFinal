@@ -37,6 +37,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { updateClaim } from './models/claimagent/updateClaim';
 import { UpdateclaimComponent } from './claims-agent/updateclaim/updateclaim/updateclaim.component';
 import { UpdateauctionComponent } from './claims-agent/updateauction/updateauction/updateauction.component';
+import { MaterialListComponent } from './serviceprovider/serviceproviderprofile/material-list/material-list/material-list.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
@@ -59,6 +60,7 @@ const routes: Routes = [
   { path: 'reset', component: ResetPasswordComponent},
   { path: 'updateclaim', component: UpdateclaimComponent},
   { path: 'updateauction', component: UpdateclaimComponent},
+  { path: 'material-list/:bidId', component: MaterialListComponent},
 
   //admin 
   { path: 'admin-nav-bar', component: AdminNavBarComponent},
