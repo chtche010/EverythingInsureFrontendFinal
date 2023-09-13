@@ -134,7 +134,7 @@ const routes: Routes = [
     DeleteAuctionDialogComponent,
     MaterialListComponent,
     OptComponent,
-    EmailVeriComponent
+    EmailVeriComponent,
     OtpInputComponent,
     AdminReportComponent,
     BidSelectComponent,
