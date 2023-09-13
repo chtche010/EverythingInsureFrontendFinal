@@ -1,7 +1,7 @@
 <h2 mat-dialog-title>{{ auctionDetails.auctionTitle }}</h2>
 
 <div mat-dialog-content>
-  <p>Date: <strong>{{ auctionDetails.auctionDate }}</strong></p>
+  <p>Date: <strong>{{ auctionDetails.auctionDate | date}}</strong></p>
   <p>Start Time: <strong>{{ auctionDetails.startTime | date:'shortTime' }}</strong></p>
   <p>End Time: <strong>{{ auctionDetails.endTime | date:'shortTime' }}</strong></p>
 

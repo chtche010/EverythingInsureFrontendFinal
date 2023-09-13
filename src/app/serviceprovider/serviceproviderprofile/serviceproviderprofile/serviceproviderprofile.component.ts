@@ -29,12 +29,13 @@ export class ServiceproviderprofileComponent implements OnInit {
   ){}
 
   serviceProviderId!: number;
+  addressId!: number;
 
   ngOnInit(): void {
     this.loadUserProfile();
     this.checkVeri(this.email);
 
-    //this.loadAddress(this.serviceProviderId);
+    this.loadAddress(this.serviceProviderId);
     //this.loadBankDetails();
 
     
@@ -74,12 +75,11 @@ export class ServiceproviderprofileComponent implements OnInit {
     );
   }
 
-  loadAddress(serviceProviderId: number) {
-    this.authService.getspaddress(serviceProviderId).subscribe(
-      (data) => {
-        this.address = data;
-        console.log('Service provider id:',serviceProviderId);
-        console.log('Address data:', data);
+  loadAddress(addressId: number) {
+    this.authService.getAddressById(addressId).subscribe(
+      (reponse) => {
+        this.address = reponse.data;
+        console.log('Address data:', this.address);
       },
       (error) => {
         console.log('Error fetching address', error);
@@ -114,4 +114,44 @@ export class ServiceproviderprofileComponent implements OnInit {
         }
       );
   }
+
+//   updateAddress() {
+//     this.authService.updateaddress(this.addressId).subscribe(
+//       (data) => {
+//         console.log('Address updated successfully:', data);
+//         this.loadAddress(data.addressId);
+//         this.snackBar.open('Your profile has been updated successfully', 'Close', {duration: 3000});
+//       },
+//       (error) => {
+//         console.error('Error updating profile:', error);
+//       }
+//     );
+// }
+
+updateAddress() {
+  // Make sure you include the addressId in the payload
+  const addressDataWithId = {
+    addressId: this.address.addressId, // Include the addressId
+    buildingName: this.address.buildingName,
+    streetNumber: this.address.streetNumber,
+    streetName: this.address.streetName,
+    surbub: this.address.surbub,
+    city: this.address.city,
+    province: this.address.province,
+    country: this.address.country,
+    zipCode: this.address.zipCode
+  };
+
+  this.authService.updateaddress(addressDataWithId).subscribe(
+    (data) => {
+      console.log('Address updated successfully:', data);
+      this.loadAddress(data.addressId);
+      this.snackBar.open('Your profile has been updated successfully', 'Close', { duration: 3000 });
+    },
+    (error) => {
+      console.error('Error updating address:', error);
+    }
+  );
+}
+
 }

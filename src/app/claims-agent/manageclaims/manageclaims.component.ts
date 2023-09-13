@@ -10,7 +10,7 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 
 export class ManageclaimsComponent {
-  displayedColumns: string[] = ['customerName', 'customerEmail', 'vehicleMake', 'vehicleModel', 'modelYear', 'MMCode', 'damageDescription', 'customerSurbub', 'customerCity', 'customerProvince'];
+  displayedColumns: string[] = ['customerName', 'customerEmail', 'vehicleMake', 'vehicleModel', 'modelYear', 'MMCode', 'damageDescription', 'customerSurbub', 'customerCity', 'customerProvince', 'actions'];
   dataSource!: MatTableDataSource<PeriodicElement>;
 
   constructor(private authService: AuthService) {}
@@ -30,5 +30,13 @@ export class ManageclaimsComponent {
         console.error('Error fetching claim details:', error);
       }
     );
+  }
+
+  editClaim() {
+
+  }
+
+  deleteClaim() {
+    
   }
 }

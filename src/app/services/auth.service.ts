@@ -171,8 +171,12 @@ export class AuthService {
   }
 
   getAddressById(addressId: number): Observable<any> {
-    const url = `${this.baseUrl}api/ServiceProvider/GetSingleAuctionDetail?id=${addressId}`;
+    const url = `${this.baseUrl}api/ServiceProvider/Get Address By Id?id=${addressId}`;
     return this.http.get<any>(url, this.httpOptions);
+  } 
+
+  public updateaddress(addressData: any): Observable<any> {
+    return this.http.put<any>(this.baseUrl + "api/ServiceProvider/Update Address", addressData, this.httpOptions);
   }
 
   // Submitting the sign up form 

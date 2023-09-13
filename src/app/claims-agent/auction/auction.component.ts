@@ -87,7 +87,7 @@ export class AuctionComponent implements OnInit {
         this.submitAuctionDetails(this.claimId);
         // Proceed to the next step
       }, (error) => {
-        console.log("Error submitting basic details:", error);
+        console.log("Error submitting claim details:", error);
       });
     } else {
       // Handle form validation errors if needed

@@ -122,6 +122,10 @@ export class InitialsignupComponent implements OnInit {
             return;
           }
           this.router.navigate([route]);
+
+          this.matSnackBar.open('Registration successful', 'Close', {
+            duration: 3000, 
+          });
         },
         error => {
           console.error(error);
