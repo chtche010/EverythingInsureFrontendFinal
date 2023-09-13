@@ -19,7 +19,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSelectModule } from '@angular/material/select';
-import { NgToastModule } from 'ng-angular-popup'
+import { NgToastModule } from 'ng-angular-popup';
 import { MatNativeDateModule } from '@angular/material/core';
 import { ClaimsagentsignupComponent } from './claimsagentsignup/claimsagentsignup.component';
 import { InitialsignupComponent } from './initialsignup/initialsignup.component';
