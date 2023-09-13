@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ResetPassword } from '../models/resetPassword.model';
+import { changePassword } from '../models/changePassword.model';
 
 
 @Injectable({
@@ -28,8 +29,21 @@ export class ResetPasswordService {
     "email":resetPasswordobj.email, 
     "emailToken":resetPasswordobj.emailToken,
     "newPassword":resetPasswordobj.newPassword,
-    "confirmPassword":resetPasswordobj.confirmPassword
-
+    "confirmPassword":resetPasswordobj.confirmPassword,
     });
+  }
+
+  changePassword( changePasswordobj: changePassword){
+
+    
+    console.log(changePasswordobj);
+
+    return this.http.post<any>(this.baseUrl + `/resetEmail`, {
+    "id": changePasswordobj.id,
+    "oldPassword": changePasswordobj.oldPassword,
+    "newPassword": changePasswordobj.newPassword,
+    "confirmPassword": changePasswordobj.confirmPassword,
+    });
+
   }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { changePassword } from 'src/app/models/changePassword.model';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -9,6 +10,8 @@ import { AuthService } from 'src/app/services/auth.service';
 
 export class CaNavbarComponent {
   userProfile: any;
+  accountUserId: number=0;
+
 
   constructor(private authService: AuthService) {}
 
@@ -25,6 +28,9 @@ export class CaNavbarComponent {
       (response) => {
         console.log(response)
         this.userProfile = response.data;
+        this.accountUserId = this.userProfile.account_UserId;
+        console.log('account_UserId:', this.accountUserId);
+       
         console.log('Claim Agent Profile', this.userProfile);
       }, 
       (error) => {

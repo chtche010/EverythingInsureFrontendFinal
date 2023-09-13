@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ResetPasswordService } from 'src/app/services/reset-password.service';
+import { changePassword } from 'src/app/models/changePassword.model';
+import ValidateForm from 'src/app/helpers/validationform';
+import { Router } from '@angular/router';
+
 
 
 @Component({
@@ -9,25 +14,35 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   templateUrl: './ca-profile.component.html',
   styleUrls: ['./ca-profile.component.css']
 })
+
 export class CaProfileComponent implements OnInit {
   userProfile: any; 
   chanegPasswordForm!: FormGroup;
+  changePassswordObj = new changePassword();
+  accountUserId: number=0;
 
 
-  constructor(private authService: AuthService,
+
+  constructor(
+    private resetService: ResetPasswordService,
+    private authService: AuthService,
      private snackBar: MatSnackBar,
+     private router: Router,
+     private snackbar: MatSnackBar,
+
      private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.getcaprofile();
-    this.chanegPasswordForm = this.fb.group([
-      //currentPassword: ['', Validators.required],   
-      //newPassword: ['', Validators.required],   
-      //confirmPassword: ['', Validators.required],
-      
-      
+    this.chanegPasswordForm = this.fb.group(
+      {
+        currentPassword: ['', Validators.required],
+        newPassword: ['', '', [Validators.required, Validators.minLength(6), Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,}$')]], 
+        confirmPassword: ['', Validators.required]
 
-    ])
+      }
+
+    )
   }
 
   getcaprofile(): void {
@@ -35,7 +50,11 @@ export class CaProfileComponent implements OnInit {
       (response) => {
         console.log(response)
         this.userProfile = response.data;
+       
+        //console.log(response.id);
         console.log('Claim Agent Profile', this.userProfile);
+       
+
       }, 
       (error) => {
         console.log('Error returning claim agent profile', error);
@@ -54,5 +73,34 @@ export class CaProfileComponent implements OnInit {
         console.error('Error updating profile:', error);
       }
     );
+  }
+
+  changePassword(){
+    
+      this.changePassswordObj.id = 1;
+      this.changePassswordObj.oldPassword = this.chanegPasswordForm.value.currentPassword,
+      this.changePassswordObj.newPassword = this.chanegPasswordForm.value.newPassword,
+      this.changePassswordObj.confirmPassword = this.chanegPasswordForm.value.confirmPassword,
+
+      console.log(this.accountUserId);
+      console.log(this.changePassswordObj);
+      
+
+      this.resetService.changePassword(this.changePassswordObj)
+      .subscribe({
+        next: (res)=>{
+          console.log(this.changePassswordObj)
+          this.snackbar.open('Success! Password reset successfully', 'Close', { duration: 4000 });
+
+          this.router.navigate(['/login']);
+        },
+        error: (err)=>{
+          this.snackbar.open('Error! Something went wrong', 'Close', { duration: 4000 });
+        }
+      })
+   
+
+    
+   
   }
 }

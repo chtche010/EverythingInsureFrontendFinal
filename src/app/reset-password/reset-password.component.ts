@@ -42,7 +42,7 @@ export class ResetPasswordComponent implements OnInit {
       let uriToken = val['code'];
 
 
-      this.emailToken2 = uriToken.replace(/ /g, '')
+      this.emailToken2 = uriToken.replace(/ /g,'+')
       console.log(this.emailToken2);
       console.log(this.emailToReset);
     })
@@ -54,8 +54,6 @@ export class ResetPasswordComponent implements OnInit {
       this.resetPasswordObj.newPassword = this.resetPasswordForm.value.password;
       this.resetPasswordObj.confirmPassword = this.resetPasswordForm.value.confirmPassword;
       this.resetPasswordObj.emailToken = this.emailToken2;
-
-
 
 
       console.log(this.resetPasswordObj)
