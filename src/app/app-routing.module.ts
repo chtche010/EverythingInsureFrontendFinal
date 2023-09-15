@@ -41,6 +41,7 @@ import { UpdateclaimComponent } from './claims-agent/updateclaim/updateclaim/upd
 import { UpdateauctionComponent } from './claims-agent/updateauction/updateauction/updateauction.component';
 import { MaterialListComponent } from './serviceprovider/serviceproviderprofile/material-list/material-list/material-list.component';
 import { AdminReportComponent } from './reporting/admin-report/admin-report.component';
+import { AwardauctionComponent } from './awardauction/awardauction.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
@@ -80,6 +81,7 @@ const routes: Routes = [
   { path: 'sp-report-dash', component: SpReportDashComponent},
   { path: 'ca-report-dash',component: CaReportDashComponent},
   { path: 'admin-report', component: AdminReportComponent},
+  { path: 'awardauction', component: AwardauctionComponent}
 ];
 
 @NgModule({

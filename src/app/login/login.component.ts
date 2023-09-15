@@ -86,7 +86,7 @@ export class LoginComponent implements OnInit {
             this.snackbar.open('Email verfication sent!', 'Close', { duration: 4000 });
             this.router.navigate(['/adminprofile']);
           } else if (decodedToken.role === 'ServiceProvider') {
-            this.snackbar.open('Email verfication sent!', 'Close', { duration: 4000 });
+            //this.snackbar.open('Email verfication sent!', 'Close', { duration: 4000 });
             this.router.navigate(['/serviceproviderprofile']);
           } else if (decodedToken.role === 'ClaimsAgent') {
             this.authService.sendOTPEmail(email)

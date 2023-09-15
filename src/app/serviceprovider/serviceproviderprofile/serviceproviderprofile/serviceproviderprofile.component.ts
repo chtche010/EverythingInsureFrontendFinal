@@ -48,12 +48,12 @@ export class ServiceproviderprofileComponent implements OnInit {
     .subscribe({
       next: (res)=>{
         console.log(email)
-        this.snackbar.open('Success! Email Verified', 'Close', { duration: 4000 });
+        this.snackbar.open('Success! Email Verified', 'Close', { duration: 2000 });
 
         this.router.navigate(['/home']);
       },
       error: (err)=>{
-        this.snackbar.open('Error! Something went wrong', 'Close', { duration: 4000 }); 
+       //this.snackbar.open('Error! Something went wrong', 'Close', { duration: 2000 }); 
 
       }
     })

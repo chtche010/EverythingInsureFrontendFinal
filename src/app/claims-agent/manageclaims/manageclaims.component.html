@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./manageclaims.component.css">
   </head>
   <body>
 
@@ -61,8 +60,8 @@
     </ng-container>
 
     <ng-container matColumnDef="damageDescription">
-        <th mat-header-cell *matHeaderCellDef> Damage description </th>
-        <td mat-cell *matCellDef="let element"> {{element.damageDescription}} </td>
+      <th mat-header-cell style="width: 70%" class="damage-description-header" *matHeaderCellDef> Damage description </th>
+      <td mat-cell style="width: 70%" class="damage-description-cell" *matCellDef="let element"> {{element.damageDescription}} </td>
     </ng-container>
 
     <ng-container matColumnDef="customerSurbub">
