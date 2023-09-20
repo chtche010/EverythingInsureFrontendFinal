@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ReactiveFormsModule } from '@angular/forms';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ResetPasswordService } from 'src/app/services/reset-password.service';
 import { changePassword } from 'src/app/models/changePassword.model';
@@ -44,6 +45,7 @@ export class CaProfileComponent implements OnInit {
 
     )
   }
+  
 
   getcaprofile(): void {
     this.authService.getcaprofile().subscribe(
@@ -76,14 +78,10 @@ export class CaProfileComponent implements OnInit {
   }
 
   changePassword(){
-    
-      this.changePassswordObj.id = 1;
-      this.changePassswordObj.oldPassword = this.chanegPasswordForm.value.currentPassword,
-      this.changePassswordObj.newPassword = this.chanegPasswordForm.value.newPassword,
-      this.changePassswordObj.confirmPassword = this.chanegPasswordForm.value.confirmPassword,
 
-      console.log(this.accountUserId);
-      console.log(this.changePassswordObj);
+  console.log(this.userProfile.accountUserId);
+
+      console.log(this.userProfile.accountUserId);
       
 
       this.resetService.changePassword(this.changePassswordObj)
