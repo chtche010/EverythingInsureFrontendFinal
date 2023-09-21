@@ -33,12 +33,12 @@ export class ResetPasswordService {
     });
   }
 
-  changePassword( changePasswordobj: changePassword){
+  changePassword(changePasswordobj: changePassword){
 
     
     console.log(changePasswordobj);
 
-    return this.http.post<any>(this.baseUrl + `/resetEmail`, {
+    return this.http.post<any>(this.baseUrl + `/changePassword`, {
     "id": changePasswordobj.id,
     "oldPassword": changePasswordobj.oldPassword,
     "newPassword": changePasswordobj.newPassword,

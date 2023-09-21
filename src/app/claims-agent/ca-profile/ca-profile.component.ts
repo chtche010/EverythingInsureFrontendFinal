@@ -19,7 +19,7 @@ export class CaProfileComponent implements OnInit {
   userProfile: any; 
   chanegPasswordForm!: FormGroup;
   changePassswordObj = new changePassword();
-  accountUserId: number=0;
+  //changePassswordObj.id = number=0;
 
 
 
@@ -76,28 +76,48 @@ export class CaProfileComponent implements OnInit {
   }
 
   changePassword(){
-    
-      this.changePassswordObj.id = 1;
-      this.changePassswordObj.oldPassword = this.chanegPasswordForm.value.currentPassword,
-      this.changePassswordObj.newPassword = this.chanegPasswordForm.value.newPassword,
-      this.changePassswordObj.confirmPassword = this.chanegPasswordForm.value.confirmPassword,
 
-      console.log(this.accountUserId);
-      console.log(this.changePassswordObj);
+
+      this.authService.getcaprofile().subscribe(
+        (response) => {
+          console.log(response)
+          this.userProfile = response.data;
+          console.log(this.userProfile);
+
+          var idNum = this.userProfile.account_UserId;
+          console.log(idNum);
+
+          this.changePassswordObj.id = this.userProfile.account_UserId;
+          //console.log(idNum);
+
+
+          console.log(this.changePassswordObj.id)
+          console.log(this.changePassswordObj)
+
+          this.resetService.changePassword(this.changePassswordObj)
+          .subscribe({
+            next: (res)=>{
+              console.log(this.changePassswordObj)
+              this.snackbar.open('Success! Password reset successfully', 'Close', { duration: 4000 });
+    
+              this.router.navigate(['/ca-profile']);
+            },
+            error: (err)=>{
+              this.snackbar.open('Error! Something went wrong', 'Close', { duration: 4000 });
+            }
+          })
+
+          //console.log(response.id);
+          console.log('Claim Agent Profile', this.userProfile);
+         
+  
+        }, 
+        (error) => {
+         // console.log('Error returning claim agent profile', error);
+        }
+      );
       
 
-      this.resetService.changePassword(this.changePassswordObj)
-      .subscribe({
-        next: (res)=>{
-          console.log(this.changePassswordObj)
-          this.snackbar.open('Success! Password reset successfully', 'Close', { duration: 4000 });
-
-          this.router.navigate(['/login']);
-        },
-        error: (err)=>{
-          this.snackbar.open('Error! Something went wrong', 'Close', { duration: 4000 });
-        }
-      })
    
 
     
