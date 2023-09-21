@@ -4,8 +4,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ResetPasswordService } from 'src/app/services/reset-password.service';
 import { changePassword } from 'src/app/models/changePassword.model';
+
 import ValidateForm from 'src/app/helpers/validationform';
 import { Router } from '@angular/router';
+import { notificationPreferences } from 'src/app/models/notificationPreferences';
 
 
 
@@ -19,6 +21,8 @@ export class CaProfileComponent implements OnInit {
   userProfile: any; 
   chanegPasswordForm!: FormGroup;
   changePassswordObj = new changePassword();
+  notificationPreferObj = new notificationPreferences(
+  );
   //changePassswordObj.id = number=0;
 
 
@@ -122,5 +126,49 @@ export class CaProfileComponent implements OnInit {
 
     
    
+  }
+
+  saveSettings() {
+
+    this.authService.getcaprofile().subscribe(
+      (response) => {
+        console.log(response)
+        this.userProfile = response.data;
+        console.log(this.userProfile);
+
+        var idNum = this.userProfile.account_UserId;
+        console.log(idNum);
+
+        this.notificationPreferObj.id = this.userProfile.account_UserId;
+        //console.log(idNum);
+
+
+        console.log(this.notificationPreferObj.id)
+        console.log(this.notificationPreferObj)
+
+        this.authService.saveSettings(this.notificationPreferObj)
+        .subscribe({
+          next: (res)=>{
+            console.log(this.changePassswordObj)
+            this.snackbar.open('Success! Notification settings updated', 'Close', { duration: 4000 });
+  
+            this.router.navigate(['/ca-profile']);
+          },
+          error: (err)=>{
+            this.snackbar.open('Error! Something went wrong', 'Close', { duration: 4000 });
+          }
+        })
+
+        //console.log(response.id);
+        console.log('Claim Agent Profile', this.userProfile);
+       
+
+      }, 
+      (error) => {
+       // console.log('Error returning claim agent profile', error);
+      }
+    );
+    // Save user settings to the service
+
   }
 }

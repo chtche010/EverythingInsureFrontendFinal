@@ -18,6 +18,7 @@ import { ClaimReview } from '../models/claimagent/claimReview';
 import { GetAllAuctions } from '../models/auction-dashboard/getallauctions';
 import { getSingleAuction } from '../models/serviceprovider/getSingleAuction';
 import { verifyEmail } from '../models/verifyEmail.model';
+import { notificationPreferences } from '../models/notificationPreferences';
 
 @Injectable({
   providedIn: 'root'
@@ -247,6 +248,19 @@ export class AuthService {
       return this.http.post<any>(this.baseUrl + 'Auth/checkVeri', {"email": email})
 
 
+    }
+
+    saveSettings(notificationPreferObj: notificationPreferences)
+    {
+  
+      console.log(notificationPreferObj);
+  
+      return this.http.post<any>(this.baseUrl + `/resetEmail`, {
+      "id":notificationPreferObj.id, 
+      "changesToAccounts":notificationPreferObj.changesToAccounts,
+      "newAuctions":notificationPreferObj.newAuctions,
+      "marketingPromo":notificationPreferObj.marketingPromo,
+      });
     }
   }
 
