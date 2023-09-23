@@ -253,9 +253,9 @@ export class AuthService {
     saveSettings(notificationPreferObj: notificationPreferences)
     {
   
-      console.log(notificationPreferObj);
+      console.log('API test', notificationPreferObj);
   
-      return this.http.post<any>(this.baseUrl + `/resetEmail`, {
+      return this.http.post<any>(this.baseUrl + `Auth/notifications`, {
       "id":notificationPreferObj.id, 
       "changesToAccounts":notificationPreferObj.changesToAccounts,
       "newAuctions":notificationPreferObj.newAuctions,
