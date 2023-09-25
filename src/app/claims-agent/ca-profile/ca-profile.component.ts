@@ -178,18 +178,40 @@ export class CaProfileComponent implements OnInit {
         // Optionally, you can log the result
         console.log(this.splitValues);
 
-        const firstValue = this.splitValues[0].trim() 
-        const secondValue = this.splitValues[1].trim() 
-        const thirdValue = this.splitValues[2].trim() 
+        const firstValue = Boolean(this.splitValues[0].trim() )
+       console.log(firstValue)
+        const secondValue = Boolean(this.splitValues[1].trim() )
+        console.log(secondValue)
 
-        if(firstValue === 'true'){
-          this.notificationPreferObj.changesToAccounts = true;
+        const thirdValue = Boolean(this.splitValues[2].trim() )
+        console.log(thirdValue)
+
+
+        if(firstValue === true){
+          this.notificationPreferObj.changesToAccounts = Boolean(true);
+          //console.log(this.notificationPreferObj.changesToAccounts)
         }else
         {
           this.notificationPreferObj.changesToAccounts = false;
-
-
         }
+
+        if(secondValue === true){
+          this.notificationPreferObj.newAuctions = Boolean(true);
+          //console.log(this.notificationPreferObj.changesToAccounts)
+        }else
+        {
+          this.notificationPreferObj.newAuctions = false;
+        }
+
+        if(thirdValue === true){
+          this.notificationPreferObj.marketingPromo = Boolean(true);
+          //console.log(this.notificationPreferObj.changesToAccounts)
+        }else
+        {
+          this.notificationPreferObj.marketingPromo = false;
+        }
+
+
             
 
             
