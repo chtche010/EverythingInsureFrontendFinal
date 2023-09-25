@@ -130,27 +130,6 @@ export class CaProfileComponent implements OnInit {
   }
 
 
-  handleSelected1() {
-    this.notificationPreferObj.changesToAccounts = !this.notificationPreferObj.changesToAccounts;  
-      console.log('Changes to Account', this.notificationPreferObj.changesToAccounts);
-  
-  }
-  
-  handleSelected2() {
-    this.notificationPreferObj.marketingPromo = !this.notificationPreferObj.marketingPromo;
-      console.log('Marketing', this.notificationPreferObj.marketingPromo);
-  }
-  
-  handleSelected3() {
-    this.notificationPreferObj.newAuctions = !this.notificationPreferObj.newAuctions;
-  
-      console.log('New Auctions', this.notificationPreferObj.newAuctions);
-  }
-
- // pushNotifications() {
-  //  this.authService.pushNotifications()
- // }
-
   pushNotifications() {
 
     this.authService.getcaprofile().subscribe(
