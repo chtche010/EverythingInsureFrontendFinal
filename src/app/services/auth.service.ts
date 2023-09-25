@@ -266,10 +266,12 @@ export class AuthService {
     }
 
 
-    pushNotifications(accountID: number): Observable<notificationPreferences> {
-      const url = `${this.baseUrl}api/Auth/returnNotifications?id=${accountID}`;
-      return this.http.get<notificationPreferences>(url, this.httpOptions);
+    pushNotifications(accountID: number): Observable<any> {
+      const url = `${this.baseUrl}Auth/returnNotifications?id=${accountID}`;
+      return this.http.post<any>(url, this.httpOptions);
     }
+
+  
 
     //Admin services
 

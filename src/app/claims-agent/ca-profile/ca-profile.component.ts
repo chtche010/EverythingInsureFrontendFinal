@@ -23,6 +23,7 @@ interface NotificationPreferences {
 export class CaProfileComponent implements OnInit {
   userProfile: any; 
   userNotifi: any;
+  splitValues: string[] = [];
   chanegPasswordForm!: FormGroup;
   changePassswordObj = new changePassword();
   notificationPreferObj = new notificationPreferences();
@@ -42,6 +43,8 @@ export class CaProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.getcaprofile();
+    this.pushNotifications();
+    //console.log('check', this.pushNotifications)
     this.chanegPasswordForm = this.fb.group(
       {
         currentPassword: ['', Validators.required],
@@ -169,15 +172,47 @@ export class CaProfileComponent implements OnInit {
         this.authService.pushNotifications(this.userProfile.account_UserId)
         .subscribe({
           next: (res)=>{
-            console.log(res)
-            this.userNotifi = response.data
+            console.log(res.data)
+            this.splitValues = res.data.split(', ');
+
+        // Optionally, you can log the result
+        console.log(this.splitValues);
+
+        const firstValue = this.splitValues[0].trim() 
+        const secondValue = this.splitValues[1].trim() 
+        const thirdValue = this.splitValues[2].trim() 
+
+        if(firstValue === 'true'){
+          this.notificationPreferObj.changesToAccounts = true;
+        }else
+        {
+          this.notificationPreferObj.changesToAccounts = false;
+
+
+        }
+            
+
+            
+           
+            console.log(firstValue);
+
+
+          //  console.log(res.changesToAccounts)
+        //   this.notificationPreferObj.changesToAccounts = res.changesToAccounts
+
+
+            
+           // this.notificationPreferObj.newAuctions = this.userNotifi.newAuctions
+           // this.notificationPreferObj.marketingPromo = this.userNotifi.marketingPromo
+
+
             
             this.snackbar.open('Success! Notifications pushed', 'Close', { duration: 4000 });
   
             this.router.navigate(['/ca-profile']);
           },
           error: (err)=>{
-            this.snackbar.open('Error! Something went wrong', 'Close', { duration: 4000 });
+            this.snackbar.open('Error! Notifications not pushed', 'Close', { duration: 4000 });
           }
         })
 
@@ -192,6 +227,14 @@ export class CaProfileComponent implements OnInit {
     );
     // Save user settings to the service
 
+  }
+
+  splitStringWithCommas(data: string) {
+    // Split the string and store the result in the splitValues array
+    this.splitValues = data.split(', ');
+
+    // Optionally, you can log the result
+    console.log(this.splitValues);
   }
   
   saveSettings() {
