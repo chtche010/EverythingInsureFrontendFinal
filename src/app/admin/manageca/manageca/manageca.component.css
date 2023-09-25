@@ -12,7 +12,7 @@ table {
   }
 
   th.mat-header-cell {
-    background-color: #f5f5f5;
+    background-color:#007bff;
     font-weight: bold;
     font-family: 'Montserrat', sans-serif;
   }
@@ -21,3 +21,5 @@ table {
     font-family: 'Montserrat', sans-serif;
     text-decoration: none;
   }
+
+  

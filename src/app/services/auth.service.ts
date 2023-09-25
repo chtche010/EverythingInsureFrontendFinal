@@ -250,10 +250,12 @@ export class AuthService {
 
     }
 
+    //notiifications
+
     saveSettings(notificationPreferObj: notificationPreferences)
     {
   
-      console.log('API test', notificationPreferObj);
+    //  console.log('API test', notificationPreferObj);
   
       return this.http.post<any>(this.baseUrl + `Auth/notifications`, {
       "id":notificationPreferObj.id, 
@@ -261,6 +263,22 @@ export class AuthService {
       "newAuctions":notificationPreferObj.newAuctions,
       "marketingPromo":notificationPreferObj.marketingPromo,
       });
+    }
+
+
+    pushNotifications(accountID: number): Observable<notificationPreferences> {
+      const url = `${this.baseUrl}api/Auth/returnNotifications?id=${accountID}`;
+      return this.http.get<notificationPreferences>(url, this.httpOptions);
+    }
+
+    //Admin services
+
+    getServiceProviders(): Observable<manageAuctions[]> {
+      return this.http.get<manageAuctions[]>(this.baseUrl + 'api/Admin/GetServiceProviders', this.httpOptions);
+    }
+
+    getClaimsAgent(): Observable<manageAuctions[]> {
+      return this.http.get<manageAuctions[]>(this.baseUrl + 'api/Admin/GetClaimsAgent', this.httpOptions);
     }
   }
 

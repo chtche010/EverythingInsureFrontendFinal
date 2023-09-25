@@ -22,6 +22,7 @@ interface NotificationPreferences {
 
 export class CaProfileComponent implements OnInit {
   userProfile: any; 
+  userNotifi: any;
   chanegPasswordForm!: FormGroup;
   changePassswordObj = new changePassword();
   notificationPreferObj = new notificationPreferences();
@@ -141,6 +142,56 @@ export class CaProfileComponent implements OnInit {
     this.notificationPreferObj.newAuctions = !this.notificationPreferObj.newAuctions;
   
       console.log('New Auctions', this.notificationPreferObj.newAuctions);
+  }
+
+ // pushNotifications() {
+  //  this.authService.pushNotifications()
+ // }
+
+  pushNotifications() {
+
+    this.authService.getcaprofile().subscribe(
+      (response) => {
+        console.log(response)
+        this.userProfile = response.data;
+        console.log(this.userProfile);
+
+        var idNum = this.userProfile.account_UserId;
+        console.log(idNum);
+
+        this.notificationPreferObj.id = this.userProfile.account_UserId;
+        //console.log(idNum);
+
+
+        console.log(this.notificationPreferObj.id)
+        console.log(this.notificationPreferObj)
+
+        this.authService.pushNotifications(this.userProfile.account_UserId)
+        .subscribe({
+          next: (res)=>{
+            console.log(res)
+            this.userNotifi = response.data
+            
+            this.snackbar.open('Success! Notifications pushed', 'Close', { duration: 4000 });
+  
+            this.router.navigate(['/ca-profile']);
+          },
+          error: (err)=>{
+            this.snackbar.open('Error! Something went wrong', 'Close', { duration: 4000 });
+          }
+        })
+
+        //console.log(response.id);
+        console.log('Claim Agent Profile', this.userProfile);
+       
+
+      }, 
+      (error) => {
+       // console.log('Error returning claim agent profile', error);
+      }
+    );
+    // Save user settings to the service
+
   }
   
   saveSettings() {
