@@ -14,6 +14,9 @@
 
 
     <div>
+<div>
+
+  <h2>Pending</h2>
 
   <table mat-table [dataSource]="pendingDataSource" class="mat-elevation-z8">
   
@@ -63,6 +66,12 @@
   
   </table>
 
+  </div>
+
+  <div>
+
+    <h2>Approved</h2>
+
   <table mat-table [dataSource]="approvedDataSource" class="mat-elevation-z8">
   
     <!--- Note that these columns can be defined in any order.
@@ -96,6 +105,9 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
 </table>
+</div>
+
+<div>
 
 <h2>Rejected</h2>
 
@@ -132,6 +144,8 @@
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
 </table>
+
+</div>
 
 
 </div>
