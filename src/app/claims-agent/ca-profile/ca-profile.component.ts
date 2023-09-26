@@ -157,63 +157,32 @@ export class CaProfileComponent implements OnInit {
         // Optionally, you can log the result
         console.log(this.splitValues);
 
-        const firstValue = Boolean(this.splitValues[0].trim() )
-       console.log(firstValue)
-        const secondValue = Boolean(this.splitValues[1].trim() )
-        console.log(secondValue)
-
-        const thirdValue = Boolean(this.splitValues[2].trim() )
-        console.log(thirdValue)
-
-
-        if(firstValue === true){
-          this.notificationPreferObj.changesToAccounts = Boolean(true);
-          //console.log(this.notificationPreferObj.changesToAccounts)
-        }else
-        {
-          this.notificationPreferObj.changesToAccounts = false;
+        if (this.splitValues[0].trim() === 'True'){
+          const firstValue = true 
+          this.notificationPreferObj.changesToAccounts = firstValue
+        } else {
+          const firstValue = false
         }
 
-        if(secondValue === true){
-          this.notificationPreferObj.newAuctions = Boolean(true);
-          //console.log(this.notificationPreferObj.changesToAccounts)
-        }else
-        {
-          this.notificationPreferObj.newAuctions = false;
+        if (this.splitValues[1].trim() === 'True'){
+          const secondValue = true 
+          this.notificationPreferObj.newAuctions = secondValue
+        } else {
+          const secondValue = false
         }
 
-        if(thirdValue === true){
-          this.notificationPreferObj.marketingPromo = Boolean(true);
-          //console.log(this.notificationPreferObj.changesToAccounts)
-        }else
-        {
-          this.notificationPreferObj.marketingPromo = false;
+        if (this.splitValues[2].trim() === 'True'){
+          const thirdValue = true 
+          this.notificationPreferObj.marketingPromo = thirdValue
+        } else {
+          const thirdValue = false
         }
 
-
-            
-
-            
-           
-            console.log(firstValue);
-
-
-          //  console.log(res.changesToAccounts)
-        //   this.notificationPreferObj.changesToAccounts = res.changesToAccounts
-
-
-            
-           // this.notificationPreferObj.newAuctions = this.userNotifi.newAuctions
-           // this.notificationPreferObj.marketingPromo = this.userNotifi.marketingPromo
-
-
-            
-            this.snackbar.open('Success! Notifications pushed', 'Close', { duration: 4000 });
   
             this.router.navigate(['/ca-profile']);
           },
           error: (err)=>{
-            this.snackbar.open('Error! Notifications not pushed', 'Close', { duration: 4000 });
+          //  this.snackbar.open('Error! Notifications not pushed', 'Close', { duration: 4000 });
           }
         })
 
@@ -229,6 +198,7 @@ export class CaProfileComponent implements OnInit {
     // Save user settings to the service
 
   }
+
 
   splitStringWithCommas(data: string) {
     // Split the string and store the result in the splitValues array
