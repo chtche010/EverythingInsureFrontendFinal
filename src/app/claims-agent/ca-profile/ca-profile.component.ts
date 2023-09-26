@@ -44,7 +44,7 @@ export class CaProfileComponent implements OnInit {
   ngOnInit(): void {
     this.getcaprofile();
     this.pushNotifications();
-    //console.log('check', this.pushNotifications)
+   // this.checkEmailVerification();
     this.chanegPasswordForm = this.fb.group(
       {
         currentPassword: ['', Validators.required],
@@ -56,13 +56,29 @@ export class CaProfileComponent implements OnInit {
     )
   }
 
-  checks = "true";
+  checkEmailVerification(){
+    console.log('checkEmailVerification called');
+    console.log(this.userProfile.email)
+    this.authService.checkVeri(this.userProfile.email).subscribe(
+      (repsonse) => {
+        console.log(repsonse.success)
+        if(repsonse.success === false){
+          this.snackbar.open('Error! Please verify your email', 'Close', { duration: 4000 });
+        }
+      },
+      (error) => {
+        console.log('1111', error);
+        this.snackbar.open('Error! Something went wrong(EmailVeri)', 'Close', { duration: 4000 });
+      }
+    )
+  }
 
   getcaprofile(): void {
     this.authService.getcaprofile().subscribe(
       (response) => {
         console.log(response)
         this.userProfile = response.data;
+        this.checkEmailVerification()
        
         //console.log(response.id);
         console.log('Claim Agent Profile', this.userProfile);
@@ -75,6 +91,8 @@ export class CaProfileComponent implements OnInit {
     );
   }
 
+
+
   updateProfile() {
     this.authService.updatecadetails(this.userProfile).subscribe(
       (data) => {
@@ -84,13 +102,12 @@ export class CaProfileComponent implements OnInit {
       },
       (error) => {
         console.error('Error updating profile:', error);
+
       }
     );
   }
 
   changePassword(){
-
-
       this.authService.getcaprofile().subscribe(
         (response) => {
           console.log(response)
