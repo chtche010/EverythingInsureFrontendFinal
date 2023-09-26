@@ -13,6 +13,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatInputModule } from '@angular/material/input';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
@@ -115,6 +116,7 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     AppRoutingModule,
+    MatCheckboxModule,
     CommonModule,
     RouterModule.forRoot(routes),
     MatStepperModule,

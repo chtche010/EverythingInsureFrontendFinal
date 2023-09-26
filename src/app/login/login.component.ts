@@ -10,6 +10,7 @@ import { initialsignup } from '../models/initialsignup.model';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
+
 import { ForgotpasswordComponent } from '../forgotpassword/forgotpassword.component';
 
 @Component({
