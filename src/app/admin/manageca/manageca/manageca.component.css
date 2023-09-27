@@ -6,6 +6,14 @@ h2 {
 
 }
 
+
+
+ul {
+  margin-left: 350px;
+
+
+}
+
 button {
 
   margin-top: 50px;
@@ -46,5 +54,32 @@ table {
 
   body {
     margin-bottom: 50px;
+  }
+
+  /* Icon styling  */
+
+  i {
+    font-size: 24px;
+    margin-right: 20px; /* Add the desired space between buttons */
+    margin-left: 20px;
+
+
+  }
+  
+  .regular-icon {
+    color: #000; /* Change to the desired color for the regular icon */
+    transition: color 0.3s; /* Add a transition effect for smooth color change */
+  }
+  
+  /* Filled icon style */
+  .filled-icon {
+    color: #ff0000; /* Change to the desired color for the filled icon */
+    transition: color 0.3s; /* Add a transition effect for smooth color change */
+  }
+
+  .action-button {
+    display: flex;
+    align-items: center;
+    margin-right: 10px; /* Add the desired space between buttons */
   }
   

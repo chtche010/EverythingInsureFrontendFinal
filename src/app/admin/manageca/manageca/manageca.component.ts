@@ -5,6 +5,8 @@ import { AuthService } from 'src/app/services/auth.service';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ElementSchemaRegistry } from '@angular/compiler';
+import { ChangeDetectorRef } from '@angular/core';
+
 
 export interface PeriodicElement {
   firstName: number;
@@ -15,8 +17,6 @@ export interface PeriodicElement {
 
 }
 
-//yourmodel(claimsAgentList)=with data
-//yourModel = structure
 
 const allowMultiSelect = true;
 var ELEMENT_DATA: PeriodicElement[] = [
@@ -33,31 +33,65 @@ export class ManagecaComponent {
   displayedColumns2: string[] = ['select', 'firstName', 'lastName', 'insuranceCompany', 'email'];
 
   selectedItems: any[] = [];
+  displaySelectedItemsFlag = false;
+  showContent: Boolean = false;
+  isHoveredUp = false;
+  isHoveredDown = false;
+
+
 
 
   dataSource!: MatTableDataSource<claimsAgentList>;
   databaseSource!: MatTableDataSource<PeriodicElement>;
-    pendingDataSource!: MatTableDataSource<claimsAgentList>;
+  pendingDataSource!: MatTableDataSource<claimsAgentList>;
   approvedDataSource!: MatTableDataSource<claimsAgentList>;
   rejectedDataSource!: MatTableDataSource<claimsAgentList>;
 
   selection = new SelectionModel<claimsAgentList>(true, [], false);
 
   getSelectedItems() {
-    console.log(this.selection.selected)
-    return this.selection.selected;
-  }
-
-  displaySelectedItems() {
-    this.selectedItems = this.getSelectedItems();
-    console.log(this.selectedItems)
-    return this.selectedItems;
-
-
+    const selectedItems = this.selection.selected;
+    const formattedItems = selectedItems.map((item) => {
+      return {
+       // ClaimsAgentId: item.claimsAgentId,
+        InsuranceCompany: item.insuranceCompany,
+        FirstName: item.firstName,
+        LastName: item.lastName,
+        Email: item.email,
+        AccountStatus: item.accountStatus,
+      };
+    });
+  
+    return formattedItems;
   }
   
+  
 
-  constructor(private authService: AuthService) {}
+  hideContent(){
+    this.showContent = false;
+    this.changeDetectorRef.detectChanges();
+    console.log('Show Content', this.showContent)
+  }
+
+
+ displaySelectedItems() {
+  if (this.selection.selected.length > 0) {
+    this.selectedItems = this.getSelectedItems();
+    console.log('Selected items:', this.selectedItems);    
+    this.displaySelectedItemsFlag = true;
+  } else
+   {
+    this.selectedItems = [];
+    this.changeDetectorRef.detectChanges();
+    this.displaySelectedItemsFlag = false;
+  }
+  console.log('displaySelectedItemsFlag:', this.displaySelectedItemsFlag);
+}
+
+  
+  
+
+  constructor(private authService: AuthService, private changeDetectorRef: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.pendingDataSource = new MatTableDataSource<claimsAgentList>();
@@ -79,6 +113,65 @@ export class ManagecaComponent {
       this.selection.clear();
       this.pendingDataSource.data.forEach((row) => this.selection.select(row));
     }
+
+    toggleSingleSelection(row: claimsAgentList) {
+      if (this.selection.isSelected(row)) {
+        // If the row is already selected, unselect it
+        this.selection.deselect(row);
+      } else {
+        // If the row is not selected, clear the selection and select the clicked row
+        this.selection.clear();
+        this.selection.select(row);
+      }
+    }
+
+
+    approveAccount() {
+      // Assuming you have a selected item
+      if (this.selection.selected.length > 0) {
+        const selectedItem = this.selection.selected[0]; // Assuming you are working with a single selected item
+
+        const selectedEmail = selectedItem.email
+
+       
+        this.authService.approveClaimsAgent(selectedEmail)
+        .subscribe(
+          (response) => {
+            console.log(response)
+            console.log("Success")
+          },
+          (error) => {
+            console.log(error)
+            console.log("Fail")
+          }
+       );
+      }
+    }
+
+    rejectAccount() {
+      // Assuming you have a selected item
+      if (this.selection.selected.length > 0) {
+        const selectedItem = this.selection.selected[0]; // Assuming you are working with a single selected item
+     
+
+        const selectedEmail = selectedItem.email
+
+  
+        this.authService.rejectClaimsAgent(selectedEmail)
+        .subscribe(
+          (response) => {
+            console.log(response)
+            console.log("Success")
+          },
+          (error) => {
+            console.log(error)
+            console.log("Fail")
+          }
+       );
+      }
+    }
+  
+    // ...
   
 
 
@@ -94,7 +187,7 @@ export class ManagecaComponent {
       const approvedUsers = response.data.filter((user: claimsAgentList) => user.accountStatus === 'Approved');
       console.log(approvedUsers);
 
-      const rejectedUsers = response.data.filter((user: claimsAgentList) => user.accountStatus === 'Rejected');
+      const rejectedUsers = response.data.filter((user: claimsAgentList) => user.accountStatus === 'Reejcted');
       console.log(rejectedUsers);
 
         this.dataSource.data = response.data;

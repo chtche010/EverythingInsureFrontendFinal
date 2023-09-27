@@ -78,8 +78,7 @@
     
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      <!-- <i class="bi bi-hand-thumbs-down"></i>
-      <i class="bi bi-hand-thumbs-up"></i> -->
+
   
   </table>
 
@@ -160,13 +159,37 @@
 </table>
 </div>
 
-<button (click)=" displaySelectedItems()">Show Selected Items</button>
+<div *ngIf="displaySelectedItemsFlag">
+  <ul>
+    <li *ngFor="let selectedItem of getSelectedItems()">
+      <!-- <div>ClaimsAgentId: {{ selectedItem.ClaimsAgentId }}</div> -->
+      <div>Insurance Company: {{ selectedItem.InsuranceCompany }}</div>
+      <div>First Name: {{ selectedItem.FirstName }}</div>
+      <div>Last Name: {{ selectedItem.LastName }}</div>
+      <div>Email: {{ selectedItem.Email }}</div>
+      <!-- <div>Account Status: {{ selectedItem.AccountStatus }}</div> -->
+    </li>
+    <br>
 
-<ul>
-  <li *ngFor="let selectedItem of selectedItems">
-    {{ selectedItem | json }}
-  </li>
-</ul>
+    
+    
+    <i [ngClass]="{ 'regular-icon': !isHoveredUp, 'filled-icon': isHoveredUp}"
+    class="bi bi-hand-thumbs-up-fill"
+    (mouseenter)="isHoveredUp = true"
+    (mouseleave)="isHoveredUp = false"
+    (click)="approveAccount()"
+    ></i>
+    <i [ngClass]="{ 'regular-icon': !isHoveredDown, 'filled-icon': isHoveredDown }"
+    class="bi bi-hand-thumbs-down-fill"
+    (mouseenter)="isHoveredDown= true"
+    (mouseleave)="isHoveredDown = false"
+    (click)="rejectAccount()"
+    ></i>
+  </ul>
+</div>
+
+
+
 
 
 <table mat-table [dataSource]="pendingDataSource" class="mat-elevation-z8">
@@ -179,8 +202,10 @@
     </th>
     <td mat-cell *matCellDef="let row">
       <mat-checkbox (click)="$event.stopPropagation()"
-                    (change)="$event?selection.toggle(row) : null"
-                    [checked]="selection.isSelected(row)">
+                    (change)="toggleSingleSelection(row);displaySelectedItems()"
+                    [checked]="selection.isSelected(row)"
+                    >
+                    
       </mat-checkbox>
     </td>
   </ng-container>
