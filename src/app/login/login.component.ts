@@ -80,35 +80,63 @@ export class LoginComponent implements OnInit {
           console.log(response);
           localStorage.setItem("authToken", JSON.stringify(response))
           // Redirect to the appropriate page based on the user's role or perform any other actions
-          const decodedToken = this.jwtHelper.decodeToken(response.data);
+          const decodedToken = this.jwtHelper.decodeToken(response.data)
+          console.log("Email",decodedToken.email)
+
+          this.authService.checkAccountStatus(decodedToken.email).subscribe({
+            next: (res) => {
+              console.log(res.message)
+
+              if(res.message =="Your account has been approved"){
+                if (decodedToken.role === 'Administrator') {
+                  // this.snackbar.open('Email verfication sent!', 'Close', { duration: 4000 });
+                   this.router.navigate(['/adminprofile']);
+                 } else if (decodedToken.role === 'ServiceProvider') {
+                  // this.snackbar.open('Email verfication sent!', 'Close', { duration: 4000 });
+                   this.router.navigate(['/serviceproviderprofile']);
+                 } else if (decodedToken.role === 'ClaimsAgent') {
+                   this.authService.sendOTPEmail(email)
+                   .subscribe({
+                     next: (res) => {
+                       this.snackbar.open('Success! OTP email sent, it will expire in 15 minutes!', 'Close', { duration: 4000 });
+       
+                       this.router.navigate(['/opt']);
+       
+                     },
+                     error:(err)=>{
+                       this.snackbar.open('Error! Something went wrong', 'Close', { duration: 4000 });
+       
+                       console.log(err);
+                     }
+                   })
+                   
+                  
+                 } else {
+                   this.router.navigate(['/login']);
+                 }
+
+              }else if(res.message == "Your account is pending approval"){
+                this.snackbar.open('Error! Your account is pending approval!', 'Close', { duration: 4000 });
+
+
+              }else if(res.message == "Your account has been rejected, please check email for more information"){
+                this.snackbar.open('Error! Your account has been rejected, please check email for more information', 'Close', { duration: 4000 });
+
+              }
+
+
+            },
+            error:(error) => {
+              console.log(error.message)
+
+            }
+          })
+
           console.log("Response Object", response)
           console.log("Decoded Value", decodedToken)
           console.log(decodedToken);
-          if (decodedToken.role === 'Administrator') {
-           // this.snackbar.open('Email verfication sent!', 'Close', { duration: 4000 });
-            this.router.navigate(['/adminprofile']);
-          } else if (decodedToken.role === 'ServiceProvider') {
-           // this.snackbar.open('Email verfication sent!', 'Close', { duration: 4000 });
-            this.router.navigate(['/serviceproviderprofile']);
-          } else if (decodedToken.role === 'ClaimsAgent') {
-            this.authService.sendOTPEmail(email)
-            .subscribe({
-              next: (res) => {
-                this.snackbar.open('Success! OTP email sent, it will expire in 15 minutes!', 'Close', { duration: 4000 });
 
-                this.router.navigate(['/opt']);
-
-              },
-              error:(err)=>{
-                this.snackbar.open('Error! Something went wrong', 'Close', { duration: 4000 });
-
-                console.log(err);
-              }
-            })
-           
-          } else {
-            this.router.navigate(['/login']);
-          }
+       
         },
         error => {
           // Handle login error

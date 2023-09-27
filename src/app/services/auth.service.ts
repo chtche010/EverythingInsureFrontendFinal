@@ -218,8 +218,6 @@ export class AuthService {
 
   verifyOTP(otp: string){
     return this.http.post<any>(this.baseUrl + 'Auth/verifyOTP', {"otp": otp})
-
-
   }
 
    parseEmail(emailAddress: string): string {
@@ -275,6 +273,8 @@ export class AuthService {
 
     //Admin services
 
+    
+
     getServiceProviders(): Observable<manageAuctions[]> {
       return this.http.get<manageAuctions[]>(this.baseUrl + 'api/Admin/GetServiceProviders', this.httpOptions);
     }
@@ -294,9 +294,13 @@ export class AuthService {
     rejectClaimsAgent(email : string): Observable<any> {
       const url = `${this.baseUrl}api/Admin/RejectClaimsAgent?email=${email}`;
       console.log("URL message", url);
-
       return this.http.post<any>(url, null, this.httpOptions);
     }
+
+    checkAccountStatus(email : string){
+      return this.http.post<any>(this.baseUrl + 'Auth/CheckAccountStatus', {"email": email});
+        }
+  
   }
 
 
