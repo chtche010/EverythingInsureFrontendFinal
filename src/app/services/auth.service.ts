@@ -279,23 +279,24 @@ export class AuthService {
       return this.http.get<manageAuctions[]>(this.baseUrl + 'api/Admin/GetServiceProviders', this.httpOptions);
     }
 
-    getClaimsAgent(): Observable<manageAuctions[]> {
-      return this.http.get<manageAuctions[]>(this.baseUrl + 'api/Admin/GetClaimsAgent', this.httpOptions);
+    getClaimsAgent(): Observable<any> {
+      // console.log(this.httpOptions)
+      return this.http.get<any>(this.baseUrl + 'api/Admin/GetClaimsAgent', this.httpOptions);
     }
 
-    approveClaimsAgent(email : string): Observable<any> {
-      const url = `${this.baseUrl}api/Admin/ApproveClaimsAgent?id=${email}`;
-      return this.http.post<any>(url, this.httpOptions);
+    approveClaimsAgent(email: string): Observable<any> {
+      const url = `${this.baseUrl}api/Admin/ApproveClaimsAgent?email=${email}`;
+      console.log("URL message", url);
+      
+      return this.http.post(url, null, this.httpOptions);
     }
 
     rejectClaimsAgent(email : string): Observable<any> {
-      const url = `${this.baseUrl}api/Admin/RejectClaimsAgent?id=${email  }`;
-      return this.http.post<any>(url, this.httpOptions);
+      const url = `${this.baseUrl}api/Admin/RejectClaimsAgent?email=${email}`;
+      console.log("URL message", url);
+
+      return this.http.post<any>(url, null, this.httpOptions);
     }
-
-  
-
-
   }
 
 

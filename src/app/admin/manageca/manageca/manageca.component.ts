@@ -88,9 +88,6 @@ export class ManagecaComponent {
   console.log('displaySelectedItemsFlag:', this.displaySelectedItemsFlag);
 }
 
-  
-  
-
   constructor(private authService: AuthService, private changeDetectorRef: ChangeDetectorRef) {}
 
   ngOnInit(): void {
@@ -100,6 +97,10 @@ export class ManagecaComponent {
     this.dataSource = new MatTableDataSource<claimsAgentList>();
     this.loadCADetails();
   }
+
+  refreshPage() {
+    location.reload();
+}
 
   isAllSelected() {
     const numSelected = this.selection.selected.length;
@@ -132,16 +133,18 @@ export class ManagecaComponent {
         const selectedItem = this.selection.selected[0]; // Assuming you are working with a single selected item
 
         const selectedEmail = selectedItem.email
+        console.log(selectedEmail)
 
        
         this.authService.approveClaimsAgent(selectedEmail)
         .subscribe(
           (response) => {
-            console.log(response)
+            console.log("Success", response)
             console.log("Success")
+            location.reload();
           },
           (error) => {
-            console.log(error)
+            console.log("Error",error)
             console.log("Fail")
           }
        );
@@ -155,6 +158,8 @@ export class ManagecaComponent {
      
 
         const selectedEmail = selectedItem.email
+        console.log(selectedEmail)
+
 
   
         this.authService.rejectClaimsAgent(selectedEmail)
@@ -162,6 +167,7 @@ export class ManagecaComponent {
           (response) => {
             console.log(response)
             console.log("Success")
+            location.reload();
           },
           (error) => {
             console.log(error)
@@ -183,12 +189,12 @@ export class ManagecaComponent {
 
   
         const pendingUsers = response.data.filter((user: claimsAgentList) => user.accountStatus === 'Pending');
-        console.log(pendingUsers);
+        console.log('Pending', pendingUsers);
       const approvedUsers = response.data.filter((user: claimsAgentList) => user.accountStatus === 'Approved');
-      console.log(approvedUsers);
+      console.log('Approved', approvedUsers);
 
-      const rejectedUsers = response.data.filter((user: claimsAgentList) => user.accountStatus === 'Reejcted');
-      console.log(rejectedUsers);
+      const rejectedUsers = response.data.filter((user: claimsAgentList) => user.accountStatus === 'Rejected');
+      console.log('Rejected', rejectedUsers);
 
         this.dataSource.data = response.data;
         this.pendingDataSource.data = pendingUsers;
@@ -196,7 +202,7 @@ export class ManagecaComponent {
       this.rejectedDataSource.data = rejectedUsers;
       },
       (error) => {
-        console.error('Error fetching auction details', error);
+        console.error('Error fetching claims agent details', error);
       }
     );
   }

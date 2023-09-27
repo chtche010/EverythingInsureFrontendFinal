@@ -81,12 +81,14 @@ export class LoginComponent implements OnInit {
           localStorage.setItem("authToken", JSON.stringify(response))
           // Redirect to the appropriate page based on the user's role or perform any other actions
           const decodedToken = this.jwtHelper.decodeToken(response.data);
+          console.log("Response Object", response)
+          console.log("Decoded Value", decodedToken)
           console.log(decodedToken);
           if (decodedToken.role === 'Administrator') {
-            this.snackbar.open('Email verfication sent!', 'Close', { duration: 4000 });
+           // this.snackbar.open('Email verfication sent!', 'Close', { duration: 4000 });
             this.router.navigate(['/adminprofile']);
           } else if (decodedToken.role === 'ServiceProvider') {
-            this.snackbar.open('Email verfication sent!', 'Close', { duration: 4000 });
+           // this.snackbar.open('Email verfication sent!', 'Close', { duration: 4000 });
             this.router.navigate(['/serviceproviderprofile']);
           } else if (decodedToken.role === 'ClaimsAgent') {
             this.authService.sendOTPEmail(email)

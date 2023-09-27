@@ -16,8 +16,7 @@ ul {
 
 button {
 
-  margin-top: 50px;
-  margin-left: 350px;
+  margin-left:20px;
   font-family: 'Montserrat', sans-serif;
   width: auto;
 
@@ -64,6 +63,10 @@ table {
     margin-left: 20px;
 
 
+  }
+
+  .shaded-row {
+    background-color: lightgray;
   }
   
   .regular-icon {
