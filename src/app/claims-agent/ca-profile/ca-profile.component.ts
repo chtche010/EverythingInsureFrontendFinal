@@ -115,19 +115,19 @@ export class CaProfileComponent implements OnInit {
           console.log(this.userProfile);
 
           var idNum = this.userProfile.account_UserId;
-          console.log(idNum);
+      //    console.log(idNum);
 
           this.changePassswordObj.id = this.userProfile.account_UserId;
           //console.log(idNum);
 
 
-          console.log(this.changePassswordObj.id)
+         // console.log(this.changePassswordObj.id)
           console.log(this.changePassswordObj)
 
           this.resetService.changePassword(this.changePassswordObj)
           .subscribe({
             next: (res)=>{
-              console.log(this.changePassswordObj)
+              console.log("API ts",this.changePassswordObj)
               this.snackbar.open('Success! Password reset successfully', 'Close', { duration: 4000 });
     
               this.router.navigate(['/ca-profile']);
