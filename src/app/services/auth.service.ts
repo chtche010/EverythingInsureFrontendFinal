@@ -19,6 +19,7 @@ import { GetAllAuctions } from '../models/auction-dashboard/getallauctions';
 import { getSingleAuction } from '../models/serviceprovider/getSingleAuction';
 import { verifyEmail } from '../models/verifyEmail.model';
 import { notificationPreferences } from '../models/notificationPreferences';
+import { rejectionObject } from '../models/rejectionObject';
 
 @Injectable({
   providedIn: 'root'
@@ -291,10 +292,15 @@ export class AuthService {
       return this.http.post(url, null, this.httpOptions);
     }
 
-    rejectClaimsAgent(email : string): Observable<any> {
-      const url = `${this.baseUrl}api/Admin/RejectClaimsAgent?email=${email}`;
-      console.log("URL message", url);
-      return this.http.post<any>(url, null, this.httpOptions);
+    rejectClaimsAgent(rejectionObj: rejectionObject)
+    {
+  
+    //  console.log('API test', notificationPreferObj);
+  
+      return this.http.post<any>(this.baseUrl + `api/Admin/RejectClaimsAgent`, {
+      "email":rejectionObj.email, 
+      "text":rejectionObj.text
+      }, this.httpOptions);
     }
 
     checkAccountStatus(email : string){

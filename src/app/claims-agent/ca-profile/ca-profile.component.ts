@@ -115,13 +115,9 @@ export class CaProfileComponent implements OnInit {
           console.log(this.userProfile);
 
           var idNum = this.userProfile.account_UserId;
-      //    console.log(idNum);
 
           this.changePassswordObj.id = this.userProfile.account_UserId;
-          //console.log(idNum);
 
-
-         // console.log(this.changePassswordObj.id)
           console.log(this.changePassswordObj)
 
           this.resetService.changePassword(this.changePassswordObj)

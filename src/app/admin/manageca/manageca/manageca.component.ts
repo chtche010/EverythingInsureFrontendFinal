@@ -1,11 +1,13 @@
-import { Component } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
+import { Component, ViewChild } from '@angular/core';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { claimsAgentList } from 'src/app/models/admin/claimsAgentList.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ElementSchemaRegistry } from '@angular/compiler';
 import { ChangeDetectorRef } from '@angular/core';
+import { rejectionObject } from 'src/app/models/rejectionObject';
+import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 
 
 export interface PeriodicElement {
@@ -26,7 +28,8 @@ var ELEMENT_DATA: PeriodicElement[] = [
 @Component({
   selector: 'app-manageca',
   templateUrl: './manageca.component.html',
-  styleUrls: ['./manageca.component.css']
+  styleUrls: ['./manageca.component.css'],
+
 })
 export class ManagecaComponent {
   displayedColumns: string[] = ['firstName', 'lastName', 'insuranceCompany', 'email'];
@@ -37,9 +40,8 @@ export class ManagecaComponent {
   showContent: Boolean = false;
   isHoveredUp = false;
   isHoveredDown = false;
-
-
-
+  rejectionObj = new rejectionObject();
+  
 
   dataSource!: MatTableDataSource<claimsAgentList>;
   databaseSource!: MatTableDataSource<PeriodicElement>;
@@ -48,6 +50,19 @@ export class ManagecaComponent {
   rejectedDataSource!: MatTableDataSource<claimsAgentList>;
 
   selection = new SelectionModel<claimsAgentList>(true, [], false);
+
+  @ViewChild('pendingPaginator')
+  pendingPaginator!: MatPaginator;
+  @ViewChild('approvedPaginator')
+  approvedPaginator!: MatPaginator;
+  @ViewChild('rejectedPaginator')
+  rejectedPaginator!: MatPaginator;
+
+    ngAfterViewInit() {
+      this.pendingDataSource.paginator = this.pendingPaginator;
+      this.approvedDataSource.paginator = this.approvedPaginator;
+      this.rejectedDataSource.paginator = this.rejectedPaginator;
+    }
 
   getSelectedItems() {
     const selectedItems = this.selection.selected;
@@ -101,6 +116,7 @@ export class ManagecaComponent {
   refreshPage() {
     location.reload();
 }
+
 
   isAllSelected() {
     const numSelected = this.selection.selected.length;
@@ -160,9 +176,15 @@ export class ManagecaComponent {
         const selectedEmail = selectedItem.email
         console.log(selectedEmail)
 
+        this.rejectionObj.email = selectedEmail;
+       // this.rejectionObj.text = this.value;
+      
+        //this.rejectionObj.text = "";
+        console.log("rejectionInfo", this.rejectionObj)
+
 
   
-        this.authService.rejectClaimsAgent(selectedEmail)
+        this.authService.rejectClaimsAgent(this.rejectionObj)
         .subscribe(
           (response) => {
             console.log(response)
@@ -176,11 +198,6 @@ export class ManagecaComponent {
        );
       }
     }
-  
-    // ...
-  
-
-
 
   loadCADetails() {
     this.authService.getClaimsAgent().subscribe(

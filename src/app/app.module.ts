@@ -34,6 +34,7 @@ import { FAQComponent } from './faq/faq.component';
 import { FooterComponent } from './footer/footer.component';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
+import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 
 //Ben's imports brought across
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -120,6 +121,7 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forRoot(routes),
     MatStepperModule,
+    MatPaginatorModule,
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
