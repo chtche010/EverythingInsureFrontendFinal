@@ -1,9 +1,13 @@
 h2 {
-  margin-top: 50px;
+  margin-top: 30px;
   margin-left: 350px;
   font-family: 'Montserrat', sans-serif;
   width: auto;
+  color: #012970;
+}
 
+#topH2 {
+  margin-top: 70px;
 }
 
 th {
