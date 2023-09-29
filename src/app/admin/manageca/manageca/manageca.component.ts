@@ -41,7 +41,8 @@ export class ManagecaComponent {
   showContent: Boolean = false;
   isHoveredUp = false;
   isHoveredDown = false;
-  rejectionObj = new rejectionObject();
+  rejectionObj = new rejectionObject(
+  );
   
 
   dataSource!: MatTableDataSource<claimsAgentList>;
@@ -177,7 +178,7 @@ export class ManagecaComponent {
         console.log(selectedEmail)
 
         this.rejectionObj.email = selectedEmail;
-        this.rejectionObj.text = this.rejectionObj.text;
+        
       
         console.log("rejectionInfo", this.rejectionObj)
 
