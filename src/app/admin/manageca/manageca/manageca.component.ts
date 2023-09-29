@@ -37,6 +37,7 @@ export class ManagecaComponent {
 
   selectedItems: any[] = [];
   displaySelectedItemsFlag = false;
+  inputValue: string = ''; 
   showContent: Boolean = false;
   isHoveredUp = false;
   isHoveredDown = false;
@@ -172,18 +173,14 @@ export class ManagecaComponent {
       if (this.selection.selected.length > 0) {
         const selectedItem = this.selection.selected[0]; // Assuming you are working with a single selected item
      
-
         const selectedEmail = selectedItem.email
         console.log(selectedEmail)
 
         this.rejectionObj.email = selectedEmail;
-       // this.rejectionObj.text = this.value;
+        this.rejectionObj.text = this.rejectionObj.text;
       
-        //this.rejectionObj.text = "";
         console.log("rejectionInfo", this.rejectionObj)
 
-
-  
         this.authService.rejectClaimsAgent(this.rejectionObj)
         .subscribe(
           (response) => {

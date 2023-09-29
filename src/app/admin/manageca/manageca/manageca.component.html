@@ -95,7 +95,9 @@
               <form ngs>                    
                 <div class="mb-3">                        
                   <label for="inputData" class="form-label">Enter Reason:</label>                        
-                  <input type="text" class="form-control" id="inputData" placeholder="Enter data here">                    
+                  <input  [value]="rejectionObj.text"
+                   [(ngModel)]="rejectionObj.text" type="text" class="form-control"
+                    id="inputData" placeholder="Enter data here">                    
                 </div>                
               </form>
             </div>
@@ -104,6 +106,7 @@
                 <button type="button" class="btn btn-danger"
                 (click)="rejectAccount()"
                 (click)="refreshPage()"
+                
                 >Reject</button>
             </div>
         </div>
