@@ -8,4 +8,7 @@ export interface serviceProviderList {
     payeeType: string;
     type: string;
     companyRegistrationNumber: string;
+    accountStatus: string;
+    vatVendor: string;
+    vatNo: string;
   }

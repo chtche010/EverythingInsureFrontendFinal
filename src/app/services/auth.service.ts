@@ -303,6 +303,24 @@ export class AuthService {
       }, this.httpOptions);
     }
 
+    approveServiceProvider(email: string): Observable<any> {
+      const url = `${this.baseUrl}api/Admin/ApproveServiceProvider?email=${email}`;
+      console.log("URL message", url);
+      
+      return this.http.post(url, null, this.httpOptions);
+    }
+
+    rejectServiceProvider(rejectionObj: rejectionObject)
+    {
+  
+    //  console.log('API test', notificationPreferObj);
+  
+      return this.http.post<any>(this.baseUrl + `api/Admin/RejectServiceProvide`, {
+      "email":rejectionObj.email, 
+      "text":rejectionObj.text
+      }, this.httpOptions);
+    }
+
     checkAccountStatus(email : string){
       return this.http.post<any>(this.baseUrl + 'Auth/CheckAccountStatus', {"email": email});
         }
