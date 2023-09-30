@@ -1,12 +1,5 @@
 @import '~@fortawesome/fontawesome-free/css/all.css';
-
-/* @import '~@angular/material/prebuilt-themes/indigo-pink.css'; */
-
-
-
-/* @import 'src/theme.scss'; */
-
-
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap');
 
 html,
 body {
@@ -18,7 +11,7 @@ body {
   font-family: "Montserrat", sans-serif;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap');
+
 
 :root {
   scroll-behavior: smooth;
@@ -175,4 +168,19 @@ h6 {
 
 .favorite-button .mat-icon {
   color: rgb(255, 1, 1);
+}
+
+/* Separate sections with thin black lines */
+.auction-section {
+  border-top: 1px solid #000;
+  padding-top: 20px;
+  margin-top: 20px;
+}
+
+/* Style section headings */
+.auction-section h2 {
+  font-size: 24px;
+  color: #000;
+  font-weight: bold;
+  margin-bottom: 10px;
 }

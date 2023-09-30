@@ -26,7 +26,7 @@ export class CaNavbarComponent {
   getcaprofile(): void {
     this.authService.getcaprofile().subscribe(
       (response) => {
-        console.log(response)
+        console.log(response);
         this.userProfile = response.data;
         this.accountUserId = this.userProfile.account_UserId;
         console.log('account_UserId:', this.accountUserId);

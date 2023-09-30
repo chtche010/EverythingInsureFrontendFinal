@@ -1,0 +1,65 @@
+/* Style for the content container */
+.content {
+    margin-left: 250px; /* Adjust the width of your sidebar */
+    margin-top: 100px; /* Adjust the top margin as needed */
+    padding: 20px;
+  }
+  
+  /* Page title style */
+  .page-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+    font-family: "Montserrat", sans-serif;
+  }
+  
+  /* Style for the search bar container */
+  .search-bar-container {
+    margin-bottom: 20px; /* Add space between the title and search bar */
+  }
+  
+  /* Style for the search bar */
+  mat-form-field {
+    width: 100%; /* Make the search bar full width */
+  }
+  
+  /* Style for the table */
+  mat-table {
+    width: 100%; /* Make the table full width within the content container */
+  }
+  
+  .mat-elevation-z8 {
+    /* Add elevation (shadow) to the table */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  th.mat-header-cell {
+    background-color: #f5f5f5;
+    font-weight: bold;
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+  .mat-header-cell {
+    font-family: 'Montserrat', sans-serif;
+    text-decoration: none;
+  }
+  
+  .action-buttons {
+    display: flex;
+    gap: 10px; /* Adjust the gap as needed */
+  }
+  
+  /* Style for the expansion panel */
+  .mat-accordion {
+    width: 100%; /* Make the expansion panel full width */
+  }
+  
+  /* Style for the bid details inside the expansion panel */
+  .bid-details {
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  /* Add more styles as needed */
+  

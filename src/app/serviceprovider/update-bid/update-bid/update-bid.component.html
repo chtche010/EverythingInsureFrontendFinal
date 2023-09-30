@@ -1,0 +1,22 @@
+<h2 mat-dialog-title class="mat-dialog-title">Update Bid Details</h2>
+<div mat-dialog-content>
+  <form [formGroup]="updateBidForm">
+    <mat-form-field>
+      <input matInput placeholder="Job description" formControlName="jobDescription" id="jobDescription" [(ngModel)]="bidData.jobDescription">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Labour Cost" formControlName="bidTotalLabourCost" id="bidTotalLabourCost" [(ngModel)]="bidData.bidTotalLabourCost">
+      <mat-hint>Enter a positive number with 2 decimal places.</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Estimated Duration (Business Days)" formControlName="bidEstimatedDuration" id="bidEstimatedDuration" [(ngModel)]="bidData.bidEstimatedDuration">
+      <mat-hint>Enter a positive whole number.</mat-hint>
+    </mat-form-field>
+  </form>
+</div>
+<div class="button-container" mat-dialog-actions>
+  <button mat-raised-button (click)="closeDialog()">Cancel</button>
+  <button mat-raised-button color="primary" (click)="updateBid()">Update</button>
+</div>

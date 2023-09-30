@@ -1,8 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap');
+
+/* Container for the content */
+.content {
+  margin: 20px;
+  margin-top: 100px;
+  margin-left: 350px; /* Adjust the width of your sidebar */
+}
+
+/* Page title style */
+.page-title {
+  font-size: 24px;
+  margin-bottom: 10px;
+  font-family: "Montserrat", sans-serif;
+}
+
+/* Style for the search bar container */
+.search-bar-container {
+  margin-bottom: -5px; /* Add space between the title and search bar */
+}
+
+/* Style for the search bar */
+mat-form-field {
+  width: 50%; /* Make the search bar full width */
+}
 
 table {
     width: 70%;
-    margin-left: 350px;
-    margin-top: 100px;
+    margin-left: -1px;
+    margin-top: 20px;
     font-family: 'Montserrat', sans-serif;
   }
 
@@ -21,3 +46,13 @@ table {
     font-family: 'Montserrat', sans-serif;
     text-decoration: none;
   }
+
+  .action-buttons {
+    display: flex;
+    gap: 10px; /* Adjust the gap as needed */
+  }
+
+.damage-description-header,
+.damage-description-cell {
+  width: 100%; /* Adjust the width as needed */
+}

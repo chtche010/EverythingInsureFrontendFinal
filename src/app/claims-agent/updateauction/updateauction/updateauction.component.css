@@ -1,0 +1,78 @@
+.dialog-container {
+    padding: 16px;
+  }
+  
+  .dialog-title {
+    font-size: 24px;
+    margin-bottom: 16px;
+  }
+  
+  .dialog-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .form-group {
+    flex-basis: calc(50% - 10px);
+    margin-bottom: 16px;
+  }
+  
+  .label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 6px;
+  }
+  
+  .mat-datepicker,
+  .mat-timepicker,
+  .mat-select {
+    width: 100%;
+  }
+  
+  .dialog-actions {
+    margin-top: 16px;
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  button {
+    margin-left: 8px;
+  }
+
+  /* Style for the form container */
+.form-container {
+  padding: 20px; /* Add padding to the form container */
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* Style for the input fields */
+.input-field {
+  margin-bottom: 20px; /* Add space between input fields */
+  margin-right: 10px;
+  width: 100%;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 5px; /* Add space between input containers */
+}
+
+.headings-container {
+  margin-top: 30px;
+  text-align: center; /* Center the text within the container */
+  margin-bottom: 20px; /* Add space below the headings */
+  font-size: large;
+  font-weight: bold;
+}
+
+.dialog-header {
+  margin-left: 90%;
+  margin-top: 20px;
+}
+
+
+  

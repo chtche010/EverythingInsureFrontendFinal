@@ -113,10 +113,12 @@
   .sidebar-nav .nav-link:hover {
     color: #212446;
     background: #f6f9ff;
+    cursor: pointer;
   }
   
   .sidebar-nav .nav-link:hover i {
     color: #212446;
+    cursor: pointer;
   }
   
   .sidebar-nav .nav-link .bi-chevron-down {

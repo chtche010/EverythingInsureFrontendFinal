@@ -1,6 +1,6 @@
 <app-sp-navbar></app-sp-navbar>
 <app-sp-sidebar></app-sp-sidebar>
-
+<div class="background-container">
 <main id="main" class="main">
 
   <div class="pagetitle">
@@ -119,6 +119,15 @@
                   <div class="col-lg-9 col-md-8">{{ userProfile?.vatNumber }}</div>
                 </div>
 
+                <div class="row">
+                  <div class="col-lg-3 col-md-4 label">Address</div>
+                  <div class="col-lg-9 col-md-8">{{ address?.buildingName }}
+                    <br>
+                    {{ address?.streetNumber }}, {{ address?.streetName }}, {{ address?.surbub }}
+                    <br>
+                    {{ address?.city }}, {{ address?.country }}, {{ address?.zipCode }},</div>
+                </div>
+
               </div>
 
               <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
@@ -208,16 +217,82 @@
                   </div>
 
                   <div class="row mb-3">
-                    <label for="VATNo:" class="col-md-4 col-lg-3 col-form-label">VAT No:</label>
+                    <label for="VATNo" class="col-md-4 col-lg-3 col-form-label">VAT No:</label>
                     <div class="col-md-8 col-lg-9">
                       <input name="VATNo" type="text" class="form-control" id="VATNo" [value]="userProfile.vatNumber" [(ngModel)]="userProfile.vatNumber">
                     </div>
                   </div>
 
                   <div class="text-center">
-                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                    <button type="submit" class="btn btn-primary">Save Profile Changes</button>
                   </div>
-                </form><!-- End Profile Edit Form -->
+                </form>
+
+                <br>
+
+                  <!-- Address data -->
+                  <form (ngSubmit)="updateAddress()">
+                  <div class="row mb-3">
+                    <label for="buildingName" class="col-md-4 col-lg-3 col-form-label">Building Name:</label>
+                    <div class="col-md-8 col-lg-9">
+                      <input name="buildingName" type="text" class="form-control" id="buildingName" [value]="address.buildingName" [(ngModel)]="address.buildingName">
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
+                    <label for="streetNumber" class="col-md-4 col-lg-3 col-form-label">Street Number:</label>
+                    <div class="col-md-8 col-lg-9">
+                      <input name="streetNumber" type="text" class="form-control" id="streetNumber" [value]="address.streetNumber" [(ngModel)]="address.streetNumber">
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
+                    <label for="streetName" class="col-md-4 col-lg-3 col-form-label">Street Name:</label>
+                    <div class="col-md-8 col-lg-9">
+                      <input name="streetName" type="text" class="form-control" id="streetName" [value]="address.streetName" [(ngModel)]="address.streetName">
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
+                    <label for="surbub" class="col-md-4 col-lg-3 col-form-label">Suburb:</label>
+                    <div class="col-md-8 col-lg-9">
+                      <input name="surbub" type="text" class="form-control" id="surbub" [value]="address.surbub" [(ngModel)]="address.surbub">
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
+                    <label for="city" class="col-md-4 col-lg-3 col-form-label">City:</label>
+                    <div class="col-md-8 col-lg-9">
+                      <input name="city" type="text" class="form-control" id="city" [value]="address.city" [(ngModel)]="address.city">
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
+                    <label for="province" class="col-md-4 col-lg-3 col-form-label">Province:</label>
+                    <div class="col-md-8 col-lg-9">
+                      <input name="province" type="text" class="form-control" id="province" [value]="address.province" [(ngModel)]="address.province">
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
+                    <label for="country" class="col-md-4 col-lg-3 col-form-label">Country:</label>
+                    <div class="col-md-8 col-lg-9">
+                      <input name="country" type="text" class="form-control" id="country" [value]="address.country" [(ngModel)]="address.country">
+                    </div>
+                  </div>
+
+                  <div class="row mb-3">
+                    <label for="zipCode" class="col-md-4 col-lg-3 col-form-label">Zip Code:</label>
+                    <div class="col-md-8 col-lg-9">
+                      <input name="zipCode" type="text" class="form-control" id="zipCode" [value]="address.zipCode" [(ngModel)]="address.zipCode">
+                    </div>
+                  </div>
+                  
+                  <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Save Address Changes</button>
+                  </div>
+                </form>
+                <!-- End Profile Edit Form -->
 
               </div>
 
@@ -232,13 +307,13 @@
                       <div class="form-check">
                         <input class="form-check-input" type="checkbox" id="changesMade" checked>
                         <label class="form-check-label" for="changesMade">
-                          Changes made to your account
+                          Alerts for new auction events
                         </label>
                       </div>
                       <div class="form-check">
                         <input class="form-check-input" type="checkbox" id="newProducts" checked>
                         <label class="form-check-label" for="newProducts">
-                          Information on new products and services
+                          Alerts for start of auction events
                         </label>
                       </div>
                       <div class="form-check">
@@ -297,19 +372,4 @@
   </section>
 
 </main><!-- End #main -->
-
-<!-- ======= Footer ======= -->
-<footer id="footer" class="footer">
-  <div class="copyright">
-    &copy; Copyright <strong><span>Everything.Auction</span></strong>. All Rights Reserved
-  </div>
-  <div class="credits">
-    <!-- All the links in the footer should remain intact. -->
-    <!-- You can delete the links only if you purchased the pro version. -->
-    <!-- Licensing information: https://bootstrapmade.com/license/ -->
-    <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-    Designed by <a href="https://bootstrapmade.com/">Everything.Insure</a>
-  </div>
-</footer><!-- End Footer -->
-
-<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+</div>
