@@ -32,4 +32,16 @@ export class SpNavbarComponent {
     );
   }
 
+  getAllfavourites(){
+    this.authService.getAllfavouriteAuction().subscribe(
+      (response) => {
+        console.log('All fav', response);
+      },
+      error => {
+        console.log('Error fetching upcoming auctions:', error);
+      }
+    );
+
+  }
+
 }

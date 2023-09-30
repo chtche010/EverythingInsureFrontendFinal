@@ -40,7 +40,7 @@ export class ManageauctionComponent {
   }
 
   loadAuctionDetails() {
-    this.authService.getServiceProviders().subscribe(
+    this.authService.cagetauctions().subscribe(
       (response: any) => {
         console.log(response.data);
         this.dataSource.data = response.data;

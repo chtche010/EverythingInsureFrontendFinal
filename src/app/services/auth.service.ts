@@ -180,6 +180,25 @@ export class AuthService {
   getAuctionById(): Observable<any> {
     return this.http.get<any>(this.baseUrl + 'api/Auction/Get Auction by Id', this.httpOptions);
   }
+
+  //favouriteAuction
+
+  favouriteAuction(auctionID: number): Observable<any> {
+    const url = `${this.baseUrl}api/Auction/${auctionID}/favfourite`;
+    return this.http.post<any>(url, null, this.httpOptions);
+  }
+
+  unfavouriteAuction(auctionID: number): Observable<any> {
+    const url = `${this.baseUrl}api/Auction/${auctionID}/unfavfourite`;
+    return this.http.post<any>(url, null, this.httpOptions);
+  }
+
+  getAllfavouriteAuction(): Observable<any> {
+    const url = `${this.baseUrl}api/Auction/getAllFavfourite`;
+    return this.http.post<any>(url, null, this.httpOptions);
+  }
+
+
   
   // service providers 
 

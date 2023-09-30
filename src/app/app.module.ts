@@ -81,7 +81,7 @@ import { MaterialListComponent } from './serviceprovider/serviceproviderprofile/
 import { OptComponent } from './opt/opt.component';
 import { EmailVeriComponent } from './email-veri/email-veri.component';
 import { AdminReportComponent } from './reporting/admin-report/admin-report.component';
-//import { NgChartsModule, NgChartsConfiguration } from 'ng2-charts';
+import { NgChartsModule, NgChartsConfiguration } from 'ng2-charts';
 import { MatGridListModule} from '@angular/material/grid-list';
 import { BidSelectComponent } from './reporting/bid-select/bid-select.component';
 import { CaBarComponent } from './reporting/ca-bar/ca-bar.component';
@@ -173,7 +173,7 @@ const routes: Routes = [
     MatDialogModule,
     MatFormFieldModule,
     MatIconModule,
-    //NgChartsModule,
+    NgChartsModule,
     MatGridListModule,
     MatExpansionModule,
   ],
