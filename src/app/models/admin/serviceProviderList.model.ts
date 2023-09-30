@@ -2,13 +2,13 @@ export interface serviceProviderList {
     registrationName: string;
     tradingName: string;
     contactPerson: string;
-    cellNumber: number;
-    telNumber: number;
+    cellNumber: string;
+    telNumber: string;
     email: string;
     payeeType: string;
     type: string;
     companyRegistrationNumber: string;
     accountStatus: string;
     vatVendor: string;
-    vatNo: string;
-  }
+    vatNumber: string;
+}

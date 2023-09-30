@@ -10,14 +10,14 @@ export interface PeriodicElement {
   registrationName: string;
   tradingName: string;
   contactPerson: string;
-  cellNumber: number;
-  telNumber: number;
+  cellNumber: string;
+  telNumber: string;
   email: string;
   payeeType: string;
   type: string;
-  companyRegistrationNumber: number;
-  VATVendor: string;
-  VATNumber: string;
+  companyRegistrationNumber:string;
+  vatVendor: string;
+  vatNumber: string;
 }
 
 const allowMultiSelect = true;
@@ -33,11 +33,11 @@ var ELEMENT_DATA: PeriodicElement[] = [
 export class ManagespComponent {
   displayedColumns: string[] = ['registrationName', 'tradingName', 'contactPerson', 'cellNumber',
                                 'telNumber', 'email', 'payeeType', 'type', 'companyRegistrationNumber', 
-                                'VATVendor', 'VATNumber',
+                                'vatVendor', 'vatNumber'
                                 ];
    displayedColumns2: string[] = ['select','registrationName', 'tradingName', 'contactPerson', 'cellNumber',
                                 'telNumber', 'email', 'payeeType', 'type', 'companyRegistrationNumber',
-                                'VATVendor', 'VATNumber',
+                                'vatVendor', 'vatNumber'
                                 ];
  selectedItems: any[] = [];
   displaySelectedItemsFlag = false;
@@ -82,8 +82,8 @@ getSelectedItems() {
      payeeType: item.payeeType,
      type: item.type,
      companyRegistrationNumber: item.companyRegistrationNumber,
-     VATVendor: item.vatVendor,
-     VATNumber: item.vatNo
+     vatVendor: item.vatVendor,
+     vatNumber: item.vatNumber
 
     };
   });
@@ -120,7 +120,7 @@ console.log('displaySelectedItemsFlag:', this.displaySelectedItemsFlag);
     this.pendingDataSource = new MatTableDataSource<serviceProviderList>();
     this.approvedDataSource = new MatTableDataSource<serviceProviderList>();
     this.rejectedDataSource = new MatTableDataSource<serviceProviderList>();
-    this.loadAuctionDetails();
+    this.loadServiceProviderDetails();
   }
 
   refreshPage() {
@@ -159,7 +159,6 @@ console.log('displaySelectedItemsFlag:', this.displaySelectedItemsFlag);
 
         const selectedEmail = selectedItem.email
         console.log(selectedEmail)
-
        
         this.authService.approveServiceProvider(selectedEmail)
         .subscribe(
@@ -205,11 +204,10 @@ console.log('displaySelectedItemsFlag:', this.displaySelectedItemsFlag);
     }
 
   
-  loadAuctionDetails() {
+  loadServiceProviderDetails() {
     this.authService.getServiceProviders().subscribe(
       (response: any) => {
         console.log(response.data);
-
 
         const pendingUsers = response.data.filter((user: serviceProviderList) => user.accountStatus === 'Pending');
         console.log('Pending', pendingUsers);
@@ -229,8 +227,6 @@ console.log('displaySelectedItemsFlag:', this.displaySelectedItemsFlag);
       }
     );
   }
-  
-
   
 }
 
