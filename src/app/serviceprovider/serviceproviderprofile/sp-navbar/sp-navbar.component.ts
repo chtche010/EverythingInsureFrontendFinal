@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -6,8 +6,10 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './sp-navbar.component.html',
   styleUrls: ['./sp-navbar.component.css']
 })
-export class SpNavbarComponent {
+export class SpNavbarComponent implements OnInit{
+  currentIcon!: string;
   userProfile: any;
+  
   constructor(private authService: AuthService) { }
   
   logout() {
@@ -18,6 +20,7 @@ export class SpNavbarComponent {
     this.loadUserProfile();
     //this.loadAddress(this.serviceProviderId);
     //this.loadBankDetails();
+    this.currentIcon = this.authService.getCurrentIcon();
   }
 
   loadUserProfile(){
@@ -43,5 +46,7 @@ export class SpNavbarComponent {
     );
 
   }
+
+  
 
 }

@@ -25,16 +25,12 @@
               <i class="bi bi-search"></i>
             </a>
           </li><!-- End Search Icon-->
-  
-       
-  
-            
+           
      <!-- End Notification Nav -->
-  
-        
 
-            <button mat-icon-button class="favorite-button" (click)="getAllfavourites()">
-              <mat-icon>favorite_border</mat-icon>         
+            <button mat-icon-button class="favorite-button" routerLink="/favourite-auction">
+                <mat-icon>{{ currentIcon }}</mat-icon>   
+                               
                </button>
   
 

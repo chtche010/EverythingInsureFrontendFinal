@@ -7,12 +7,12 @@ import { AuthService } from 'src/app/services/auth.service';
 import { GetAllAuctions } from 'src/app/models/auction-dashboard/getallauctions';
 
 @Component({
-  selector: 'app-auction-dashboard',
-  templateUrl: './auction-dashboard.component.html',
-  styleUrls: ['./auction-dashboard.component.css']
+  selector: 'app-favourite-auction',
+  templateUrl: './favourite-auction.component.html',
+  styleUrls: ['./favourite-auction.component.css']
 })
 
-export class AuctionDashboardComponent implements OnInit {
+export class FavouriteAuctionComponent implements OnInit {
   selectedAuctionId: number | null = null;
   openAuctions: GetAllAuctions[] = [];
   upcomingAuctions: GetAllAuctions[] = [];
@@ -43,11 +43,10 @@ export class AuctionDashboardComponent implements OnInit {
   ngOnInit(): void {
     this.getAuctionEvents();
     this.changeIcon();
-
   }
 
   getAuctionEvents(): void {
-    this.authService.getOpenAuctions().subscribe(
+    this.authService.GetOpenFavAuctions().subscribe(
       (response: any) => {
         console.log('Open Auctions:', response.data);
         this.openAuctions = response.data;
@@ -60,7 +59,7 @@ export class AuctionDashboardComponent implements OnInit {
       }
     );
 
-    this.authService.getUpcomingAuctions().subscribe(
+    this.authService.GetUpcomingFavAuctions().subscribe(
       (response: any) => {
         console.log('Upcoming Auctions:', response.data);
         this.upcomingAuctions = response.data;
@@ -90,7 +89,7 @@ export class AuctionDashboardComponent implements OnInit {
       }
     );
 
-    this.authService.getClosedAuctions().subscribe(
+    this.authService.GetClosedFavAuctions().subscribe(
       (response: any) => {
         console.log('Closed Auctions:', response.data);
         this.closedAuctions = response.data;
@@ -100,6 +99,10 @@ export class AuctionDashboardComponent implements OnInit {
         console.log('Error fetching closed auctions:', error);
       }
     );
+  }
+
+  changeIcon() {
+    return this.authService.setCurrentIcon('favorite');
   }
 
   favoriteEvent(event: any, auctionEvent: any) {
@@ -112,8 +115,6 @@ export class AuctionDashboardComponent implements OnInit {
       this.removeFromFavorites(auctionEvent);
     } else {
       console.log(this.selectedAuctionId)
-      //var id = this.selectedAuctionId;
-
       const id = this.selectedAuctionId !== null ? Math.floor(this.selectedAuctionId) : 0;
             console.log(id)
      this.favouriteAuction(id);
@@ -163,12 +164,9 @@ export class AuctionDashboardComponent implements OnInit {
               );
               }
 
-              changeIcon() {
-                return this.authService.setCurrentIcon('favorite_border');
-              }
-
 
       }
+
 
 
 

@@ -198,6 +198,32 @@ export class AuthService {
     return this.http.post<any>(url, null, this.httpOptions);
   }
 
+  GetUpcomingFavAuctions(): Observable<any> {
+    const url = `${this.baseUrl}api/Auction/GetUpcomingFavAuctions`;
+    return this.http.post<any>(url, null, this.httpOptions);
+  }
+
+  GetOpenFavAuctions(): Observable<any> {
+    const url = `${this.baseUrl}api/Auction/GetOpenFavAuctions`;
+    return this.http.post<any>(url, null, this.httpOptions);
+  }
+
+  GetClosedFavAuctions(): Observable<any> {
+    const url = `${this.baseUrl}api/Auction/GetClosedFavAuctions`;
+    return this.http.post<any>(url, null, this.httpOptions);
+  }
+
+  private currentIcon: string = 'favorite_border'; // 'default-icon' is the initial icon
+
+  // Getter and Setter for the icon state
+  getCurrentIcon(): string {
+    return this.currentIcon;
+  }
+
+  setCurrentIcon(iconName: string): void {
+    this.currentIcon = iconName;
+  }
+
 
   
   // service providers 

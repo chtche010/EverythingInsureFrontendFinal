@@ -87,6 +87,7 @@ import { BidSelectComponent } from './reporting/bid-select/bid-select.component'
 import { CaBarComponent } from './reporting/ca-bar/ca-bar.component';
 import { AwardauctionComponent } from './awardauction/awardauction.component';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { FavouriteAuctionComponent } from './serviceprovider/serviceproviderprofile/favourite-auction/favourite-auction.component';
 
 const routes: Routes = [
   { path: 'signup', component: SignupComponent },
@@ -144,7 +145,8 @@ const routes: Routes = [
     AdminReportComponent,
     BidSelectComponent,
     CaBarComponent,
-    AwardauctionComponent
+    AwardauctionComponent,
+    FavouriteAuctionComponent
   ],
   imports: [
     BrowserModule,
