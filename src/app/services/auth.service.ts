@@ -396,6 +396,11 @@ export class AuthService {
       return this.http.post<any>(url, this.httpOptions);
     }
 
+    pushNotificationsEmail(email: string): Observable<any> {
+      const url = `${this.baseUrl}Auth/returnNotifications?id=${email}`;
+      return this.http.post<any>(url, this.httpOptions);
+    }
+
   
 
     //Admin services

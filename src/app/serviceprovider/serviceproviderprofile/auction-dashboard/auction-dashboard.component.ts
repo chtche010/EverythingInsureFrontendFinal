@@ -50,9 +50,26 @@ export class AuctionDashboardComponent implements OnInit {
     this.authService.getOpenAuctions().subscribe(
       (response: any) => {
         console.log('Open Auctions:', response.data);
+
         this.openAuctions = response.data;
-        var auctionId: number = 0;
-        console.log(this.openAuctions);
+        if (this.openAuctions && this.openAuctions.length > 0) {
+          // Loop through all upcoming auctions
+          for (const auction of this.openAuctions) {
+            // Log the ID for each auction
+            this.selectedAuctionId = auction.auctionId;
+            console.log('Auction ID:', auction.auctionId);
+ 
+            if( auction.isFav === true){
+              this.favoriteEvents.push(auction)
+            } 
+
+            console.log('Fav auctions',this.favoriteEvents)
+
+
+          }
+        } else {
+          console.log('No upcoming auctions found.');
+        }
 
       },
       error => {
@@ -94,7 +111,24 @@ export class AuctionDashboardComponent implements OnInit {
       (response: any) => {
         console.log('Closed Auctions:', response.data);
         this.closedAuctions = response.data;
-        console.log(this.closedAuctions);
+        if (this.closedAuctions && this.closedAuctions.length > 0) {
+          // Loop through all upcoming auctions
+          for (const auction of this.closedAuctions) {
+            // Log the ID for each auction
+            this.selectedAuctionId = auction.auctionId;
+            console.log('Auction ID:', auction.auctionId);
+ 
+            if( auction.isFav === true){
+              this.favoriteEvents.push(auction)
+            } 
+
+            console.log('Fav auctions',this.favoriteEvents)
+
+
+          }
+        } else {
+          console.log('No upcoming auctions found.');
+        }
       },
       error => {
         console.log('Error fetching closed auctions:', error);
@@ -102,20 +136,17 @@ export class AuctionDashboardComponent implements OnInit {
     );
   }
 
-  favoriteEvent(event: any, auctionEvent: any) {
-   
+  favoriteEvent(event: any, auctionEvent: any) {   
     event.stopPropagation();//this line prevents the event from bubbling up
     if (this.isEventFavorite(auctionEvent)) {
       const id = this.selectedAuctionId !== null ? Math.floor(this.selectedAuctionId) : 0;
-
+      console.log(id)
       this.unfavouriteAuction(id);
       this.removeFromFavorites(auctionEvent);
     } else {
       console.log(this.selectedAuctionId)
-      //var id = this.selectedAuctionId;
-
       const id = this.selectedAuctionId !== null ? Math.floor(this.selectedAuctionId) : 0;
-            console.log(id)
+      console.log(id)
      this.favouriteAuction(id);
 
       this.addToFavorites(auctionEvent);

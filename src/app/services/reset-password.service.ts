@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ResetPassword } from '../models/resetPassword.model';
 import { changePassword } from '../models/changePassword.model';
+import { changePasswordEmail } from '../models/changePasswordEmail.model';
 
 
 @Injectable({
@@ -43,6 +44,20 @@ export class ResetPasswordService {
     "oldPassword": changePasswordobj.oldPassword,
     "newPassword": changePasswordobj.newPassword,
     "confirmPassword": changePasswordobj.confirmPassword,
+    });
+
+  }
+
+  changePasswordEmail(changePasswordoEmailobj: changePasswordEmail){
+
+    
+    console.log(changePasswordoEmailobj);
+
+    return this.http.post<any>(this.baseUrl + `/changePasswordEmail`, {
+    "email": changePasswordoEmailobj.email,
+    "oldPassword": changePasswordoEmailobj.oldPassword,
+    "newPassword": changePasswordoEmailobj.newPassword,
+    "confirmPassword": changePasswordoEmailobj.confirmPassword,
     });
 
   }
