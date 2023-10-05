@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { switchMap } from 'rxjs/operators';
+import { NgForm } from '@angular/forms'; // Import NgForm for form submission
 import { Router } from '@angular/router';
 import { ResetPasswordService } from 'src/app/services/reset-password.service';
 import { changePassword } from 'src/app/models/changePassword.model';
@@ -23,7 +24,7 @@ export class ServiceproviderprofileComponent implements OnInit {
   userNotifi: any;
   splitValues: string[] = [];
   chanegPasswordForm!: FormGroup;
-  changePassswordObj = new changePassword();
+ // changePassswordObj = new changePassword();
   changePasswordEmailObj = new changePasswordEmail();
   notificationPreferObj = new notificationPreferences();
   notificationPreferEmailObj = new notificationPreferencesEmail();
@@ -38,6 +39,7 @@ export class ServiceproviderprofileComponent implements OnInit {
       private snackBar: MatSnackBar,
       private router: Router,
       private snackbar: MatSnackBar,
+      private fb: FormBuilder
 
 
   ){}
@@ -50,6 +52,17 @@ export class ServiceproviderprofileComponent implements OnInit {
     this.checkVeri(this.email);
     this.pushNotifications();
     this.loadAddress(this.address);
+    //this.saveSettings();
+
+    this.chanegPasswordForm = this.fb.group(
+      {
+        currentPassword: ['', Validators.required],
+        newPassword: ['', '', [Validators.required, Validators.minLength(6), Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,}$')]], 
+        confirmPassword: ['', Validators.required]
+
+      }
+
+    )
     
 
     
@@ -167,14 +180,17 @@ changePassword(){
       console.log(this.changePasswordEmailObj)
 
       this.resetService.changePasswordEmail(this.changePasswordEmailObj)
+      
       .subscribe({
         next: (res)=>{
-          console.log("API ts",this.changePassswordObj)
+          console.log("API ts",this.changePasswordEmailObj)
           this.snackbar.open('Success! Password reset successfully', 'Close', { duration: 4000 });
 
           this.router.navigate(['/ca-profile']);
         },
         error: (err)=>{
+          console.log("API ts",this.changePasswordEmailObj)
+
           this.snackbar.open('Error! Something went wrong', 'Close', { duration: 4000 });
         }
       })
@@ -198,7 +214,7 @@ this.authService.getspdetails().subscribe(
     console.log(this.userProfile);
 
     var email = this.userProfile.email;
-    console.log("User ID",email);
+   // console.log("User ID",email);
 
     this.notificationPreferEmailObj.email = this.userProfile.email;
     //console.log(idNum);
@@ -279,17 +295,17 @@ this.authService.getspdetails().subscribe(
     var idNum = this.userProfile.account_UserId;
     console.log(idNum);
 
-    this.notificationPreferObj.id = this.userProfile.account_UserId;
+    this.notificationPreferEmailObj.email = this.userProfile.email;
     //console.log(idNum);
 
 
-    console.log(this.notificationPreferObj.id)
-    console.log(this.notificationPreferObj)
+    console.log(this.notificationPreferEmailObj.email)
+    console.log(this.notificationPreferEmailObj)
 
-    this.authService.saveSettings(this.notificationPreferObj)
+    this.authService.saveSettingsEmail(this.notificationPreferEmailObj)
     .subscribe({
       next: (res)=>{
-        console.log(this.changePassswordObj)
+        console.log(this.notificationPreferEmailObj)
         this.snackbar.open('Success! Notification settings updated', 'Close', { duration: 4000 });
 
         this.router.navigate(['/ca-profile']);

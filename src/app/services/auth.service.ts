@@ -25,6 +25,7 @@ import { createBid } from '../models/serviceprovider/createBid';
 import { createBidMaterial } from '../models/serviceprovider/createBidMaterial';
 import { getBids } from '../models/serviceprovider/getBids';
 import { getspAddress } from '../models/serviceprovider/getspAddress';
+import { notificationPreferencesEmail } from '../models/notificationPreferencesEmail';
 
 @Injectable({
   providedIn: 'root'
@@ -389,6 +390,21 @@ export class AuthService {
       "marketingPromo":notificationPreferObj.marketingPromo,
       });
     }
+
+    saveSettingsEmail(notificationPreferEmailObj: notificationPreferencesEmail)
+    {
+  
+    //  console.log('API test', notificationPreferObj);
+  
+      return this.http.post<any>(this.baseUrl + `Auth/notificationsEmail`, {
+      "email":notificationPreferEmailObj.email, 
+      "changesToAccounts":notificationPreferEmailObj.changesToAccounts,
+      "newAuctions":notificationPreferEmailObj.newAuctions,
+      "marketingPromo":notificationPreferEmailObj.marketingPromo,
+      });
+    }
+
+
 
 
     pushNotifications(accountID: number): Observable<any> {

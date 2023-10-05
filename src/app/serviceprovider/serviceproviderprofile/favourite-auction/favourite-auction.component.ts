@@ -50,6 +50,25 @@ export class FavouriteAuctionComponent implements OnInit {
       (response: any) => {
         console.log('Open Auctions:', response.data);
         this.openAuctions = response.data;
+
+        if (this.openAuctions && this.openAuctions.length > 0) {
+          // Loop through all upcoming auctions
+          for (const auction of this.openAuctions) {
+            // Log the ID for each auction
+            this.selectedAuctionId = auction.auctionId;
+            console.log('Auction ID:', auction.auctionId);
+ 
+            if( auction.isFav === true){
+              this.favoriteEvents.push(auction)
+            } 
+
+            console.log('Fav auctions',this.favoriteEvents)
+
+
+          }
+        } else {
+          console.log('No upcoming auctions found.');
+        }
         var auctionId: number = 0;
         console.log(this.openAuctions);
 
@@ -93,6 +112,25 @@ export class FavouriteAuctionComponent implements OnInit {
       (response: any) => {
         console.log('Closed Auctions:', response.data);
         this.closedAuctions = response.data;
+
+        if (this.closedAuctions && this.closedAuctions.length > 0) {
+          // Loop through all upcoming auctions
+          for (const auction of this.closedAuctions) {
+            // Log the ID for each auction
+            this.selectedAuctionId = auction.auctionId;
+            console.log('Auction ID:', auction.auctionId);
+ 
+            if( auction.isFav === true){
+              this.favoriteEvents.push(auction)
+            } 
+
+            console.log('Fav auctions',this.favoriteEvents)
+
+
+          }
+        } else {
+          console.log('No upcoming auctions found.');
+        }
         console.log(this.closedAuctions);
       },
       error => {
@@ -105,21 +143,24 @@ export class FavouriteAuctionComponent implements OnInit {
     return this.authService.setCurrentIcon('favorite');
   }
 
-  favoriteEvent(event: any, auctionEvent: any) {
-   
+  favoriteEvent(event: any, auctionEvent: any) {   
     event.stopPropagation();//this line prevents the event from bubbling up
     if (this.isEventFavorite(auctionEvent)) {
-      const id = this.selectedAuctionId !== null ? Math.floor(this.selectedAuctionId) : 0;
-
-      this.unfavouriteAuction(id);
+      console.log(auctionEvent)
+      //const id = this.selectedAuctionId !== null ? Math.floor(this.selectedAuctionId) : 0;
+      //console.log(id)
+      var idnum = auctionEvent.auctionId;
+      console.log("ID",auctionEvent.auctionId)
+      this.unfavouriteAuction(idnum);
       this.removeFromFavorites(auctionEvent);
     } else {
-      console.log(this.selectedAuctionId)
-      const id = this.selectedAuctionId !== null ? Math.floor(this.selectedAuctionId) : 0;
-            console.log(id)
-     this.favouriteAuction(id);
-
+      console.log(auctionEvent)
+      //console.log(this.selectedAuctionId)
+     // const id = this.selectedAuctionId !== null ? Math.floor(this.selectedAuctionId) : 0;
       this.addToFavorites(auctionEvent);
+      var idnum = auctionEvent.auctionId;
+      console.log("ID",auctionEvent.auctionId)
+      this.favouriteAuction(idnum);
     }
   }
 
@@ -144,10 +185,10 @@ export class FavouriteAuctionComponent implements OnInit {
     console.log(id)
         this.authService.favouriteAuction(id).subscribe(
           (response: any) => {
-            console.log('Success favourited', response);
+            console.log( response);
           },
           error => {
-            console.log('Error fetching upcoming auctions:', error);
+            console.log('Error liking auctions:', error);
           }
         );
         }
