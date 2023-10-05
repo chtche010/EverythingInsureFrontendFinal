@@ -4,9 +4,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ResetPasswordService } from 'src/app/services/reset-password.service';
 import { changePassword } from 'src/app/models/changePassword.model';
-
-
-import ValidateForm from 'src/app/helpers/validationform';
 import { Router } from '@angular/router';
 import { notificationPreferences } from 'src/app/models/notificationPreferences';
 
@@ -22,16 +19,14 @@ interface NotificationPreferences {
 
 export class CaProfileComponent implements OnInit {
   userProfile: any; 
+  email = "";
   userNotifi: any;
   splitValues: string[] = [];
   chanegPasswordForm!: FormGroup;
   changePassswordObj = new changePassword();
   notificationPreferObj = new notificationPreferences();
+
   
-
-
-
-
   constructor(
     private resetService: ResetPasswordService,
     private authService: AuthService,
@@ -43,8 +38,9 @@ export class CaProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.getcaprofile();
+    //this.checkVeri(this.email);
     this.pushNotifications();
-   // this.checkEmailVerification();
+    this.checkEmailVerification();
     this.chanegPasswordForm = this.fb.group(
       {
         currentPassword: ['', Validators.required],
@@ -144,7 +140,6 @@ export class CaProfileComponent implements OnInit {
 
 
   pushNotifications() {
-
     this.authService.getcaprofile().subscribe(
       (response) => {
         console.log(response)
@@ -172,7 +167,7 @@ export class CaProfileComponent implements OnInit {
 
         if (this.splitValues[0].trim() === 'True'){
           const firstValue = true 
-          this.notificationPreferObj.changesToAccounts = firstValue
+          this.notificationPreferObj.changesToAccounts = firstValue          
         } else {
           const firstValue = false
         }

@@ -413,8 +413,8 @@ export class AuthService {
     }
 
     pushNotificationsEmail(email: string): Observable<any> {
-      const url = `${this.baseUrl}Auth/returnNotifications?id=${email}`;
-      return this.http.post<any>(url, this.httpOptions);
+      const url = `${this.baseUrl}Auth/returnNotificationsEmail?email=${email}`;
+      return this.http.post<any>(url,null, this.httpOptions);
     }
 
   

@@ -168,31 +168,30 @@
                                                 <div class="col-md-8 col-lg-9">
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="checkbox" id="changesMade"
-                                                            checked>
+                                                        [(ngModel)]="notificationPreferObj.changesToAccounts"
+                                                        name="changesToAccounts"
+                                                            >
                                                         <label class="form-check-label" for="changesMade">
                                                             Changes made to your account
                                                         </label>
                                                     </div>
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" id="newProducts"
-                                                            checked>
+                                                        <input class="form-check-input" type="checkbox" id="newAuctions"
+                                                        [(ngModel)]="notificationPreferObj.newAuctions"
+                                                        name="newAuctions">
                                                         <label class="form-check-label" for="newProducts">
-                                                            Information on new products and services
+                                                            Information on new auctiobs
                                                         </label>
                                                     </div>
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" id="proOffers">
+                                                        <input class="form-check-input" type="checkbox" id="marketingPromo"
+                                                        [(ngModel)]="notificationPreferObj.marketingPromo"
+                                                        name="marketingPromo">
                                                         <label class="form-check-label" for="proOffers">
                                                             Marketing and promo offers
                                                         </label>
                                                     </div>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox"
-                                                            id="securityNotify" checked disabled>
-                                                        <label class="form-check-label" for="securityNotify">
-                                                            Security alerts
-                                                        </label>
-                                                    </div>
+                                                    
                                                 </div>
                                             </div>
 

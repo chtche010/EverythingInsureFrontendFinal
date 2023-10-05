@@ -1,14 +1,9 @@
-import { Token } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { switchMap } from 'rxjs/operators';
-import { NgForm } from '@angular/forms'; // Import NgForm for form submission
 import { Router } from '@angular/router';
 import { ResetPasswordService } from 'src/app/services/reset-password.service';
-import { changePassword } from 'src/app/models/changePassword.model';
-import { notificationPreferences } from 'src/app/models/notificationPreferences';
 import { changePasswordEmail } from 'src/app/models/changePasswordEmail.model';
 import { notificationPreferencesEmail } from 'src/app/models/notificationPreferencesEmail';
 
@@ -24,23 +19,16 @@ export class ServiceproviderprofileComponent implements OnInit {
   userNotifi: any;
   splitValues: string[] = [];
   chanegPasswordForm!: FormGroup;
- // changePassswordObj = new changePassword();
   changePasswordEmailObj = new changePasswordEmail();
-  notificationPreferObj = new notificationPreferences();
   notificationPreferEmailObj = new notificationPreferencesEmail();
-
-  
-
 
   constructor(
     private resetService: ResetPasswordService,
     private authService: AuthService,
-     private formBuilder: FormBuilder,
       private snackBar: MatSnackBar,
       private router: Router,
       private snackbar: MatSnackBar,
       private fb: FormBuilder
-
 
   ){}
 
@@ -49,41 +37,32 @@ export class ServiceproviderprofileComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadUserProfile();
-    this.checkVeri(this.email);
     this.pushNotifications();
+    this.checkEmailVerification();   
     this.loadAddress(this.address);
-    //this.saveSettings();
-
     this.chanegPasswordForm = this.fb.group(
       {
         currentPassword: ['', Validators.required],
         newPassword: ['', '', [Validators.required, Validators.minLength(6), Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,}$')]], 
         confirmPassword: ['', Validators.required]
-
       }
-
     )
-    
-
     
   }
 
-  checkVeri(email: string){
-
-    this.authService.checkVeri(email)
-    .subscribe({
-      next: (res)=>{
-        console.log(email)
-        this.snackbar.open('Success! Email Verified', 'Close', { duration: 2000 });
-
-        this.router.navigate(['/home']);
+  checkEmailVerification(){
+    this.authService.checkVeri(this.userProfile.email).subscribe(
+      (repsonse) => {
+        console.log(repsonse.success)
+        if(repsonse.success === false){
+          this.snackbar.open('Error! Please verify your email', 'Close', { duration: 4000 });
+        }
       },
-      error: (err)=>{
-       //this.snackbar.open('Error! Something went wrong', 'Close', { duration: 2000 }); 
-
+      (error) => {
+        console.log('1111', error);
+        this.snackbar.open('Error! Something went wrong(EmailVeri)', 'Close', { duration: 4000 });
       }
-    })
-
+    )
   }
 
   loadUserProfile(){
@@ -206,7 +185,6 @@ changePassword(){
 
 
 pushNotifications() {
-
 this.authService.getspdetails().subscribe(
   (response) => {
     console.log(response)
@@ -214,20 +192,20 @@ this.authService.getspdetails().subscribe(
     console.log(this.userProfile);
 
     var email = this.userProfile.email;
-   // console.log("User ID",email);
 
     this.notificationPreferEmailObj.email = this.userProfile.email;
-    //console.log(idNum);
+
+    console.log(this.notificationPreferEmailObj.changesToAccounts)
+    console.log(this.notificationPreferEmailObj.newAuctions)
+    console.log(this.notificationPreferEmailObj.marketingPromo)
 
 
-    console.log(this.notificationPreferEmailObj.email)
-    console.log(this.notificationPreferEmailObj)
 
     this.authService.pushNotificationsEmail(this.userProfile.email)
     .subscribe({
       next: (res)=>{
         console.log("push notification", res.data)
-        
+       // console.log(res.data)        
         this.splitValues = res.data.split(', ');
 
     // Optionally, you can log the result
@@ -240,22 +218,33 @@ this.authService.getspdetails().subscribe(
       const firstValue = false
     }
 
+    console.log(this.notificationPreferEmailObj.changesToAccounts)
+
+
     if (this.splitValues[1].trim() === 'True'){
       const secondValue = true 
       this.notificationPreferEmailObj.newAuctions = secondValue
+
     } else {
       const secondValue = false
     }
 
+    console.log(this.notificationPreferEmailObj.newAuctions)
+
+
     if (this.splitValues[2].trim() === 'True'){
       const thirdValue = true 
       this.notificationPreferEmailObj.marketingPromo = thirdValue
+
     } else {
       const thirdValue = false
     }
 
+    console.log(this.notificationPreferEmailObj.marketingPromo)
 
-        this.router.navigate(['/ca-profile']);
+
+
+        this.router.navigate(['/serviceproviderprofile']);
       },
       error: (err)=>{
       //  this.snackbar.open('Error! Notifications not pushed', 'Close', { duration: 4000 });
@@ -263,7 +252,7 @@ this.authService.getspdetails().subscribe(
     })
 
     //console.log(response.id);
-    console.log('Claim Agent Profile', this.userProfile);
+    console.log('Service Provider Profile', this.userProfile);
    
 
   }, 
@@ -285,21 +274,16 @@ console.log(this.splitValues);
 }
 
 saveSettings() {
-
 this.authService.getspdetails().subscribe(
   (response) => {
     console.log(response)
     this.userProfile = response.data;
     console.log(this.userProfile);
 
-    var idNum = this.userProfile.account_UserId;
-    console.log(idNum);
+    var email = this.userProfile.email;
 
-    this.notificationPreferEmailObj.email = this.userProfile.email;
-    //console.log(idNum);
+    this.notificationPreferEmailObj.email = email;
 
-
-    console.log(this.notificationPreferEmailObj.email)
     console.log(this.notificationPreferEmailObj)
 
     this.authService.saveSettingsEmail(this.notificationPreferEmailObj)
@@ -318,13 +302,11 @@ this.authService.getspdetails().subscribe(
     //console.log(response.id);
     console.log('Claim Agent Profile', this.userProfile);
    
-
   }, 
   (error) => {
-   // console.log('Error returning claim agent profile', error);
+
   }
 );
-// Save user settings to the service
 
 }
 
