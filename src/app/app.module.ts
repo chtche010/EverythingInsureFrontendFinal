@@ -82,8 +82,9 @@ import { NgChartsModule, NgChartsConfiguration } from 'ng2-charts';
 import { MatGridListModule} from '@angular/material/grid-list';
 import { BidSelectComponent } from './reporting/bid-select/bid-select.component';
 import { CaBarComponent } from './reporting/ca-bar/ca-bar.component';
-import { AwardauctionComponent } from './awardauction/awardauction.component';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { AwardDialogComponent } from './award-dialog/award-dialog.component';
+import { AwardauctionComponent } from './awardauction/awardauction.component';
 
 const routes: Routes = [
   { path: 'signup', component: SignupComponent },
@@ -141,7 +142,8 @@ const routes: Routes = [
     AdminReportComponent,
     BidSelectComponent,
     CaBarComponent,
-    AwardauctionComponent
+    AwardDialogComponent,
+    AwardauctionComponent,
   ],
   imports: [
     BrowserModule,

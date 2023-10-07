@@ -131,6 +131,10 @@ export class AuthService {
     return this.http.delete(url, this.httpOptions);
   }
 
+  public awardAuctions(): Observable<any[]> {
+    return this.http.get<any[]>(this.baseUrl + 'api/Auction/GetAllReports', this.httpOptions);
+  }
+
   // Adding an auction 
 
   submitClaimData(claimData: addclaim): Observable<ServiceResponse<any>> {

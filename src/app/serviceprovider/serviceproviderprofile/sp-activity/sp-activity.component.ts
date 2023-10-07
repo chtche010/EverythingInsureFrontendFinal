@@ -61,7 +61,7 @@ export class SpActivityComponent implements OnInit {
 
   openMaterialList(bidId: number): void {
     console.log('Clicked bidId:', bidId);
-    this.router.navigate(['/material-list', bidId], { relativeTo: this.route });
+    this.router.navigate(['/material-list', bidId]);
 }
 
 }
