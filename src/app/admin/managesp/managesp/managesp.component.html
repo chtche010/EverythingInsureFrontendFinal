@@ -10,13 +10,27 @@
   
       <app-admin-nav-bar></app-admin-nav-bar>
       <app-admin-side-bar></app-admin-side-bar>
+
+      <h2 id="topH2">Pending</h2>
   
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-  
-      <!--- Note that these columns can be defined in any order.
-            The actual rendered columns are set as a property on the row definition" -->
+  <table mat-table [dataSource]="pendingDataSource" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-checkbox (change)="$event ? toggleAllRows() : null"
+                      [checked]="selection.hasValue() && isAllSelected()"
+                      [indeterminate]="selection.hasValue() && !isAllSelected()">
+        </mat-checkbox>
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <mat-checkbox (click)="$event.stopPropagation()"
+                      (change)="toggleSingleSelection(row); displaySelectedItems()"
+                      [checked]="selection.isSelected(row)">
+        </mat-checkbox>
+      </td>
+    </ng-container>
     
-      <!-- Position Column -->
+      
       <ng-container matColumnDef="registrationName">
         <th mat-header-cell *matHeaderCellDef> Registration name </th>
         <td mat-cell *matCellDef="let element"> {{element.registrationName}} </td>
@@ -62,21 +76,227 @@
         <td mat-cell *matCellDef="let element"> {{element.companyRegistrationNumber}} </td>
       </ng-container>
 
-      <ng-container matColumnDef="VATVendor">
+      <ng-container matColumnDef="vatVendor">
         <th mat-header-cell *matHeaderCellDef> VAT vendor </th>
-        <td mat-cell *matCellDef="let element"> {{element.VATVendor}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.vatVendor}} </td>
       </ng-container>
 
-      <ng-container matColumnDef="VATNumber">
+      <ng-container matColumnDef="vatNumber">
         <th mat-header-cell *matHeaderCellDef> VAT number </th>
-        <td mat-cell *matCellDef="let element"> {{element.VATNumber}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.vatNumber}} </td>
       </ng-container>
     
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns2;"></tr>
   
   </table>
+  <mat-paginator #pendingPaginator 
+  [pageSizeOptions]="[5, 10, 20]" 
+  showFirstLastButtons 
+  [length]="pendingDataSource.data.length">
+</mat-paginator>
+
+<div *ngIf="displaySelectedItemsFlag">
+  <ul>
+    <li *ngFor="let selectedItem of getSelectedItems()">
+      <!-- <div>ClaimsAgentId: {{ selectedItem.ClaimsAgentId }}</div> -->
+      <div>registrationName: {{selectedItem.registrationName}}</div>
+      <div>tradingName: {{ selectedItem.tradingName }}</div>
+      <div>contactPerson: {{ selectedItem.contactPerson}}</div>
+      <div>cellNumber: {{ selectedItem.cellNumber }}</div>
+      <div>telNumber: {{ selectedItem.telNumber }}</div>
+      <div>email: {{ selectedItem.email }}</div>
+      <div>payeeType: {{ selectedItem.payeeType }}</div>
+      <div>type: {{ selectedItem.type }}</div>
+      <div>companyRegistrationNumber: {{ selectedItem.companyRegistrationNumber}}</div>
+      <div>VATVendor: {{ selectedItem.vatVendor}}</div>
+      <div>VATNumber: {{ selectedItem.vatNumber}}</div>
+
+
+
+      <!-- <div>Account Status: {{ selectedItem.AccountStatus }}</div> -->
+    </li>
+    <br>
+
+    <button type="button" class="btn btn-success" 
+    (click)="approveAccount()"
+    (click)="refreshPage()"
+    >Approve</button>
+
+<button type="button" 
+class="btn btn-danger duck"
+data-bs-toggle="modal" 
+data-bs-target="#myModal">Reject</button>
+
+<div class="modal" id="myModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+              <form >                    
+                <div class="mb-3">                        
+                  <label for="inputData" class="form-label">Enter Reason:</label>     
+
+                  <input [(ngModel)]="rejectionObj.text"
+                  [ngModelOptions]="{standalone: true}"
+                   type="text" class="form-control"
+                    placeholder="Enter data here">                   
+                </div>                
+              </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-danger"
+                (click)="rejectAccount()"
+                (click)="refreshPage()"
+                >Reject</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+  </ul>
+</div>
+
+<h2>Approved</h2>
+
+
+<table mat-table [dataSource]="approvedDataSource" class="mat-elevation-z8">
   
+  <ng-container matColumnDef="registrationName">
+    <th mat-header-cell *matHeaderCellDef> Registration name </th>
+    <td mat-cell *matCellDef="let element"> {{element.registrationName}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="tradingName">
+    <th mat-header-cell *matHeaderCellDef> Trading name </th>
+    <td mat-cell *matCellDef="let element"> {{element.tradingName}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="contactPerson">
+    <th mat-header-cell *matHeaderCellDef> Contact person </th>
+    <td mat-cell *matCellDef="let element"> {{element.contactPerson}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="cellNumber">
+    <th mat-header-cell *matHeaderCellDef> Cellphone </th>
+    <td mat-cell *matCellDef="let element"> {{element.cellNumber}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="telNumber">
+    <th mat-header-cell *matHeaderCellDef> Tellephone </th>
+    <td mat-cell *matCellDef="let element"> {{element.telNumber}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="email">
+    <th mat-header-cell *matHeaderCellDef> Email </th>
+    <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="payeeType">
+    <th mat-header-cell *matHeaderCellDef> Payee type </th>
+    <td mat-cell *matCellDef="let element"> {{element.payeeType}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="type">
+    <th mat-header-cell *matHeaderCellDef> Type </th>
+    <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="companyRegistrationNumber">
+    <th mat-header-cell *matHeaderCellDef> Company registration number </th>
+    <td mat-cell *matCellDef="let element"> {{element.companyRegistrationNumber}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="vatVendor">
+    <th mat-header-cell *matHeaderCellDef> VAT vendor </th>
+    <td mat-cell *matCellDef="let element"> {{element.vatVendor}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="vatNumber">
+    <th mat-header-cell *matHeaderCellDef> VAT number </th>
+    <td mat-cell *matCellDef="let element"> {{element.vatNumber}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+</table>
+<mat-paginator #approvedPaginator
+[pageSizeOptions]="[5, 10, 20]" 
+showFirstLastButtons 
+[length]="approvedDataSource.data.length">
+</mat-paginator>
+
+<h2>Rejected</h2>
+
+<table mat-table [dataSource]="rejectedDataSource" class="mat-elevation-z8">
+  
+  <ng-container matColumnDef="registrationName">
+    <th mat-header-cell *matHeaderCellDef> Registration name </th>
+    <td mat-cell *matCellDef="let element"> {{element.registrationName}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="tradingName">
+    <th mat-header-cell *matHeaderCellDef> Trading name </th>
+    <td mat-cell *matCellDef="let element"> {{element.tradingName}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="contactPerson">
+    <th mat-header-cell *matHeaderCellDef> Contact person </th>
+    <td mat-cell *matCellDef="let element"> {{element.contactPerson}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="cellNumber">
+    <th mat-header-cell *matHeaderCellDef> Cellphone </th>
+    <td mat-cell *matCellDef="let element"> {{element.cellNumber}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="telNumber">
+    <th mat-header-cell *matHeaderCellDef> Tellephone </th>
+    <td mat-cell *matCellDef="let element"> {{element.telNumber}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="email">
+    <th mat-header-cell *matHeaderCellDef> Email </th>
+    <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="payeeType">
+    <th mat-header-cell *matHeaderCellDef> Payee type </th>
+    <td mat-cell *matCellDef="let element"> {{element.payeeType}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="type">
+    <th mat-header-cell *matHeaderCellDef> Type </th>
+    <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="companyRegistrationNumber">
+    <th mat-header-cell *matHeaderCellDef> Company registration number </th>
+    <td mat-cell *matCellDef="let element"> {{element.companyRegistrationNumber}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="vatVendor">
+    <th mat-header-cell *matHeaderCellDef> VAT vendor </th>
+    <td mat-cell *matCellDef="let element"> {{element.vatVendor}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="vatNumber">
+    <th mat-header-cell *matHeaderCellDef> VAT number </th>
+    <td mat-cell *matCellDef="let element"> {{element.vatNumber}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+</table>
+<mat-paginator #rejectedPaginator 
+[pageSizeOptions]="[5, 10, 20]" 
+showFirstLastButtons 
+[length]="rejectedDataSource.data.length">
+</mat-paginator>
+
   </body>
   </html>
 

@@ -1,0 +1,186 @@
+@import '~@fortawesome/fontawesome-free/css/all.css';
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap');
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: "Montserrat", sans-serif;
+}
+
+
+
+:root {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+  background: #f6f9ff;
+  color: #444444;
+}
+
+a {
+  color: #444444;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #717ff5;
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Montserrat", sans-serif;
+  color: #444444;
+  font-weight: 800;
+}
+
+
+.background-container {
+  background-image: url("src/assets/Images/background4.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  min-height: 100vh;
+}
+
+/*--------------------------------------------------------------
+
+  # Main
+
+  --------------------------------------------------------------*/
+
+#main {
+  margin-top: 60px;
+  margin-left: 310px;
+  padding: 20px 30px;
+  transition: all 0.3s;
+}
+
+@media (max-width: 1199px) {
+  #main {
+    padding: 20px;
+    margin-left: 0;
+  }
+}
+
+.auction-events-container {
+  width: 100%;
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap: 20px;
+}
+
+.auction-events-container mat-card {
+  width: 100%;
+  margin: 0px;
+  cursor: pointer;
+}
+
+.auction-events-container mat-card-header {
+  display: flex;
+  flex-direction: column;
+}
+
+.auction-events-container mat-card-title {
+  font-size: 16px;
+  margin-left: 8px;
+}
+
+.auction-events-container mat-card-subtitle {
+  font-size: 12px;
+  margin-top: 10px;
+  margin-left: 8px;
+  margin-bottom: 5px;
+  color: #666;
+}
+
+.auction-card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  border-radius: 10px;
+  /* 5px rounded corners */
+}
+
+.auction-card:hover {
+  transform: scale(1.03);
+  transition: transform .3s ease-in-out;
+  color: rgb(7, 48, 125);
+}
+
+.auctions-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.image-container {
+  width: 100%;
+  height: 200px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  overflow: hidden;
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.image-placeholder {
+  width: 100%;
+  height: 200px;
+  border: 1px solid #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  color: #ccc;
+}
+
+.divider-line {
+  margin-right: 20px;
+  margin-left: 20px;
+  height: 1px;
+  background-color: #d6d5d5cf;
+  /* Change the color of the divider line if needed */
+}
+
+.title-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.favorite-button .mat-icon {
+  color: rgb(255, 1, 1);
+}
+
+/* Separate sections with thin black lines */
+.auction-section {
+  border-top: 1px solid #000;
+  padding-top: 20px;
+  margin-top: 20px;
+}
+
+/* Style section headings */
+.auction-section h2 {
+  font-size: 24px;
+  color: #000;
+  font-weight: bold;
+  margin-bottom: 10px;
+}

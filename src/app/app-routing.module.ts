@@ -42,6 +42,7 @@ import { UpdateauctionComponent } from './claims-agent/updateauction/updateaucti
 import { MaterialListComponent } from './serviceprovider/serviceproviderprofile/material-list/material-list/material-list.component';
 import { AdminReportComponent } from './reporting/admin-report/admin-report.component';
 import { AwardauctionComponent } from './awardauction/awardauction.component';
+import { FavouriteAuctionComponent } from './serviceprovider/serviceproviderprofile/favourite-auction/favourite-auction.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
@@ -67,6 +68,7 @@ const routes: Routes = [
   { path: 'updateauction', component: UpdateclaimComponent},
   { path: 'material-list/:bidId', component: MaterialListComponent},
   { path: 'emailVeri', component: EmailVeriComponent},
+  {path: 'favourite-auction', component: FavouriteAuctionComponent},
 
   //admin 
   { path: 'admin-nav-bar', component: AdminNavBarComponent},
