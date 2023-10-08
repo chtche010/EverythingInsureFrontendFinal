@@ -41,7 +41,6 @@ export class AdminprofileComponent implements AfterViewInit {
     this.authService.getClaimsAgent().subscribe(
       (response: any) => {
         console.log(response.data);
-        this.userProfile = response.data;
         const pendingUsers = response.data.filter((user: claimsAgentList) => user.accountStatus === 'Pending');
         console.log('Pending', pendingUsers);
         this.pendingDataSource.data = pendingUsers; // Set the data for the MatTableDataSource
@@ -51,6 +50,7 @@ export class AdminprofileComponent implements AfterViewInit {
       }
     );
   }
+
 
   loadServiceProviderDetails() {
     this.authService.getServiceProviders().subscribe(

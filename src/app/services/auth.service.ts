@@ -471,6 +471,10 @@ export class AuthService {
     checkAccountStatus(email : string){
       return this.http.post<any>(this.baseUrl + 'Auth/CheckAccountStatus', {"email": email});
         }
+
+        getadminProfile(): Observable<any> {
+          return this.http.get<any>(this.baseUrl + 'api/Admin/GetAdminProfile', this.httpOptions);
+        }
   
   }
 

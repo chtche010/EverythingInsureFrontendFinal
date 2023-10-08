@@ -184,6 +184,7 @@ console.log('displaySelectedItemsFlag:', this.displaySelectedItemsFlag);
         console.log(selectedEmail)
 
         this.rejectionObj.email = selectedEmail;
+        const rejectionReason = this.rejectionObj.text;
         
       
         console.log("rejectionInfo", this.rejectionObj)
