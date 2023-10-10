@@ -1,15 +1,90 @@
 <app-ca-navbar></app-ca-navbar>
 
+ 
+
 <app-ca-sidebar></app-ca-sidebar>
 
+ 
+
 <div class="background-container">
+
     <main id="main" class="main">
+
+ 
 
         <div class="pagetitle">
 
             <h1>CA Reporting Dashboard</h1>
 
         </div><!-- End Page Title -->
+
+ 
+
+        <mat-grid-list class="top-tile" cols="12" rowHeight="100px" gutterSize="150px">
+
+            <!-- top row with 3 smaller columns -->
+
+            <mat-grid-tile colspan="4" rowspan="1">
+
+                <mat-grid-tile-header class="header-style"><i class="fa fa-check-square" style="color: blue;"></i> Total Claims Uploaded</mat-grid-tile-header>
+
+               <span class="number1" *ngIf="totalClaims !== undefined"> {{ totalClaims }} </span>
+               <span class="number1" *ngIf="totalClaims === undefined">Loading...</span>
+
+            </mat-grid-tile>
+
+            <mat-grid-tile colspan="4" rowspan="1">
+
+                <mat-grid-tile-header class="header-style"><i class="fa-solid fa-hourglass-half" style="color:rgb(9, 157, 9)"></i> Pending Auctions</mat-grid-tile-header>
+
+               <span class="number2"> {{ randomPendingAuctions}} </span>
+
+            </mat-grid-tile>
+
+            <mat-grid-tile colspan="4" rowspan="1">
+
+                <mat-grid-tile-header class="header-style"><i class="fas fa-chart-bar" style="color: rgb(235, 130, 50);"></i> Avg. Number of Bids</mat-grid-tile-header>
+
+              <span class="number3"> {{ randomAvgBids }} </span>
+
+            </mat-grid-tile>
+
+            <br>
+
+            </mat-grid-list>
+
+            <br><br><br>
+
+            <mat-grid-list class="below-tile" cols="12" rowHeight="100px" gutterSize="40px">
+
+            <!-- main section for table -->
+
+            <mat-grid-tile colspan="6" rowspan="3">
+
+                <mat-grid-tile-header class="header-style1">Top Bids</mat-grid-tile-header>
+
+                <app-bid-select> <!--Place the auction [auctionId] = "auctionId"--> </app-bid-select>
+
+            </mat-grid-tile>
+
+            <br>
+
+            <!-- main section for chart -->
+
+            <mat-grid-tile colspan="6" rowspan="3">
+
+                <mat-grid-tile-header class="header-style1">Bids Per Auction</mat-grid-tile-header>
+
+                <app-ca-bar></app-ca-bar>
+
+            </mat-grid-tile>
+
+        </mat-grid-list>
+
+        <br><br>
+
     </main>
-   
+
+ 
+
 </div>

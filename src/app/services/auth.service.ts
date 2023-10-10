@@ -242,6 +242,16 @@ export class AuthService {
     return this.http.post<ServiceResponse<any>>(this.baseUrl + "api/ServiceProvider/Add Bank Details", bankingDetails, this.httpOptions);
   }
 
+//Reporting
+//getCountClaims(): Observable<number> {
+  //const url = `${this.baseUrl}api/ClaimsAgentReport/CountClaims`;
+  //return this.http.get<number>(url, this.httpOptions);
+//}
+
+public getCountClaims(): Observable<number> {
+  return this.http.get<number>(this.baseUrl + 'api/ClaimsAgentReport/CountClaims', this.httpOptions);
+}
+
   // Getting auctions 
 
   public getUpcomingAuctions(): Observable<GetAllAuctions[]> {
