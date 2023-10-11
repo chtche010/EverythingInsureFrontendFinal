@@ -432,6 +432,13 @@ export class AuthService {
       return this.http.get<any>(this.baseUrl + 'api/Admin/GetClaimsAgent', this.httpOptions);
     }
 
+    getAllAuction(): Observable<any> {
+      // console.log(this.httpOptions)
+      return this.http.get<any>(this.baseUrl + 'api/Admin/GetAllAuctions', this.httpOptions);
+    }
+
+
+
     approveClaimsAgent(email: string): Observable<any> {
       const url = `${this.baseUrl}api/Admin/ApproveClaimsAgent?email=${email}`;
       console.log("URL message", url);
