@@ -89,6 +89,7 @@ import { AwardauctionComponent } from './awardauction/awardauction.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { FavouriteAuctionComponent } from './serviceprovider/serviceproviderprofile/favourite-auction/favourite-auction.component';
 import { RejectedUsersComponent } from './admin/rejected-users/rejected-users.component';
+import { ViewAuctionsComponent } from './admin/view-auctions/view-auctions.component';
 
 const routes: Routes = [
   { path: 'signup', component: SignupComponent },
@@ -148,7 +149,8 @@ const routes: Routes = [
     CaBarComponent,
     AwardauctionComponent,
     FavouriteAuctionComponent,
-    RejectedUsersComponent
+    RejectedUsersComponent,
+    ViewAuctionsComponent
   ],
   imports: [
     BrowserModule,

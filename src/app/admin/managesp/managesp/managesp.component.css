@@ -34,10 +34,40 @@ button {
   width: auto;
 }
 
+.mat-mdc-row:hover .mat-mdc-cell {
+  border-color: currentColor;
+}
+
+h4 {
+  margin: 0px;
+}
+
+
+.modal-tite {
+  margin-bottom: 0px !important
+}
+
+.mat-mdc-row .mat-mdc-cell {
+  border-bottom: 1px solid transparent;
+  border-top: 1px solid transparent;
+  cursor: pointer;
+}
+
+
+.demo-row-is-clicked {
+  font-weight: bolder;
+  text-decoration: underline;
+
+}
+
+.move {
+  margin-left: 350px;
+}
+
 table {
     width: 70%;
     margin-left: 350px;
-    margin-top: 100px;
+    
     font-family: 'Montserrat', sans-serif;
   }
 
@@ -83,6 +113,14 @@ table {
 
   .shaded-row {
     background-color: lightgray;
+  }
+
+  p {
+    margin-left: 350px;
+  }
+
+  .column-right {
+    margin-left: -100px; /* Adjust the value to control the spacing between columns */
   }
   
   .regular-icon {

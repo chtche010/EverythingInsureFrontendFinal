@@ -12,7 +12,9 @@
       <app-admin-side-bar></app-admin-side-bar>
 
       <h2 id="topH2">Pending</h2>
-  
+
+      <div *ngIf="pendingDataSource.data.length > 0; else noContent">
+
   <table mat-table [dataSource]="pendingDataSource" class="mat-elevation-z8">
 
     <ng-container matColumnDef="select">
@@ -96,24 +98,46 @@
   [length]="pendingDataSource.data.length">
 </mat-paginator>
 
+
+</div>
+
+<ng-template #noContent>
+  <p>No pending Service Providers</p>
+</ng-template>
+
+
+
 <div *ngIf="displaySelectedItemsFlag">
   <ul>
     <li *ngFor="let selectedItem of getSelectedItems()">
-      <!-- <div>ClaimsAgentId: {{ selectedItem.ClaimsAgentId }}</div> -->
-      <div>registrationName: {{selectedItem.registrationName}}</div>
-      <div>tradingName: {{ selectedItem.tradingName }}</div>
-      <div>contactPerson: {{ selectedItem.contactPerson}}</div>
-      <div>cellNumber: {{ selectedItem.cellNumber }}</div>
-      <div>telNumber: {{ selectedItem.telNumber }}</div>
-      <div>email: {{ selectedItem.email }}</div>
+      <div class="container">
+
+   
+      <div class="row justify-content-start">
+<div class="col"> 
+  <div>registrationName: {{selectedItem.registrationName}}</div>
+  <div>tradingName: {{ selectedItem.tradingName }}</div>
+  <div>contactPerson: {{ selectedItem.contactPerson}}</div>
+  <div>cellNumber: {{ selectedItem.cellNumber }}</div>
+  <div>telNumber: {{ selectedItem.telNumber }}</div>
+
+</div>
+
+<div class="col column-right"> 
+  <div>email: {{ selectedItem.email }}</div>
       <div>payeeType: {{ selectedItem.payeeType }}</div>
       <div>type: {{ selectedItem.type }}</div>
       <div>companyRegistrationNumber: {{ selectedItem.companyRegistrationNumber}}</div>
       <div>VATVendor: {{ selectedItem.vatVendor}}</div>
       <div>VATNumber: {{ selectedItem.vatNumber}}</div>
 
+</div>
 
+</div>
 
+</div>
+     
+  
       <!-- <div>Account Status: {{ selectedItem.AccountStatus }}</div> -->
     </li>
     <br>
@@ -139,7 +163,7 @@ data-bs-target="#myModal">Reject</button>
                   <input [(ngModel)]="rejectionObj.text"
                   [ngModelOptions]="{standalone: true}"
                    type="text" class="form-control"
-                    placeholder="Enter data here">                   
+                    placeholder="">                   
                 </div>                
               </form>
             </div>
@@ -217,9 +241,14 @@ data-bs-target="#myModal">Reject</button>
     <th mat-header-cell *matHeaderCellDef> VAT number </th>
     <td mat-cell *matCellDef="let element"> {{element.vatNumber}} </td>
   </ng-container>
+  
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  <tr 
+  mat-row 
+  (click)="selectRow(row)"
+  [class.demo-row-is-clicked]="row === selectedRow"
+  *matRowDef="let row; columns: displayedColumns;"></tr>
 
 </table>
 <mat-paginator #approvedPaginator
@@ -228,9 +257,43 @@ showFirstLastButtons
 [length]="approvedDataSource.data.length">
 </mat-paginator>
 
-<h2>Rejected</h2>
+<!-- ... (table code) ... -->
 
-<table mat-table [dataSource]="rejectedDataSource" class="mat-elevation-z8">
+
+
+<!-- Bootstrap Modal -->
+<div class="modal" tabindex="-1" [ngClass]="{'show': showModal}" [style.display]="showModal ? 'block' : 'none'">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Disable {{selectedRow?.registrationName}} Account</h4>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="inputData" class="form-label">Enter Reason:</label>
+            <input [(ngModel)]="rejectionObj.text" [ngModelOptions]="{ standalone: true }" type="text" class="form-control" placeholder="">
+          </div>
+        </form>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="showModal = false">Cancel</button>
+        <button type="submit" class="btn btn-danger" (click)="disableAccount(); showModal = false; refreshPage();">Disable</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<h2>Disabled</h2>
+
+
+<table mat-table [dataSource]="disabledDataSource" class="mat-elevation-z8">
   
   <ng-container matColumnDef="registrationName">
     <th mat-header-cell *matHeaderCellDef> Registration name </th>
@@ -287,15 +350,26 @@ showFirstLastButtons
     <td mat-cell *matCellDef="let element"> {{element.vatNumber}} </td>
   </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  <ng-container matColumnDef="rejectionReason">
+    <th mat-header-cell *matHeaderCellDef> Reason </th>
+    <td mat-cell *matCellDef="let element"> {{element.rejectionReason
+    }} </td>
+  </ng-container>
+  
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumnsDisabled"></tr>
+  <tr 
+  mat-row 
+  *matRowDef="let row; columns: displayedColumnsDisabled;"></tr>
 
 </table>
-<mat-paginator #rejectedPaginator 
+<mat-paginator #disabledPaginator
 [pageSizeOptions]="[5, 10, 20]" 
 showFirstLastButtons 
-[length]="rejectedDataSource.data.length">
+[length]="disabledDataSource.data.length">
 </mat-paginator>
+
+
 
   </body>
   </html>

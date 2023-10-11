@@ -34,10 +34,20 @@ var ELEMENT_DATA: PeriodicElement[] = [
 export class ManagecaComponent {
   displayedColumns: string[] = ['firstName', 'lastName', 'insuranceCompany', 'email'];
   displayedColumns2: string[] = ['select', 'firstName', 'lastName', 'insuranceCompany', 'email'];
+  displayedColumnsDisabled: string[] = ['firstName', 'lastName', 'insuranceCompany', 'email', 'rejectionReason'
+  
+  ];
 
   selectedItems: any[] = [];
+
+  clickedRow = new Set<PeriodicElement>();
+  selectedRow: any; // Replace 'any' with the actual data type of your rows
+ 
+  showModal = false;
+
   displaySelectedItemsFlag = false;
   inputValue: string = ''; 
+  selectedEmail: string = ''; // Add this variable at the top of your component class.
   showContent: Boolean = false;
   isHoveredUp = false;
   isHoveredDown = false;
@@ -50,6 +60,8 @@ export class ManagecaComponent {
   pendingDataSource!: MatTableDataSource<claimsAgentList>;
   approvedDataSource!: MatTableDataSource<claimsAgentList>;
   rejectedDataSource!: MatTableDataSource<claimsAgentList>;
+  disabledDataSource!: MatTableDataSource<claimsAgentList>;
+
 
   selection = new SelectionModel<claimsAgentList>(true, [], false);
 
@@ -59,11 +71,27 @@ export class ManagecaComponent {
   approvedPaginator!: MatPaginator;
   @ViewChild('rejectedPaginator')
   rejectedPaginator!: MatPaginator;
+  @ViewChild('disabledPaginator')
+  disabledPaginator!: MatPaginator;
 
     ngAfterViewInit() {
       this.pendingDataSource.paginator = this.pendingPaginator;
       this.approvedDataSource.paginator = this.approvedPaginator;
       this.rejectedDataSource.paginator = this.rejectedPaginator;
+      this.disabledDataSource.paginator = this.disabledPaginator;
+
+    }
+
+    
+    selectRow(row: any) {
+      this.selectedRow = row;
+      this.showModal = true;
+      this.selectedEmail = row.email; // Store the extracted email
+      console.log(row);
+  
+      // Add the clicked row to the Set for logging
+      this.clickedRow.clear(); // Clear the Set to only track one clicked row
+      this.clickedRow.add(row);
     }
 
   getSelectedItems() {
@@ -111,6 +139,8 @@ export class ManagecaComponent {
     this.pendingDataSource = new MatTableDataSource<claimsAgentList>();
     this.approvedDataSource = new MatTableDataSource<claimsAgentList>();
     this.rejectedDataSource = new MatTableDataSource<claimsAgentList>();
+    this.disabledDataSource = new MatTableDataSource<claimsAgentList>();
+
     this.dataSource = new MatTableDataSource<claimsAgentList>();
     this.loadCADetails();
   }
@@ -197,6 +227,29 @@ export class ManagecaComponent {
       }
     }
 
+    disableAccount(){
+
+      console.log(this.selectedEmail);
+
+      console.log(this.rejectionObj.text)
+
+      this.rejectionObj.email = this.selectedEmail;
+
+      this.authService.disableClaimsAgent(this.rejectionObj)
+      .subscribe(
+        (response) => {
+          console.log(response)
+          console.log("Success Disable")
+          location.reload();
+        },
+        (error) => {
+          console.log(error)
+          console.log("Fail Disable")
+        }
+     );
+
+    }
+
   loadCADetails() {
     this.authService.getClaimsAgent().subscribe(
       (response: any) => {
@@ -211,10 +264,14 @@ export class ManagecaComponent {
       const rejectedUsers = response.data.filter((user: claimsAgentList) => user.accountStatus === 'Rejected');
       console.log('Rejected', rejectedUsers);
 
+      const disabledUsers = response.data.filter((user: claimsAgentList) => user.accountStatus === 'Disabled');
+      console.log('Disabled', disabledUsers);
+
         this.dataSource.data = response.data;
         this.pendingDataSource.data = pendingUsers;
       this.approvedDataSource.data = approvedUsers;
       this.rejectedDataSource.data = rejectedUsers;
+      this.disabledDataSource.data = disabledUsers;
       },
       (error) => {
         console.error('Error fetching claims agent details', error);

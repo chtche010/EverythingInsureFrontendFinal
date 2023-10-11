@@ -1,0 +1,135 @@
+h2 {
+    margin-top: 30px;
+    margin-left: 350px;
+    font-family: 'Montserrat', sans-serif;
+    width: auto;
+    color: #012970;
+  }
+  
+  #topH2 {
+    margin-top: 70px;
+  }
+  
+  p {
+    margin-left: 350px;
+  }
+  
+  th {
+    font-weight: bold;
+  }
+  
+  
+  ul {
+    margin-left: 350px;
+    list-style: none;
+  }
+  
+  .duck {
+    margin-left: 20px;
+  }
+  
+  table {
+    width: 100%;
+  }
+  
+  button {
+  
+    font-family: 'Montserrat', sans-serif;
+    width: auto;
+  }
+  
+  table {
+      width: 70%;
+      margin-left: 350px;
+      font-family: 'Montserrat', sans-serif;
+    }
+  
+    h2 + table {
+      margin-top: 0;
+    }
+  
+    
+  .mat-mdc-row:hover .mat-mdc-cell {
+    border-color: currentColor;
+  }
+  
+  h4 {
+    margin: 0px;
+  }
+  
+  
+  .modal-tite {
+    margin-bottom: 0px !important
+  }
+  
+  .mat-mdc-row .mat-mdc-cell {
+    border-bottom: 1px solid transparent;
+    border-top: 1px solid transparent;
+    cursor: pointer;
+  }
+  
+  .demo-row-is-clicked {
+    font-weight: 100;
+    text-decoration: underline;
+  
+  }
+  
+  .move {
+    margin-left: 350px;
+  }
+  
+    
+  
+    .mat-elevation-z8 {
+      /* Add elevation (shadow) to the table */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+  
+    th.mat-header-cell {
+      background-color:#007bff;
+      font-weight: bold;
+      font-family: 'Montserrat', sans-serif;
+    }
+  
+    .mat-header-cell {
+      font-family: 'Montserrat', sans-serif;
+      text-decoration: none;
+    }
+  
+    body {
+      margin-bottom: 50px;
+      background-image: url('/assets/Images/background1.png');
+      background-size: cover;
+      background-position: center center;
+      background-color: #f0f0f0;
+    }
+  
+    /* Icon styling  */
+  
+    i {
+      font-size: 24px;
+      margin-right: 20px; /* Add the desired space between buttons */
+      margin-left: 20px;
+    }
+  
+    .shaded-row {
+      background-color: lightgray;
+    }
+    
+    .regular-icon {
+      color: #000; /* Change to the desired color for the regular icon */
+      transition: color 0.3s; /* Add a transition effect for smooth color change */
+    }
+    
+    /* Filled icon style */
+    .filled-icon {
+      color: #ff0000; /* Change to the desired color for the filled icon */
+      transition: color 0.3s; /* Add a transition effect for smooth color change */
+    }
+  
+    .action-button {
+      display: flex;
+      align-items: center;
+      margin-right: 10px; /* Add the desired space between buttons */
+    }
+    

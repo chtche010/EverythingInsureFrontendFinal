@@ -450,6 +450,15 @@ export class AuthService {
       }, this.httpOptions);
     }
 
+    disableClaimsAgent(rejectionObj: rejectionObject)
+    {
+  
+      return this.http.post<any>(this.baseUrl + `api/Admin/DisableClaimsAgent`, {
+      "email":rejectionObj.email, 
+      "text":rejectionObj.text
+      }, this.httpOptions);
+    }
+
     approveServiceProvider(email: string): Observable<any> {
       const url = `${this.baseUrl}api/Admin/ApproveServiceProvider?email=${email}`;
       console.log("URL message", url);
@@ -467,6 +476,19 @@ export class AuthService {
       "text":rejectionObj.text
       }, this.httpOptions);
     }
+
+    disableServiceProvider(rejectionObj: rejectionObject)
+    {
+  
+    //  console.log('API test', notificationPreferObj);
+  
+      return this.http.post<any>(this.baseUrl + `api/Admin/DisableServiceProvider`, {
+      "email":rejectionObj.email, 
+      "text":rejectionObj.text
+      }, this.httpOptions);
+    }
+
+    
 
     checkAccountStatus(email : string){
       return this.http.post<any>(this.baseUrl + 'Auth/CheckAccountStatus', {"email": email});

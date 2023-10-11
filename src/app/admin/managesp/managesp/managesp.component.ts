@@ -39,9 +39,21 @@ export class ManagespComponent {
                                 'telNumber', 'email', 'payeeType', 'type', 'companyRegistrationNumber',
                                 'vatVendor', 'vatNumber'
                                 ];
+
+                                displayedColumnsDisabled: string[] = ['registrationName', 'tradingName', 'contactPerson', 'cellNumber',
+                                'telNumber', 'email', 'payeeType', 'type', 'companyRegistrationNumber', 
+                                'vatVendor', 'vatNumber', 'rejectionReason'
+                                
+                                ];
  selectedItems: any[] = [];
+
+ clickedRow = new Set<PeriodicElement>();
+ selectedRow: any; // Replace 'any' with the actual data type of your rows
+
+ showModal = false;
   displaySelectedItemsFlag = false;
   inputValue: string = ''; 
+  selectedEmail: string = ''; // Add this variable at the top of your component class.
   showContent: Boolean = false;
   isHoveredUp = false;
    isHoveredDown = false;
@@ -52,6 +64,8 @@ export class ManagespComponent {
   pendingDataSource!: MatTableDataSource<serviceProviderList>;
   approvedDataSource!: MatTableDataSource<serviceProviderList>;
   rejectedDataSource!: MatTableDataSource<serviceProviderList>;
+  disabledDataSource!: MatTableDataSource<serviceProviderList>;
+
 
   selection = new SelectionModel<serviceProviderList>(true, [], false);
 
@@ -61,12 +75,29 @@ export class ManagespComponent {
   approvedPaginator!: MatPaginator;
   @ViewChild('rejectedPaginator')
   rejectedPaginator!: MatPaginator;
+  @ViewChild('disabledPaginator')
+  disabledPaginator!: MatPaginator;
+
 
   ngAfterViewInit() {
     this.pendingDataSource.paginator = this.pendingPaginator;
     this.approvedDataSource.paginator = this.approvedPaginator;
     this.rejectedDataSource.paginator = this.rejectedPaginator;
+    this.disabledDataSource.paginator = this.disabledPaginator;
+
   }
+
+  selectRow(row: any) {
+    this.selectedRow = row;
+    this.showModal = true;
+    this.selectedEmail = row.email; // Store the extracted email
+    console.log(row);
+
+    // Add the clicked row to the Set for logging
+    this.clickedRow.clear(); // Clear the Set to only track one clicked row
+    this.clickedRow.add(row);
+  }
+  
 
 getSelectedItems() {
   const selectedItems = this.selection.selected;
@@ -120,6 +151,8 @@ console.log('displaySelectedItemsFlag:', this.displaySelectedItemsFlag);
     this.pendingDataSource = new MatTableDataSource<serviceProviderList>();
     this.approvedDataSource = new MatTableDataSource<serviceProviderList>();
     this.rejectedDataSource = new MatTableDataSource<serviceProviderList>();
+    this.disabledDataSource = new MatTableDataSource<serviceProviderList>();
+
     this.loadServiceProviderDetails();
   }
 
@@ -189,7 +222,7 @@ console.log('displaySelectedItemsFlag:', this.displaySelectedItemsFlag);
       
         console.log("rejectionInfo", this.rejectionObj)
 
-        this.authService.rejectClaimsAgent(this.rejectionObj)
+        this.authService.rejectServiceProvider(this.rejectionObj)
         .subscribe(
           (response) => {
             console.log(response)
@@ -202,6 +235,29 @@ console.log('displaySelectedItemsFlag:', this.displaySelectedItemsFlag);
           }
        );
       }
+    }
+
+    disableAccount(){
+
+      console.log(this.selectedEmail);
+
+      console.log(this.rejectionObj.text)
+
+      this.rejectionObj.email = this.selectedEmail;
+
+      this.authService.disableServiceProvider(this.rejectionObj)
+      .subscribe(
+        (response) => {
+          console.log(response)
+          console.log("Success Disable")
+          location.reload();
+        },
+        (error) => {
+          console.log(error)
+          console.log("Fail Disable")
+        }
+     );
+
     }
 
   
@@ -218,10 +274,16 @@ console.log('displaySelectedItemsFlag:', this.displaySelectedItemsFlag);
       const rejectedUsers = response.data.filter((user: serviceProviderList) => user.accountStatus === 'Rejected');
       console.log('Rejected', rejectedUsers);
 
+      const disabledUsers = response.data.filter((user: serviceProviderList) => user.accountStatus === 'Disabled');
+      console.log('Disabled', disabledUsers);
+
         this.dataSource.data = response.data;
         this.pendingDataSource.data = pendingUsers;
       this.approvedDataSource.data = approvedUsers;
       this.rejectedDataSource.data = rejectedUsers;
+      this.disabledDataSource.data = disabledUsers;
+
+
       },
       (error) => {
         console.error('Error fetching auction details', error);

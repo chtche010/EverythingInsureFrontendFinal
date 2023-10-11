@@ -7,6 +7,7 @@
 
   <h2 id="topH2">Pending Claims Agents</h2>
 
+  <div *ngIf="pendingDataSource.data.length > 0; else noContent">
   
 <table mat-table [dataSource]="pendingDataSource" class="mat-elevation-z8">
   <ng-container matColumnDef="firstName">
@@ -40,10 +41,17 @@
   showFirstLastButtons 
   [length]="pendingDataSource.data.length">
 </mat-paginator>
+</div>
+
+<ng-template #noContent>
+  <p>No pending Claims Agent</p>
+</ng-template>
 
 </div>
 
 <h2 id="topH2">Pending Service Providers</h2>
+
+<div *ngIf="pendingDataSourceSP.data.length > 0; else noContent">
   
   <table mat-table [dataSource]="pendingDataSourceSP" class="mat-elevation-z8">
 
@@ -108,11 +116,17 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumnSP;"></tr>
   
   </table>
-  <mat-paginator #pendingPaginator 
+  <mat-paginator #pendingPaginatorr 
   [pageSizeOptions]="[5, 10, 20]" 
   showFirstLastButtons 
-  [length]="pendingDataSource.data.length">
+  [length]="pendingDataSourceSP.data.length">
 </mat-paginator>
+
+</div>
+
+<ng-template #noContent>
+  <p>No pending Service Provider</p>
+</ng-template>
 
 
   <div class="pagetitle">
