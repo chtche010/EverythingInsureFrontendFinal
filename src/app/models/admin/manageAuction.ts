@@ -4,7 +4,7 @@ export interface manageAuction {
     lastName: string;
     insuranceCompany: string;
     // Other claimsAgent properties
-  };
+  }
    
     auctionTitle: string;
     startTime: string;

@@ -21,29 +21,49 @@ export class ViewAuctionsComponent {
   }
 
   applyFilter(event: Event): void {
-    // Use optional chaining to safely access event.target.value
     const filterValue = (event.target as HTMLInputElement)?.value?.trim().toLowerCase() || '';
   
-    // Update the filter with the computed filterValue
     this.dataSource.filter = filterValue;
   
-    // If filterValue is empty, reset the filterPredicate to the default to show all elements
     if (filterValue === '') {
       this.dataSource.filterPredicate = (data: manageAuction, filter: string) => true;
     } else {
-      // Otherwise, set a custom filterPredicate based on your needs
       this.dataSource.filterPredicate = (data: manageAuction, filter: string) => {
-        // Customize this condition based on your filtering requirements
         const claimsAgent = data.claimsAgent;
   
+        const options: Intl.DateTimeFormatOptions = {
+          year: 'numeric',
+          month: 'long', // Display the full month name
+          day: '2-digit',
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit',
+          hour12: true,
+        };
+        
+  
+        const auctionDateStr = new Date(data.auctionDate).toLocaleString('en-US', options);
+        const startTimeStr = new Date(data.startTime).toLocaleString('en-US', options);
+        const endTimeStr = new Date(data.endTime).toLocaleString('en-US', options);
+  
         return (
-          claimsAgent?.firstName?.toLowerCase().includes(filter) ||
-          claimsAgent?.lastName?.toLowerCase().includes(filter) ||
-          claimsAgent?.insuranceCompany?.toLowerCase().includes(filter)
+          (claimsAgent?.firstName?.toLowerCase().includes(filter) ||
+            claimsAgent?.lastName?.toLowerCase().includes(filter) ||
+            claimsAgent?.insuranceCompany?.toLowerCase().includes(filter)) ||
+          data.auctionTitle?.toLowerCase().includes(filter) ||
+          auctionDateStr.toLowerCase().includes(filter) ||
+          startTimeStr.toLowerCase().includes(filter) ||
+          console.log(startTimeStr) ||
+          endTimeStr.toLowerCase().includes(filter) ||
+          data.auctionStatus?.toLowerCase().includes(filter)
         );
       };
     }
   }
+  
+      
+  
+  
   
   
 

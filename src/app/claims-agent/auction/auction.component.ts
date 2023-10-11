@@ -15,6 +15,10 @@ import { Router } from '@angular/router';
 export class AuctionComponent implements OnInit {
   @ViewChild('stepper') stepper: any;
 
+  //customerName!: string; // Make sure you have this property in your component class
+  allInfo: any;
+
+
   addedMaterials: any[] = [];
   isAddingMaterial = false;
   showMaterialsCard = false;
@@ -23,6 +27,7 @@ export class AuctionComponent implements OnInit {
   auctionForm!: FormGroup;
   guidePriceForm!: FormGroup;
   materialCostForm!: FormGroup;
+  summaryForm!: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -39,6 +44,7 @@ export class AuctionComponent implements OnInit {
   guidePriceId!: number;
 
   ngOnInit(): void {
+    
     this.claimDetailsForm = this.formBuilder.group({
       customerName: ['', Validators.required],
       customerEmail: ['', Validators.required],
@@ -70,6 +76,33 @@ export class AuctionComponent implements OnInit {
       cost: ['', Validators.required],
       quantity: ['', Validators.required],
     });
+
+    this.summaryForm = this.formBuilder.group({
+      customerName: ['', Validators.required],
+      customerEmail: ['', Validators.required],
+      vehicleMake: ['', Validators.required],
+      vehicleModel: ['', Validators.required],
+      modelYear: ['', Validators.required],
+      MMCode: ['', Validators.required],
+      damageDescription: ['', Validators.required],
+      customerSurbub: ['', Validators.required],
+      customerCity: ['', Validators.required],
+      customerProvince: ['', Validators.required],
+
+      claimId: ['', Validators.required],
+      auctionDate: ['', Validators.required],
+      startTime: ['', Validators.required],
+      endTime: ['', Validators.required],
+
+      labourCost: ['', Validators.required],
+      estimatedDuration: ['', Validators.required],
+
+      materialName: ['', Validators.required],
+      materialDescription: ['', Validators.required],
+      cost: ['', Validators.required],
+      quantity: ['', Validators.required],
+    });
+  
 
   }
 
@@ -163,7 +196,9 @@ export class AuctionComponent implements OnInit {
   }
 
   addMaterial(guidePriceId: number) {
+    
     if (this.materialCostForm.valid) {
+      
       console.log("guidePriceId:", guidePriceId);
 
       const material = {
@@ -176,10 +211,16 @@ export class AuctionComponent implements OnInit {
 
       this.authService.createGuidePriceMaterial(material).subscribe(() => {
         console.log("Material added successfully!");
+        //this.getclaimInformation()
+
+       
 
       this.addedMaterials.push(material);
       this.materialCostForm.reset();
       this.showMaterialsCard = true;
+     // this.getclaimInformation()
+
+     
       
     }, (error) => {
       console.log("Error adding material:", error);
@@ -191,6 +232,30 @@ export class AuctionComponent implements OnInit {
 
 handleSubmit() {
   this.snackBar.open('Auction added successfully!', 'Close', { duration: 5000 });
-  this.router.navigate(['/caprofile']);
+  //this.router.navigate(['/caprofile']);
+  this.getclaimInformation()
+}
+
+onStepSelectionChange(event: any) {
+  if (event.selectedIndex === 4) { // 4 is the 5th step (0-based index)
+    // Call your method here
+    this.getclaimInformation();
+  }
+}
+
+getclaimInformation(){
+
+  this.authService.getAllClaimInformaation(this.claimId).subscribe
+  ((response) => {
+    console.log("All Claim information loaded successfully!", response.data);
+    this.allInfo = response.data;
+
+  
+  }, (error) => {
+    console.log("Error loading claim information", error);
+
+  });
+
+
 }
 }

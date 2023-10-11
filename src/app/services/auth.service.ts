@@ -134,6 +134,11 @@ export class AuthService {
     return this.http.delete(url, this.httpOptions);
   }
 
+getAllClaimInformaation(bidId: number): Observable<any> {
+    const url = `${this.baseUrl}api/Claims/GetClaimById?id=${bidId}`; // Include the bidId in the URL
+    return this.http.get<any>(url, this.httpOptions);
+  }
+
   // Adding an auction 
 
   submitClaimData(claimData: addclaim): Observable<ServiceResponse<any>> {

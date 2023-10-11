@@ -150,7 +150,8 @@
             <div class="button-container">
               <button mat-raised-button color="primary" matStepperPrevious>Back</button>
               <button mat-raised-button color="primary" (click)="addMaterial(guidePriceId)">Add material</button>
-              <button mat-raised-button color="primary" (click)="handleSubmit()">Submit</button>
+              <button mat-raised-button matStepperNext color="primary" (click)="handleSubmit()" [disabled]="!materialCostForm.valid">Next</button>
+
             </div>
           </div>
           </form>
@@ -169,6 +170,136 @@
                       </mat-card-content>
                     </mat-card>
                   </div>
+        </mat-step>
+
+        <!-- Confirmation -->
+      </div>
+
+      <!-- Step 5: Summary  -->
+
+      <div class="material-cost-form-container">
+        <mat-step [stepControl]="summaryForm" (stepSelectionChange)="onStepSelectionChange($event)">
+          <ng-template matStepLabel>Summary</ng-template>
+
+          <form [formGroup]="summaryForm">
+
+            <h5 >Claim details</h5>
+
+            <div class="col-lg-3 col-md-4 label">Customer Name</div>
+            <div class="col-lg-9 col-md-8">{{ allInfo?.customerName}}</div>
+      
+            <mat-error class="error-message" *ngIf="claimDetailsForm.get('customerName')?.invalid && (claimDetailsForm.get('customerName')?.dirty || claimDetailsForm.get('customerName')?.touched)">
+              Please enter a valid email address
+            </mat-error>
+      
+            <mat-form-field appearance="fill" style="width: 50%">
+              <mat-label for="customerEmail">Customer email</mat-label>
+              <input matInput formControlName="customerEmail" required id="customerEmail" name="customerEmail">
+            </mat-form-field>
+      
+            <mat-form-field appearance="fill" style="width: 50%">
+              <mat-label for="vehicleMake">Vehicle make</mat-label>
+              <input matInput formControlName="vehicleMake" required id="vehicleMake" name="vehicleMake">
+            </mat-form-field>
+      
+            <mat-form-field appearance="fill" style="width: 50%">
+              <mat-label for="vehicleModel">Vehicle model</mat-label>
+              <input matInput formControlName="vehicleModel" required id="vehicleModel" name="vehicleModel">
+            </mat-form-field>
+      
+            <mat-form-field appearance="fill" style="width: 50%">
+              <mat-label for="modelYear">Vehicle year</mat-label>
+              <input matInput formControlName="modelYear" required id="modelYear" name="modelYear">
+            </mat-form-field>
+      
+            <mat-form-field appearance="fill" style="width: 50%">
+              <mat-label for="MMCode">MM code</mat-label>
+              <input matInput formControlName="MMCode" required id="MMCode" name="MMCode">
+            </mat-form-field>
+      
+            <mat-form-field appearance="fill" style="width: 50%">
+              <mat-label for="damageDescription">Damage description</mat-label>
+              <textarea matInput formControlName="damageDescription" required id="damageDescription" name="damageDescription" rows="4"></textarea>
+            </mat-form-field>
+      
+            <mat-form-field appearance="fill" style="width: 50%">
+              <mat-label for="customerSurbub">Customer suburb</mat-label>
+              <input matInput formControlName="customerSurbub" required id="customerSurbub" name="customerSurbub">
+            </mat-form-field>
+      
+            <mat-form-field appearance="fill" style="width: 50%">
+              <mat-label for="customerCity">Customer city</mat-label>
+              <input matInput formControlName="customerCity" required id="customerCity" name="customerCity">
+            </mat-form-field>
+      
+            <mat-form-field appearance="fill" style="width: 50%">
+              <mat-label for="customerProvince">Customer province</mat-label>
+              <input matInput formControlName="customerProvince" required id="customerProvince" name="customerProvince">
+            </mat-form-field>
+
+
+
+            <mat-form-field appearance="fill" style="width: 50%">
+              <mat-label for="auctionDate">Auction Date</mat-label>
+              <input matInput formControlName="auctionDate" required id="auctionDate" name="Auction Date">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" style="width: 50%">
+              <mat-label for="startTime">Start Time</mat-label>
+              <input matInput formControlName="startTime" required id="startTime" name="startTime">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" style="width: 50%">
+              <mat-label for="endTime">End Time</mat-label>
+              <input matInput formControlName="endTime" required id="endTime" name="endTime">
+            </mat-form-field>
+
+
+      
+          <mat-form-field appearance="fill" style="width: 50%">
+              <mat-label for="labourCost">Labour Cost</mat-label>
+              <input matInput formControlName="labourCost" required id="labourCost" name="labourCost">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" style="width: 50%">
+              <mat-label for="estimatedDuration">Estimated Duration</mat-label>
+              <input matInput formControlName="estimatedDuration" required id="estimatedDuration" name="estimatedDuration">
+            </mat-form-field>
+      
+
+            
+            <mat-form-field appearance="fill" style="width: 50%">
+              <mat-label for="materialName">Material Name</mat-label>
+              <input matInput formControlName="materialName" required id="materialName" name="materialName">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" style="width: 50%">
+              <mat-label for="materialDescription">Material Description</mat-label>
+              <input matInput formControlName="materialDescription" required id="materialDescription" name="materialDescription">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" style="width: 50%">
+              <mat-label for="Cost">Cost</mat-label>
+              <input matInput formControlName="Cost" required id="Cost" name="Cost">
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" style="width: 50%">
+              <mat-label for="quantity">Quantity</mat-label>
+              <input matInput formControlName="quantity" required id="quantity" name="quantity">
+            </mat-form-field>
+
+            
+            <div *ngIf="!isAddingMaterial">
+            <div class="button-container">
+              <button mat-raised-button color="primary">Edit</button>
+              <button mat-raised-button  color="primary" (click)="handleSubmit()">Confirm</button>
+
+            </div>
+          </div>
+          </form>
+          <br><br>
+                   <!-- Display added materials -->
+                
         </mat-step>
 
         <!-- Confirmation -->
