@@ -1,59 +1,31 @@
-
-  
+<!-- awardauction.component.html -->
 
 <app-ca-navbar></app-ca-navbar>
 <app-ca-sidebar></app-ca-sidebar>
+
 <main>
-<div class="content">
-    <h1 class="page-title">Manage Claims</h1>
+  <div class="content">
+    <mat-table [dataSource]="auctions" class="mat-elevation-z8">
+      <!-- Column definitions -->
+      <ng-container matColumnDef="auctionTitle">
+        <th mat-header-cell *matHeaderCellDef>Auction Title</th>
+        <td mat-cell *matCellDef="let auction">{{ auction.auctionTitle }}</td>
+      </ng-container>
 
-  <div class="search-bar-container">
-    <mat-form-field>
-      <input matInput (input)="applyFilter($event)" placeholder="Search">
-    </mat-form-field>
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let auction">
+          <button mat-raised-button color="primary" (click)="openAwardDialog(auction)">
+            Award
+          </button>
+        </td>
+      </ng-container>
+
+      <!-- Define other columns here, e.g., auction date, etc. -->
+
+      <!-- Row definitions -->
+      <ng-container matRowDef="let row; columns: displayedColumns;"></ng-container>
+    </mat-table>
   </div>
-
-<mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-    <!-- Column definitions -->
-  
-    <!-- Define a column for the expansion panel -->
-    <ng-container matColumnDef="expand">
-      <th mat-header-cell *matHeaderCellDef></th>
-      <td mat-cell *matCellDef="let element">
-        <button mat-icon-button (click)="toggleExpansion(element)">
-          <mat-icon>{{ element.expanded ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}</mat-icon>
-        </button>
-      </td>
-    </ng-container>
-  
-    <!-- Define other columns here, e.g., auction title, date, etc. -->
-  
-    <!-- Row definitions -->
-    <ng-container matRowDef="let row; columns: displayedColumns;"></ng-container>
-  
-    <!-- Expansion panel row definition -->
-    <ng-container matRowDef="let row; when: isExpanded">
-      <td mat-cell [attr.colspan]="displayedColumns.length">
-        <mat-accordion [multi]="true">
-          <mat-expansion-panel [expanded]="row.expanded">
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                Top Three Bids
-              </mat-panel-title>
-            </mat-expansion-panel-header>
-            <div class="bid-details">
-              <!-- Display top three bids and their details here -->
-              <div *ngFor="let bid of row.topThreeBids">
-                <!-- Display bid details, e.g., service provider name, amount, etc. -->
-                <div>{{ bid.serviceProviderName }}</div>
-                <div>{{ bid.bidAmount }}</div>
-                <!-- Add more bid details as needed -->
-              </div>
-            </div>
-          </mat-expansion-panel>
-        </mat-accordion>
-      </td>
-    </ng-container>
-  </mat-table>
-</div>
 </main>
+

@@ -11,6 +11,8 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { FormArrayName, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -32,6 +34,7 @@ import { FAQComponent } from './faq/faq.component';
 import { FooterComponent } from './footer/footer.component';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
+import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ClaimsAgentDashboardComponent } from './claims-agent/claims-agent-dashboard/claims-agent-dashboard.component';
@@ -82,8 +85,11 @@ import { NgChartsModule, NgChartsConfiguration } from 'ng2-charts';
 import { MatGridListModule} from '@angular/material/grid-list';
 import { BidSelectComponent } from './reporting/bid-select/bid-select.component';
 import { CaBarComponent } from './reporting/ca-bar/ca-bar.component';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { AwardDialogComponent } from './award-dialog/award-dialog.component';
 import { AwardauctionComponent } from './awardauction/awardauction.component';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { FavouriteAuctionComponent } from './serviceprovider/serviceproviderprofile/favourite-auction/favourite-auction.component';
 
 const routes: Routes = [
   { path: 'signup', component: SignupComponent },
@@ -141,14 +147,17 @@ const routes: Routes = [
     AdminReportComponent,
     BidSelectComponent,
     CaBarComponent,
-    AwardauctionComponent
+    AwardauctionComponent,
+    FavouriteAuctionComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    MatCheckboxModule,
     CommonModule,
     RouterModule.forRoot(routes),
     MatStepperModule,
+    MatPaginatorModule,
     ReactiveFormsModule,
     MatInputModule,
     MatSelectModule,
@@ -180,9 +189,9 @@ const routes: Routes = [
     provide: JWT_OPTIONS,
     useValue: JWT_OPTIONS
   },
-  {
-    provide: NgChartsConfiguration, useValue: { generateColors: false}
-  },
+  //{
+    //provide: NgChartsConfiguration, useValue: { generateColors: false}
+ // },
   JwtHelperService,
   DatePipe
   ],

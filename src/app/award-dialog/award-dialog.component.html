@@ -1,0 +1,41 @@
+<h2 mat-dialog-title>Award Auction</h2>
+<mat-dialog-content>
+  <!-- Display auction details here -->
+  <p>Auction Title:</p>
+  <!-- Add more details as needed -->
+
+  <div class="bid-card-container">
+    <div class="bid-card" *ngFor="let bid of topThreeBids; let i = index" [ngClass]="{ 'active': currentIndex === i }">
+      <!-- Card Content for Bid -->
+      <h3>Bid {{ i + 1 }}</h3>
+      <p>Job Description: {{ bid.jobDescription }}</p>
+      <p>Total Material Cost: {{ bid.bidTotalMaterialCost }}</p>
+      <p>Total Labour Cost: {{ bid.bidTotalLabourCost }}</p>
+      <p>Total Cost: {{ bid.bidTotalCost }}</p>
+      <p>Estimated Duration: {{ bid.bidEstimatedDuration }}</p>
+
+      <h4>Materials</h4>
+      <ul>
+        <li *ngFor="let material of bid.bidMaterials">
+          <p>Name: {{ material.bidMaterialName }}</p>
+          <p>Description: {{ material.bidMaterialDescription }}</p>
+          <p>Cost: {{ material.bidMaterialCost }}</p>
+          <p>Quantity: {{ material.bidQuantity }}</p>
+          <p>Total Cost: {{ material.bidTotalCost }}</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="navigation-buttons">
+    <button mat-icon-button (click)="navigate(-1)" [disabled]="currentIndex === 0">
+      <mat-icon>keyboard_arrow_left</mat-icon>
+    </button>
+    <button mat-icon-button (click)="navigate(1)" [disabled]="currentIndex === topThreeBids.length - 1">
+      <mat-icon>keyboard_arrow_right</mat-icon>
+    </button>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="closeDialog()">Close</button>
+</mat-dialog-actions>

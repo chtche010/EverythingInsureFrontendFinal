@@ -18,11 +18,14 @@ import { ClaimReview } from '../models/claimagent/claimReview';
 import { GetAllAuctions } from '../models/auction-dashboard/getallauctions';
 import { getSingleAuction } from '../models/serviceprovider/getSingleAuction';
 import { verifyEmail } from '../models/verifyEmail.model';
+import { notificationPreferences } from '../models/notificationPreferences';
+import { rejectionObject } from '../models/rejectionObject';
 import { updateClaim } from '../models/claimagent/updateClaim';
 import { createBid } from '../models/serviceprovider/createBid';
 import { createBidMaterial } from '../models/serviceprovider/createBidMaterial';
 import { getBids } from '../models/serviceprovider/getBids';
 import { getspAddress } from '../models/serviceprovider/getspAddress';
+import { notificationPreferencesEmail } from '../models/notificationPreferencesEmail';
 
 @Injectable({
   providedIn: 'root'
@@ -131,6 +134,10 @@ export class AuthService {
     return this.http.delete(url, this.httpOptions);
   }
 
+  public awardAuctions(): Observable<any[]> {
+    return this.http.get<any[]>(this.baseUrl + 'api/Auction/GetAllReports', this.httpOptions);
+  }
+
   // Adding an auction 
 
   submitClaimData(claimData: addclaim): Observable<ServiceResponse<any>> {
@@ -178,6 +185,51 @@ export class AuthService {
   getAuctionById(): Observable<any> {
     return this.http.get<any>(this.baseUrl + 'api/Auction/Get Auction by Id', this.httpOptions);
   }
+
+  //favouriteAuction
+
+  favouriteAuction(auctionID: number): Observable<any> {
+    const url = `${this.baseUrl}api/Auction/${auctionID}/favfourite`;
+    return this.http.post<any>(url, null, this.httpOptions);
+  }
+
+  unfavouriteAuction(auctionID: number): Observable<any> {
+    const url = `${this.baseUrl}api/Auction/${auctionID}/unfavfourite`;
+    return this.http.post<any>(url, null, this.httpOptions);
+  }
+
+  getAllfavouriteAuction(): Observable<any> {
+    const url = `${this.baseUrl}api/Auction/getAllFavfourite`;
+    return this.http.post<any>(url, null, this.httpOptions);
+  }
+
+  GetUpcomingFavAuctions(): Observable<any> {
+    const url = `${this.baseUrl}api/Auction/GetUpcomingFavAuctions`;
+    return this.http.post<any>(url, null, this.httpOptions);
+  }
+
+  GetOpenFavAuctions(): Observable<any> {
+    const url = `${this.baseUrl}api/Auction/GetOpenFavAuctions`;
+    return this.http.post<any>(url, null, this.httpOptions);
+  }
+
+  GetClosedFavAuctions(): Observable<any> {
+    const url = `${this.baseUrl}api/Auction/GetClosedFavAuctions`;
+    return this.http.post<any>(url, null, this.httpOptions);
+  }
+
+  private currentIcon: string = 'favorite_border'; // 'default-icon' is the initial icon
+
+  // Getter and Setter for the icon state
+  getCurrentIcon(): string {
+    return this.currentIcon;
+  }
+
+  setCurrentIcon(iconName: string): void {
+    this.currentIcon = iconName;
+  }
+
+
   
   // service providers 
 
@@ -298,8 +350,6 @@ export class AuthService {
 
   verifyOTP(otp: string){
     return this.http.post<any>(this.baseUrl + 'Auth/verifyOTP', {"otp": otp})
-
-
   }
 
    parseEmail(emailAddress: string): string {
@@ -329,7 +379,105 @@ export class AuthService {
 
 
     }
+
+    //notiifications
+
+    saveSettings(notificationPreferObj: notificationPreferences)
+    {
+  
+    //  console.log('API test', notificationPreferObj);
+  
+      return this.http.post<any>(this.baseUrl + `Auth/notifications`, {
+      "id":notificationPreferObj.id, 
+      "changesToAccounts":notificationPreferObj.changesToAccounts,
+      "newAuctions":notificationPreferObj.newAuctions,
+      "marketingPromo":notificationPreferObj.marketingPromo,
+      });
+    }
+
+    saveSettingsEmail(notificationPreferEmailObj: notificationPreferencesEmail)
+    {
+  
+    //  console.log('API test', notificationPreferObj);
+  
+      return this.http.post<any>(this.baseUrl + `Auth/notificationsEmail`, {
+      "email":notificationPreferEmailObj.email, 
+      "changesToAccounts":notificationPreferEmailObj.changesToAccounts,
+      "newAuctions":notificationPreferEmailObj.newAuctions,
+      "marketingPromo":notificationPreferEmailObj.marketingPromo,
+      });
+    }
+
+
+
+
+    pushNotifications(accountID: number): Observable<any> {
+      const url = `${this.baseUrl}Auth/returnNotifications?id=${accountID}`;
+      return this.http.post<any>(url, this.httpOptions);
+    }
+
+    pushNotificationsEmail(email: string): Observable<any> {
+      const url = `${this.baseUrl}Auth/returnNotificationsEmail?email=${email}`;
+      return this.http.post<any>(url,null, this.httpOptions);
+    }
+
+  
+
+    //Admin services
+
+    
+
+    getServiceProviders(): Observable<manageAuctions[]> {
+      return this.http.get<manageAuctions[]>(this.baseUrl + 'api/Admin/GetServiceProviders', this.httpOptions);
+    }
+
+    getClaimsAgent(): Observable<any> {
+      // console.log(this.httpOptions)
+      return this.http.get<any>(this.baseUrl + 'api/Admin/GetClaimsAgent', this.httpOptions);
+    }
+
+    approveClaimsAgent(email: string): Observable<any> {
+      const url = `${this.baseUrl}api/Admin/ApproveClaimsAgent?email=${email}`;
+      console.log("URL message", url);
+      
+      return this.http.post(url, null, this.httpOptions);
+    }
+
+    rejectClaimsAgent(rejectionObj: rejectionObject)
+    {
+  
+    //  console.log('API test', notificationPreferObj);
+  
+      return this.http.post<any>(this.baseUrl + `api/Admin/RejectClaimsAgent`, {
+      "email":rejectionObj.email, 
+      "text":rejectionObj.text
+      }, this.httpOptions);
+    }
+
+    approveServiceProvider(email: string): Observable<any> {
+      const url = `${this.baseUrl}api/Admin/ApproveServiceProvider?email=${email}`;
+      console.log("URL message", url);
+      
+      return this.http.post(url, null, this.httpOptions);
+    }
+
+    rejectServiceProvider(rejectionObj: rejectionObject)
+    {
+  
+    //  console.log('API test', notificationPreferObj);
+  
+      return this.http.post<any>(this.baseUrl + `api/Admin/RejectServiceProvide`, {
+      "email":rejectionObj.email, 
+      "text":rejectionObj.text
+      }, this.httpOptions);
+    }
+
+    checkAccountStatus(email : string){
+      return this.http.post<any>(this.baseUrl + 'Auth/CheckAccountStatus', {"email": email});
+        }
+  
   }
+
 
 
 
