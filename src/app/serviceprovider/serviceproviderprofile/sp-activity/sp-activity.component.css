@@ -1,6 +1,6 @@
 
 table {
-    width: 70%;
+    width: 50%;
     margin-left: 350px;
     margin-top: 100px;
     font-family: 'Montserrat', sans-serif;
@@ -15,11 +15,17 @@ table {
     background-color: #f5f5f5;
     font-weight: bold;
     font-family: 'Montserrat', sans-serif;
+    width: 10%
   }
 
   .mat-header-cell {
     font-family: 'Montserrat', sans-serif;
     text-decoration: none;
+  }
+
+  td.mat-cell {
+    font-family: 'Montserrat', sans-serif;
+    width: 10%; /* Adjust the width as needed for each column */
   }
 
   .action-buttons {

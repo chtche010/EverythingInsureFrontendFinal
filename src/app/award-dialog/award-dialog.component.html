@@ -1,41 +1,91 @@
-<h2 mat-dialog-title>Award Auction</h2>
-<mat-dialog-content>
-  <!-- Display auction details here -->
-  <p>Auction Title:</p>
-  <!-- Add more details as needed -->
-
-  <div class="bid-card-container">
-    <div class="bid-card" *ngFor="let bid of topThreeBids; let i = index" [ngClass]="{ 'active': currentIndex === i }">
-      <!-- Card Content for Bid -->
-      <h3>Bid {{ i + 1 }}</h3>
-      <p>Job Description: {{ bid.jobDescription }}</p>
-      <p>Total Material Cost: {{ bid.bidTotalMaterialCost }}</p>
-      <p>Total Labour Cost: {{ bid.bidTotalLabourCost }}</p>
-      <p>Total Cost: {{ bid.bidTotalCost }}</p>
-      <p>Estimated Duration: {{ bid.bidEstimatedDuration }}</p>
-
-      <h4>Materials</h4>
-      <ul>
-        <li *ngFor="let material of bid.bidMaterials">
-          <p>Name: {{ material.bidMaterialName }}</p>
-          <p>Description: {{ material.bidMaterialDescription }}</p>
-          <p>Cost: {{ material.bidMaterialCost }}</p>
-          <p>Quantity: {{ material.bidQuantity }}</p>
-          <p>Total Cost: {{ material.bidTotalCost }}</p>
-        </li>
-      </ul>
+<div class="award-dialog-container">
+  <div class="award-dialog-content">
+    <h2 class="page-title">Top 3 Bids</h2>
+    <table mat-table [dataSource]="data.top3Bids" class="award-dialog-table">
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>Status</th>
+        <td mat-cell *matCellDef="let bid">{{ bid.status }}</td>
+      </ng-container>
+      <ng-container matColumnDef="jobDescription">
+        <th mat-header-cell *matHeaderCellDef>Job Description</th>
+        <td mat-cell *matCellDef="let bid">{{ bid.jobDescription }}</td>
+      </ng-container>
+      <ng-container matColumnDef="bidTotalMaterialCost">
+        <th mat-header-cell *matHeaderCellDef>Bid Material Cost</th>
+        <td mat-cell *matCellDef="let bid">{{ bid.bidTotalMaterialCost }}</td>
+      </ng-container>
+      <ng-container matColumnDef="bidTotalLabourCost">
+        <th mat-header-cell *matHeaderCellDef>Bid Labour Cost</th>
+        <td mat-cell *matCellDef="let bid">{{ bid.bidTotalLabourCost }}</td>
+      </ng-container>
+      <ng-container matColumnDef="bidTotalCost">
+        <th mat-header-cell *matHeaderCellDef>Bid Total Cost</th>
+        <td mat-cell *matCellDef="let bid">{{ bid.bidTotalCost }}</td>
+      </ng-container>
+      <ng-container matColumnDef="bidEstimatedDuration">
+        <th mat-header-cell *matHeaderCellDef>Bid Estimated Duration</th>
+        <td mat-cell *matCellDef="let bid">{{ bid.bidEstimatedDuration }}</td>
+      </ng-container>
+      <ng-container matColumnDef="selectWinner">
+        <th mat-header-cell *matHeaderCellDef>Select Winner</th>
+        <td mat-cell *matCellDef="let bid" class="select-winner-cell">
+          <mat-checkbox
+            (change)="onWinnerSelect(bid.bidId)"
+            [checked]="selectedWinner === bid.bidId"
+          ></mat-checkbox>
+          <div *ngIf="bid.status !== 'Position1' && selectedWinner === bid.bidId" class="reason-input">
+            <mat-form-field>
+              <input
+                matInput
+                placeholder="Reason for Override"
+                [(ngModel)]="overrideReason"
+                name="overrideReason"
+                required
+              />
+            </mat-form-field>
+          </div>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="['status', 'jobDescription', 'bidTotalMaterialCost', 'bidTotalLabourCost', 'bidTotalCost', 'bidEstimatedDuration', 'selectWinner']"></tr>
+      <tr mat-row *matRowDef="let bid; columns: ['status', 'jobDescription', 'bidTotalMaterialCost', 'bidTotalLabourCost', 'bidTotalCost', 'bidEstimatedDuration', 'selectWinner']"></tr>
+    </table>
+    <h3>Materials for Each Bid</h3>
+    <div *ngFor="let bid of data.top3Bids">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Materials for Bid - {{ getBidPosition(bid.status) }}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <table mat-table [dataSource]="bid.bidMaterials" class="award-dialog-table">
+          <ng-container matColumnDef="bidMaterialName">
+            <th mat-header-cell *matHeaderCellDef>Material Name</th>
+            <td mat-cell *matCellDef="let material">{{ material.bidMaterialName }}</td>
+          </ng-container>
+          <ng-container matColumnDef="bidMaterialDescription">
+            <th mat-header-cell *matHeaderCellDef>Material Description</th>
+            <td mat-cell *matCellDef="let material">{{ material.bidMaterialDescription }}</td>
+          </ng-container>
+          <ng-container matColumnDef="bidMaterialCost">
+            <th mat-header-cell *matHeaderCellDef>Material Cost</th>
+            <td mat-cell *matCellDef="let material">{{ material.bidMaterialCost }}</td>
+          </ng-container>
+          <ng-container matColumnDef="bidQuantity">
+            <th mat-header-cell *matHeaderCellDef>Quantity</th>
+            <td mat-cell *matCellDef="let material">{{ material.bidQuantity }}</td>
+          </ng-container>
+          <ng-container matColumnDef="bidTotalCost">
+            <th mat-header-cell *matHeaderCellDef>Total Cost</th>
+            <td mat-cell *matCellDef="let material">{{ material.bidTotalCost }}</td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="['bidMaterialName', 'bidMaterialDescription', 'bidMaterialCost', 'bidQuantity', 'bidTotalCost']"></tr>
+          <tr mat-row *matRowDef="let material; columns: ['bidMaterialName', 'bidMaterialDescription', 'bidMaterialCost', 'bidQuantity', 'bidTotalCost']"></tr>
+        </table>
+      </mat-expansion-panel>
     </div>
   </div>
 
-  <div class="navigation-buttons">
-    <button mat-icon-button (click)="navigate(-1)" [disabled]="currentIndex === 0">
-      <mat-icon>keyboard_arrow_left</mat-icon>
-    </button>
-    <button mat-icon-button (click)="navigate(1)" [disabled]="currentIndex === topThreeBids.length - 1">
-      <mat-icon>keyboard_arrow_right</mat-icon>
-    </button>
+  <div class="dialog-buttons">
+    <button mat-raised-button color="primary" (click)="onNoClick()">Close</button>
+    <button mat-raised-button color="primary" (click)="onSubmit()">Submit</button>
   </div>
-</mat-dialog-content>
-<mat-dialog-actions>
-  <button mat-button (click)="closeDialog()">Close</button>
-</mat-dialog-actions>

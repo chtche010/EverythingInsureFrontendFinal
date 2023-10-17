@@ -2,33 +2,50 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AwardDialogComponent } from '../award-dialog/award-dialog.component'; // Import the award dialog component
+import { AuctiondetailsdialogComponent } from '../auctiondetailsdialog/auctiondetailsdialog.component';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-awardauction',
   templateUrl: './awardauction.component.html',
   styleUrls: ['./awardauction.component.css'],
 })
-export class AwardauctionComponent implements OnInit {
+export class AwardauctionComponent {
   auctions: any[] = [];
+  displayedColumns: string[] = ['auctionId', 'actions'];
 
   constructor(private authService: AuthService, private dialog: MatDialog) {}
 
-  ngOnInit(): void {
-    // Fetch the list of auctions that need to be awarded
-    this.authService.awardAuctions().subscribe((response) => {
-      this.auctions = response;
+  ngOnInit() {
+    this.loadAuctions();
+  }
+
+  loadAuctions() {
+    this.authService.getAllReports().subscribe((data) => {
+      this.auctions = data.data;
+      console.log('Auctions:', this.auctions);
     });
   }
 
-  openAwardDialog(auction: any): void {
-    // Open the award dialog and pass the data for the top three bids
-    const dialogRef = this.dialog.open(AwardDialogComponent, {
-      width: '600px', // Adjust the width as needed
-      data: auction.top3Bids,
-    });
+  viewAuctionDetails(auctionId: number) {
+    const selectedAuction = this.auctions.find(auction => auction.auctionId === auctionId);
 
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log('The award dialog was closed');
-    });
+    if (selectedAuction) {
+      this.dialog.open(AuctiondetailsdialogComponent, {
+        data: selectedAuction,
+        width: '400px'
+      });
+    }
+  }
+
+  selectWinner(auctionId: number) {
+    const selectedAuction = this.auctions.find(auction => auction.auctionId === auctionId);
+  
+    if (selectedAuction) {
+      this.dialog.open(AwardDialogComponent, {
+        data: selectedAuction,
+        width: '1000px'
+      });
+    }
   }
 }

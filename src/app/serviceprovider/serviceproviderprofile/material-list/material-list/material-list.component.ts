@@ -2,7 +2,10 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
+import { UpdateBidComponent } from 'src/app/serviceprovider/update-bid/update-bid/update-bid.component';
+import { UpdateMaterialComponent } from '../../update-material/update-material.component';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-material-list',
@@ -11,49 +14,50 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class MaterialListComponent {
   bidId!: number;
-  dataSource: MatTableDataSource<any> = new MatTableDataSource<any>([]);
-  displayedColumns: string[] = ['bidMaterialName', 'bidMaterialDescription', 'bidMaterialCost', 'bidQuantity', 'bidTotalCost'];
+  materials: any[] = [];
+  displayedColumns: string[] = ['bidMaterialName', 'bidMaterialDescription', 'bidMaterialCost', 'bidQuantity', 'bidTotalCost', 'actions'];
 
-  constructor(
+  constructor(  
     private route: ActivatedRoute,
     private authService: AuthService,
-    public dialogRef: MatDialogRef<MaterialListComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    private dialog: MatDialog,
+    private formBuilder: FormBuilder
   ) {}
 
-  // ngOnInit() {
-  //   this.route.params.subscribe(params => {
-  //     const bidId = +params['bidId']; // Ensure it's a number
-  //     console.log('Received BidId:', bidId);
-  //     // Fetch materials data based on bidId
-  //     this.authService.getAllMaterials(bidId).subscribe((response) => {
-  //       console.log('API Response for Materials:', response);
-  //       this.dataSource = new MatTableDataSource(response.data[0].bidMaterials);
-  //     });
-  //   });
-  // }
-
   ngOnInit(): void {
-    const bidIdString = this.route.snapshot.paramMap.get('bidId');
-    const bidId = +bidIdString!;
-
-    console.log('Received BidId:', bidId);
-      // Fetch materials data based on bidId
-      this.authService.getAllMaterials(bidId).subscribe((response) => {
-        console.log('API Response for Materials:', response);
-        this.dataSource = new MatTableDataSource(response.data[0].bidMaterials);
+    this.route.queryParams.subscribe(params => {
+      const bidId = +params['bidId'];
+      this.authService.getAllMaterials(bidId).subscribe((response: any) => {
+        this.materials = response.data;
       });
+    });
   }
 
-  onCloseClick(): void {
-    this.dialogRef.close();
+  fetchData() {
+    this.route.queryParams.subscribe((params) => {
+      const bidId = +params['bidId'];
+      this.authService.getAllMaterials(bidId).subscribe((response: any) => {
+        this.materials = response.data;
+      });
+    });
   }
 
-  openDialog() {
+  editMaterial(bidMaterialId: number): void {
+    console.log('Editing material with ID:', bidMaterialId);
+    this.authService.getSingleBidMaterial(bidMaterialId).subscribe((response: any) => {
+      const material = response.data;
+      const dialogRef = this.dialog.open(UpdateMaterialComponent, {
+        width: '400px',
+        data: { material: material }
+      });
 
-  }
-
-  deleteClaim() {
-
+      dialogRef.afterClosed().subscribe(updatedMaterialData => {
+        if (updatedMaterialData) {
+          this.fetchData();
+          console.log('Material updated successfully', updatedMaterialData);
+        }
+      });
+    });
   }
 }
+

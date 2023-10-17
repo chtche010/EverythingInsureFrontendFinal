@@ -1,0 +1,43 @@
+<h2 class="heading">Auction Details</h2>
+<div class="fields-container">
+  <div class="fields-column">
+    <mat-form-field>
+      <mat-label>Average Labour Cost</mat-label>
+      <input matInput [(ngModel)]="data.averageLabourCost" readonly>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Labour Cost Difference</mat-label>
+      <input matInput [(ngModel)]="data.labourCostDifference" readonly>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Average Duration</mat-label>
+      <input matInput [(ngModel)]="data.averageDuration" readonly>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Duration Difference</mat-label>
+      <input matInput [(ngModel)]="data.durationDifference" readonly>
+    </mat-form-field>
+  </div>
+
+  <div class="fields-column">
+    <mat-form-field>
+      <mat-label>Average Materials Cost</mat-label>
+      <input matInput [(ngModel)]="data.averageMaterialsCost" readonly>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Materials Cost Difference</mat-label>
+      <input matInput [(ngModel)]="data.materialsCostDifference" readonly>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Number of Bids</mat-label>
+      <input matInput [(ngModel)]="data.numberOfBids" readonly>
+    </mat-form-field>
+  </div>
+</div>
+
+<button mat-raised-button color="primary" (click)="closeDialog()" class="button" >Close</button>

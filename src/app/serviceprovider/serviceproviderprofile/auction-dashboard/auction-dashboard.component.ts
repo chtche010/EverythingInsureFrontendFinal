@@ -20,11 +20,14 @@ export class AuctionDashboardComponent implements OnInit {
   favoriteEvents: any[] = []; // Array to store favorite events
   selectedAuction: any; // <------------Update this type based on your DTO structure
   formSubmitted = false;
+  images: string[];
 
   constructor(
     private formBuilder: FormBuilder,
     public dialog: MatDialog,
-    private authService: AuthService) { }
+    private authService: AuthService) {
+      this.images = [];
+     }
 
   openDialog(auctionEvent: any): void {
     console.log('AuctionId:', auctionEvent.auctionId);
@@ -46,12 +49,27 @@ export class AuctionDashboardComponent implements OnInit {
 
   }
 
+  fetchAuctionImages(auctionEvent: GetAllAuctions) {
+    console.log('Fetching images for auction event:', auctionEvent);
+    console.log('claimId:', auctionEvent.ClaimId);
+    this.authService.getClaimImages(auctionEvent.ClaimId).subscribe(
+      (images: string[]) => {
+        auctionEvent.images = images;
+      },
+      (error) => {
+        console.error('Error fetching auction images:', error);
+      }
+    );
+  }
+
   getAuctionEvents(): void {
     this.authService.getOpenAuctions().subscribe(
       (response: any) => {
         console.log('Open Auctions:', response.data);
 
         this.openAuctions = response.data;
+        this.openAuctions.forEach((auction) => this.fetchAuctionImages(auction));
+
         if (this.openAuctions && this.openAuctions.length > 0) {
           // Loop through all upcoming auctions
           for (const auction of this.openAuctions) {
@@ -81,6 +99,7 @@ export class AuctionDashboardComponent implements OnInit {
       (response: any) => {
         console.log('Upcoming Auctions:', response.data);
         this.upcomingAuctions = response.data;
+        this.upcomingAuctions.forEach((auction) => this.fetchAuctionImages(auction));
 
         if (this.upcomingAuctions && this.upcomingAuctions.length > 0) {
           // Loop through all upcoming auctions
@@ -111,6 +130,8 @@ export class AuctionDashboardComponent implements OnInit {
       (response: any) => {
         console.log('Closed Auctions:', response.data);
         this.closedAuctions = response.data;
+        this.closedAuctions.forEach((auction) => this.fetchAuctionImages(auction));
+        
         if (this.closedAuctions && this.closedAuctions.length > 0) {
           // Loop through all upcoming auctions
           for (const auction of this.closedAuctions) {

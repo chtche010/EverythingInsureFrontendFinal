@@ -1,0 +1,64 @@
+.award-dialog-container {
+    padding: 16px;
+    height: 600px;
+  }
+  
+  .award-dialog-table {
+    width: 100%;
+    margin-bottom: 16px;
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+  }
+  
+  .award-dialog-table th,
+  .award-dialog-table td {
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .materials-panel {
+    margin-top: 16px;
+    background-color: #f5f5f5;
+  }
+  
+  .materials-table {
+    width: 100%;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+  }
+  
+  .materials-table th,
+  .materials-table td {
+    padding: 8px;
+    text-align: left;
+  }
+
+  .select-winner-cell {
+    display: flex;
+    align-items: center;
+  }
+  
+  .reason-input {
+    margin-left: 12px; 
+  }
+  
+  .dialog-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .dialog-buttons button {
+    margin: 0 10px;
+  }
+
+  .page-title {
+    font-size: 24px; 
+    font-weight: bold;
+    margin-bottom: 20px; 
+    font-family: "Montserrat", sans-serif;
+    text-align: center;
+  }
+
+  

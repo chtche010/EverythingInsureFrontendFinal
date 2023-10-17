@@ -88,8 +88,10 @@ import { CaBarComponent } from './reporting/ca-bar/ca-bar.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { AwardDialogComponent } from './award-dialog/award-dialog.component';
 import { AwardauctionComponent } from './awardauction/awardauction.component';
-import { MatExpansionModule } from '@angular/material/expansion';
 import { FavouriteAuctionComponent } from './serviceprovider/serviceproviderprofile/favourite-auction/favourite-auction.component';
+import { UpdateMaterialComponent } from './serviceprovider/serviceproviderprofile/update-material/update-material.component';
+import { AuctiondetailsdialogComponent } from './auctiondetailsdialog/auctiondetailsdialog.component';
+import { AuctionwinnersComponent } from './claims-agent/auctionwinners/auctionwinners.component';
 
 const routes: Routes = [
   { path: 'signup', component: SignupComponent },
@@ -148,7 +150,12 @@ const routes: Routes = [
     BidSelectComponent,
     CaBarComponent,
     AwardauctionComponent,
-    FavouriteAuctionComponent
+    FavouriteAuctionComponent,
+    UpdateMaterialComponent,
+    AuctiondetailsdialogComponent,
+    AwardDialogComponent,
+    AwardauctionComponent,
+    AuctionwinnersComponent,
   ],
   imports: [
     BrowserModule,
