@@ -77,13 +77,24 @@ h6 {
 #grids
 --------------------------------------------------------------*/
 
-mat-grid-list.top-tile,
-mat-grid-list.below-tile {
+mat-grid-list.top-tile {
   display: flex;
   flex-wrap:nowrap; /* Allows items to wrap to the next line when there's not enough space */
   justify-content: space-between; /* Distributes items evenly along the main axis */
   align-items: center; /* Centers items vertically */
   margin-right: 50px;
+}
+
+mat-grid-list.below-tile {
+  display:grid;
+  flex-wrap:nowrap; /* Allows items to wrap to the next line when there's not enough space */
+  justify-content: center; /* Distributes items evenly along the main axis */
+  align-items: center; /* Centers items vertically */
+}
+.below-tile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 mat-grid-tile {

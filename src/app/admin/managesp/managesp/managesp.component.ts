@@ -204,29 +204,64 @@ console.log('displaySelectedItemsFlag:', this.displaySelectedItemsFlag);
     }
 
   
-  loadServiceProviderDetails() {
-    this.authService.getServiceProviders().subscribe(
-      (response: any) => {
-        console.log(response.data);
 
-        const pendingUsers = response.data.filter((user: serviceProviderList) => user.accountStatus === 'Pending');
-        console.log('Pending', pendingUsers);
-      const approvedUsers = response.data.filter((user: serviceProviderList) => user.accountStatus === 'Approved');
-      console.log('Approved', approvedUsers);
-
-      const rejectedUsers = response.data.filter((user: serviceProviderList) => user.accountStatus === 'Rejected');
-      console.log('Rejected', rejectedUsers);
-
-        this.dataSource.data = response.data;
-        this.pendingDataSource.data = pendingUsers;
-      this.approvedDataSource.data = approvedUsers;
-      this.rejectedDataSource.data = rejectedUsers;
-      },
-      (error) => {
-        console.error('Error fetching auction details', error);
-      }
-    );
-  }
+    loadServiceProviderDetails() {
+   
+       this.authService.getServiceProviders().subscribe(
+   
+         (response: any) => {
+   
+           console.log(response.data);
+   
+    
+   
+           const pendingUsers = response.data.filter((user: serviceProviderList) => user.accountStatus === 'Pending');
+   
+           console.log('Pending', pendingUsers);
+   
+         const approvedUsers = response.data.filter((user: serviceProviderList) => user.accountStatus === 'Approved');
+   
+         console.log('Approved', approvedUsers);
+   
+    
+   
+         const rejectedUsers = response.data.filter((user: serviceProviderList) => user.accountStatus === 'Rejected');
+   
+         console.log('Rejected', rejectedUsers);
+   
+    
+   
+         const disabledUsers = response.data.filter((user: serviceProviderList) => user.accountStatus === 'Disabled');
+   
+         console.log('Disabled', disabledUsers);
+   
+    
+   
+           this.dataSource.data = response.data;
+   
+           this.pendingDataSource.data = pendingUsers;
+   
+         this.approvedDataSource.data = approvedUsers;
+   
+         this.rejectedDataSource.data = rejectedUsers;
+   
+         //this.disabledDataSource.data = disabledUsers;
+   
+    
+   
+    
+   
+         },
+   
+         (error) => {
+   
+           console.error('Error fetching auction details', error);
+   
+         }
+   
+       );
+   
+     }
   
 }
 
