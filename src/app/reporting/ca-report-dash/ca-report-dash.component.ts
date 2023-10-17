@@ -1,28 +1,50 @@
-import { Component } from '@angular/core';
-
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
+ 
 
 @Component({
+
   selector: 'app-ca-report-dash',
+
   templateUrl: './ca-report-dash.component.html',
+
   styleUrls: ['./ca-report-dash.component.css']
+
 })
-export class CaReportDashComponent {
-  getRandomWholeNumber(min: number, max: number) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
 
-  getRndomIntInclusive(min: number, max: number) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
+export class CaReportDashComponent implements OnInit{
+  public totalClaims!: number ;
+  public totalUpcomingAuctions: number = 0;
+  public averageNumberOfBids: string = '0.00';
 
-  getRandomIntInclusive(min: number, max: number) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
+  constructor(private authService: AuthService) { }
+  ngOnInit(): void {
+    this.authService.getCountClaims().subscribe(
+      (response: any) => {
+        this.totalClaims = response.data;
+      },
+      (error: any) => {
+        console.error('Error retrieving count of claims:', error);
+      }
+    );
 
-randomTotalClaims = this.getRandomWholeNumber(1, 100);
-randomPendingAuctions = this.getRandomIntInclusive(1, 10);
-randomAvgBids = this.getRandomIntInclusive(15, 35);
+    this.authService.getCountUpcomingAuctions().subscribe(
+      (response: any) => {
+        this.totalUpcomingAuctions = response.data;
+      },
+      (error: any) => {
+        console.error('Error retrieving count of upcoming auctions:', error);
+      }
+    );
+
+    this.authService.getAverageNumberOfBids().subscribe(
+      (response: any) => {
+        this.averageNumberOfBids = response.data.toFixed(2);
+      },
+      (error: any) => {
+        console.error('Error retrieving average number of bids:', error);
+      }
+    );
+  }
 
 }

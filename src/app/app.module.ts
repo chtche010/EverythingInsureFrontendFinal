@@ -34,7 +34,7 @@ import { FAQComponent } from './faq/faq.component';
 import { FooterComponent } from './footer/footer.component';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
-import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ClaimsAgentDashboardComponent } from './claims-agent/claims-agent-dashboard/claims-agent-dashboard.component';
@@ -82,7 +82,7 @@ import { OptComponent } from './opt/opt.component';
 import { EmailVeriComponent } from './email-veri/email-veri.component';
 import { AdminReportComponent } from './reporting/admin-report/admin-report.component';
 import { NgChartsModule, NgChartsConfiguration } from 'ng2-charts';
-import { MatGridListModule} from '@angular/material/grid-list';
+import { MatGridListModule } from '@angular/material/grid-list';
 import { BidSelectComponent } from './reporting/bid-select/bid-select.component';
 import { CaBarComponent } from './reporting/ca-bar/ca-bar.component';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -110,7 +110,7 @@ const routes: Routes = [
     WhyTrustUsComponent,
     FAQComponent,
     FooterComponent,
-    ClaimsAgentDashboardComponent, 
+    ClaimsAgentDashboardComponent,
     AuctionComponent,
     CaProfileComponent,
     CaNavbarComponent,
@@ -190,16 +190,17 @@ const routes: Routes = [
   providers: [{
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptor,
-    multi: true }, 
+    multi: true
+  },
   {
     provide: JWT_OPTIONS,
     useValue: JWT_OPTIONS
   },
-  //{
-    //provide: NgChartsConfiguration, useValue: { generateColors: false}
- // },
-  JwtHelperService,
-  DatePipe
+  {
+    provide: NgChartsConfiguration, useValue: { generateColors: false }
+  },
+    JwtHelperService,
+    DatePipe
   ],
   bootstrap: [AppComponent],
 })
