@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject  } from 'rxjs';
+import { Observable, BehaviorSubject, throwError  } from 'rxjs';
 import { initialsignup } from '../models/initialsignup.model';
 import { HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -26,6 +26,7 @@ import { createBidMaterial } from '../models/serviceprovider/createBidMaterial';
 import { getBids } from '../models/serviceprovider/getBids';
 import { getspAddress } from '../models/serviceprovider/getspAddress';
 import { notificationPreferencesEmail } from '../models/notificationPreferencesEmail';
+import { catchError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -138,6 +139,20 @@ export class AuthService {
     return this.http.get<any[]>(this.baseUrl + 'api/Auction/GetAllReports', this.httpOptions);
   }
 
+  //claims images
+  uploadImages(claimId: number, files: File[]): Observable<any> {
+    const formData = new FormData();
+    formData.append('claimId', claimId.toString());
+    for (let i = 0; i < files.length; i++) {
+      formData.append('files', files[i]);
+    }
+    return this.http.post<any>(`${this.baseUrl}api/Claims/UploadImages`, formData);
+  }
+
+  getImages(claimId: number): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}api/Claims/GetImages?claimId=${claimId}`);
+  }
+
   // Adding an auction 
 
   submitClaimData(claimData: addclaim): Observable<ServiceResponse<any>> {
@@ -228,7 +243,14 @@ export class AuthService {
   setCurrentIcon(iconName: string): void {
     this.currentIcon = iconName;
   }
+ //NEW favorite an auction 17/10/2023
+ getLikedAuctions(): Observable<any> {
+  return this.http.get<any>(this.baseUrl + "api/ServiceProvider/GetLikedAuctions", this.httpOptions);
+}
 
+likeAuction(auctionId: number): Observable<any> {
+  return this.http.post<any>(this.baseUrl + "api/ServiceProvider/LikeAuction", auctionId, this.httpOptions);
+}
 
   
   // service providers 
@@ -307,6 +329,8 @@ export class AuthService {
     const url = `${this.baseUrl}api/Bid/GetAllMaterials?BidId=${bidId}`; // Include the bidId in the URL
     return this.http.get<any>(url, this.httpOptions);
   }
+
+ 
 
   // Submitting the sign up form 
 

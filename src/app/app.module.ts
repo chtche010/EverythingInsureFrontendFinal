@@ -88,7 +88,6 @@ import { CaBarComponent } from './reporting/ca-bar/ca-bar.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { AwardDialogComponent } from './award-dialog/award-dialog.component';
 import { AwardauctionComponent } from './awardauction/awardauction.component';
-import { MatExpansionModule } from '@angular/material/expansion';
 import { FavouriteAuctionComponent } from './serviceprovider/serviceproviderprofile/favourite-auction/favourite-auction.component';
 
 const routes: Routes = [
@@ -148,7 +147,8 @@ const routes: Routes = [
     BidSelectComponent,
     CaBarComponent,
     AwardauctionComponent,
-    FavouriteAuctionComponent
+    FavouriteAuctionComponent,
+    AwardDialogComponent
   ],
   imports: [
     BrowserModule,
