@@ -5,6 +5,7 @@ export interface GetAllAuctions {
     endTime: string;
     auctionStatus: string;
     auctionDate: string;
-    images: string;
+    images: string[];
     isFav: boolean;
+    ClaimId: number;
   }

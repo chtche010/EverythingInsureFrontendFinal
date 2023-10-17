@@ -23,6 +23,8 @@ export class AuctionComponent implements OnInit {
   auctionForm!: FormGroup;
   guidePriceForm!: FormGroup;
   materialCostForm!: FormGroup;
+  imageUploadForm!: FormGroup;
+  imageFiles: File[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -52,6 +54,10 @@ export class AuctionComponent implements OnInit {
       customerProvince: ['', Validators.required],
     });
 
+    this.imageUploadForm = this.formBuilder.group({
+      images: ['', Validators.required]
+    });
+
     this.auctionForm = this.formBuilder.group({
       claimId: ['', Validators.required],
       auctionDate: ['', Validators.required],
@@ -73,6 +79,20 @@ export class AuctionComponent implements OnInit {
 
   }
 
+  nextStep() {
+    if (this.stepper) {
+      this.stepper.next(); // Navigate to the next step
+    }
+  }
+
+  onImageSelect(event: any) {
+    if (event.target.files) {
+      this.imageFiles = Array.from(event.target.files);
+      console.log('Selected files:', this.imageFiles);
+    } else {
+      console.log('No files selected');
+    }
+  }
   submitClaimDetails() {
     if (this.claimDetailsForm.valid) {
       this.authService.submitClaimData(this.claimDetailsForm.value).subscribe((response) => {
@@ -91,6 +111,27 @@ export class AuctionComponent implements OnInit {
       });
     } else {
       // Handle form validation errors if needed
+    }
+  }
+
+  uploadImages() {
+    if (this.imageFiles && this.imageFiles.length > 0) {
+      const formData:FormData=new FormData();
+      this.imageFiles.forEach((file) => {
+        formData.append('file', file, file.name);
+      });
+      this.authService.uploadImages(this.claimId, formData).subscribe(
+        (response) => {
+          console.log('Images uploaded successfully!', response);
+          this.stepper.next();
+        },  
+        (error) => {
+          console.error('Error uploading images:', error);
+          // Handle error if needed
+        }
+      );
+    } else {
+      console.error('No files selected for upload.');
     }
   }
 

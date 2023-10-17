@@ -43,6 +43,7 @@ import { MaterialListComponent } from './serviceprovider/serviceproviderprofile/
 import { AdminReportComponent } from './reporting/admin-report/admin-report.component';
 import { AwardauctionComponent } from './awardauction/awardauction.component';
 import { FavouriteAuctionComponent } from './serviceprovider/serviceproviderprofile/favourite-auction/favourite-auction.component';
+import { AuctionwinnersComponent } from './claims-agent/auctionwinners/auctionwinners.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
@@ -66,7 +67,7 @@ const routes: Routes = [
   { path: 'reset', component: ResetPasswordComponent},
   { path: 'updateclaim', component: UpdateclaimComponent},
   { path: 'updateauction', component: UpdateclaimComponent},
-  { path: 'material-list/:bidId', component: MaterialListComponent},
+  { path: 'material-list', component: MaterialListComponent },
   { path: 'emailVeri', component: EmailVeriComponent},
   {path: 'favourite-auction', component: FavouriteAuctionComponent},
 
@@ -83,7 +84,8 @@ const routes: Routes = [
   { path: 'sp-report-dash', component: SpReportDashComponent},
   { path: 'ca-report-dash',component: CaReportDashComponent},
   { path: 'admin-report', component: AdminReportComponent},
-  { path: 'awardauction', component: AwardauctionComponent}
+  { path: 'awardauction', component: AwardauctionComponent},
+  { path: 'auctionwinners', component: AuctionwinnersComponent},
 ];
 
 @NgModule({

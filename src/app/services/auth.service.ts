@@ -86,6 +86,15 @@ export class AuthService {
 
   // claims agents 
 
+  uploadImages(claimId: number, formData: FormData): Observable<any> {
+    return this.http.post(this.baseUrl + `api/Claims/UploadImages/?id=${claimId}`, formData, this.httpOptions);
+  }
+
+  getClaimImages(claimId: number): Observable<string[]> {
+    const url = `${this.baseUrl}/Claims/GetImages?claimId=${claimId}`;
+    return this.http.get<string[]>(url);
+  }
+
   getToken(){
     var tokenstring=localStorage.getItem("authToken")
     if (tokenstring!=null){var token=JSON.parse(tokenstring)
@@ -139,18 +148,12 @@ export class AuthService {
     return this.http.get<any[]>(this.baseUrl + 'api/Auction/GetAllReports', this.httpOptions);
   }
 
-  //claims images
-  uploadImages(claimId: number, files: File[]): Observable<any> {
-    const formData = new FormData();
-    formData.append('claimId', claimId.toString());
-    for (let i = 0; i < files.length; i++) {
-      formData.append('files', files[i]);
-    }
-    return this.http.post<any>(`${this.baseUrl}api/Claims/UploadImages`, formData);
+  public getAllReports(): Observable<any> {
+    return this.http.get(this.baseUrl + 'api/Auction/GetAllReports', this.httpOptions);
   }
 
-  getImages(claimId: number): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}api/Claims/GetImages?claimId=${claimId}`);
+  public selectWinner(requestData: any): Observable<any> {
+    return this.http.put<any>(this.baseUrl + "api/Auction/SelectWinner", requestData, this.httpOptions);
   }
 
   // Adding an auction 
@@ -330,7 +333,14 @@ likeAuction(auctionId: number): Observable<any> {
     return this.http.get<any>(url, this.httpOptions);
   }
 
- 
+  updateBidMaterial(updatedMaterialData: any): Observable<any> {
+    return this.http.put<any>(this.baseUrl + "api/Bid/UpdateBidMaterial", updatedMaterialData, this.httpOptions);
+  }
+
+  getSingleBidMaterial(bidMaterialId: number): Observable<any> {
+    const url = `${this.baseUrl}api/Bid/GetSingleBidMaterial?id=${bidMaterialId}`;
+    return this.http.get<any>(url, this.httpOptions);
+  }
 
   // Submitting the sign up form 
 
