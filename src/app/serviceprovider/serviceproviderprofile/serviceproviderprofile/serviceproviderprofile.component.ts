@@ -41,6 +41,7 @@ export class ServiceproviderprofileComponent implements OnInit {
   ngOnInit(): void {
     this.loadUserProfile();
     this.pushNotifications();
+    this.changeIcon();
     this.checkEmailVerification();   
     this.loadAddress(this.address);
     this.chanegPasswordForm = this.fb.group({
@@ -49,6 +50,10 @@ export class ServiceproviderprofileComponent implements OnInit {
       confirmPassword: ['', Validators.required]
     });
     
+  }
+
+  changeIcon() {
+    return this.authService.setCurrentIcon('favorite_border');
   }
 
   checkEmailVerification(){

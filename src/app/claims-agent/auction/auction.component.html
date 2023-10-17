@@ -269,39 +269,34 @@
 
             <h5 class="heading-style">Material Cost</h5>
 
-      
-
-            <div class="container" *ngFor="let item of allInfo?.auction.guidePrice.guidePriceMaterials">
+            <div class="container" *ngFor="let material of addedMaterials">
               <div class="row">
                 <div class="col-lg-3 col-md-4 label-style">Material Name</div>
-                <div class="col-lg-9 col-md-8 value-style">{{ item.materialName }}</div>
+                <div class="col-lg-9 col-md-8 value-style">{{ material.materialName }}</div>
               </div>
             
               <div class="row">
                 <div class="col-lg-3 col-md-4 label-style">Material Description</div>
-                <div class="col-lg-9 col-md-8 value-style">{{ item.materialDescription }}</div>
+                <div class="col-lg-9 col-md-8 value-style">{{ material.materialDescription }}</div>
               </div>
             
               <div class="row">
                 <div class="col-lg-3 col-md-4 label-style">Cost</div>
-                <div class="col-lg-9 col-md-8 value-style">{{ item.cost }}</div>
+                <div class="col-lg-9 col-md-8 value-style">{{ material.cost }}</div>
               </div>
             
               <div class="row">
                 <div class="col-lg-3 col-md-4 label-style">Quantity</div>
-                <div class="col-lg-9 col-md-8 value-style">{{ item.quantity }}</div>
+                <div class="col-lg-9 col-md-8 value-style">{{ material.quantity }}</div>
               </div>
             
-              <div class="row">
-                <div class="col-lg-3 col-md-4 label-style">Total Cost</div>
-                <div class="col-lg-9 col-md-8 value-style">{{ item.totalCost }}</div>
-              </div>
+           
             </div>
             
           
             <div *ngIf="!isAddingMaterial">
             <div class="button-container">
-              <button mat-raised-button color="primary">Edit</button>
+              <button mat-raised-button color="primary" matStepperPrevious>Back</button>
               <button mat-raised-button  color="primary" (click)="handleSubmit()">Confirm</button>
 
             </div>

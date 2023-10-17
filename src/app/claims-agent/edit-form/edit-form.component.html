@@ -1,1 +1,107 @@
-<p>edit-form works!</p>
+<h2 mat-dialog-title>Forgot Password?</h2>
+<div mat-dialog-content>
+    <h5>Please enter your email address. We will send you an email to reset your password.</h5>
+    <form [formGroup]="editForm">
+
+        <mat-form-field appearance="fill" style="width: 50%">
+            <mat-label for="customerName">Customer name</mat-label>
+            <input matInput formControlName="customerName" required id="customerName" name="customerName" 
+            [value]="allInfo?.customerName" [(ngModel)]="allInfo.customerName">
+          </mat-form-field>
+    
+          <mat-form-field appearance="fill" style="width: 50%">
+            <mat-label for="customerEmail">Customer email</mat-label>
+            <input matInput formControlName="customerEmail" required id="customerEmail" name="customerEmail">
+          </mat-form-field>
+    
+          <mat-form-field appearance="fill" style="width: 50%">
+            <mat-label for="vehicleMake">Vehicle make</mat-label>
+            <input matInput formControlName="vehicleMake" required id="vehicleMake" name="vehicleMake">
+          </mat-form-field>
+    
+          <mat-form-field appearance="fill" style="width: 50%">
+            <mat-label for="vehicleModel">Vehicle model</mat-label>
+            <input matInput formControlName="vehicleModel" required id="vehicleModel" name="vehicleModel">
+          </mat-form-field>
+    
+          <mat-form-field appearance="fill" style="width: 50%">
+            <mat-label for="modelYear">Vehicle year</mat-label>
+            <input matInput formControlName="modelYear" required id="modelYear" name="modelYear">
+          </mat-form-field>
+    
+          <mat-form-field appearance="fill" style="width: 50%">
+            <mat-label for="MMCode">MM code</mat-label>
+            <input matInput formControlName="MMCode" required id="MMCode" name="MMCode">
+          </mat-form-field>
+    
+          <mat-form-field appearance="fill" style="width: 50%">
+            <mat-label for="damageDescription">Damage description</mat-label>
+            <textarea matInput formControlName="damageDescription" required id="damageDescription" name="damageDescription" rows="4"></textarea>
+          </mat-form-field>
+    
+          <mat-form-field appearance="fill" style="width: 50%">
+            <mat-label for="customerSurbub">Customer suburb</mat-label>
+            <input matInput formControlName="customerSurbub" required id="customerSurbub" name="customerSurbub">
+          </mat-form-field>
+    
+          <mat-form-field appearance="fill" style="width: 50%">
+            <mat-label for="customerCity">Customer city</mat-label>
+            <input matInput formControlName="customerCity" required id="customerCity" name="customerCity">
+          </mat-form-field>
+    
+          <mat-form-field appearance="fill" style="width: 50%">
+            <mat-label for="customerProvince">Customer province</mat-label>
+            <input matInput formControlName="customerProvince" required id="customerProvince" name="customerProvince">
+          </mat-form-field>
+
+
+          <mat-form-field>
+            <input matInput formControlName="auctionDate" [matDatepicker]="auctionDatepicker" placeholder="Auction Date">
+            <mat-datepicker-toggle matSuffix [for]="auctionDatepicker"></mat-datepicker-toggle>
+            <mat-datepicker #auctionDatepicker></mat-datepicker>
+          </mat-form-field>
+    
+          <mat-form-field>
+            <input matInput formControlName="startTime" type="time" placeholder="Start Time">
+            <ngx-material-timepicker #picker></ngx-material-timepicker>
+          </mat-form-field>
+    
+          <mat-form-field>
+            <input matInput formControlName="endTime" type="time" matInput placeholder="End Time">
+            <ngx-material-timepicker #picker></ngx-material-timepicker>
+          </mat-form-field>
+
+
+          <mat-form-field>
+            <input matInput formControlName="labourCost" placeholder="Labour cost">
+          </mat-form-field>
+    
+          <mat-form-field>
+            <input matInput formControlName="estimatedDuration" placeholder="Estimated duration">
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput placeholder="Material Name" formControlName="materialName">
+          </mat-form-field>
+    
+          <mat-form-field>
+            <input matInput placeholder="Material Description" formControlName="materialDescription">
+          </mat-form-field>
+    
+          <mat-form-field>
+            <input matInput type="number" placeholder="Cost" formControlName="cost">
+          </mat-form-field>
+    
+          <mat-form-field>
+            <input matInput type="number" placeholder="Quantity" formControlName="quantity">
+          </mat-form-field>  
+
+
+  
+          
+    </form>
+</div>
+<div mat-dialog-actions>
+    <button id="closeBtn" mat-button [disabled]="editForm.invalid">Send Reset Link</button>
+</div>
+

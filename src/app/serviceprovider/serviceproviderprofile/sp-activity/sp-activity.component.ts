@@ -41,6 +41,11 @@ export class SpActivityComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadBidDetails();
+    this.changeIcon();
+  }
+
+  changeIcon() {
+    return this.authService.setCurrentIcon('favorite_border');
   }
 
   loadBidDetails() {
