@@ -8,11 +8,11 @@ import { Dialog } from '@angular/cdk/dialog';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-auction',
-  templateUrl: './auction.component.html',
-  styleUrls: ['./auction.component.css']
+  selector: 'app-edit-form',
+  templateUrl: './edit-form.component.html',
+  styleUrls: ['./edit-form.component.css']
 })
-export class AuctionComponent implements OnInit {
+export class EditFormComponent implements OnInit{
   @ViewChild('stepper') stepper: any;
 
   //customerName!: string; // Make sure you have this property in your component class
@@ -23,13 +23,13 @@ export class AuctionComponent implements OnInit {
   isAddingMaterial = false;
   showMaterialsCard = false;
 
+  editForm!: FormGroup;
+
   claimDetailsForm!: FormGroup;
   auctionForm!: FormGroup;
   guidePriceForm!: FormGroup;
   materialCostForm!: FormGroup;
   summaryForm!: FormGroup;
-  imageUploadForm!: FormGroup;
-  imageFiles: File[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -60,10 +60,6 @@ export class AuctionComponent implements OnInit {
       customerProvince: ['', Validators.required],
     });
 
-    this.imageUploadForm = this.formBuilder.group({
-      images: ['', Validators.required]
-    });
-
     this.auctionForm = this.formBuilder.group({
       claimId: ['', Validators.required],
       auctionDate: ['', Validators.required],
@@ -83,21 +79,33 @@ export class AuctionComponent implements OnInit {
       quantity: ['', Validators.required],
     });
 
-  }
+    this.summaryForm = this.formBuilder.group({
+      customerName: ['', Validators.required],
+      customerEmail: ['', Validators.required],
+      vehicleMake: ['', Validators.required],
+      vehicleModel: ['', Validators.required],
+      modelYear: ['', Validators.required],
+      MMCode: ['', Validators.required],
+      damageDescription: ['', Validators.required],
+      customerSurbub: ['', Validators.required],
+      customerCity: ['', Validators.required],
+      customerProvince: ['', Validators.required],
 
-  nextStep() {
-    if (this.stepper) {
-      this.stepper.next(); // Navigate to the next step
-    }
-  }
+      claimId: ['', Validators.required],
+      auctionDate: ['', Validators.required],
+      startTime: ['', Validators.required],
+      endTime: ['', Validators.required],
 
-  onImageSelect(event: any) {
-    if (event.target.files) {
-      this.imageFiles = Array.from(event.target.files);
-      console.log('Selected files:', this.imageFiles);
-    } else {
-      console.log('No files selected');
-    }
+      labourCost: ['', Validators.required],
+      estimatedDuration: ['', Validators.required],
+
+      materialName: ['', Validators.required],
+      materialDescription: ['', Validators.required],
+      cost: ['', Validators.required],
+      quantity: ['', Validators.required],
+    });
+  
+
   }
 
   submitClaimDetails() {
@@ -118,32 +126,6 @@ export class AuctionComponent implements OnInit {
       });
     } else {
       // Handle form validation errors if needed
-    }
-  }
-
-  uploadImages() {
-    console.log('imageFiles:', this.imageFiles);
-
-    if (this.imageFiles && this.imageFiles.length > 0) {
-      const formData: FormData = new FormData();
-      this.imageFiles.forEach((file) => {
-        formData.append('file', file, file.name);
-      });
-      
-      this.authService.uploadImages(this.claimId, formData).subscribe(
-        (response) => {
-          console.log('Images uploaded successfully!', response);
-          console.log('claimId', this.claimId);
-          console.log('Form data:', formData);
-          this.stepper.next();
-        },  
-        (error) => {
-          console.error('Error uploading images:', error);
-          // Handle error if needed
-        }
-      );
-    } else {
-      console.error('No files selected for upload.');
     }
   }
 
@@ -278,4 +260,5 @@ getclaimInformation(){
 
 
 }
+
 }

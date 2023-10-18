@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ReactiveFormsModule } from '@angular/forms';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ResetPasswordService } from 'src/app/services/reset-password.service';
 import { changePassword } from 'src/app/models/changePassword.model';
@@ -51,6 +52,7 @@ export class CaProfileComponent implements OnInit {
 
     )
   }
+  
 
   checkEmailVerification(){
     console.log('checkEmailVerification called');

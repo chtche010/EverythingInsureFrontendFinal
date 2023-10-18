@@ -163,7 +163,8 @@
             <div class="button-container">
               <button mat-raised-button color="primary" matStepperPrevious>Back</button>
               <button mat-raised-button color="primary" (click)="addMaterial(guidePriceId)">Add material</button>
-              <button mat-raised-button color="primary" (click)="handleSubmit()">Submit</button>
+              <button mat-raised-button matStepperNext color="primary" (click)="handleSubmit()" [disabled]="!materialCostForm.valid">Next</button>
+
             </div>
           </div>
           </form>
@@ -182,6 +183,141 @@
                       </mat-card-content>
                     </mat-card>
                   </div>
+        </mat-step>
+
+        <!-- Confirmation -->
+      </div>
+
+      <!-- Step 5: Summary  -->
+
+      <div class="material-cost-form-container">
+        <mat-step [stepControl]="summaryForm" (stepSelectionChange)="onStepSelectionChange($event)">
+          <ng-template matStepLabel>Summary</ng-template>
+
+          <form [formGroup]="summaryForm">
+
+            <h5 class="heading-style">Claim details</h5>
+
+            <div class="row">
+                <div class="col-lg-3 col-md-4 label-style">Customer Name</div>
+                <div class="col-lg-9 col-md-8 value-style">{{ allInfo?.customerName }}</div>
+            </div>
+          
+          <div class="row">
+              <div class="col-lg-3 col-md-4 label-style">Customer Email</div>
+              <div class="col-lg-9 col-md-8 value-style">{{ allInfo?.customerEmail }}</div>
+          </div>
+          
+          <div class="row">
+              <div class="col-lg-3 col-md-4 label-style">Vehicle Make</div>
+              <div class="col-lg-9 col-md-8 value-style">{{ allInfo?.vehicleMake }}</div>
+          </div>
+          
+          <div class="row">
+              <div class="col-lg-3 col-md-4 label-style">Vehicle Model</div>
+              <div class="col-lg-9 col-md-8 value-style">{{ allInfo?.vehicleModel }}</div>
+          </div>
+          
+          <div class="row">
+              <div class="col-lg-3 col-md-4 label-style">Model Year</div>
+              <div class="col-lg-9 col-md-8 value-style">{{ allInfo?.modelYear }}</div>
+          </div>
+          
+          <div class="row">
+              <div class="col-lg-3 col-md-4 label-style">MM Code</div>
+              <div class="col-lg-9 col-md-8 value-style">{{ allInfo?.mmCode }}</div>
+          </div>
+          
+          <div class="row">
+              <div class="col-lg-3 col-md-4 label-style">Damage Description</div>
+              <div class="col-lg-9 col-md-8 value-style">{{ allInfo?.damageDescription }}</div>
+          </div>
+          
+          <div class="row">
+              <div class="col-lg-3 col-md-4 label-style">Customer Suburb</div>
+              <div class="col-lg-9 col-md-8 value-style">{{ allInfo?.customerSurbub }}</div>
+          </div>
+          
+          <div class="row">
+              <div class="col-lg-3 col-md-4 label-style">Customer City</div>
+              <div class="col-lg-9 col-md-8 value-style">{{ allInfo?.customerCity }}</div>
+          </div>
+          
+          <div class="row">
+              <div class="col-lg-3 col-md-4 label-style">Customer Province</div>
+              <div class="col-lg-9 col-md-8 value-style">{{ allInfo?.customerProvince }}</div>
+          </div>
+          
+
+            <h5 class="heading-style">Auction details</h5>
+
+            <div class="row">
+              <div class="col-lg-3 col-md-4 label-style">Auction Date</div>
+              <div class="col-lg-9 col-md-8 value-style">{{ allInfo?.auction.auctionDate | date:'longDate' }}</div>
+          </div>
+          
+          <div class="row">
+              <div class="col-lg-3 col-md-4 label-style">Start Time</div>
+              <div class="col-lg-9 col-md-8 value-style">{{ allInfo?.auction.startTime | date:'shortTime' }}</div>
+          </div>
+          
+          <div class="row">
+              <div class="col-lg-3 col-md-4 label-style">End Time</div>
+              <div class="col-lg-9 col-md-8 value-style">{{ allInfo?.auction.endTime | date:'shortTime' }}</div>
+          </div>        
+
+            <h5 class="heading-style">Guide Price</h5>
+     
+            <div class="row">
+              <div class="col-lg-3 col-md-4 label-style">Labour Cost</div>
+              <div class="col-lg-9 col-md-8 value-style">{{ allInfo?.auction.guidePrice.labourCost}}</div>
+          </div>
+
+          
+          <div class="row">
+              <div class="col-lg-3 col-md-4 label-style">Estimated Duration</div>
+              <div class="col-lg-9 col-md-8 value-style">{{ allInfo?.auction.guidePrice.estimatedDuration }}</div>
+          </div>
+          
+
+            <h5 class="heading-style">Material Cost</h5>
+
+            <div class="container" *ngFor="let material of addedMaterials">
+              <div class="row">
+                <div class="col-lg-3 col-md-4 label-style">Material Name</div>
+                <div class="col-lg-9 col-md-8 value-style">{{ material.materialName }}</div>
+              </div>
+            
+              <div class="row">
+                <div class="col-lg-3 col-md-4 label-style">Material Description</div>
+                <div class="col-lg-9 col-md-8 value-style">{{ material.materialDescription }}</div>
+              </div>
+            
+              <div class="row">
+                <div class="col-lg-3 col-md-4 label-style">Cost</div>
+                <div class="col-lg-9 col-md-8 value-style">{{ material.cost }}</div>
+              </div>
+            
+              <div class="row">
+                <div class="col-lg-3 col-md-4 label-style">Quantity</div>
+                <div class="col-lg-9 col-md-8 value-style">{{ material.quantity }}</div>
+              </div>
+            
+           
+            </div>
+            
+          
+            <div *ngIf="!isAddingMaterial">
+            <div class="button-container">
+              <button mat-raised-button color="primary" matStepperPrevious>Back</button>
+              <button mat-raised-button  color="primary" (click)="handleSubmit()">Confirm</button>
+
+            </div>
+          </div>
+          </form>
+          <br><br>
+                   <!-- Display added materials -->
+                
         </mat-step>
 
         <!-- Confirmation -->

@@ -73,6 +73,8 @@ export class LoginComponent implements OnInit {
         accountType: '' // Add the accountType property here
       };
 
+      console.log(loginObject)
+
 
       this.authService.login(loginObject).subscribe(
         response => {

@@ -34,7 +34,7 @@ import { FAQComponent } from './faq/faq.component';
 import { FooterComponent } from './footer/footer.component';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
-import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ClaimsAgentDashboardComponent } from './claims-agent/claims-agent-dashboard/claims-agent-dashboard.component';
@@ -82,7 +82,7 @@ import { OptComponent } from './opt/opt.component';
 import { EmailVeriComponent } from './email-veri/email-veri.component';
 import { AdminReportComponent } from './reporting/admin-report/admin-report.component';
 import { NgChartsModule, NgChartsConfiguration } from 'ng2-charts';
-import { MatGridListModule} from '@angular/material/grid-list';
+import { MatGridListModule } from '@angular/material/grid-list';
 import { BidSelectComponent } from './reporting/bid-select/bid-select.component';
 import { CaBarComponent } from './reporting/ca-bar/ca-bar.component';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -92,6 +92,9 @@ import { FavouriteAuctionComponent } from './serviceprovider/serviceproviderprof
 import { UpdateMaterialComponent } from './serviceprovider/serviceproviderprofile/update-material/update-material.component';
 import { AuctiondetailsdialogComponent } from './auctiondetailsdialog/auctiondetailsdialog.component';
 import { AuctionwinnersComponent } from './claims-agent/auctionwinners/auctionwinners.component';
+import { RejectedUsersComponent } from './admin/rejected-users/rejected-users.component';
+import { ViewAuctionsComponent } from './admin/view-auctions/view-auctions.component';
+import { EditFormComponent } from './claims-agent/edit-form/edit-form.component';
 
 const routes: Routes = [
   { path: 'signup', component: SignupComponent },
@@ -110,7 +113,7 @@ const routes: Routes = [
     WhyTrustUsComponent,
     FAQComponent,
     FooterComponent,
-    ClaimsAgentDashboardComponent, 
+    ClaimsAgentDashboardComponent,
     AuctionComponent,
     CaProfileComponent,
     CaNavbarComponent,
@@ -151,11 +154,13 @@ const routes: Routes = [
     CaBarComponent,
     AwardauctionComponent,
     FavouriteAuctionComponent,
+    AwardDialogComponent,
     UpdateMaterialComponent,
     AuctiondetailsdialogComponent,
-    AwardDialogComponent,
-    AwardauctionComponent,
     AuctionwinnersComponent,
+    RejectedUsersComponent,
+    ViewAuctionsComponent,
+    EditFormComponent
   ],
   imports: [
     BrowserModule,
@@ -191,16 +196,17 @@ const routes: Routes = [
   providers: [{
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptor,
-    multi: true }, 
+    multi: true
+  },
   {
     provide: JWT_OPTIONS,
     useValue: JWT_OPTIONS
   },
-  //{
-    //provide: NgChartsConfiguration, useValue: { generateColors: false}
- // },
-  JwtHelperService,
-  DatePipe
+  {
+    provide: NgChartsConfiguration, useValue: { generateColors: false }
+  },
+    JwtHelperService,
+    DatePipe
   ],
   bootstrap: [AppComponent],
 })
