@@ -259,8 +259,11 @@ getAllClaimInformaation(bidId: number): Observable<any> {
   return this.http.get<any>(this.baseUrl + "api/ServiceProvider/GetLikedAuctions", this.httpOptions);
 }
 
+//likeAuction(auctionId: number): Observable<any> {
+ // return this.http.post<any>(this.baseUrl + "api/ServiceProvider/LikeAuction", auctionId, this.httpOptions);
+//}
 likeAuction(auctionId: number): Observable<any> {
-  return this.http.post<any>(this.baseUrl + "api/ServiceProvider/LikeAuction", auctionId, this.httpOptions);
+  return this.http.post<any>(`${this.baseUrl}api/ServiceProvider/LikeAuction/${auctionId}`, this.httpOptions);
 }
 
 

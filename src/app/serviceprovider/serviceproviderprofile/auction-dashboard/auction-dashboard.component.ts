@@ -45,7 +45,7 @@ export class AuctionDashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAuctionEvents();
-    this.changeIcon();
+    
 
   }
 
@@ -161,11 +161,13 @@ export class AuctionDashboardComponent implements OnInit {
   favoriteEvent(event: Event, auctionEvent: GetAllAuctions): void {
     event.stopPropagation(); // Prevent the click event from propagating to the card click event
 
+    console.log(auctionEvent);
+
     this.authService.likeAuction(auctionEvent.auctionId).subscribe(
       (response: any) => {
         if (response.success) {
           auctionEvent.isFav = true; // Update the UI to indicate that the auction is favorited
-          this.favoriteEvents.push(auctionEvent);
+          this.favoriteEvents.push(auctionEvent.auctionId);
         }
         console.log(response.message);
       },
@@ -174,9 +176,7 @@ export class AuctionDashboardComponent implements OnInit {
       }
     );
   }
-  changeIcon() {
-    return this.authService.setCurrentIcon('favorite_border');
-  }
+ 
   isEventFavorite(auctionEvent: GetAllAuctions): boolean {
     return this.favoriteEvents.includes(auctionEvent.auctionId);
   }

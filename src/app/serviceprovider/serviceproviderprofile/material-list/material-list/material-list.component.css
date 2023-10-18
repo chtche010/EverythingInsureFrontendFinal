@@ -1,14 +1,79 @@
+@import '~@fortawesome/fontawesome-free/css/all.css';
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap');
+
+
+
+:root {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+  background: #f6f9ff;
+  color: #444444;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Montserrat", sans-serif;
+  color: #444444;
+  font-weight: 800;
+}
+
+.back-link {
+  display: inline-block;
+  padding: 6px 12px;
+  background-color: #f5f5f5;
+  border: none;
+  border-radius: 4px;
+  text-decoration: none;
+  color: #3643f1;
+  transition: background-color 0.3s;
+}
+
+.back-link:hover {
+  color: #0713b1;
+}
+
+.background-container {
+  background-image: url("src/assets/Images/background1.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  min-height: 100vh;
+}
+
+.content {
+  margin-top: 80px;
+  margin-left: 310px;
+  padding: 20px 30px;
+  transition: all 0.3s;
+}
+
+.table-container {
+  width: 100%;
+  max-width: fit-content; /* Adjust the maximum width as needed */
+  overflow-x: auto; /* Add horizontal scroll if the table content exceeds the container width */
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  padding: 10px;
+  background-color: transparent;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
 table {
-  width: 100%;
-  margin-left: 350%;
-  margin-top: 100px;
+  width: 100%; /* Adjust the width to fit the content */
   font-family: 'Montserrat', sans-serif;
 }
 
 .mat-elevation-z8 {
   /* Add elevation (shadow) to the table */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
 }
 
 th.mat-header-cell {
@@ -25,4 +90,17 @@ th.mat-header-cell {
 .action-buttons {
   display: flex;
   gap: 10px; /* Adjust the gap as needed */
+}
+
+.action-buttons button {
+  background-color: #f5f5f5;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.action-buttons button:hover {
+  background-color: #819eee;
 }
