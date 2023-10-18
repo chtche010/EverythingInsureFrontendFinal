@@ -171,6 +171,15 @@ getAllClaimInformaation(bidId: number): Observable<any> {
     return this.http.get<any[]>(this.baseUrl + 'api/Auction/GetAllReports', this.httpOptions);
   }
 
+  public getReportAwarded(): Observable<any> {
+    return this.http.get(this.baseUrl + 'api/Auction/GetReportAwarded', this.httpOptions);
+  }
+
+  public setAuctionDate(auctionReportId: number, date: string): Observable<any> {
+    const url = `${this.baseUrl}api/Auction/SetDate?auctionReportId=${auctionReportId}&date=${date}`;
+    return this.http.put(url, this.httpOptions);
+  }
+
   // Adding an auction 
 
   submitClaimData(claimData: addclaim): Observable<ServiceResponse<any>> {

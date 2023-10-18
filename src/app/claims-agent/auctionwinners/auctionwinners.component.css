@@ -1,0 +1,35 @@
+.auction-winner-panel {
+    border: 1px solid #ccc;
+    border-radius: 1    px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    margin-left: 150px;
+    margin-top: 100px;
+    margin-bottom: -50px;
+  }
+  
+  .auction-winner-panel .mat-expansion-panel-header {
+    padding: 10px;
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .auction-winner-panel .mat-expansion-panel-header mat-icon {
+    cursor: pointer;
+    color: #007bff;
+  }
+  
+  .auction-winner-panel .expansion-details {
+    padding: 20px;
+  }
+  
+  .auction-winner-panel h3 {
+    font-size: 1.2em;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .auction-winner-panel p {
+    margin: 0 0 10px;
+    color: #666;
+  } 
