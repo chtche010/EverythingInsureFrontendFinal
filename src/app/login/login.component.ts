@@ -10,6 +10,7 @@ import { initialsignup } from '../models/initialsignup.model';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
+
 import { ForgotpasswordComponent } from '../forgotpassword/forgotpassword.component';
 
 @Component({
@@ -77,40 +78,72 @@ export class LoginComponent implements OnInit {
         response => {
           // Handle successful login
           console.log(response);
-          localStorage.setItem("authToken", JSON.stringify(response))
+          localStorage.setItem("authToken", JSON.stringify(response));
           // Redirect to the appropriate page based on the user's role or perform any other actions
-          const decodedToken = this.jwtHelper.decodeToken(response.data);
-          console.log(decodedToken);
-          if (decodedToken.role === 'Administrator') {
-            this.snackbar.open('Email verfication sent!', 'Close', { duration: 4000 });
-            this.router.navigate(['/adminprofile']);
-          } else if (decodedToken.role === 'ServiceProvider') {
-            this.snackbar.open('Email verfication sent!', 'Close', { duration: 4000 });
-            this.router.navigate(['/serviceproviderprofile']);
-          } else if (decodedToken.role === 'ClaimsAgent') {
-            this.authService.sendOTPEmail(email)
-            .subscribe({
-              next: (res) => {
-                this.snackbar.open('Success! OTP email sent, it will expire in 15 minutes!', 'Close', { duration: 4000 });
+          const decodedToken = this.jwtHelper.decodeToken(response.data)
+          console.log("Email",decodedToken.email)
 
-                this.router.navigate(['/opt']);
+          this.authService.checkAccountStatus(decodedToken.email).subscribe({
+            next: (res) => {
+              console.log(res.message)
 
-              },
-              error:(err)=>{
-                this.snackbar.open('Error! Something went wrong', 'Close', { duration: 4000 });
+              if(res.message =="Your account has been approved"){
+                if (decodedToken.role === 'Administrator') {
+                  // this.snackbar.open('Email verfication sent!', 'Close', { duration: 4000 });
+                   this.router.navigate(['/adminprofile']);
+                 } else if (decodedToken.role === 'ServiceProvider') {
+                  // this.snackbar.open('Email verfication sent!', 'Close', { duration: 4000 });
+                   this.router.navigate(['/serviceproviderprofile']);
+                 } else if (decodedToken.role === 'ClaimsAgent') {
+                   this.authService.sendOTPEmail(email)
+                   .subscribe({
+                     next: (res) => {
+                       this.snackbar.open('Success! OTP email sent, it will expire in 15 minutes!', 'Close', { duration: 4000 });
+       
+                       this.router.navigate(['/opt']);
+       
+                     },
+                     error:(err)=>{
+                       this.snackbar.open('Error! Something went wrong', 'Close', { duration: 4000 });
+       
+                       console.log(err);
+                     }
+                   })
+                   
+                  
+                 } else {
+                   this.router.navigate(['/login']);
+                 }
 
-                console.log(err);
+              }else if(res.message == "Your account is pending approval"){
+                this.snackbar.open('Error! Your account is pending approval!', 'Close', { duration: 4000 });
+
+
+              }else if(res.message == "Your account has been rejected, please check email for more information"){
+                this.snackbar.open('Error! Your account has been rejected, please check email for more information', 'Close', { duration: 4000 });
+
               }
-            })
-           
-          } else {
-            this.router.navigate(['/login']);
-          }
+
+
+            },
+            error:(error) => {
+              console.log(error.message)
+
+            }
+          })
+
+          console.log("Response Object", response)
+          console.log("Decoded Value", decodedToken)
+          console.log(decodedToken);
+
+       
         },
         error => {
           // Handle login error
           console.error(error);
-          // Display an error message to the user or perform any other actions
+          const errorMessage = "Invalid login credentials";
+          // Display an error message to the user
+          this.toast.error({ detail: 'Error', summary: errorMessage, duration: 5000 });
         }
       );
     }

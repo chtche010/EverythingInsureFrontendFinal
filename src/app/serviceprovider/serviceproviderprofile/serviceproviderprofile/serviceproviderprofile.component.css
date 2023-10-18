@@ -1,5 +1,5 @@
-
 @import '~@fortawesome/fontawesome-free/css/all.css';
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap');
 /* @import '~@angular/material/prebuilt-themes/indigo-pink.css'; */
 
 /* @import 'src/theme.scss'; */
@@ -7,7 +7,7 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: "Montserrat", sans-serif; }
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap');
+
 :root {
     scroll-behavior: smooth;
   }
@@ -37,7 +37,13 @@ body { margin: 0; font-family: "Montserrat", sans-serif; }
     font-family: "Montserrat", sans-serif;
     color: #444444;
   }
-  
+  .background-container {
+    background-image: url("src/assets/Images/background3.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    min-height: 100vh;
+  }
   /*--------------------------------------------------------------
   # Main
   --------------------------------------------------------------*/
@@ -66,39 +72,6 @@ body { margin: 0; font-family: "Montserrat", sans-serif; }
     font-family: "Montserrat", sans-serif;;
     margin-bottom: 0;
     color: #212446;
-  }
-  
-  /*--------------------------------------------------------------
-  # Back to top button
-  --------------------------------------------------------------*/
-  .back-to-top {
-    position: fixed;
-    visibility: hidden;
-    opacity: 0;
-    right: 15px;
-    bottom: 15px;
-    z-index: 99999;
-    background: #212446;
-    width: 40px;
-    height: 40px;
-    border-radius: 4px;
-    transition: all 0.4s;
-  }
-  
-  .back-to-top i {
-    font-size: 24px;
-    color: #fff;
-    line-height: 0;
-  }
-  
-  .back-to-top:hover {
-    background: #6776f4;
-    color: #fff;
-  }
-  
-  .back-to-top.active {
-    visibility: visible;
-    opacity: 1;
   }
   
   /*--------------------------------------------------------------
@@ -511,48 +484,6 @@ body { margin: 0; font-family: "Montserrat", sans-serif; }
     margin-left: 95px;
   }
   
-  /* Recent Sales */
-  .dashboard .recent-sales {
-    font-size: 14px;
-  }
-  
-  .dashboard .recent-sales .table thead {
-    background: #f6f6fe;
-  }
-  
-  .dashboard .recent-sales .table thead th {
-    border: 0;
-  }
-  
-  .dashboard .recent-sales .dataTable-top {
-    padding: 0 0 10px 0;
-  }
-  
-  .dashboard .recent-sales .dataTable-bottom {
-    padding: 10px 0 0 0;
-  }
-  
-  /* Top Selling */
-  .dashboard .top-selling {
-    font-size: 14px;
-  }
-  
-  .dashboard .top-selling .table thead {
-    background: #f6f6fe;
-  }
-  
-  .dashboard .top-selling .table thead th {
-    border: 0;
-  }
-  
-  .dashboard .top-selling .table tbody td {
-    vertical-align: middle;
-  }
-  
-  .dashboard .top-selling img {
-    border-radius: 5px;
-    max-width: 60px;
-  }
   
   /*--------------------------------------------------------------
   # Icons list page

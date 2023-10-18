@@ -31,8 +31,19 @@ import { ManagecaComponent } from './admin/manageca/manageca/manageca.component'
 import { ManagespComponent } from './admin/managesp/managesp/managesp.component';
 //forgot password
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
+import { ChangepasswordComponent } from './changepassword/changepassword.component';
+import { SpReportDashComponent } from './reporting/sp-report-dash/sp-report-dash.component';
+import { CaReportDashComponent } from './reporting/ca-report-dash/ca-report-dash.component';
 import { ResetPassword } from './models/resetPassword.model';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { updateClaim } from './models/claimagent/updateClaim';
+import { UpdateclaimComponent } from './claims-agent/updateclaim/updateclaim/updateclaim.component';
+import { UpdateauctionComponent } from './claims-agent/updateauction/updateauction/updateauction.component';
+import { MaterialListComponent } from './serviceprovider/serviceproviderprofile/material-list/material-list/material-list.component';
+import { AdminReportComponent } from './reporting/admin-report/admin-report.component';
+import { AwardauctionComponent } from './awardauction/awardauction.component';
+import { FavouriteAuctionComponent } from './serviceprovider/serviceproviderprofile/favourite-auction/favourite-auction.component';
+import { AuctionwinnersComponent } from './claims-agent/auctionwinners/auctionwinners.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
@@ -54,7 +65,11 @@ const routes: Routes = [
   { path: 'serviceproviderprofile', component: ServiceproviderprofileComponent},
   { path: 'auction-dashboard', component: AuctionDashboardComponent},
   { path: 'reset', component: ResetPasswordComponent},
+  { path: 'updateclaim', component: UpdateclaimComponent},
+  { path: 'updateauction', component: UpdateclaimComponent},
+  { path: 'material-list', component: MaterialListComponent },
   { path: 'emailVeri', component: EmailVeriComponent},
+  {path: 'favourite-auction', component: FavouriteAuctionComponent},
 
   //admin 
   { path: 'admin-nav-bar', component: AdminNavBarComponent},
@@ -64,7 +79,13 @@ const routes: Routes = [
   { path: 'manageca', component: ManagecaComponent},
   { path: 'managesp', component: ManagespComponent},
   { path: 'bid-form', component: BidFormComponent},
-  { path: 'forgotpassword', component: ForgotpasswordComponent}
+  { path: 'forgotpassword', component: ForgotpasswordComponent},
+  { path: 'changepassword', component: ChangepasswordComponent},
+  { path: 'sp-report-dash', component: SpReportDashComponent},
+  { path: 'ca-report-dash',component: CaReportDashComponent},
+  { path: 'admin-report', component: AdminReportComponent},
+  { path: 'awardauction', component: AwardauctionComponent},
+  { path: 'auctionwinners', component: AuctionwinnersComponent},
 ];
 
 @NgModule({

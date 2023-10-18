@@ -27,26 +27,41 @@
         </a>
       </li><!-- End create auction Page Nav -->
 
-      <!-- <li class="nav-item">
-        <a class="nav-link collapsed" routerLink="/ca-profile" routerLinkActive="active">
-          <i class="bi bi-envelope"></i>
-          <span>Contact</span>
-        </a>
-      </li>End Contact Page Nav -->
-
       <li class="nav-item">
-        <a class="nav-link collapsed" routerLink="/manageclaims">
+        <a class="nav-link collapsed" routerLink="/manageclaims" routerLinkActive="active">
           <i class="bi bi-clipboard"></i>
           <span>Manage claims</span>
+        </a>
+      </li><!-- End manage claim Page Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" routerLink="/manageauctions" routerLinkActive="active">
+          <i class="bi bi-clipboard-pulse"></i>
+          <span>Manage auctions</span>
+        </a>
+      </li> <!-- End manage auction Page Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" routerLink="/awardauction" routerLinkActive="active">
+          <i class="bi bi-award"></i>
+          <span>Award auction</span>
         </a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" routerLink="/manageauctions">
-          <i class="bi bi-clipboard-pulse"></i>
-          <span>Manage auctions</span>
+        <a class="nav-link collapsed" routerLink="/auctionwinners" routerLinkActive="active">
+          <i class="bi bi-trophy"></i>
+          <span>Auction winners</span>
         </a>
-      </li> 
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" routerLink="/ca-report-dash" routerLinkActive="active">
+          <i class="bi bi-envelope"></i>
+          <span>Reports</span>
+        </a>
+      </li><!-- End CA report Page Nav -->
+
       <li class="nav-item">
         <a class="nav-link collapsed" (click)="logout()">
           <i class="bi bi-box-arrow-right"></i>
@@ -54,8 +69,6 @@
         </a>
       </li>
       <!-- End Logout Page Nav -->
-
-      <!-- End Blank Page Nav -->
 
     </ul>
 

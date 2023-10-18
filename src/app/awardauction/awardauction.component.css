@@ -1,0 +1,30 @@
+.container {
+  padding: 200px; /* Add padding to adjust the position */
+  margin-top: -130px;
+}
+
+mat-table {
+  width: 100%;
+  border: 1px solid #e0e0e0;
+  /* Other table styles */
+}
+
+/* Define specific styles for your app-ca-sidebar */
+app-ca-sidebar {
+  width: 250px; /* Adjust the width as needed */
+  background-color: #333;
+  color: white;
+  /* Other sidebar styles */
+}
+
+/* Additional styling for your app-ca-navbar if needed */
+app-ca-navbar {
+  background-color: #0077cc;
+  color: white;
+  padding: 10px;
+  /* Other navbar styles */
+}
+
+.action-button {
+  margin-left: 10px;
+}

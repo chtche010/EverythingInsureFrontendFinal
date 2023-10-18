@@ -164,3 +164,11 @@
   .sidebar-nav .nav-content a.active i {
     background-color: #212446;
   }
+
+  .sidebar-nav .nav-item .nav-link.active {
+    color: #212446; /* Change the text color to blue when hovered or active */
+    background-color: #009cfd53;
+  }
+  .sidebar-nav .nav-item .nav-link.active i {
+    color: #212446; /* Change the background color of the icon when the link is active */
+  }

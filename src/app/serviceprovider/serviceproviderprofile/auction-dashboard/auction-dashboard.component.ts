@@ -1,7 +1,7 @@
+
 import { MatDialog } from '@angular/material/dialog';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
 import { AuctionDialogComponent } from '../auction-dialog/auction-dialog.component';
 import { AuthService } from 'src/app/services/auth.service';
 import { GetAllAuctions } from 'src/app/models/auction-dashboard/getallauctions';
@@ -13,19 +13,25 @@ import { GetAllAuctions } from 'src/app/models/auction-dashboard/getallauctions'
 })
 
 export class AuctionDashboardComponent implements OnInit {
-  auctionEvents: GetAllAuctions[] = [];
-  favoriteEvents: any[] = []; //array to store favorite events
+  selectedAuctionId: number | null = null;
+  openAuctions: GetAllAuctions[] = [];
+  upcomingAuctions: GetAllAuctions[] = [];
+  closedAuctions: GetAllAuctions[] = [];
+  favoriteEvents: any[] = []; // Array to store favorite events
   selectedAuction: any; // <------------Update this type based on your DTO structure
   formSubmitted = false;
+  images: string[];
 
   constructor(
-    private formBuilder: FormBuilder, 
+    private formBuilder: FormBuilder,
     public dialog: MatDialog,
-    private authService: AuthService) { } 
+    private authService: AuthService) {
+      this.images = [];
+     }
 
   openDialog(auctionEvent: any): void {
     console.log('AuctionId:', auctionEvent.auctionId);
-    
+
     const dialogRef = this.dialog.open(AuctionDialogComponent, {
       width: '80%',
       enterAnimationDuration: '500ms',
@@ -34,39 +40,116 @@ export class AuctionDashboardComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(
       result => console.log('The dialog was closed', result)
-      // You can do something with the result here if needed
     );
   }
 
   ngOnInit(): void {
     this.getAuctionEvents();
+    this.changeIcon();
+
   }
-  
-  getAuctionEvents(): void {
-    this.authService.getUpcomingAuctions().subscribe(
-      (response: any) => {
-        console.log('Upcoming auctions', response.data);
-        this.auctionEvents = response.data;
+
+  fetchAuctionImages(auctionEvent: GetAllAuctions) {
+    console.log('Fetching images for auction event:', auctionEvent);
+    console.log('claimId:', auctionEvent.ClaimId);
+    this.authService.getClaimImages(auctionEvent.ClaimId).subscribe(
+      (images: string[]) => {
+        auctionEvent.images = images;
       },
-      error => {
-        console.log('Error fetching upcoming auctions:', error);
+      (error) => {
+        console.error('Error fetching auction images:', error);
       }
     );
-  
+  }
+
+  getAuctionEvents(): void {
     this.authService.getOpenAuctions().subscribe(
       (response: any) => {
         console.log('Open Auctions:', response.data);
-        this.auctionEvents = response.data;
+
+        this.openAuctions = response.data;
+        this.openAuctions.forEach((auction) => this.fetchAuctionImages(auction));
+
+        if (this.openAuctions && this.openAuctions.length > 0) {
+          // Loop through all upcoming auctions
+          for (const auction of this.openAuctions) {
+            // Log the ID for each auction
+            this.selectedAuctionId = auction.auctionId;
+            console.log('Auction ID:', auction.auctionId);
+
+            if (auction.isFav === true) {
+              this.favoriteEvents.push(auction)
+            }
+
+            console.log('Fav auctions', this.favoriteEvents)
+
+
+          }
+        } else {
+          console.log('No upcoming auctions found.');
+        }
+
       },
       error => {
         console.log('Error fetching open auctions:', error);
       }
     );
-  
+
+    this.authService.getUpcomingAuctions().subscribe(
+      (response: any) => {
+        console.log('Upcoming Auctions:', response.data);
+        this.upcomingAuctions = response.data;
+        this.upcomingAuctions.forEach((auction) => this.fetchAuctionImages(auction));
+
+        if (this.upcomingAuctions && this.upcomingAuctions.length > 0) {
+          // Loop through all upcoming auctions
+          for (const auction of this.upcomingAuctions) {
+            // Log the ID for each auction
+            this.selectedAuctionId = auction.auctionId;
+            console.log('Auction ID:', auction.auctionId);
+
+            if (auction.isFav === true) {
+              this.favoriteEvents.push(auction)
+            }
+
+            console.log('Fav auctions', this.favoriteEvents)
+
+
+          }
+        } else {
+          console.log('No upcoming auctions found.');
+        }
+
+      },
+      error => {
+        console.log('Error fetching upcoming auctions:', error);
+      }
+    );
+
     this.authService.getClosedAuctions().subscribe(
       (response: any) => {
         console.log('Closed Auctions:', response.data);
-        this.auctionEvents = response.data;
+        this.closedAuctions = response.data;
+        this.closedAuctions.forEach((auction) => this.fetchAuctionImages(auction));
+        
+        if (this.closedAuctions && this.closedAuctions.length > 0) {
+          // Loop through all upcoming auctions
+          for (const auction of this.closedAuctions) {
+            // Log the ID for each auction
+            this.selectedAuctionId = auction.auctionId;
+            console.log('Auction ID:', auction.auctionId);
+
+            if (auction.isFav === true) {
+              this.favoriteEvents.push(auction)
+            }
+
+            console.log('Fav auctions', this.favoriteEvents)
+
+
+          }
+        } else {
+          console.log('No upcoming auctions found.');
+        }
       },
       error => {
         console.log('Error fetching closed auctions:', error);
@@ -74,30 +157,97 @@ export class AuctionDashboardComponent implements OnInit {
     );
   }
 
-  favoriteEvent(event: any, auctionEvent: any) {
+  // Function to like an auction
+  favoriteEvent(event: Event, auctionEvent: GetAllAuctions): void {
+    event.stopPropagation(); // Prevent the click event from propagating to the card click event
+
+    this.authService.likeAuction(auctionEvent.auctionId).subscribe(
+      (response: any) => {
+        if (response.success) {
+          auctionEvent.isFav = true; // Update the UI to indicate that the auction is favorited
+          this.favoriteEvents.push(auctionEvent);
+        }
+        console.log(response.message);
+      },
+      (error: any) => {
+        console.error('Error liking auction:', error);
+      }
+    );
+  }
+  changeIcon() {
+    return this.authService.setCurrentIcon('favorite_border');
+  }
+  isEventFavorite(auctionEvent: GetAllAuctions): boolean {
+    return this.favoriteEvents.includes(auctionEvent.auctionId);
+  }
+}
+
+/*
+  favoriteEvent(event: any, auctionEvent: any) {   
     event.stopPropagation();//this line prevents the event from bubbling up
     if (this.isEventFavorite(auctionEvent)) {
+      const id = this.selectedAuctionId !== null ? Math.floor(this.selectedAuctionId) : 0;
+      console.log(id)
+      this.unfavouriteAuction(id);
       this.removeFromFavorites(auctionEvent);
     } else {
+      console.log(this.selectedAuctionId)
+      const id = this.selectedAuctionId !== null ? Math.floor(this.selectedAuctionId) : 0;
+      console.log(id)
+     this.favouriteAuction(id);
+ 
       this.addToFavorites(auctionEvent);
     }
   }
-
+ 
   isEventFavorite(auctionEvent: any): boolean {
+    //console.log(auctionEvent)
     return this.favoriteEvents.includes(auctionEvent);
   }
-
+ 
   addToFavorites(auctionEvent: any) {
     this.favoriteEvents.push(auctionEvent);
+    console.log(auctionEvent);
   }
-
+ 
   removeFromFavorites(auctionEvent: any) {
     const index = this.favoriteEvents.indexOf(auctionEvent);
     if (index > -1) {
       this.favoriteEvents.splice(index, 1);
     }
   }
+ 
+  favouriteAuction(id: number){
+    console.log(id)
+        this.authService.favouriteAuction(id).subscribe(
+          (response: any) => {
+            console.log('Success favourited', response);
+          },
+          error => {
+            console.log('Error fetching upcoming auctions:', error);
+          }
+        );
+        }
+ 
+        unfavouriteAuction(id: number){
+          console.log(id)
+              this.authService.unfavouriteAuction(id).subscribe(
+                (response: any) => {
+                  console.log('Success unfavourited', response);
+                },
+                error => {
+                  console.log('Error fetching upcoming auctions:', error);
+                }
+              );
+              }
+ 
+              changeIcon() {
+                return this.authService.setCurrentIcon('favorite_border');
+              }
+ 
+*/
 
 
-}
+
+
 

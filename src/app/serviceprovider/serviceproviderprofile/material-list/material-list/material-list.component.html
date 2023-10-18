@@ -1,0 +1,49 @@
+<app-sp-navbar></app-sp-navbar>
+<app-sp-sidebar></app-sp-sidebar>
+
+<mat-table [dataSource]="materials" class="mat-elevation-z8" style="margin-left: 350px; margin-top: 100px; width: 100%">
+  <!-- Material Name Column -->
+  <ng-container matColumnDef="bidMaterialName">
+    <th mat-header-cell *matHeaderCellDef> Material Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.bidMaterialName}} </td>
+  </ng-container>
+
+  <!-- Material Description Column -->
+  <ng-container matColumnDef="bidMaterialDescription">
+    <th mat-header-cell *matHeaderCellDef> Material Description </th>
+    <td mat-cell *matCellDef="let element"> {{element.bidMaterialDescription}} </td>
+  </ng-container>
+
+  <!-- Material Cost Column -->
+  <ng-container matColumnDef="bidMaterialCost">
+    <th mat-header-cell *matHeaderCellDef> Material Cost </th>
+    <td mat-cell *matCellDef="let element"> R {{element.bidMaterialCost}} </td>
+  </ng-container>
+
+  <!-- Material Quantity Column -->
+  <ng-container matColumnDef="bidQuantity">
+    <th mat-header-cell *matHeaderCellDef> Quantity </th>
+    <td mat-cell *matCellDef="let element"> {{element.bidQuantity}} </td>
+  </ng-container>
+
+  <!-- Material Total Cost Column -->
+  <ng-container matColumnDef="bidTotalCost">
+    <th mat-header-cell *matHeaderCellDef> Total Cost </th>
+    <td mat-cell *matCellDef="let element"> R {{element.bidTotalCost}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef> Actions </th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-icon-button (click)="editMaterial(element.bidMaterialId)">
+        <mat-icon aria-label="Edit">edit</mat-icon>
+      </button>
+      <!-- <button mat-icon-button (click)="deleteMaterial(element.bidMaterialId)">
+        <mat-icon aria-label="Delete">delete</mat-icon>
+      </button> -->
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</mat-table>

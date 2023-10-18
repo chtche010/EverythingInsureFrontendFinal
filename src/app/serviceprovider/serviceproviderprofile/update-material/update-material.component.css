@@ -1,0 +1,45 @@
+/* Add this to your component's CSS file or a global CSS file */
+
+/* Style the dialog title */
+.custom-dialog-title {
+    font-size: 24px;
+    text-align: center;
+    padding: 16px;
+  }
+  
+  /* Center-align the dialog content */
+  .mat-dialog-content {
+    text-align: center;
+  }
+  
+  /* Style the form fields */
+  .mat-form-field {
+    width: 100%;
+    margin-bottom: 16px;
+  }
+
+  mat-form-field {
+    width: 100%;
+    max-width: 400px; 
+  }
+  
+  /* Center-align the dialog actions (buttons) */
+  .custom-dialog-actions {
+    justify-content: center;
+    margin-top: -10px;
+  }
+  
+  /* Style the Cancel button */
+  .custom-cancel-button {
+    background-color: #ccc;
+    margin-right: 16px;
+    width: 100px;
+  }
+  
+  /* Style the Update button */
+  .custom-update-button {
+    background-color: #007bff;
+    color: #fff;
+    width: 100px;
+  }
+  

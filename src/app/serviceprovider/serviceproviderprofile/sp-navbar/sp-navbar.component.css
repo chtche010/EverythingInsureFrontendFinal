@@ -83,6 +83,10 @@
     transition: 0.3s;
     width: 100%;
   }
+
+  .favorite-button .mat-icon {
+    color: rgb(255, 1, 1);
+  }
   
   .header .search-form input:focus,
   .header .search-form input:hover {

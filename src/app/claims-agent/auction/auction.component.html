@@ -1,7 +1,13 @@
-<div class="container stepper-container">
+<!--<div class="container stepper-container">-->
 <app-ca-navbar></app-ca-navbar>
 <app-ca-sidebar></app-ca-sidebar>
 
+<div class="background-container">
+  <main id="main" class="main">
+    <div class="pagetitle">
+      <h1>Add Auction</h1>
+    </div><!-- End Page Title -->
+    <div class="container stepper-container">
 <mat-stepper [linear]="isLinear" #stepper>
     <!-- Step 1: Create claim -->
    <mat-step [stepControl]="claimDetailsForm">
@@ -67,6 +73,19 @@
       </div>
     </form>
    </mat-step>
+
+   <!-- Step 1.5: Upload Images -->
+
+   <mat-step [stepControl]="imageUploadForm">
+    <ng-template matStepLabel>Image Upload</ng-template>
+    <form [formGroup]="imageUploadForm">
+      <input type="file" (change)="onImageSelect($event)" multiple>
+      <button mat-raised-button color="primary" (click)="uploadImages()" [disabled]="!imageFiles || imageFiles.length === 0">Upload Images</button>
+  
+      <!-- Add the "Next" button to proceed to the next step -->
+      <button mat-raised-button color="primary" (click)="nextStep()">Next</button>
+    </form>
+    </mat-step>
   
     <!-- Step 2: Auction details -->
     
@@ -168,4 +187,6 @@
         <!-- Confirmation -->
       </div>
   </mat-stepper>
+  </div>
+  </main>
   </div>

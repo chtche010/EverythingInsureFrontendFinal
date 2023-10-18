@@ -1,11 +1,32 @@
+.background-container {
+  background-image: url("src/assets/Images/background2.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  min-height: 100vh;
+}
+
+#main {
+  margin-top: 60px;
+  margin-left: 310px;
+  padding: 20px 30px;
+  transition: all 0.3s;
+}
+
+@media (max-width: 1199px) {
+  #main {
+    padding: 20px;
+    margin-left: 0;
+  }
+}
 .container {
   display: flex;
   flex-direction: column;
+  background: transparent;
 }
 
 mat-stepper {
-  margin-top: 70px; /* Add space between navbar and stepper */
-  margin-left: 230px; /* Add space for the sidebar on the left */
+  background: transparent; 
 }
 
 .stepper-container mat-form-field {

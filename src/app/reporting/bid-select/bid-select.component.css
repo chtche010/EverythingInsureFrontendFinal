@@ -1,0 +1,27 @@
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 5px;
+}
+
+th {
+    color: rgb(15, 30, 142);
+    background-color: rgba(30, 30, 196, 0.635);
+    font-weight: 800;
+    font-family: "Montserrat", sans-serif;
+}
+
+td,
+th {
+    border: 1px solid rgb(224, 222, 222);
+    padding: 8px;
+    font-family: "Montserrat", sans-serif;
+}
+
+@media (max-width: 600px) {
+    .grid-container {
+        grid-template-columns: 1fr;
+    }
+}

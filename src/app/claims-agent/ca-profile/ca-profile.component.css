@@ -3,6 +3,14 @@
 /*--------------------------------------------------------------
 # Profie Page
 --------------------------------------------------------------*/
+.background-container {
+  background-image: url("src/assets/Images/background1.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  min-height: 100vh;
+}
+
 .container-fluid {
     display:flex;
     margin-top: 20px;
