@@ -75,7 +75,9 @@ export class AuthService {
   }
 
   public login(InitialSignUp: initialsignup): Observable<{ data: string }> {
+    console.log(InitialSignUp)
     return this.http.post<{ data: string }>(this.baseUrl + 'Auth/Login', InitialSignUp);
+   
   }
 
   logout(): void {
@@ -148,6 +150,18 @@ export class AuthService {
 getAllClaimInformaation(bidId: number): Observable<any> {
     const url = `${this.baseUrl}api/Claims/GetClaimById?id=${bidId}`; // Include the bidId in the URL
     return this.http.get<any>(url, this.httpOptions);
+  }
+
+  public selectWinner(requestData: any): Observable<any> {
+    return this.http.put<any>(this.baseUrl + "api/Auction/SelectWinner", requestData, this.httpOptions);
+  }
+
+  public getAllReports(): Observable<any> {
+    return this.http.get(this.baseUrl + 'api/Auction/GetAllReports', this.httpOptions);
+  }
+
+  public awardAuctions(): Observable<any[]> {
+    return this.http.get<any[]>(this.baseUrl + 'api/Auction/GetAllReports', this.httpOptions);
   }
 
   // Adding an auction 
@@ -463,10 +477,7 @@ likeAuction(auctionId: number): Observable<any> {
     //   return this.http.get<any>(this.baseUrl + 'api/Admin/GetClaimsAgent', this.httpOptions);
     // }
 
-    getAllAuction(): Observable<any> {
-      // console.log(this.httpOptions)
-      return this.http.get<any>(this.baseUrl + 'api/Admin/GetAllAuctions', this.httpOptions);
-    }
+  
 
 
 

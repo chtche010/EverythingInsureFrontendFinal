@@ -87,7 +87,7 @@ const routes: Routes = [
   { path: 'ca-report-dash',component: CaReportDashComponent},
   { path: 'admin-report', component: AdminReportComponent},
   { path: 'awardauction', component: AwardauctionComponent},
-  { path: 'auctionwinners', component: AuctionwinnersComponent},,
+  { path: 'auctionwinners', component: AuctionwinnersComponent},
   {path: 'view-auctions', component: ViewAuctionsComponent},
   {path: 'editAuction', component: EditFormComponent}
 ];
