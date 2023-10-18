@@ -21,6 +21,7 @@ export class AuctionDashboardComponent implements OnInit {
   selectedAuction: any; // <------------Update this type based on your DTO structure
   formSubmitted = false;
   images: string[];
+ 
 
   constructor(
     private formBuilder: FormBuilder,
@@ -48,7 +49,24 @@ export class AuctionDashboardComponent implements OnInit {
     
 
   }
-
+  fetchAuctionImages(auctionEvent: GetAllAuctions) {
+    console.log('Fetching images for auction event:', auctionEvent);
+    if (auctionEvent.auctionId === undefined || auctionEvent.auctionId === null) {
+      console.log('AuctionId:', auctionEvent.auctionId);
+      return; // Exit early if ClaimId is not valid
+    }
+  
+    this.authService.getClaimImages(auctionEvent.auctionId).subscribe(
+      (images: string[]) => {
+        auctionEvent.images = images;
+      },
+      (error) => {
+        console.error('Error fetching auction images:', error);
+      }
+    );
+  }
+  
+/*
   fetchAuctionImages(auctionEvent: GetAllAuctions) {
     console.log('Fetching images for auction event:', auctionEvent);
     console.log('claimId:', auctionEvent.ClaimId);
@@ -61,7 +79,7 @@ export class AuctionDashboardComponent implements OnInit {
       }
     );
   }
-
+*/
   getAuctionEvents(): void {
     this.authService.getOpenAuctions().subscribe(
       (response: any) => {
@@ -69,7 +87,7 @@ export class AuctionDashboardComponent implements OnInit {
 
         this.openAuctions = response.data;
         this.openAuctions.forEach((auction) => this.fetchAuctionImages(auction));
-
+        this.processAuctions(this.openAuctions);
         if (this.openAuctions && this.openAuctions.length > 0) {
           // Loop through all upcoming auctions
           for (const auction of this.openAuctions) {
@@ -100,7 +118,7 @@ export class AuctionDashboardComponent implements OnInit {
         console.log('Upcoming Auctions:', response.data);
         this.upcomingAuctions = response.data;
         this.upcomingAuctions.forEach((auction) => this.fetchAuctionImages(auction));
-
+        this.processAuctions(this.upcomingAuctions);
         if (this.upcomingAuctions && this.upcomingAuctions.length > 0) {
           // Loop through all upcoming auctions
           for (const auction of this.upcomingAuctions) {
@@ -131,7 +149,7 @@ export class AuctionDashboardComponent implements OnInit {
         console.log('Closed Auctions:', response.data);
         this.closedAuctions = response.data;
         this.closedAuctions.forEach((auction) => this.fetchAuctionImages(auction));
-        
+        this.processAuctions(this.closedAuctions);
         if (this.closedAuctions && this.closedAuctions.length > 0) {
           // Loop through all upcoming auctions
           for (const auction of this.closedAuctions) {
@@ -156,7 +174,13 @@ export class AuctionDashboardComponent implements OnInit {
       }
     );
   }
-
+  processAuctions(auctions: GetAllAuctions[]): void {
+    auctions.forEach((auction) => {
+      if (auction.isFav) {
+        this.favoriteEvents.push(auction.auctionId);
+      }
+    });
+  }
   // Function to like an auction
   favoriteEvent(event: Event, auctionEvent: GetAllAuctions): void {
     event.stopPropagation(); // Prevent the click event from propagating to the card click event

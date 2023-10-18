@@ -61,7 +61,7 @@ export class AuctionComponent implements OnInit {
     });
 
     this.imageUploadForm = this.formBuilder.group({
-      images: ['', Validators.required]
+      images: ['']
     });
 
     this.auctionForm = this.formBuilder.group({
@@ -120,7 +120,30 @@ export class AuctionComponent implements OnInit {
       // Handle form validation errors if needed
     }
   }
-
+  uploadImages() {
+    console.log('imageFiles:', this.imageFiles);
+  
+    if (this.imageFiles && this.imageFiles.length > 0) {
+      const files: File[] = Array.from(this.imageFiles);
+  
+      this.authService.uploadImages(this.claimId, files).subscribe(
+        (response) => {
+          console.log('Images uploaded successfully!', response);
+          console.log('claimId', this.claimId);
+          console.log('Files:', files);
+          this.nextStep();
+        },  
+        (error) => {
+          console.error('Error uploading images:', error);
+          // Handle error if needed
+        }
+      );
+    } else {
+      console.error('No files selected for upload.');
+    }
+  }
+  
+/*
   uploadImages() {
     console.log('imageFiles:', this.imageFiles);
 
@@ -146,7 +169,7 @@ export class AuctionComponent implements OnInit {
       console.error('No files selected for upload.');
     }
   }
-
+*/
   submitAuctionDetails(claimId: number) {
     if (this.auctionForm.valid) {
 
@@ -257,7 +280,7 @@ handleSubmit() {
 }
 
 onStepSelectionChange(event: any) {
-  if (event.selectedIndex === 4) { // 4 is the 5th step (0-based index)
+  if (event.selectedIndex === 5) { // 4 is the 5th step (0-based index)
     // Call your method here
     this.getclaimInformation();
   }
