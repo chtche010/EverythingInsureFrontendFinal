@@ -145,16 +145,9 @@ export class AuthService {
     return this.http.delete(url, this.httpOptions);
   }
 
-  public awardAuctions(): Observable<any[]> {
-    return this.http.get<any[]>(this.baseUrl + 'api/Auction/GetAllReports', this.httpOptions);
-  }
-
-  public getAllReports(): Observable<any> {
-    return this.http.get(this.baseUrl + 'api/Auction/GetAllReports', this.httpOptions);
-  }
-
-  public selectWinner(requestData: any): Observable<any> {
-    return this.http.put<any>(this.baseUrl + "api/Auction/SelectWinner", requestData, this.httpOptions);
+getAllClaimInformaation(bidId: number): Observable<any> {
+    const url = `${this.baseUrl}api/Claims/GetClaimById?id=${bidId}`; // Include the bidId in the URL
+    return this.http.get<any>(url, this.httpOptions);
   }
 
   // Adding an auction 
@@ -445,16 +438,118 @@ likeAuction(auctionId: number): Observable<any> {
 
 
 
-
   pushNotifications(accountID: number): Observable<any> {
     const url = `${this.baseUrl}Auth/returnNotifications?id=${accountID}`;
     return this.http.post<any>(url, this.httpOptions);
   }
 
-  pushNotificationsEmail(email: string): Observable<any> {
-    const url = `${this.baseUrl}Auth/returnNotificationsEmail?email=${email}`;
-    return this.http.post<any>(url, null, this.httpOptions);
-  }
+    pushNotificationsEmail(email: string): Observable<any> {
+      const url = `${this.baseUrl}Auth/returnNotificationsEmail?email=${email}`;
+      return this.http.post<any>(url,null, this.httpOptions);
+    }
+
+  
+
+    //Admin services
+
+    
+
+    // getServiceProviders(): Observable<manageAuctions[]> {
+    //   return this.http.get<manageAuctions[]>(this.baseUrl + 'api/Admin/GetServiceProviders', this.httpOptions);
+    // }
+
+    // getClaimsAgent(): Observable<any> {
+    //   // console.log(this.httpOptions)
+    //   return this.http.get<any>(this.baseUrl + 'api/Admin/GetClaimsAgent', this.httpOptions);
+    // }
+
+    getAllAuction(): Observable<any> {
+      // console.log(this.httpOptions)
+      return this.http.get<any>(this.baseUrl + 'api/Admin/GetAllAuctions', this.httpOptions);
+    }
+
+
+
+    // approveClaimsAgent(email: string): Observable<any> {
+    //   const url = `${this.baseUrl}api/Admin/ApproveClaimsAgent?email=${email}`;
+    //   console.log("URL message", url);
+      
+    //   return this.http.post(url, null, this.httpOptions);
+    // }
+
+    // rejectClaimsAgent(rejectionObj: rejectionObject)
+    // {
+  
+    // //  console.log('API test', notificationPreferObj);
+  
+    //   return this.http.post<any>(this.baseUrl + `api/Admin/RejectClaimsAgent`, {
+    //   "email":rejectionObj.email, 
+    //   "text":rejectionObj.text
+    //   }, this.httpOptions);
+    // }
+
+    // disableClaimsAgent(rejectionObj: rejectionObject)
+    // {
+  
+    //   return this.http.post<any>(this.baseUrl + `api/Admin/DisableClaimsAgent`, {
+    //   "email":rejectionObj.email, 
+    //   "text":rejectionObj.text
+    //   }, this.httpOptions);
+    // }
+
+    // approveServiceProvider(email: string): Observable<any> {
+    //   const url = `${this.baseUrl}api/Admin/ApproveServiceProvider?email=${email}`;
+    //   console.log("URL message", url);
+      
+    //   return this.http.post(url, null, this.httpOptions);
+    // }
+
+    // rejectServiceProvider(rejectionObj: rejectionObject)
+    // {
+  
+    // //  console.log('API test', notificationPreferObj);
+  
+    //   return this.http.post<any>(this.baseUrl + `api/Admin/RejectServiceProvide`, {
+    //   "email":rejectionObj.email, 
+    //   "text":rejectionObj.text
+    //   }, this.httpOptions);
+    // }
+
+    // disableServiceProvider(rejectionObj: rejectionObject)
+    // {
+  
+    // //  console.log('API test', notificationPreferObj);
+  
+    //   return this.http.post<any>(this.baseUrl + `api/Admin/DisableServiceProvider`, {
+    //   "email":rejectionObj.email, 
+    //   "text":rejectionObj.text
+    //   }, this.httpOptions);
+    // }
+
+    
+
+    // checkAccountStatus(email : string){
+    //   return this.http.post<any>(this.baseUrl + 'Auth/CheckAccountStatus', {"email": email});
+    //     }
+
+        getadminProfile(): Observable<any> {
+          return this.http.get<any>(this.baseUrl + 'api/Admin/GetAdminProfile', this.httpOptions);
+        }
+  
+  
+
+
+
+
+  // pushNotifications(accountID: number): Observable<any> {
+  //   const url = `${this.baseUrl}Auth/returnNotifications?id=${accountID}`;
+  //   return this.http.post<any>(url, this.httpOptions);
+  // }
+
+  // pushNotificationsEmail(email: string): Observable<any> {
+  //   const url = `${this.baseUrl}Auth/returnNotificationsEmail?email=${email}`;
+  //   return this.http.post<any>(url, null, this.httpOptions);
+  // }
 
   //Reporting
 //getCountClaims(): Observable<number> {
@@ -485,10 +580,17 @@ likeAuction(auctionId: number): Observable<any> {
     return this.http.get<manageAuctions[]>(this.baseUrl + 'api/Admin/GetServiceProviders', this.httpOptions);
   }
 
-  getClaimsAgent(): Observable<any> {
-    // console.log(this.httpOptions)
-    return this.http.get<any>(this.baseUrl + 'api/Admin/GetClaimsAgent', this.httpOptions);
-  }
+    getClaimsAgent(): Observable<any> {
+      // console.log(this.httpOptions)
+      return this.http.get<any>(this.baseUrl + 'api/Admin/GetClaimsAgent', this.httpOptions);
+    }
+
+    getAllAuction(): Observable<any> {
+      // console.log(this.httpOptions)
+      return this.http.get<any>(this.baseUrl + 'api/Admin/GetAllAuctions', this.httpOptions);
+    }
+
+
 
   approveClaimsAgent(email: string): Observable<any> {
     const url = `${this.baseUrl}api/Admin/ApproveClaimsAgent?email=${email}`;
@@ -507,6 +609,15 @@ likeAuction(auctionId: number): Observable<any> {
     }, this.httpOptions);
   }
 
+    disableClaimsAgent(rejectionObj: rejectionObject)
+    {
+  
+      return this.http.post<any>(this.baseUrl + `api/Admin/DisableClaimsAgent`, {
+      "email":rejectionObj.email, 
+      "text":rejectionObj.text
+      }, this.httpOptions);
+    }
+
   approveServiceProvider(email: string): Observable<any> {
     const url = `${this.baseUrl}api/Admin/ApproveServiceProvider?email=${email}`;
     console.log("URL message", url);
@@ -524,11 +635,22 @@ likeAuction(auctionId: number): Observable<any> {
     }, this.httpOptions);
   }
 
-  checkAccountStatus(email: string) {
-    return this.http.post<any>(this.baseUrl + 'Auth/CheckAccountStatus', { "email": email });
-  }
+    disableServiceProvider(rejectionObj: rejectionObject)
+    {
+  
+    //  console.log('API test', notificationPreferObj);
+  
+      return this.http.post<any>(this.baseUrl + `api/Admin/DisableServiceProvider`, {
+      "email":rejectionObj.email, 
+      "text":rejectionObj.text
+      }, this.httpOptions);
+    }
 
-}
+    checkAccountStatus(email : string){
+      return this.http.post<any>(this.baseUrl + 'Auth/CheckAccountStatus', {"email": email});
+        }
+  
+  }
 
 
 

@@ -146,21 +146,13 @@ export class FavouriteAuctionComponent implements OnInit {
   favoriteEvent(event: any, auctionEvent: any) {   
     event.stopPropagation();//this line prevents the event from bubbling up
     if (this.isEventFavorite(auctionEvent)) {
-      console.log(auctionEvent)
-      //const id = this.selectedAuctionId !== null ? Math.floor(this.selectedAuctionId) : 0;
-      //console.log(id)
-      var idnum = auctionEvent.auctionId;
-      console.log("ID",auctionEvent.auctionId)
-      this.unfavouriteAuction(idnum);
+      
+      this.unfavouriteAuction(auctionEvent.auctionId);
       this.removeFromFavorites(auctionEvent);
     } else {
-      console.log(auctionEvent)
-      //console.log(this.selectedAuctionId)
-     // const id = this.selectedAuctionId !== null ? Math.floor(this.selectedAuctionId) : 0;
+     
+     this.favouriteAuction(auctionEvent.auctionId);
       this.addToFavorites(auctionEvent);
-      var idnum = auctionEvent.auctionId;
-      console.log("ID",auctionEvent.auctionId)
-      this.favouriteAuction(idnum);
     }
   }
 

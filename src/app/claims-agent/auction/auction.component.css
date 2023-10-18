@@ -72,3 +72,68 @@ mat-stepper {
   width: 30%;
   margin-left: 300;
 }
+
+/* Summary formatting */
+
+.form-container {
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+}
+
+ 
+
+.heading-style {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 1.5em;
+    color: #333;
+  margin-bottom: 10px;
+}
+
+ 
+
+.row {
+  margin-bottom: 10px;
+}
+
+ 
+
+.label-style {
+  font-weight: bold;
+  color: #333;
+}
+
+ 
+
+.value-style {
+  color: #666;
+}
+
+ 
+
+.material-container {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+ 
+
+.button-container {
+  margin-top: 20px;
+}
+
+ 
+
+.edit-button {
+  margin-right: 10px;
+}
+
+ 
+
+.confirm-button {
+  margin-left: 10px;
+}
+
+

@@ -92,6 +92,9 @@ import { FavouriteAuctionComponent } from './serviceprovider/serviceproviderprof
 import { UpdateMaterialComponent } from './serviceprovider/serviceproviderprofile/update-material/update-material.component';
 import { AuctiondetailsdialogComponent } from './auctiondetailsdialog/auctiondetailsdialog.component';
 import { AuctionwinnersComponent } from './claims-agent/auctionwinners/auctionwinners.component';
+import { RejectedUsersComponent } from './admin/rejected-users/rejected-users.component';
+import { ViewAuctionsComponent } from './admin/view-auctions/view-auctions.component';
+import { EditFormComponent } from './claims-agent/edit-form/edit-form.component';
 
 const routes: Routes = [
   { path: 'signup', component: SignupComponent },
@@ -155,6 +158,9 @@ const routes: Routes = [
     UpdateMaterialComponent,
     AuctiondetailsdialogComponent,
     AuctionwinnersComponent,
+    RejectedUsersComponent,
+    ViewAuctionsComponent,
+    EditFormComponent
   ],
   imports: [
     BrowserModule,

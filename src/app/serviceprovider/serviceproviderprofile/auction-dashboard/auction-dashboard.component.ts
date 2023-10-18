@@ -186,9 +186,8 @@ export class AuctionDashboardComponent implements OnInit {
   favoriteEvent(event: any, auctionEvent: any) {   
     event.stopPropagation();//this line prevents the event from bubbling up
     if (this.isEventFavorite(auctionEvent)) {
-      const id = this.selectedAuctionId !== null ? Math.floor(this.selectedAuctionId) : 0;
-      console.log(id)
-      this.unfavouriteAuction(id);
+      
+      this.unfavouriteAuction(auctionEvent.auctionId);
       this.removeFromFavorites(auctionEvent);
     } else {
       console.log(this.selectedAuctionId)
@@ -196,6 +195,8 @@ export class AuctionDashboardComponent implements OnInit {
       console.log(id)
      this.favouriteAuction(id);
  
+     
+     this.favouriteAuction(auctionEvent.auctionId);
       this.addToFavorites(auctionEvent);
     }
   }
@@ -218,7 +219,8 @@ export class AuctionDashboardComponent implements OnInit {
   }
  
   favouriteAuction(id: number){
-    console.log(id)
+    //const idAuction = id;
+
         this.authService.favouriteAuction(id).subscribe(
           (response: any) => {
             console.log('Success favourited', response);

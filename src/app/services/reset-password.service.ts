@@ -51,7 +51,7 @@ export class ResetPasswordService {
   changePasswordEmail(changePasswordoEmailobj: changePasswordEmail){
 
     
-    console.log(changePasswordoEmailobj);
+    //console.log(changePasswordoEmailobj);
 
     return this.http.post<any>(this.baseUrl + `/changePasswordEmail`, {
     "email": changePasswordoEmailobj.email,

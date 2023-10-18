@@ -8,6 +8,8 @@ import { AdminprofileComponent } from './adminprofile/adminprofile.component';
 import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './guards/auth.guard';
 import { OptComponent } from './opt/opt.component';
+import { ViewAuctionsComponent } from './admin/view-auctions/view-auctions.component';
+import { EditFormComponent } from './claims-agent/edit-form/edit-form.component';
 
 import { ClaimsAgentDashboardComponent } from './claims-agent/claims-agent-dashboard/claims-agent-dashboard.component';
 import { CaSidebarComponent } from './claims-agent/ca-sidebar/ca-sidebar.component';
@@ -85,7 +87,9 @@ const routes: Routes = [
   { path: 'ca-report-dash',component: CaReportDashComponent},
   { path: 'admin-report', component: AdminReportComponent},
   { path: 'awardauction', component: AwardauctionComponent},
-  { path: 'auctionwinners', component: AuctionwinnersComponent},
+  { path: 'auctionwinners', component: AuctionwinnersComponent},,
+  {path: 'view-auctions', component: ViewAuctionsComponent},
+  {path: 'editAuction', component: EditFormComponent}
 ];
 
 @NgModule({

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -6,11 +6,13 @@ import { Router } from '@angular/router';
 import { ResetPasswordService } from 'src/app/services/reset-password.service';
 import { changePasswordEmail } from 'src/app/models/changePasswordEmail.model';
 import { notificationPreferencesEmail } from 'src/app/models/notificationPreferencesEmail';
+import { ViewChild, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-serviceproviderprofile',
   templateUrl: './serviceproviderprofile.component.html',
-  styleUrls: ['./serviceproviderprofile.component.css']
+  styleUrls: ['./serviceproviderprofile.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class ServiceproviderprofileComponent implements OnInit {
   userProfile: any;
@@ -21,6 +23,7 @@ export class ServiceproviderprofileComponent implements OnInit {
   chanegPasswordForm!: FormGroup;
   changePasswordEmailObj = new changePasswordEmail();
   notificationPreferEmailObj = new notificationPreferencesEmail();
+  
 
   constructor(
     private resetService: ResetPasswordService,
@@ -38,16 +41,19 @@ export class ServiceproviderprofileComponent implements OnInit {
   ngOnInit(): void {
     this.loadUserProfile();
     this.pushNotifications();
+    this.changeIcon();
     this.checkEmailVerification();   
     this.loadAddress(this.address);
-    this.chanegPasswordForm = this.fb.group(
-      {
-        currentPassword: ['', Validators.required],
-        newPassword: ['', '', [Validators.required, Validators.minLength(6), Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,}$')]], 
-        confirmPassword: ['', Validators.required]
-      }
-    )
+    this.chanegPasswordForm = this.fb.group({
+      oldPassword: ['', Validators.required],
+      newPassword: ['', [Validators.required, Validators.minLength(6)]],
+      confirmPassword: ['', Validators.required]
+    });
     
+  }
+
+  changeIcon() {
+    return this.authService.setCurrentIcon('favorite_border');
   }
 
   checkEmailVerification(){
@@ -65,6 +71,7 @@ export class ServiceproviderprofileComponent implements OnInit {
     )
   }
 
+
   loadUserProfile(){
     this.authService.getspdetails().subscribe(
       (response) => {
@@ -80,6 +87,7 @@ export class ServiceproviderprofileComponent implements OnInit {
       }
     );
   }
+
 
   loadAddress(addressId: number) {
     this.authService.getAddressById(addressId).subscribe(
@@ -149,17 +157,12 @@ updateAddress() {
 }
 
 changePassword(){
-  this.authService.getspdetails().subscribe(
-    (response) => {
-      console.log(response)
-      this.userProfile = response.data;
-      console.log(this.userProfile);
-      this.changePasswordEmailObj.email = this.userProfile.email;
 
-      console.log(this.changePasswordEmailObj)
+      this.changePasswordEmailObj.email = this.userProfile.email;
+    
+      
 
       this.resetService.changePasswordEmail(this.changePasswordEmailObj)
-      
       .subscribe({
         next: (res)=>{
           console.log("API ts",this.changePasswordEmailObj)
@@ -175,13 +178,9 @@ changePassword(){
       })
 
       console.log('Claim Agent Profile', this.userProfile);
-     
-    }, 
-    (error) => {
-    }
-  );  
+  
 
-}
+  }
 
 
 pushNotifications() {
@@ -261,9 +260,7 @@ this.authService.getspdetails().subscribe(
   }
 );
 // Save user settings to the service
-
 }
-
 
 splitStringWithCommas(data: string) {
 // Split the string and store the result in the splitValues array
