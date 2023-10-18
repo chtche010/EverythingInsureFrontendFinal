@@ -182,31 +182,34 @@ export class AuctionDashboardComponent implements OnInit {
     });
   }
   // Function to like an auction
-  favoriteEvent(event: Event, auctionEvent: GetAllAuctions): void {
-    event.stopPropagation(); // Prevent the click event from propagating to the card click event
+  // favoriteEvent(event: Event, auctionEvent: GetAllAuctions): void {
+  //   event.stopPropagation(); // Prevent the click event from propagating to the card click event
 
-    console.log(auctionEvent);
+  //   this.authService.likeAuction(auctionEvent.auctionId).subscribe(
+  //     (response: any) => {
+  //       if (response.success) {
+  //         auctionEvent.isFav = true; // Update the UI to indicate that the auction is favorited
+  //         this.favoriteEvents.push(auctionEvent);
+  //       }
+  //       console.log(response.message);
+  //     },
+  //     (error: any) => {
+  //       console.error('Error liking auction:', error);
+  //     }
+  //   );
+  // }
+  // changeIcon() {
+  //   return this.authService.setCurrentIcon('favorite_border');
+  // }
+  // isEventFavorite(auctionEvent: GetAllAuctions): boolean {
+  //   return this.favoriteEvents.includes(auctionEvent.auctionId);
+  // }
 
-    this.authService.likeAuction(auctionEvent.auctionId).subscribe(
-      (response: any) => {
-        if (response.success) {
-          auctionEvent.isFav = true; // Update the UI to indicate that the auction is favorited
-          this.favoriteEvents.push(auctionEvent.auctionId);
-        }
-        console.log(response.message);
-      },
-      (error: any) => {
-        console.error('Error liking auction:', error);
-      }
-    );
-  }
- 
-  isEventFavorite(auctionEvent: GetAllAuctions): boolean {
-    return this.favoriteEvents.includes(auctionEvent.auctionId);
-  }
-}
+  
 
-/*
+
+
+
   favoriteEvent(event: any, auctionEvent: any) {   
     event.stopPropagation();//this line prevents the event from bubbling up
     if (this.isEventFavorite(auctionEvent)) {
@@ -214,10 +217,10 @@ export class AuctionDashboardComponent implements OnInit {
       this.unfavouriteAuction(auctionEvent.auctionId);
       this.removeFromFavorites(auctionEvent);
     } else {
-      console.log(this.selectedAuctionId)
+     // console.log(this.selectedAuctionId)
       const id = this.selectedAuctionId !== null ? Math.floor(this.selectedAuctionId) : 0;
-      console.log(id)
-     this.favouriteAuction(id);
+     // console.log(id)
+     //this.favouriteAuction(id);
  
      
      this.favouriteAuction(auctionEvent.auctionId);
@@ -245,7 +248,7 @@ export class AuctionDashboardComponent implements OnInit {
   favouriteAuction(id: number){
     //const idAuction = id;
 
-        this.authService.favouriteAuction(id).subscribe(
+        this.authService.likeAuction(id).subscribe(
           (response: any) => {
             console.log('Success favourited', response);
           },
@@ -270,8 +273,9 @@ export class AuctionDashboardComponent implements OnInit {
               changeIcon() {
                 return this.authService.setCurrentIcon('favorite_border');
               }
+
+            }
  
-*/
 
 
 
