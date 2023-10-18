@@ -65,6 +65,13 @@ export class AuthService {
       ),
   };
 
+  private httpOptionsMultipart = {
+    headers: new HttpHeaders({
+      "Authorization": "bearer " + this.getToken(),
+      "Content-Type": "multipart/form-data;"
+    }),
+  };
+
   constructor(private http: HttpClient, private router: Router) { }
 
   // all users 
@@ -86,7 +93,7 @@ export class AuthService {
   // claims agents 
 
   uploadImages(claimId: number, formData: FormData): Observable<any> {
-    return this.http.post(this.baseUrl + `api/Claims/UploadImages/?id=${claimId}`, formData, this.httpOptions);
+    return this.http.post(this.baseUrl + `api/Claims/UploadImages?claimId=${claimId}`, formData, this.httpOptionsMultipart);
   }
 
   getClaimImages(claimId: number): Observable<string[]> {
@@ -147,8 +154,8 @@ export class AuthService {
     return this.http.get<any[]>(this.baseUrl + 'api/Auction/GetAllReports', this.httpOptions);
   }
 
-  public getAllReports(): Observable<any> {
-    return this.http.get(this.baseUrl + 'api/Auction/GetAllReports', this.httpOptions);
+  public getReportNotAwarded(): Observable<any> {
+    return this.http.get(this.baseUrl + 'api/Auction/GetReportNotAwarded', this.httpOptions);
   }
 
   public selectWinner(requestData: any): Observable<any> {

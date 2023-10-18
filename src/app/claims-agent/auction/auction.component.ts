@@ -93,6 +93,7 @@ export class AuctionComponent implements OnInit {
       console.log('No files selected');
     }
   }
+
   submitClaimDetails() {
     if (this.claimDetailsForm.valid) {
       this.authService.submitClaimData(this.claimDetailsForm.value).subscribe((response) => {
@@ -115,14 +116,19 @@ export class AuctionComponent implements OnInit {
   }
 
   uploadImages() {
+    console.log('imageFiles:', this.imageFiles);
+
     if (this.imageFiles && this.imageFiles.length > 0) {
-      const formData:FormData=new FormData();
+      const formData: FormData = new FormData();
       this.imageFiles.forEach((file) => {
         formData.append('file', file, file.name);
       });
+      
       this.authService.uploadImages(this.claimId, formData).subscribe(
         (response) => {
           console.log('Images uploaded successfully!', response);
+          console.log('claimId', this.claimId);
+          console.log('Form data:', formData);
           this.stepper.next();
         },  
         (error) => {
