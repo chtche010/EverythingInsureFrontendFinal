@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {MatTableModule} from '@angular/material/table';
+import { AuthService } from 'src/app/services/auth.service';
 
 export interface PeriodicElement {
   jobDescription: string;
@@ -20,7 +21,28 @@ const ELEMENT_DATA: PeriodicElement[] = [
   templateUrl: './managebid.component.html',
   styleUrls: ['./managebid.component.css']
 })
-export class ManagebidComponent {
-  displayedColumns: string[] = ['jobDescription', 'bidTotalMaterialCost', 'bidTotalLabourCost', 'bidTotalCost', 'bidEstimatedDuration', 'auction', 'serviceProvider'];
+export class ManagebidComponent implements OnInit {
+  data: any;
+  displayedColumns: string[] = ['auctionTitle', 'auctionDate', 'claimsAgent', 'reason'];
   dataSource = ELEMENT_DATA;
-}
+
+  constructor(
+    private authService: AuthService) {   
+     }
+     ngOnInit(): void {
+      this.getRejectedBids();
+    }
+
+      getRejectedBids(){
+        this.authService.getRejectedBid().subscribe(
+          (response: any) => {
+            console.log('View Rejected Bids', response);
+            console.log(response.data)
+          },
+          error => {
+            console.log('Error viwewing rejected bids:', error);
+          }
+        );
+      }    
+      }
+
