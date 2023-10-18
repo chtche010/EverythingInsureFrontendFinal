@@ -1,4 +1,5 @@
 export interface GetAllAuctions {
+    firstImage: string | null;
     auctionId: number;
     auctionTitle: string;
     startTime: string;

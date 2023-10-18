@@ -21,6 +21,7 @@ export class AuctionDashboardComponent implements OnInit {
   selectedAuction: any; // <------------Update this type based on your DTO structure
   formSubmitted = false;
   images: string[];
+ 
 
   constructor(
     private formBuilder: FormBuilder,
@@ -45,10 +46,27 @@ export class AuctionDashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAuctionEvents();
-    this.changeIcon();
+    
 
   }
-
+  fetchAuctionImages(auctionEvent: GetAllAuctions) {
+    console.log('Fetching images for auction event:', auctionEvent);
+    if (auctionEvent.auctionId === undefined || auctionEvent.auctionId === null) {
+      console.log('AuctionId:', auctionEvent.auctionId);
+      return; // Exit early if ClaimId is not valid
+    }
+  
+    this.authService.getClaimImages(auctionEvent.auctionId).subscribe(
+      (images: string[]) => {
+        auctionEvent.images = images;
+      },
+      (error) => {
+        console.error('Error fetching auction images:', error);
+      }
+    );
+  }
+  
+/*
   fetchAuctionImages(auctionEvent: GetAllAuctions) {
     console.log('Fetching images for auction event:', auctionEvent);
     console.log('claimId:', auctionEvent.ClaimId);
@@ -61,7 +79,7 @@ export class AuctionDashboardComponent implements OnInit {
       }
     );
   }
-
+*/
   getAuctionEvents(): void {
     this.authService.getOpenAuctions().subscribe(
       (response: any) => {
@@ -69,7 +87,7 @@ export class AuctionDashboardComponent implements OnInit {
 
         this.openAuctions = response.data;
         this.openAuctions.forEach((auction) => this.fetchAuctionImages(auction));
-
+        this.processAuctions(this.openAuctions);
         if (this.openAuctions && this.openAuctions.length > 0) {
           // Loop through all upcoming auctions
           for (const auction of this.openAuctions) {
@@ -100,7 +118,7 @@ export class AuctionDashboardComponent implements OnInit {
         console.log('Upcoming Auctions:', response.data);
         this.upcomingAuctions = response.data;
         this.upcomingAuctions.forEach((auction) => this.fetchAuctionImages(auction));
-
+        this.processAuctions(this.upcomingAuctions);
         if (this.upcomingAuctions && this.upcomingAuctions.length > 0) {
           // Loop through all upcoming auctions
           for (const auction of this.upcomingAuctions) {
@@ -131,7 +149,7 @@ export class AuctionDashboardComponent implements OnInit {
         console.log('Closed Auctions:', response.data);
         this.closedAuctions = response.data;
         this.closedAuctions.forEach((auction) => this.fetchAuctionImages(auction));
-        
+        this.processAuctions(this.closedAuctions);
         if (this.closedAuctions && this.closedAuctions.length > 0) {
           // Loop through all upcoming auctions
           for (const auction of this.closedAuctions) {
@@ -156,33 +174,42 @@ export class AuctionDashboardComponent implements OnInit {
       }
     );
   }
-
-  // Function to like an auction
-  favoriteEvent(event: Event, auctionEvent: GetAllAuctions): void {
-    event.stopPropagation(); // Prevent the click event from propagating to the card click event
-
-    this.authService.likeAuction(auctionEvent.auctionId).subscribe(
-      (response: any) => {
-        if (response.success) {
-          auctionEvent.isFav = true; // Update the UI to indicate that the auction is favorited
-          this.favoriteEvents.push(auctionEvent);
-        }
-        console.log(response.message);
-      },
-      (error: any) => {
-        console.error('Error liking auction:', error);
+  processAuctions(auctions: GetAllAuctions[]): void {
+    auctions.forEach((auction) => {
+      if (auction.isFav) {
+        this.favoriteEvents.push(auction.auctionId);
       }
-    );
+    });
   }
-  changeIcon() {
-    return this.authService.setCurrentIcon('favorite_border');
-  }
-  isEventFavorite(auctionEvent: GetAllAuctions): boolean {
-    return this.favoriteEvents.includes(auctionEvent.auctionId);
-  }
-}
+  // Function to like an auction
+  // favoriteEvent(event: Event, auctionEvent: GetAllAuctions): void {
+  //   event.stopPropagation(); // Prevent the click event from propagating to the card click event
 
-/*
+  //   this.authService.likeAuction(auctionEvent.auctionId).subscribe(
+  //     (response: any) => {
+  //       if (response.success) {
+  //         auctionEvent.isFav = true; // Update the UI to indicate that the auction is favorited
+  //         this.favoriteEvents.push(auctionEvent);
+  //       }
+  //       console.log(response.message);
+  //     },
+  //     (error: any) => {
+  //       console.error('Error liking auction:', error);
+  //     }
+  //   );
+  // }
+  // changeIcon() {
+  //   return this.authService.setCurrentIcon('favorite_border');
+  // }
+  // isEventFavorite(auctionEvent: GetAllAuctions): boolean {
+  //   return this.favoriteEvents.includes(auctionEvent.auctionId);
+  // }
+
+  
+
+
+
+
   favoriteEvent(event: any, auctionEvent: any) {   
     event.stopPropagation();//this line prevents the event from bubbling up
     if (this.isEventFavorite(auctionEvent)) {
@@ -190,10 +217,10 @@ export class AuctionDashboardComponent implements OnInit {
       this.unfavouriteAuction(auctionEvent.auctionId);
       this.removeFromFavorites(auctionEvent);
     } else {
-      console.log(this.selectedAuctionId)
+     // console.log(this.selectedAuctionId)
       const id = this.selectedAuctionId !== null ? Math.floor(this.selectedAuctionId) : 0;
-      console.log(id)
-     this.favouriteAuction(id);
+     // console.log(id)
+     //this.favouriteAuction(id);
  
      
      this.favouriteAuction(auctionEvent.auctionId);
@@ -221,7 +248,7 @@ export class AuctionDashboardComponent implements OnInit {
   favouriteAuction(id: number){
     //const idAuction = id;
 
-        this.authService.favouriteAuction(id).subscribe(
+        this.authService.likeAuction(id).subscribe(
           (response: any) => {
             console.log('Success favourited', response);
           },
@@ -246,8 +273,9 @@ export class AuctionDashboardComponent implements OnInit {
               changeIcon() {
                 return this.authService.setCurrentIcon('favorite_border');
               }
+
+            }
  
-*/
 
 
 

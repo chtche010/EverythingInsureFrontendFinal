@@ -44,7 +44,7 @@
   </main>
 </div>
 
-<!-- <div class="background-container">
+<div class="background-container">
   <main id="main" class="main">
     <div class="pagetitle">
       <h1>Auction Events</h1>
@@ -76,7 +76,7 @@
     </div>
 
   </main>
-</div> --> -->
+</div> --> 
 
 <app-sp-navbar></app-sp-navbar>
 <app-sp-sidebar></app-sp-sidebar>
@@ -94,8 +94,10 @@
         <mat-card *ngFor="let auctionEvent of openAuctions" (click)="openDialog(auctionEvent)" class="auction-card">
           <mat-card-header>
             <div class="image-container">
-              <div *ngIf="auctionEvent.images && auctionEvent.images[0]; else noImage">
-                <img [src]="auctionEvent.images[0]" alt="Image" class="card-image">
+              <div *ngIf="auctionEvent.images && auctionEvent.images.length > 0; else noImage">
+                <div *ngFor="let image of auctionEvent.images">
+                  <img [src]="image" alt="Image" class="card-image">
+                </div>
               </div>
               <ng-template #noImage>
                 <div class="image-placeholder">
@@ -104,6 +106,7 @@
               </ng-template>
             </div>
           </mat-card-header>
+          
           <div class="title-section">
             <mat-card-title>
               {{ auctionEvent.auctionTitle }}
@@ -132,8 +135,10 @@
         <mat-card *ngFor="let auctionEvent of upcomingAuctions" (click)="openDialog(auctionEvent)" class="auction-card">
           <mat-card-header>
             <div class="image-container">
-              <div *ngIf="auctionEvent.images && auctionEvent.images[0]; else noImage">
-                <img [src]="auctionEvent.images[0]" alt="Image" class="card-image">
+              <div *ngIf="auctionEvent.images && auctionEvent.images.length > 0; else noImage">
+                <div *ngFor="let image of auctionEvent.images">
+                  <img [src]="image" alt="Image" class="card-image">
+                </div>
               </div>
               <ng-template #noImage>
                 <div class="image-placeholder">
@@ -142,6 +147,7 @@
               </ng-template>
             </div>
           </mat-card-header>
+          
           <div class="title-section">
             <mat-card-title>
               {{ auctionEvent.auctionTitle }}
