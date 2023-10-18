@@ -21,7 +21,7 @@ export class AwardauctionComponent {
   }
 
   loadAuctions() {
-    this.authService.getAllReports().subscribe((data) => {
+    this.authService.getReportNotAwarded().subscribe((data) => {
       this.auctions = data.data;
       console.log('Auctions:', this.auctions);
     });
