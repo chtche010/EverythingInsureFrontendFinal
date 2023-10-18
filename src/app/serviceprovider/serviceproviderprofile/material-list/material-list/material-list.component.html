@@ -1,7 +1,14 @@
 <app-sp-navbar></app-sp-navbar>
 <app-sp-sidebar></app-sp-sidebar>
-
-<mat-table [dataSource]="materials" class="mat-elevation-z8" style="margin-left: 350px; margin-top: 100px; width: 100%">
+<div class="background-container">
+  <div class="content">
+    <div class="pagetitle">
+      <h1>Preview of materials</h1>
+    </div>
+    <a href="/sp-activity" class="back-link">Back</a>
+    <br><br>
+    <div class="table-container">
+<mat-table [dataSource]="materials" class="mat-elevation-z8" >
   <!-- Material Name Column -->
   <ng-container matColumnDef="bidMaterialName">
     <th mat-header-cell *matHeaderCellDef> Material Name </th>
@@ -47,3 +54,6 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </mat-table>
+</div>
+</div>
+</div>

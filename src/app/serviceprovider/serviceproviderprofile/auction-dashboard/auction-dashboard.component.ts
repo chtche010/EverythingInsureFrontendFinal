@@ -45,7 +45,7 @@ export class AuctionDashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAuctionEvents();
-    this.changeIcon();
+    
 
   }
 
