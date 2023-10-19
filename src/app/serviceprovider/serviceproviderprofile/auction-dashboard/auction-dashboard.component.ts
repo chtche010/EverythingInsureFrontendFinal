@@ -146,6 +146,7 @@ export class AuctionDashboardComponent implements OnInit {
       (response: any) => {
         console.log('Closed Auctions:', response.data);
         this.closedAuctions = response.data;
+        console.log(this.closedAuctions);
         this.closedAuctions.forEach((auction) => this.fetchAuctionImages(auction));
         this.processAuctions(this.closedAuctions);
         if (this.closedAuctions && this.closedAuctions.length > 0) {
@@ -216,7 +217,7 @@ export class AuctionDashboardComponent implements OnInit {
       this.removeFromFavorites(auctionEvent);
     } else {
      // console.log(this.selectedAuctionId)
-      const id = this.selectedAuctionId !== null ? Math.floor(this.selectedAuctionId) : 0;
+     // const id = this.selectedAuctionId !== null ? Math.floor(this.selectedAuctionId) : 0;
      // console.log(id)
      //this.favouriteAuction(id);
  
@@ -246,7 +247,7 @@ export class AuctionDashboardComponent implements OnInit {
   favouriteAuction(id: number){
     //const idAuction = id;
 
-        this.authService.likeAuction(id).subscribe(
+        this.authService.favouriteAuction(id).subscribe(
           (response: any) => {
             console.log('Success favourited', response);
           },

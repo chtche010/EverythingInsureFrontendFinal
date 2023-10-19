@@ -62,7 +62,7 @@ export class FavouriteAuctionComponent implements OnInit {
               this.favoriteEvents.push(auction)
             } 
 
-            console.log('Fav auctions',this.favoriteEvents)
+            console.log('Fav auctions open',this.favoriteEvents)
 
 
           }
@@ -94,7 +94,7 @@ export class FavouriteAuctionComponent implements OnInit {
               this.favoriteEvents.push(auction)
             } 
 
-            console.log('Fav auctions',this.favoriteEvents)
+            console.log('Fav auctions upcoming',this.favoriteEvents)
 
 
           }
@@ -124,7 +124,7 @@ export class FavouriteAuctionComponent implements OnInit {
               this.favoriteEvents.push(auction)
             } 
 
-            console.log('Fav auctions',this.favoriteEvents)
+            console.log('Fav auctions closed',this.favoriteEvents)
 
 
           }
