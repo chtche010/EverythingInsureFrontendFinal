@@ -95,15 +95,26 @@ export class AuthService {
 
   // claims agents 
 
-  uploadImages(claimId: number, formData: FormData): Observable<any> {
-    return this.http.post(this.baseUrl + `api/Claims/UploadImages?claimId=${claimId}`, formData, this.httpOptionsMultipart);
+ // uploadImages(claimId: number, formData: FormData): Observable<any> {
+   // return this.http.post(this.baseUrl + `api/Claims/UploadImages?claimId=${claimId}`, formData, this.httpOptionsMultipart);
+  //}
+
+ //getClaimImages(claimId: number): Observable<string[]> {
+   // const url = `${this.baseUrl}api/Claims/GetImages?claimId=${claimId}`;
+   // return this.http.get<string[]>(url);
+  //}
+  uploadImages(claimId: number, files: File[]): Observable<any> {
+    const formData = new FormData();
+    for (let i = 0; i < files.length; i++) {
+      formData.append('files', files[i]);
+    }
+
+    return this.http.post<any>(`${this.baseUrl}api/Claims/UploadImages?claimId=${claimId}`, formData, this.httpOptions);
   }
 
-  getClaimImages(claimId: number): Observable<string[]> {
-    const url = `${this.baseUrl}/Claims/GetImages?claimId=${claimId}`;
-    return this.http.get<string[]>(url);
+  getClaimImages(auctionId: number): Observable<string[]> {
+    return this.http.get<string[]>(`${this.baseUrl}api/Claims/GetImages?claimId=${auctionId}`, this.httpOptions);
   }
-
   getToken(){
     var tokenstring=localStorage.getItem("authToken")
     if (tokenstring!=null){var token=JSON.parse(tokenstring)
@@ -169,6 +180,15 @@ getAllClaimInformaation(bidId: number): Observable<any> {
 
   public awardAuctions(): Observable<any[]> {
     return this.http.get<any[]>(this.baseUrl + 'api/Auction/GetAllReports', this.httpOptions);
+  }
+
+  public getReportAwarded(): Observable<any> {
+    return this.http.get(this.baseUrl + 'api/Auction/GetReportAwarded', this.httpOptions);
+  }
+
+  public setAuctionDate(auctionReportId: number, date: string): Observable<any> {
+    const url = `${this.baseUrl}api/Auction/SetDate?auctionReportId=${auctionReportId}&date=${date}`;
+    return this.http.put(url, this.httpOptions);
   }
 
   // Adding an auction 

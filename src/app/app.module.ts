@@ -95,6 +95,7 @@ import { AuctionwinnersComponent } from './claims-agent/auctionwinners/auctionwi
 import { RejectedUsersComponent } from './admin/rejected-users/rejected-users.component';
 import { ViewAuctionsComponent } from './admin/view-auctions/view-auctions.component';
 import { EditFormComponent } from './claims-agent/edit-form/edit-form.component';
+import { DatePickerDialogComponent } from './claims-agent/date-picker-dialog/date-picker-dialog.component';
 
 const routes: Routes = [
   { path: 'signup', component: SignupComponent },
@@ -160,7 +161,8 @@ const routes: Routes = [
     AuctionwinnersComponent,
     RejectedUsersComponent,
     ViewAuctionsComponent,
-    EditFormComponent
+    EditFormComponent,
+    DatePickerDialogComponent
   ],
   imports: [
     BrowserModule,

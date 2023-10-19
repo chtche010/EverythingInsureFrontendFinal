@@ -1,2 +1,42 @@
 <app-ca-navbar></app-ca-navbar>
 <app-ca-sidebar></app-ca-sidebar>
+
+<div class="auction-winners">
+  <h1>Auction Winners</h1>
+  <div class="container">
+  <ng-container *ngFor="let winner of auctionWinners">
+    <mat-expansion-panel class="auction-winner-panel">
+      <mat-expansion-panel-header>
+        <mat-panel-title>{{ winner.auctionTitle }} - {{ winner.serviceProvider.tradingName }}</mat-panel-title>
+        <mat-panel-description>
+          <mat-icon (click)="openDatePickerDialog(winner.auctionReportId)">event</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="expansion-details">
+        <h3>Contact Details of Service Provider</h3>
+        <p>Contact Person: {{ winner.serviceProvider.contactPerson }}</p>
+        <p>Cell Number: {{ winner.serviceProvider.cellNumber }}</p>
+        <p>Tel Number: {{ winner.serviceProvider.telNumber }}</p>
+        <p>Email: {{ winner.serviceProvider.email }}</p>
+
+        <h3>Address of Service Provider</h3>
+        <p>Building Name: {{ winner.spAddress.buildingName }}</p>
+        <p>Street Number: {{ winner.spAddress.streetNumber }}</p>
+        <p>Street Name: {{ winner.spAddress.streetName }}</p>
+        <p>Suburb: {{ winner.spAddress.surbub }}</p>
+        <p>City: {{ winner.spAddress.city }}</p>
+        <p>Province: {{ winner.spAddress.province }}</p>
+        <p>Country: {{ winner.spAddress.country }}</p>
+        <p>Zip Code: {{ winner.spAddress.zipCode }}</p>
+
+        <h3>Bid Details</h3>
+        <p>Job Description: {{ winner.spBid.jobDescription }}</p>
+        <p>Bid Total Material Cost: {{ winner.spBid.bidTotalMaterialCost }}</p>
+        <p>Bid Total Labour Cost: {{ winner.spBid.bidTotalLabourCost }}</p>
+        <p>Bid Total Cost: {{ winner.spBid.bidTotalCost }}</p>
+        <p>Bid Estimated Duration: {{ winner.spBid.bidEstimatedDuration }}</p>
+      </div>
+    </mat-expansion-panel>
+  </ng-container>
+  </div>
+</div>
