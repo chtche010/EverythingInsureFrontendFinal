@@ -3,6 +3,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DatePickerDialogComponent } from '../date-picker-dialog/date-picker-dialog.component';
 import { AuctionWinner } from 'src/app/models/claimagent/auctionWinner';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-auctionwinners',
@@ -12,7 +13,7 @@ import { AuctionWinner } from 'src/app/models/claimagent/auctionWinner';
 export class AuctionwinnersComponent implements OnInit {
   auctionWinners: AuctionWinner[] = []; // Initialize with the data from the API  
 
-  constructor(private authService: AuthService, private dialog: MatDialog) {}
+  constructor(private authService: AuthService, private dataService: DataService, private dialog: MatDialog) {}
 
   openDatePickerDialog(auctionReportId: number) {
     const dialogRef = this.dialog.open(DatePickerDialogComponent);
@@ -33,9 +34,7 @@ export class AuctionwinnersComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.authService.getReportAwarded().subscribe((response: any) => {
-      this.auctionWinners = response.data;
-    });
+    this.auctionWinners = this.dataService.auctionWinnersData;
   }
 
   setAuctionDate(auctionReportId: number, selectedDate: string) {

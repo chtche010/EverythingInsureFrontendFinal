@@ -115,6 +115,7 @@ export class AuthService {
   getClaimImages(auctionId: number): Observable<string[]> {
     return this.http.get<string[]>(`${this.baseUrl}api/Claims/GetImages?claimId=${auctionId}`, this.httpOptions);
   }
+
   getToken(){
     var tokenstring=localStorage.getItem("authToken")
     if (tokenstring!=null){var token=JSON.parse(tokenstring)

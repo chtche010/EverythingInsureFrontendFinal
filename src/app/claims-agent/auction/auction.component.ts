@@ -120,6 +120,7 @@ export class AuctionComponent implements OnInit {
       // Handle form validation errors if needed
     }
   }
+  
   uploadImages() {
     console.log('imageFiles:', this.imageFiles);
   
@@ -143,33 +144,6 @@ export class AuctionComponent implements OnInit {
     }
   }
   
-/*
-  uploadImages() {
-    console.log('imageFiles:', this.imageFiles);
-
-    if (this.imageFiles && this.imageFiles.length > 0) {
-      const formData: FormData = new FormData();
-      this.imageFiles.forEach((file) => {
-        formData.append('file', file, file.name);
-      });
-      
-      this.authService.uploadImages(this.claimId, formData).subscribe(
-        (response) => {
-          console.log('Images uploaded successfully!', response);
-          console.log('claimId', this.claimId);
-          console.log('Form data:', formData);
-          this.stepper.next();
-        },  
-        (error) => {
-          console.error('Error uploading images:', error);
-          // Handle error if needed
-        }
-      );
-    } else {
-      console.error('No files selected for upload.');
-    }
-  }
-*/
   submitAuctionDetails(claimId: number) {
     if (this.auctionForm.valid) {
 
@@ -275,7 +249,7 @@ export class AuctionComponent implements OnInit {
 
 handleSubmit() {
   this.snackBar.open('Auction added successfully!', 'Close', { duration: 5000 });
-  //this.router.navigate(['/caprofile']);
+  this.router.navigate(['/manageauctions']);
   this.getclaimInformation()
 }
 

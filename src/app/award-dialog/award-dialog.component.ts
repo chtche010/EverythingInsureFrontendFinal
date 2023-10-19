@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { AuthService } from '../services/auth.service';
+import { DataService } from '../claims-agent/data.service';
 
 @Component({
   selector: 'app-award-dialog',
@@ -17,7 +18,8 @@ export class AwardDialogComponent {
   constructor(
     public dialogRef: MatDialogRef<AwardDialogComponent>,
     private authService: AuthService,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private dataService: DataService
   ) { }
 
   ngOnInit() {
@@ -69,6 +71,7 @@ export class AwardDialogComponent {
       this.authService.selectWinner(requestData).subscribe(
         (response) => {
           // Handle the success response as needed
+          this.dataService.auctionWinnersData = response.data;
           console.log('Winner selected successfully', response);
           this.dialogRef.close();
         },

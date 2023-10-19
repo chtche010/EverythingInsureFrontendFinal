@@ -49,37 +49,35 @@ export class AuctionDashboardComponent implements OnInit {
     
 
   }
+
   fetchAuctionImages(auctionEvent: GetAllAuctions) {
-    console.log('Fetching images for auction event:', auctionEvent);
-    if (auctionEvent.auctionId === undefined || auctionEvent.auctionId === null) {
-      console.log('AuctionId:', auctionEvent.auctionId);
-      return; // Exit early if ClaimId is not valid
+  console.log('Fetching images for auction event:', auctionEvent);
+  if (auctionEvent.auctionId === undefined || auctionEvent.auctionId === null) {
+    console.log('AuctionId:', auctionEvent.auctionId);
+    return; 
+  }
+
+  this.authService.getClaimImages(auctionEvent.auctionId).subscribe(
+    (images: any) => {
+      if (Array.isArray(images.data)) {
+        auctionEvent.images = images.data.map((image: string) => this.convertToAbsoluteUrl(image));
+      } else {
+        console.error('Images.data is not an array:', images.data);
+      }
+    },
+    (error) => {
+      console.error('Error fetching auction images:', error);
     }
-  
-    this.authService.getClaimImages(auctionEvent.auctionId).subscribe(
-      (images: string[]) => {
-        auctionEvent.images = images;
-      },
-      (error) => {
-        console.error('Error fetching auction images:', error);
-      }
-    );
+  );
+}
+
+  convertToAbsoluteUrl(relativeUrl: string): string {
+    
+    const baseUrl = 'http://localhost:5184/api/';
+    return `${baseUrl}${relativeUrl}`;
   }
   
-/*
-  fetchAuctionImages(auctionEvent: GetAllAuctions) {
-    console.log('Fetching images for auction event:', auctionEvent);
-    console.log('claimId:', auctionEvent.ClaimId);
-    this.authService.getClaimImages(auctionEvent.ClaimId).subscribe(
-      (images: string[]) => {
-        auctionEvent.images = images;
-      },
-      (error) => {
-        console.error('Error fetching auction images:', error);
-      }
-    );
-  }
-*/
+
   getAuctionEvents(): void {
     this.authService.getOpenAuctions().subscribe(
       (response: any) => {

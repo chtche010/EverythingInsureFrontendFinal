@@ -42,7 +42,6 @@ h6 {
   max-width: 1000px; /* Adjust the maximum width as needed */
   /* Center the table horizontally and add margin from the top */
   overflow-x: auto; /* Add horizontal scroll if the table content exceeds the container width */
-  border: 1px solid #ccc;
   padding: 10px;
 }
 
